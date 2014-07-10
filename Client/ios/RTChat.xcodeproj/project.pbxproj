@@ -1,0 +1,484 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		435E03B2196E7D9F000C3012 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03B1196E7D9F000C3012 /* Foundation.framework */; };
+		435E03D8196E813C000C3012 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03D7196E813C000C3012 /* AudioToolbox.framework */; };
+		435E03DC196E828E000C3012 /* AQRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 435E03DB196E828E000C3012 /* AQRecorder.mm */; };
+		435E03E5196E8333000C3012 /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435E03DE196E8333000C3012 /* CADebugMacros.cpp */; };
+		435E03E6196E8333000C3012 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435E03E1196E8333000C3012 /* CAStreamBasicDescription.cpp */; };
+		435E03E7196E8333000C3012 /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435E03E3196E8333000C3012 /* CAXException.cpp */; };
+		43D648D9196E9247001944DC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03B1196E7D9F000C3012 /* Foundation.framework */; };
+		43D648DA196E9247001944DC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03EE196E91AC000C3012 /* CoreGraphics.framework */; };
+		43D648DB196E9247001944DC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03C2196E7D9F000C3012 /* UIKit.framework */; };
+		43D648E1196E9247001944DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43D648DF196E9247001944DC /* InfoPlist.strings */; };
+		43D648E3196E9247001944DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D648E2196E9247001944DC /* main.m */; };
+		43D648E7196E9247001944DC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D648E6196E9247001944DC /* AppDelegate.m */; };
+		43D648EA196E9247001944DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43D648E8196E9247001944DC /* Main.storyboard */; };
+		43D648ED196E9247001944DC /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43D648EC196E9247001944DC /* ViewController.mm */; };
+		43D648EF196E9247001944DC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43D648EE196E9247001944DC /* Images.xcassets */; };
+		43D64909196E9647001944DC /* libRTChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03AE196E7D9F000C3012 /* libRTChat.a */; };
+		43D6490C196E97B9001944DC /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03D7196E813C000C3012 /* AudioToolbox.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		435E03AC196E7D9F000C3012 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		435E03AE196E7D9F000C3012 /* libRTChat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRTChat.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		435E03B1196E7D9F000C3012 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		435E03B5196E7D9F000C3012 /* RTChat-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RTChat-Prefix.pch"; sourceTree = "<group>"; };
+		435E03BF196E7D9F000C3012 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		435E03C2196E7D9F000C3012 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		435E03D7196E813C000C3012 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		435E03DA196E828E000C3012 /* AQRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AQRecorder.h; sourceTree = "<group>"; };
+		435E03DB196E828E000C3012 /* AQRecorder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AQRecorder.mm; sourceTree = "<group>"; };
+		435E03DE196E8333000C3012 /* CADebugMacros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADebugMacros.cpp; sourceTree = "<group>"; };
+		435E03DF196E8333000C3012 /* CADebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugMacros.h; sourceTree = "<group>"; };
+		435E03E0196E8333000C3012 /* CAMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAMath.h; sourceTree = "<group>"; };
+		435E03E1196E8333000C3012 /* CAStreamBasicDescription.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAStreamBasicDescription.cpp; sourceTree = "<group>"; };
+		435E03E2196E8333000C3012 /* CAStreamBasicDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAStreamBasicDescription.h; sourceTree = "<group>"; };
+		435E03E3196E8333000C3012 /* CAXException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAXException.cpp; sourceTree = "<group>"; };
+		435E03E4196E8333000C3012 /* CAXException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAXException.h; sourceTree = "<group>"; };
+		435E03EE196E91AC000C3012 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		43D648D8196E9247001944DC /* RTChatTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RTChatTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		43D648DE196E9247001944DC /* RTChatTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RTChatTest-Info.plist"; sourceTree = "<group>"; };
+		43D648E0196E9247001944DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		43D648E2196E9247001944DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		43D648E4196E9247001944DC /* RTChatTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RTChatTest-Prefix.pch"; sourceTree = "<group>"; };
+		43D648E5196E9247001944DC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		43D648E6196E9247001944DC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		43D648E9196E9247001944DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		43D648EB196E9247001944DC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		43D648EC196E9247001944DC /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		43D648EE196E9247001944DC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		43D6490A196E9797001944DC /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		435E03AB196E7D9F000C3012 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				435E03D8196E813C000C3012 /* AudioToolbox.framework in Frameworks */,
+				435E03B2196E7D9F000C3012 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43D648D5196E9247001944DC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43D6490C196E97B9001944DC /* AudioToolbox.framework in Frameworks */,
+				43D64909196E9647001944DC /* libRTChat.a in Frameworks */,
+				43D648DA196E9247001944DC /* CoreGraphics.framework in Frameworks */,
+				43D648DB196E9247001944DC /* UIKit.framework in Frameworks */,
+				43D648D9196E9247001944DC /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		435E03A5196E7D9F000C3012 = {
+			isa = PBXGroup;
+			children = (
+				435E03B3196E7D9F000C3012 /* RTChat */,
+				43D648DC196E9247001944DC /* RTChatTest */,
+				435E03B0196E7D9F000C3012 /* Frameworks */,
+				435E03AF196E7D9F000C3012 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		435E03AF196E7D9F000C3012 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				435E03AE196E7D9F000C3012 /* libRTChat.a */,
+				43D648D8196E9247001944DC /* RTChatTest.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		435E03B0196E7D9F000C3012 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				43D6490A196E9797001944DC /* CoreAudio.framework */,
+				435E03D7196E813C000C3012 /* AudioToolbox.framework */,
+				435E03B1196E7D9F000C3012 /* Foundation.framework */,
+				435E03BF196E7D9F000C3012 /* XCTest.framework */,
+				435E03C2196E7D9F000C3012 /* UIKit.framework */,
+				435E03EE196E91AC000C3012 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		435E03B3196E7D9F000C3012 /* RTChat */ = {
+			isa = PBXGroup;
+			children = (
+				435E03DD196E8333000C3012 /* PublicUtility */,
+				435E03D9196E828E000C3012 /* Classes */,
+				435E03B4196E7D9F000C3012 /* Supporting Files */,
+			);
+			path = RTChat;
+			sourceTree = "<group>";
+		};
+		435E03B4196E7D9F000C3012 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				435E03B5196E7D9F000C3012 /* RTChat-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		435E03D9196E828E000C3012 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				435E03DA196E828E000C3012 /* AQRecorder.h */,
+				435E03DB196E828E000C3012 /* AQRecorder.mm */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		435E03DD196E8333000C3012 /* PublicUtility */ = {
+			isa = PBXGroup;
+			children = (
+				435E03DE196E8333000C3012 /* CADebugMacros.cpp */,
+				435E03DF196E8333000C3012 /* CADebugMacros.h */,
+				435E03E0196E8333000C3012 /* CAMath.h */,
+				435E03E1196E8333000C3012 /* CAStreamBasicDescription.cpp */,
+				435E03E2196E8333000C3012 /* CAStreamBasicDescription.h */,
+				435E03E3196E8333000C3012 /* CAXException.cpp */,
+				435E03E4196E8333000C3012 /* CAXException.h */,
+			);
+			path = PublicUtility;
+			sourceTree = "<group>";
+		};
+		43D648DC196E9247001944DC /* RTChatTest */ = {
+			isa = PBXGroup;
+			children = (
+				43D648E5196E9247001944DC /* AppDelegate.h */,
+				43D648E6196E9247001944DC /* AppDelegate.m */,
+				43D648E8196E9247001944DC /* Main.storyboard */,
+				43D648EB196E9247001944DC /* ViewController.h */,
+				43D648EC196E9247001944DC /* ViewController.mm */,
+				43D648EE196E9247001944DC /* Images.xcassets */,
+				43D648DD196E9247001944DC /* Supporting Files */,
+			);
+			path = RTChatTest;
+			sourceTree = "<group>";
+		};
+		43D648DD196E9247001944DC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				43D648DE196E9247001944DC /* RTChatTest-Info.plist */,
+				43D648DF196E9247001944DC /* InfoPlist.strings */,
+				43D648E2196E9247001944DC /* main.m */,
+				43D648E4196E9247001944DC /* RTChatTest-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		435E03AD196E7D9F000C3012 /* RTChat */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 435E03D1196E7D9F000C3012 /* Build configuration list for PBXNativeTarget "RTChat" */;
+			buildPhases = (
+				435E03AA196E7D9F000C3012 /* Sources */,
+				435E03AB196E7D9F000C3012 /* Frameworks */,
+				435E03AC196E7D9F000C3012 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RTChat;
+			productName = RTChat;
+			productReference = 435E03AE196E7D9F000C3012 /* libRTChat.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		43D648D7196E9247001944DC /* RTChatTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43D64902196E9247001944DC /* Build configuration list for PBXNativeTarget "RTChatTest" */;
+			buildPhases = (
+				43D648D4196E9247001944DC /* Sources */,
+				43D648D5196E9247001944DC /* Frameworks */,
+				43D648D6196E9247001944DC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RTChatTest;
+			productName = RTChatTest;
+			productReference = 43D648D8196E9247001944DC /* RTChatTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		435E03A6196E7D9F000C3012 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = yunwei;
+			};
+			buildConfigurationList = 435E03A9196E7D9F000C3012 /* Build configuration list for PBXProject "RTChat" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 435E03A5196E7D9F000C3012;
+			productRefGroup = 435E03AF196E7D9F000C3012 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				435E03AD196E7D9F000C3012 /* RTChat */,
+				43D648D7196E9247001944DC /* RTChatTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		43D648D6196E9247001944DC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43D648EF196E9247001944DC /* Images.xcassets in Resources */,
+				43D648E1196E9247001944DC /* InfoPlist.strings in Resources */,
+				43D648EA196E9247001944DC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		435E03AA196E7D9F000C3012 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				435E03E7196E8333000C3012 /* CAXException.cpp in Sources */,
+				435E03E5196E8333000C3012 /* CADebugMacros.cpp in Sources */,
+				435E03DC196E828E000C3012 /* AQRecorder.mm in Sources */,
+				435E03E6196E8333000C3012 /* CAStreamBasicDescription.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43D648D4196E9247001944DC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43D648ED196E9247001944DC /* ViewController.mm in Sources */,
+				43D648E7196E9247001944DC /* AppDelegate.m in Sources */,
+				43D648E3196E9247001944DC /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		43D648DF196E9247001944DC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				43D648E0196E9247001944DC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		43D648E8196E9247001944DC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				43D648E9196E9247001944DC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		435E03CF196E7D9F000C3012 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		435E03D0196E7D9F000C3012 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		435E03D2196E7D9F000C3012 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/RTChat.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RTChat/RTChat-Prefix.pch";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		435E03D3196E7D9F000C3012 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/RTChat.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RTChat/RTChat-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		43D64903196E9247001944DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RTChatTest/RTChatTest-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "RTChatTest/RTChatTest-Info.plist";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		43D64904196E9247001944DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RTChatTest/RTChatTest-Prefix.pch";
+				INFOPLIST_FILE = "RTChatTest/RTChatTest-Info.plist";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		435E03A9196E7D9F000C3012 /* Build configuration list for PBXProject "RTChat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				435E03CF196E7D9F000C3012 /* Debug */,
+				435E03D0196E7D9F000C3012 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		435E03D1196E7D9F000C3012 /* Build configuration list for PBXNativeTarget "RTChat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				435E03D2196E7D9F000C3012 /* Debug */,
+				435E03D3196E7D9F000C3012 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		43D64902196E9247001944DC /* Build configuration list for PBXNativeTarget "RTChatTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43D64903196E9247001944DC /* Debug */,
+				43D64904196E9247001944DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 435E03A6196E7D9F000C3012 /* Project object */;
+}
