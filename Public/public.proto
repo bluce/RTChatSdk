@@ -1,0 +1,40 @@
+package Cmd;
+
+
+//struct stBaseCmd
+//{
+//	uint16 cmdid;
+//  uint32 cmdlen;
+//	char data[0];
+//};
+
+
+enum enCmdId
+{
+	enNone = 0;
+
+	/// 返回需要连接的逻辑服务器信息
+	enNotifyLogicInfo = 1;
+
+	/// 登录
+	enLogin = 2;
+
+	/// 创建频道
+	enRequestCreateRoom = 3;
+
+	/// 创建频道返回
+	enReturnCreateResult = 4;
+
+	/// 加入频道
+	enRequestEnterRoom = 5;
+
+	/// 加入频道返回
+	enReturnEnterResult = 6;
+
+	/// 传输语音数据
+	enVoiceData = 7;
+
+	/// 离开房间
+	enNotifyLeaveRoom = 8;
+}
+

@@ -1,0 +1,54 @@
+/// 客户端和服务器之间的协议定义
+
+package Cmd;
+
+import "public.proto";
+
+
+/// 通知逻辑服务器信息
+message cmdNotifyLogicInfo
+{
+	required string ip = 1;
+	required uint32 port = 2;
+}
+
+/// 登录
+message cmdLogin
+{
+	required string id = 1;
+}
+
+
+/// 创建频道
+message cmdquestCreateRoom
+{
+	required uint32 ctype = 1;
+}
+
+/// 创建频道返回
+message cmdReturnCreateResult
+{
+	required uint64 roomid = 1;
+	required string ip = 2;
+	required uint32 port = 3;
+}
+
+/// 加入频道
+message cmdRequestEnterRoom
+{
+	required uint64 roomid = 1;
+}
+
+/// 加入频道返回
+message cmdReturnEnterResult
+{
+	required bool isok = 1;
+	optional string ip = 2;
+	optional uint32 port = 3;
+}
+
+/// 离开房间
+message cmdNotifyLeaveRoom
+{
+	required uint32 id = 1;
+}
