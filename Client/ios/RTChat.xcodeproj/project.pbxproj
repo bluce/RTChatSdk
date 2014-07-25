@@ -7,12 +7,69 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		430079591973A705003DB064 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 430079581973A705003DB064 /* CoreFoundation.framework */; };
+		430F163F196F7A3C0083B252 /* AQPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 430F163E196F7A3C0083B252 /* AQPlayer.mm */; };
+		430F1697196F83490083B252 /* rtpfaketransmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1642196F83490083B252 /* rtpfaketransmitter.cpp */; };
+		430F1698196F83490083B252 /* rtcpapppacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1644196F83490083B252 /* rtcpapppacket.cpp */; };
+		430F1699196F83490083B252 /* rtcpbyepacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1646196F83490083B252 /* rtcpbyepacket.cpp */; };
+		430F169A196F83490083B252 /* rtcpcompoundpacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1648196F83490083B252 /* rtcpcompoundpacket.cpp */; };
+		430F169B196F83490083B252 /* rtcpcompoundpacketbuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F164A196F83490083B252 /* rtcpcompoundpacketbuilder.cpp */; };
+		430F169C196F83490083B252 /* rtcppacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F164C196F83490083B252 /* rtcppacket.cpp */; };
+		430F169D196F83490083B252 /* rtcppacketbuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F164E196F83490083B252 /* rtcppacketbuilder.cpp */; };
+		430F169E196F83490083B252 /* rtcprrpacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1650196F83490083B252 /* rtcprrpacket.cpp */; };
+		430F169F196F83490083B252 /* rtcpscheduler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1652196F83490083B252 /* rtcpscheduler.cpp */; };
+		430F16A0196F83490083B252 /* rtcpsdesinfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1654196F83490083B252 /* rtcpsdesinfo.cpp */; };
+		430F16A1196F83490083B252 /* rtcpsdespacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1656196F83490083B252 /* rtcpsdespacket.cpp */; };
+		430F16A2196F83490083B252 /* rtcpsrpacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1658196F83490083B252 /* rtcpsrpacket.cpp */; };
+		430F16A3196F83490083B252 /* rtpbyteaddress.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F165C196F83490083B252 /* rtpbyteaddress.cpp */; };
+		430F16A4196F83490083B252 /* rtpcollisionlist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F165E196F83490083B252 /* rtpcollisionlist.cpp */; };
+		430F16A5196F83490083B252 /* rtpdebug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1660196F83490083B252 /* rtpdebug.cpp */; };
+		430F16A6196F83490083B252 /* rtperrors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1663196F83490083B252 /* rtperrors.cpp */; };
+		430F16A7196F83490083B252 /* rtpexternaltransmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1665196F83490083B252 /* rtpexternaltransmitter.cpp */; };
+		430F16A8196F83490083B252 /* rtpinternalsourcedata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1668196F83490083B252 /* rtpinternalsourcedata.cpp */; };
+		430F16A9196F83490083B252 /* rtpipv4address.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F166A196F83490083B252 /* rtpipv4address.cpp */; };
+		430F16AA196F83490083B252 /* rtpipv6address.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F166D196F83490083B252 /* rtpipv6address.cpp */; };
+		430F16AB196F83490083B252 /* rtplibraryversion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1671196F83490083B252 /* rtplibraryversion.cpp */; };
+		430F16AC196F83490083B252 /* rtppacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1675196F83490083B252 /* rtppacket.cpp */; };
+		430F16AD196F83490083B252 /* rtppacketbuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1677196F83490083B252 /* rtppacketbuilder.cpp */; };
+		430F16AE196F83490083B252 /* rtppollthread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1679196F83490083B252 /* rtppollthread.cpp */; };
+		430F16AF196F83490083B252 /* rtprandom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F167B196F83490083B252 /* rtprandom.cpp */; };
+		430F16B0196F83490083B252 /* rtprandomrand48.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F167D196F83490083B252 /* rtprandomrand48.cpp */; };
+		430F16B1196F83490083B252 /* rtprandomrands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F167F196F83490083B252 /* rtprandomrands.cpp */; };
+		430F16B2196F83490083B252 /* rtprandomurandom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1681196F83490083B252 /* rtprandomurandom.cpp */; };
+		430F16B3196F83490083B252 /* rtpsession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1684196F83490083B252 /* rtpsession.cpp */; };
+		430F16B4196F83490083B252 /* rtpsessionparams.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1686196F83490083B252 /* rtpsessionparams.cpp */; };
+		430F16B5196F83490083B252 /* rtpsessionsources.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1688196F83490083B252 /* rtpsessionsources.cpp */; };
+		430F16B6196F83490083B252 /* rtpsourcedata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F168A196F83490083B252 /* rtpsourcedata.cpp */; };
+		430F16B7196F83490083B252 /* rtpsources.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F168C196F83490083B252 /* rtpsources.cpp */; };
+		430F16B8196F83490083B252 /* rtptimeutilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F168F196F83490083B252 /* rtptimeutilities.cpp */; };
+		430F16B9196F83490083B252 /* rtpudpv4transmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1693196F83490083B252 /* rtpudpv4transmitter.cpp */; };
+		430F16BA196F83490083B252 /* rtpudpv6transmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1695196F83490083B252 /* rtpudpv6transmitter.cpp */; };
+		430F16E6196F8D5F0083B252 /* adler32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16C1196F8D5F0083B252 /* adler32.cpp */; };
+		430F16E8196F8D5F0083B252 /* CsvParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16C5196F8D5F0083B252 /* CsvParser.cpp */; };
+		430F16E9196F8D5F0083B252 /* DataStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16C7196F8D5F0083B252 /* DataStream.cpp */; };
+		430F16EC196F8D5F0083B252 /* md5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16CE196F8D5F0083B252 /* md5.cpp */; };
+		430F16EE196F8D5F0083B252 /* public.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16D3196F8D5F0083B252 /* public.cpp */; };
+		430F16EF196F8D5F0083B252 /* Rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16D5196F8D5F0083B252 /* Rect.cpp */; };
+		430F16F0196F8D5F0083B252 /* StringUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16D8196F8D5F0083B252 /* StringUtil.cpp */; };
+		430F16F1196F8D5F0083B252 /* SystemUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16DA196F8D5F0083B252 /* SystemUtil.cpp */; };
+		430F16F2196F8D5F0083B252 /* XmlParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16DE196F8D5F0083B252 /* XmlParser.cpp */; };
+		430F16F3196F8D5F0083B252 /* zThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16E4196F8D5F0083B252 /* zThread.cpp */; };
+		430F16FC196F8DC10083B252 /* tinystr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F6196F8DC10083B252 /* tinystr.cpp */; };
+		430F16FD196F8DC10083B252 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F7196F8DC10083B252 /* tinyxml.cpp */; };
+		430F16FE196F8DC10083B252 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F8196F8DC10083B252 /* tinyxmlerror.cpp */; };
+		430F16FF196F8DC10083B252 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F9196F8DC10083B252 /* tinyxmlparser.cpp */; };
+		430F1705196F91430083B252 /* ClientTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1701196F91430083B252 /* ClientTask.cpp */; };
+		430F1706196F91430083B252 /* StreamConnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F1703196F91430083B252 /* StreamConnection.cpp */; };
 		435E03B2196E7D9F000C3012 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03B1196E7D9F000C3012 /* Foundation.framework */; };
 		435E03D8196E813C000C3012 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03D7196E813C000C3012 /* AudioToolbox.framework */; };
 		435E03DC196E828E000C3012 /* AQRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 435E03DB196E828E000C3012 /* AQRecorder.mm */; };
 		435E03E5196E8333000C3012 /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435E03DE196E8333000C3012 /* CADebugMacros.cpp */; };
 		435E03E6196E8333000C3012 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435E03E1196E8333000C3012 /* CAStreamBasicDescription.cpp */; };
 		435E03E7196E8333000C3012 /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435E03E3196E8333000C3012 /* CAXException.cpp */; };
+		43AE0052197913930062C9B4 /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43AE004D197913930062C9B4 /* json_reader.cpp */; };
+		43AE0053197913930062C9B4 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43AE004F197913930062C9B4 /* json_value.cpp */; };
+		43AE0054197913930062C9B4 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43AE0051197913930062C9B4 /* json_writer.cpp */; };
 		43D648D9196E9247001944DC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03B1196E7D9F000C3012 /* Foundation.framework */; };
 		43D648DA196E9247001944DC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03EE196E91AC000C3012 /* CoreGraphics.framework */; };
 		43D648DB196E9247001944DC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03C2196E7D9F000C3012 /* UIKit.framework */; };
@@ -39,6 +96,135 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		430079581973A705003DB064 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		430F163D196F7A3C0083B252 /* AQPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AQPlayer.h; sourceTree = "<group>"; };
+		430F163E196F7A3C0083B252 /* AQPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AQPlayer.mm; sourceTree = "<group>"; };
+		430F1642196F83490083B252 /* rtpfaketransmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtpfaketransmitter.cpp; sourceTree = "<group>"; };
+		430F1643196F83490083B252 /* rtpfaketransmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpfaketransmitter.h; sourceTree = "<group>"; };
+		430F1644196F83490083B252 /* rtcpapppacket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtcpapppacket.cpp; sourceTree = "<group>"; };
+		430F1645196F83490083B252 /* rtcpapppacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtcpapppacket.h; sourceTree = "<group>"; };
+		430F1646196F83490083B252 /* rtcpbyepacket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtcpbyepacket.cpp; sourceTree = "<group>"; };
+		430F1647196F83490083B252 /* rtcpbyepacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtcpbyepacket.h; sourceTree = "<group>"; };
+		430F1648196F83490083B252 /* rtcpcompoundpacket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtcpcompoundpacket.cpp; sourceTree = "<group>"; };
+		430F1649196F83490083B252 /* rtcpcompoundpacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtcpcompoundpacket.h; sourceTree = "<group>"; };
+		430F164A196F83490083B252 /* rtcpcompoundpacketbuilder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtcpcompoundpacketbuilder.cpp; sourceTree = "<group>"; };
+		430F164B196F83490083B252 /* rtcpcompoundpacketbuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtcpcompoundpacketbuilder.h; sourceTree = "<group>"; };
+		430F164C196F83490083B252 /* rtcppacket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtcppacket.cpp; sourceTree = "<group>"; };
+		430F164D196F83490083B252 /* rtcppacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtcppacket.h; sourceTree = "<group>"; };
+		430F164E196F83490083B252 /* rtcppacketbuilder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtcppacketbuilder.cpp; sourceTree = "<group>"; };
+		430F164F196F83490083B252 /* rtcppacketbuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtcppacketbuilder.h; sourceTree = "<group>"; };
+		430F1650196F83490083B252 /* rtcprrpacket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtcprrpacket.cpp; sourceTree = "<group>"; };
+		430F1651196F83490083B252 /* rtcprrpacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtcprrpacket.h; sourceTree = "<group>"; };
+		430F1652196F83490083B252 /* rtcpscheduler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtcpscheduler.cpp; sourceTree = "<group>"; };
+		430F1653196F83490083B252 /* rtcpscheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtcpscheduler.h; sourceTree = "<group>"; };
+		430F1654196F83490083B252 /* rtcpsdesinfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtcpsdesinfo.cpp; sourceTree = "<group>"; };
+		430F1655196F83490083B252 /* rtcpsdesinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtcpsdesinfo.h; sourceTree = "<group>"; };
+		430F1656196F83490083B252 /* rtcpsdespacket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtcpsdespacket.cpp; sourceTree = "<group>"; };
+		430F1657196F83490083B252 /* rtcpsdespacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtcpsdespacket.h; sourceTree = "<group>"; };
+		430F1658196F83490083B252 /* rtcpsrpacket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtcpsrpacket.cpp; sourceTree = "<group>"; };
+		430F1659196F83490083B252 /* rtcpsrpacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtcpsrpacket.h; sourceTree = "<group>"; };
+		430F165A196F83490083B252 /* rtcpunknownpacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtcpunknownpacket.h; sourceTree = "<group>"; };
+		430F165B196F83490083B252 /* rtpaddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpaddress.h; sourceTree = "<group>"; };
+		430F165C196F83490083B252 /* rtpbyteaddress.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtpbyteaddress.cpp; sourceTree = "<group>"; };
+		430F165D196F83490083B252 /* rtpbyteaddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpbyteaddress.h; sourceTree = "<group>"; };
+		430F165E196F83490083B252 /* rtpcollisionlist.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtpcollisionlist.cpp; sourceTree = "<group>"; };
+		430F165F196F83490083B252 /* rtpcollisionlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpcollisionlist.h; sourceTree = "<group>"; };
+		430F1660196F83490083B252 /* rtpdebug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtpdebug.cpp; sourceTree = "<group>"; };
+		430F1661196F83490083B252 /* rtpdebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpdebug.h; sourceTree = "<group>"; };
+		430F1662196F83490083B252 /* rtpdefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpdefines.h; sourceTree = "<group>"; };
+		430F1663196F83490083B252 /* rtperrors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtperrors.cpp; sourceTree = "<group>"; };
+		430F1664196F83490083B252 /* rtperrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtperrors.h; sourceTree = "<group>"; };
+		430F1665196F83490083B252 /* rtpexternaltransmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtpexternaltransmitter.cpp; sourceTree = "<group>"; };
+		430F1666196F83490083B252 /* rtpexternaltransmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpexternaltransmitter.h; sourceTree = "<group>"; };
+		430F1667196F83490083B252 /* rtphashtable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtphashtable.h; sourceTree = "<group>"; };
+		430F1668196F83490083B252 /* rtpinternalsourcedata.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtpinternalsourcedata.cpp; sourceTree = "<group>"; };
+		430F1669196F83490083B252 /* rtpinternalsourcedata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpinternalsourcedata.h; sourceTree = "<group>"; };
+		430F166A196F83490083B252 /* rtpipv4address.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtpipv4address.cpp; sourceTree = "<group>"; };
+		430F166B196F83490083B252 /* rtpipv4address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpipv4address.h; sourceTree = "<group>"; };
+		430F166C196F83490083B252 /* rtpipv4destination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpipv4destination.h; sourceTree = "<group>"; };
+		430F166D196F83490083B252 /* rtpipv6address.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtpipv6address.cpp; sourceTree = "<group>"; };
+		430F166E196F83490083B252 /* rtpipv6address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpipv6address.h; sourceTree = "<group>"; };
+		430F166F196F83490083B252 /* rtpipv6destination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpipv6destination.h; sourceTree = "<group>"; };
+		430F1670196F83490083B252 /* rtpkeyhashtable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpkeyhashtable.h; sourceTree = "<group>"; };
+		430F1671196F83490083B252 /* rtplibraryversion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtplibraryversion.cpp; sourceTree = "<group>"; };
+		430F1672196F83490083B252 /* rtplibraryversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtplibraryversion.h; sourceTree = "<group>"; };
+		430F1673196F83490083B252 /* rtpmemorymanager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpmemorymanager.h; sourceTree = "<group>"; };
+		430F1674196F83490083B252 /* rtpmemoryobject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpmemoryobject.h; sourceTree = "<group>"; };
+		430F1675196F83490083B252 /* rtppacket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtppacket.cpp; sourceTree = "<group>"; };
+		430F1676196F83490083B252 /* rtppacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtppacket.h; sourceTree = "<group>"; };
+		430F1677196F83490083B252 /* rtppacketbuilder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtppacketbuilder.cpp; sourceTree = "<group>"; };
+		430F1678196F83490083B252 /* rtppacketbuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtppacketbuilder.h; sourceTree = "<group>"; };
+		430F1679196F83490083B252 /* rtppollthread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtppollthread.cpp; sourceTree = "<group>"; };
+		430F167A196F83490083B252 /* rtppollthread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtppollthread.h; sourceTree = "<group>"; };
+		430F167B196F83490083B252 /* rtprandom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtprandom.cpp; sourceTree = "<group>"; };
+		430F167C196F83490083B252 /* rtprandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtprandom.h; sourceTree = "<group>"; };
+		430F167D196F83490083B252 /* rtprandomrand48.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtprandomrand48.cpp; sourceTree = "<group>"; };
+		430F167E196F83490083B252 /* rtprandomrand48.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtprandomrand48.h; sourceTree = "<group>"; };
+		430F167F196F83490083B252 /* rtprandomrands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtprandomrands.cpp; sourceTree = "<group>"; };
+		430F1680196F83490083B252 /* rtprandomrands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtprandomrands.h; sourceTree = "<group>"; };
+		430F1681196F83490083B252 /* rtprandomurandom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtprandomurandom.cpp; sourceTree = "<group>"; };
+		430F1682196F83490083B252 /* rtprandomurandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtprandomurandom.h; sourceTree = "<group>"; };
+		430F1683196F83490083B252 /* rtprawpacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtprawpacket.h; sourceTree = "<group>"; };
+		430F1684196F83490083B252 /* rtpsession.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtpsession.cpp; sourceTree = "<group>"; };
+		430F1685196F83490083B252 /* rtpsession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpsession.h; sourceTree = "<group>"; };
+		430F1686196F83490083B252 /* rtpsessionparams.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtpsessionparams.cpp; sourceTree = "<group>"; };
+		430F1687196F83490083B252 /* rtpsessionparams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpsessionparams.h; sourceTree = "<group>"; };
+		430F1688196F83490083B252 /* rtpsessionsources.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtpsessionsources.cpp; sourceTree = "<group>"; };
+		430F1689196F83490083B252 /* rtpsessionsources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpsessionsources.h; sourceTree = "<group>"; };
+		430F168A196F83490083B252 /* rtpsourcedata.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtpsourcedata.cpp; sourceTree = "<group>"; };
+		430F168B196F83490083B252 /* rtpsourcedata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpsourcedata.h; sourceTree = "<group>"; };
+		430F168C196F83490083B252 /* rtpsources.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtpsources.cpp; sourceTree = "<group>"; };
+		430F168D196F83490083B252 /* rtpsources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpsources.h; sourceTree = "<group>"; };
+		430F168E196F83490083B252 /* rtpstructs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpstructs.h; sourceTree = "<group>"; };
+		430F168F196F83490083B252 /* rtptimeutilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtptimeutilities.cpp; sourceTree = "<group>"; };
+		430F1690196F83490083B252 /* rtptimeutilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtptimeutilities.h; sourceTree = "<group>"; };
+		430F1691196F83490083B252 /* rtptransmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtptransmitter.h; sourceTree = "<group>"; };
+		430F1692196F83490083B252 /* rtptypes_win.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtptypes_win.h; sourceTree = "<group>"; };
+		430F1693196F83490083B252 /* rtpudpv4transmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtpudpv4transmitter.cpp; sourceTree = "<group>"; };
+		430F1694196F83490083B252 /* rtpudpv4transmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpudpv4transmitter.h; sourceTree = "<group>"; };
+		430F1695196F83490083B252 /* rtpudpv6transmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtpudpv6transmitter.cpp; sourceTree = "<group>"; };
+		430F1696196F83490083B252 /* rtpudpv6transmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpudpv6transmitter.h; sourceTree = "<group>"; };
+		430F16BB196F83980083B252 /* rtpconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtpconfig.h; sourceTree = "<group>"; };
+		430F16BC196F83C00083B252 /* rtptypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtptypes.h; sourceTree = "<group>"; };
+		430F16C1196F8D5F0083B252 /* adler32.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adler32.cpp; sourceTree = "<group>"; };
+		430F16C2196F8D5F0083B252 /* adler32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adler32.h; sourceTree = "<group>"; };
+		430F16C5196F8D5F0083B252 /* CsvParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CsvParser.cpp; sourceTree = "<group>"; };
+		430F16C6196F8D5F0083B252 /* CsvParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CsvParser.h; sourceTree = "<group>"; };
+		430F16C7196F8D5F0083B252 /* DataStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataStream.cpp; sourceTree = "<group>"; };
+		430F16C8196F8D5F0083B252 /* DataStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStream.h; sourceTree = "<group>"; };
+		430F16C9196F8D5F0083B252 /* Engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
+		430F16CE196F8D5F0083B252 /* md5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = md5.cpp; sourceTree = "<group>"; };
+		430F16CF196F8D5F0083B252 /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
+		430F16D2196F8D5F0083B252 /* NetWorks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorks.h; sourceTree = "<group>"; };
+		430F16D3196F8D5F0083B252 /* public.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = public.cpp; sourceTree = "<group>"; };
+		430F16D4196F8D5F0083B252 /* public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = public.h; sourceTree = "<group>"; };
+		430F16D5196F8D5F0083B252 /* Rect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rect.cpp; sourceTree = "<group>"; };
+		430F16D6196F8D5F0083B252 /* Rect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rect.h; sourceTree = "<group>"; };
+		430F16D7196F8D5F0083B252 /* RegExp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegExp.h; sourceTree = "<group>"; };
+		430F16D8196F8D5F0083B252 /* StringUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringUtil.cpp; sourceTree = "<group>"; };
+		430F16D9196F8D5F0083B252 /* StringUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtil.h; sourceTree = "<group>"; };
+		430F16DA196F8D5F0083B252 /* SystemUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SystemUtil.cpp; sourceTree = "<group>"; };
+		430F16DB196F8D5F0083B252 /* SystemUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUtil.h; sourceTree = "<group>"; };
+		430F16DC196F8D5F0083B252 /* template.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = template.h; sourceTree = "<group>"; };
+		430F16DD196F8D5F0083B252 /* Vector2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector2.h; sourceTree = "<group>"; };
+		430F16DE196F8D5F0083B252 /* XmlParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XmlParser.cpp; sourceTree = "<group>"; };
+		430F16DF196F8D5F0083B252 /* XmlParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlParser.h; sourceTree = "<group>"; };
+		430F16E0196F8D5F0083B252 /* zCond.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zCond.h; sourceTree = "<group>"; };
+		430F16E1196F8D5F0083B252 /* zMutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zMutex.h; sourceTree = "<group>"; };
+		430F16E2196F8D5F0083B252 /* zNoncopyable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zNoncopyable.h; sourceTree = "<group>"; };
+		430F16E3196F8D5F0083B252 /* zRWLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zRWLock.h; sourceTree = "<group>"; };
+		430F16E4196F8D5F0083B252 /* zThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = zThread.cpp; sourceTree = "<group>"; };
+		430F16E5196F8D5F0083B252 /* zThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zThread.h; sourceTree = "<group>"; };
+		430F16F6196F8DC10083B252 /* tinystr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinystr.cpp; sourceTree = "<group>"; };
+		430F16F7196F8DC10083B252 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
+		430F16F8196F8DC10083B252 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
+		430F16F9196F8DC10083B252 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
+		430F16FA196F8DC10083B252 /* tinystr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinystr.h; sourceTree = "<group>"; };
+		430F16FB196F8DC10083B252 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
+		430F1701196F91430083B252 /* ClientTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClientTask.cpp; sourceTree = "<group>"; };
+		430F1702196F91430083B252 /* ClientTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientTask.h; sourceTree = "<group>"; };
+		430F1703196F91430083B252 /* StreamConnection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StreamConnection.cpp; sourceTree = "<group>"; };
+		430F1704196F91430083B252 /* StreamConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamConnection.h; sourceTree = "<group>"; };
 		435E03AE196E7D9F000C3012 /* libRTChat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRTChat.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		435E03B1196E7D9F000C3012 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		435E03B5196E7D9F000C3012 /* RTChat-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RTChat-Prefix.pch"; sourceTree = "<group>"; };
@@ -55,6 +241,23 @@
 		435E03E3196E8333000C3012 /* CAXException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAXException.cpp; sourceTree = "<group>"; };
 		435E03E4196E8333000C3012 /* CAXException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAXException.h; sourceTree = "<group>"; };
 		435E03EE196E91AC000C3012 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		43AE0040197913930062C9B4 /* assertions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = assertions.h; sourceTree = "<group>"; };
+		43AE0041197913930062C9B4 /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = autolink.h; sourceTree = "<group>"; };
+		43AE0042197913930062C9B4 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		43AE0043197913930062C9B4 /* features.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = features.h; sourceTree = "<group>"; };
+		43AE0044197913930062C9B4 /* forwards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = forwards.h; sourceTree = "<group>"; };
+		43AE0045197913930062C9B4 /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json.h; sourceTree = "<group>"; };
+		43AE0046197913930062C9B4 /* reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reader.h; sourceTree = "<group>"; };
+		43AE0047197913930062C9B4 /* value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = value.h; sourceTree = "<group>"; };
+		43AE0048197913930062C9B4 /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
+		43AE004A197913930062C9B4 /* json_batchallocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json_batchallocator.h; sourceTree = "<group>"; };
+		43AE004B197913930062C9B4 /* json_internalarray.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_internalarray.inl; sourceTree = "<group>"; };
+		43AE004C197913930062C9B4 /* json_internalmap.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_internalmap.inl; sourceTree = "<group>"; };
+		43AE004D197913930062C9B4 /* json_reader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_reader.cpp; sourceTree = "<group>"; };
+		43AE004E197913930062C9B4 /* json_tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json_tool.h; sourceTree = "<group>"; };
+		43AE004F197913930062C9B4 /* json_value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_value.cpp; sourceTree = "<group>"; };
+		43AE0050197913930062C9B4 /* json_valueiterator.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_valueiterator.inl; sourceTree = "<group>"; };
+		43AE0051197913930062C9B4 /* json_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_writer.cpp; sourceTree = "<group>"; };
 		43D648D8196E9247001944DC /* RTChatTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RTChatTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43D648DE196E9247001944DC /* RTChatTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RTChatTest-Info.plist"; sourceTree = "<group>"; };
 		43D648E0196E9247001944DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -74,6 +277,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				430079591973A705003DB064 /* CoreFoundation.framework in Frameworks */,
 				435E03D8196E813C000C3012 /* AudioToolbox.framework in Frameworks */,
 				435E03B2196E7D9F000C3012 /* Foundation.framework in Frameworks */,
 			);
@@ -94,6 +298,176 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		430F1640196F83490083B252 /* jrtplib */ = {
+			isa = PBXGroup;
+			children = (
+				430F16BC196F83C00083B252 /* rtptypes.h */,
+				430F16BB196F83980083B252 /* rtpconfig.h */,
+				430F1641196F83490083B252 /* extratransmitters */,
+				430F1644196F83490083B252 /* rtcpapppacket.cpp */,
+				430F1645196F83490083B252 /* rtcpapppacket.h */,
+				430F1646196F83490083B252 /* rtcpbyepacket.cpp */,
+				430F1647196F83490083B252 /* rtcpbyepacket.h */,
+				430F1648196F83490083B252 /* rtcpcompoundpacket.cpp */,
+				430F1649196F83490083B252 /* rtcpcompoundpacket.h */,
+				430F164A196F83490083B252 /* rtcpcompoundpacketbuilder.cpp */,
+				430F164B196F83490083B252 /* rtcpcompoundpacketbuilder.h */,
+				430F164C196F83490083B252 /* rtcppacket.cpp */,
+				430F164D196F83490083B252 /* rtcppacket.h */,
+				430F164E196F83490083B252 /* rtcppacketbuilder.cpp */,
+				430F164F196F83490083B252 /* rtcppacketbuilder.h */,
+				430F1650196F83490083B252 /* rtcprrpacket.cpp */,
+				430F1651196F83490083B252 /* rtcprrpacket.h */,
+				430F1652196F83490083B252 /* rtcpscheduler.cpp */,
+				430F1653196F83490083B252 /* rtcpscheduler.h */,
+				430F1654196F83490083B252 /* rtcpsdesinfo.cpp */,
+				430F1655196F83490083B252 /* rtcpsdesinfo.h */,
+				430F1656196F83490083B252 /* rtcpsdespacket.cpp */,
+				430F1657196F83490083B252 /* rtcpsdespacket.h */,
+				430F1658196F83490083B252 /* rtcpsrpacket.cpp */,
+				430F1659196F83490083B252 /* rtcpsrpacket.h */,
+				430F165A196F83490083B252 /* rtcpunknownpacket.h */,
+				430F165B196F83490083B252 /* rtpaddress.h */,
+				430F165C196F83490083B252 /* rtpbyteaddress.cpp */,
+				430F165D196F83490083B252 /* rtpbyteaddress.h */,
+				430F165E196F83490083B252 /* rtpcollisionlist.cpp */,
+				430F165F196F83490083B252 /* rtpcollisionlist.h */,
+				430F1660196F83490083B252 /* rtpdebug.cpp */,
+				430F1661196F83490083B252 /* rtpdebug.h */,
+				430F1662196F83490083B252 /* rtpdefines.h */,
+				430F1663196F83490083B252 /* rtperrors.cpp */,
+				430F1664196F83490083B252 /* rtperrors.h */,
+				430F1665196F83490083B252 /* rtpexternaltransmitter.cpp */,
+				430F1666196F83490083B252 /* rtpexternaltransmitter.h */,
+				430F1667196F83490083B252 /* rtphashtable.h */,
+				430F1668196F83490083B252 /* rtpinternalsourcedata.cpp */,
+				430F1669196F83490083B252 /* rtpinternalsourcedata.h */,
+				430F166A196F83490083B252 /* rtpipv4address.cpp */,
+				430F166B196F83490083B252 /* rtpipv4address.h */,
+				430F166C196F83490083B252 /* rtpipv4destination.h */,
+				430F166D196F83490083B252 /* rtpipv6address.cpp */,
+				430F166E196F83490083B252 /* rtpipv6address.h */,
+				430F166F196F83490083B252 /* rtpipv6destination.h */,
+				430F1670196F83490083B252 /* rtpkeyhashtable.h */,
+				430F1671196F83490083B252 /* rtplibraryversion.cpp */,
+				430F1672196F83490083B252 /* rtplibraryversion.h */,
+				430F1673196F83490083B252 /* rtpmemorymanager.h */,
+				430F1674196F83490083B252 /* rtpmemoryobject.h */,
+				430F1675196F83490083B252 /* rtppacket.cpp */,
+				430F1676196F83490083B252 /* rtppacket.h */,
+				430F1677196F83490083B252 /* rtppacketbuilder.cpp */,
+				430F1678196F83490083B252 /* rtppacketbuilder.h */,
+				430F1679196F83490083B252 /* rtppollthread.cpp */,
+				430F167A196F83490083B252 /* rtppollthread.h */,
+				430F167B196F83490083B252 /* rtprandom.cpp */,
+				430F167C196F83490083B252 /* rtprandom.h */,
+				430F167D196F83490083B252 /* rtprandomrand48.cpp */,
+				430F167E196F83490083B252 /* rtprandomrand48.h */,
+				430F167F196F83490083B252 /* rtprandomrands.cpp */,
+				430F1680196F83490083B252 /* rtprandomrands.h */,
+				430F1681196F83490083B252 /* rtprandomurandom.cpp */,
+				430F1682196F83490083B252 /* rtprandomurandom.h */,
+				430F1683196F83490083B252 /* rtprawpacket.h */,
+				430F1684196F83490083B252 /* rtpsession.cpp */,
+				430F1685196F83490083B252 /* rtpsession.h */,
+				430F1686196F83490083B252 /* rtpsessionparams.cpp */,
+				430F1687196F83490083B252 /* rtpsessionparams.h */,
+				430F1688196F83490083B252 /* rtpsessionsources.cpp */,
+				430F1689196F83490083B252 /* rtpsessionsources.h */,
+				430F168A196F83490083B252 /* rtpsourcedata.cpp */,
+				430F168B196F83490083B252 /* rtpsourcedata.h */,
+				430F168C196F83490083B252 /* rtpsources.cpp */,
+				430F168D196F83490083B252 /* rtpsources.h */,
+				430F168E196F83490083B252 /* rtpstructs.h */,
+				430F168F196F83490083B252 /* rtptimeutilities.cpp */,
+				430F1690196F83490083B252 /* rtptimeutilities.h */,
+				430F1691196F83490083B252 /* rtptransmitter.h */,
+				430F1692196F83490083B252 /* rtptypes_win.h */,
+				430F1693196F83490083B252 /* rtpudpv4transmitter.cpp */,
+				430F1694196F83490083B252 /* rtpudpv4transmitter.h */,
+				430F1695196F83490083B252 /* rtpudpv6transmitter.cpp */,
+				430F1696196F83490083B252 /* rtpudpv6transmitter.h */,
+			);
+			path = jrtplib;
+			sourceTree = "<group>";
+		};
+		430F1641196F83490083B252 /* extratransmitters */ = {
+			isa = PBXGroup;
+			children = (
+				430F1642196F83490083B252 /* rtpfaketransmitter.cpp */,
+				430F1643196F83490083B252 /* rtpfaketransmitter.h */,
+			);
+			path = extratransmitters;
+			sourceTree = "<group>";
+		};
+		430F16C0196F8D5F0083B252 /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				430F16C1196F8D5F0083B252 /* adler32.cpp */,
+				430F16C2196F8D5F0083B252 /* adler32.h */,
+				430F16C5196F8D5F0083B252 /* CsvParser.cpp */,
+				430F16C6196F8D5F0083B252 /* CsvParser.h */,
+				430F16C7196F8D5F0083B252 /* DataStream.cpp */,
+				430F16C8196F8D5F0083B252 /* DataStream.h */,
+				430F16C9196F8D5F0083B252 /* Engine.h */,
+				430F16CE196F8D5F0083B252 /* md5.cpp */,
+				430F16CF196F8D5F0083B252 /* md5.h */,
+				430F16D2196F8D5F0083B252 /* NetWorks.h */,
+				430F16D3196F8D5F0083B252 /* public.cpp */,
+				430F16D4196F8D5F0083B252 /* public.h */,
+				430F16D5196F8D5F0083B252 /* Rect.cpp */,
+				430F16D6196F8D5F0083B252 /* Rect.h */,
+				430F16D7196F8D5F0083B252 /* RegExp.h */,
+				430F16D8196F8D5F0083B252 /* StringUtil.cpp */,
+				430F16D9196F8D5F0083B252 /* StringUtil.h */,
+				430F16DA196F8D5F0083B252 /* SystemUtil.cpp */,
+				430F16DB196F8D5F0083B252 /* SystemUtil.h */,
+				430F16DC196F8D5F0083B252 /* template.h */,
+				430F16DD196F8D5F0083B252 /* Vector2.h */,
+				430F16DE196F8D5F0083B252 /* XmlParser.cpp */,
+				430F16DF196F8D5F0083B252 /* XmlParser.h */,
+				430F16E0196F8D5F0083B252 /* zCond.h */,
+				430F16E1196F8D5F0083B252 /* zMutex.h */,
+				430F16E2196F8D5F0083B252 /* zNoncopyable.h */,
+				430F16E3196F8D5F0083B252 /* zRWLock.h */,
+				430F16E4196F8D5F0083B252 /* zThread.cpp */,
+				430F16E5196F8D5F0083B252 /* zThread.h */,
+			);
+			path = Engine;
+			sourceTree = "<group>";
+		};
+		430F16F4196F8DC10083B252 /* tinyXml */ = {
+			isa = PBXGroup;
+			children = (
+				430F16F5196F8DC10083B252 /* source */,
+				430F16FA196F8DC10083B252 /* tinystr.h */,
+				430F16FB196F8DC10083B252 /* tinyxml.h */,
+			);
+			path = tinyXml;
+			sourceTree = "<group>";
+		};
+		430F16F5196F8DC10083B252 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				430F16F6196F8DC10083B252 /* tinystr.cpp */,
+				430F16F7196F8DC10083B252 /* tinyxml.cpp */,
+				430F16F8196F8DC10083B252 /* tinyxmlerror.cpp */,
+				430F16F9196F8DC10083B252 /* tinyxmlparser.cpp */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		430F1700196F91430083B252 /* NetProcess */ = {
+			isa = PBXGroup;
+			children = (
+				430F1701196F91430083B252 /* ClientTask.cpp */,
+				430F1702196F91430083B252 /* ClientTask.h */,
+				430F1703196F91430083B252 /* StreamConnection.cpp */,
+				430F1704196F91430083B252 /* StreamConnection.h */,
+			);
+			path = NetProcess;
+			sourceTree = "<group>";
+		};
 		435E03A5196E7D9F000C3012 = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +490,7 @@
 		435E03B0196E7D9F000C3012 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				430079581973A705003DB064 /* CoreFoundation.framework */,
 				43D6490A196E9797001944DC /* CoreAudio.framework */,
 				435E03D7196E813C000C3012 /* AudioToolbox.framework */,
 				435E03B1196E7D9F000C3012 /* Foundation.framework */,
@@ -147,6 +522,13 @@
 		435E03D9196E828E000C3012 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				43AEFB761979013F0062C9B4 /* third_party */,
+				430F1700196F91430083B252 /* NetProcess */,
+				430F16F4196F8DC10083B252 /* tinyXml */,
+				430F16C0196F8D5F0083B252 /* Engine */,
+				430F1640196F83490083B252 /* jrtplib */,
+				430F163D196F7A3C0083B252 /* AQPlayer.h */,
+				430F163E196F7A3C0083B252 /* AQPlayer.mm */,
 				435E03DA196E828E000C3012 /* AQRecorder.h */,
 				435E03DB196E828E000C3012 /* AQRecorder.mm */,
 			);
@@ -165,6 +547,54 @@
 				435E03E4196E8333000C3012 /* CAXException.h */,
 			);
 			path = PublicUtility;
+			sourceTree = "<group>";
+		};
+		43AE003E197913930062C9B4 /* jsoncpp */ = {
+			isa = PBXGroup;
+			children = (
+				43AE003F197913930062C9B4 /* json */,
+				43AE0049197913930062C9B4 /* lib_json */,
+			);
+			path = jsoncpp;
+			sourceTree = "<group>";
+		};
+		43AE003F197913930062C9B4 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				43AE0040197913930062C9B4 /* assertions.h */,
+				43AE0041197913930062C9B4 /* autolink.h */,
+				43AE0042197913930062C9B4 /* config.h */,
+				43AE0043197913930062C9B4 /* features.h */,
+				43AE0044197913930062C9B4 /* forwards.h */,
+				43AE0045197913930062C9B4 /* json.h */,
+				43AE0046197913930062C9B4 /* reader.h */,
+				43AE0047197913930062C9B4 /* value.h */,
+				43AE0048197913930062C9B4 /* writer.h */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
+		43AE0049197913930062C9B4 /* lib_json */ = {
+			isa = PBXGroup;
+			children = (
+				43AE004A197913930062C9B4 /* json_batchallocator.h */,
+				43AE004B197913930062C9B4 /* json_internalarray.inl */,
+				43AE004C197913930062C9B4 /* json_internalmap.inl */,
+				43AE004D197913930062C9B4 /* json_reader.cpp */,
+				43AE004E197913930062C9B4 /* json_tool.h */,
+				43AE004F197913930062C9B4 /* json_value.cpp */,
+				43AE0050197913930062C9B4 /* json_valueiterator.inl */,
+				43AE0051197913930062C9B4 /* json_writer.cpp */,
+			);
+			path = lib_json;
+			sourceTree = "<group>";
+		};
+		43AEFB761979013F0062C9B4 /* third_party */ = {
+			isa = PBXGroup;
+			children = (
+				43AE003E197913930062C9B4 /* jsoncpp */,
+			);
+			path = third_party;
 			sourceTree = "<group>";
 		};
 		43D648DC196E9247001944DC /* RTChatTest */ = {
@@ -275,10 +705,66 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43AE0052197913930062C9B4 /* json_reader.cpp in Sources */,
+				430F169F196F83490083B252 /* rtcpscheduler.cpp in Sources */,
+				430F16F2196F8D5F0083B252 /* XmlParser.cpp in Sources */,
+				430F16A6196F83490083B252 /* rtperrors.cpp in Sources */,
+				430F1705196F91430083B252 /* ClientTask.cpp in Sources */,
+				430F169E196F83490083B252 /* rtcprrpacket.cpp in Sources */,
+				430F16E8196F8D5F0083B252 /* CsvParser.cpp in Sources */,
+				430F16A7196F83490083B252 /* rtpexternaltransmitter.cpp in Sources */,
+				430F16B0196F83490083B252 /* rtprandomrand48.cpp in Sources */,
+				430F16A0196F83490083B252 /* rtcpsdesinfo.cpp in Sources */,
+				430F16FF196F8DC10083B252 /* tinyxmlparser.cpp in Sources */,
+				430F16B4196F83490083B252 /* rtpsessionparams.cpp in Sources */,
+				430F16A2196F83490083B252 /* rtcpsrpacket.cpp in Sources */,
+				430F16B5196F83490083B252 /* rtpsessionsources.cpp in Sources */,
+				430F16AD196F83490083B252 /* rtppacketbuilder.cpp in Sources */,
+				430F16B6196F83490083B252 /* rtpsourcedata.cpp in Sources */,
+				430F16A1196F83490083B252 /* rtcpsdespacket.cpp in Sources */,
+				430F16E6196F8D5F0083B252 /* adler32.cpp in Sources */,
+				430F16AB196F83490083B252 /* rtplibraryversion.cpp in Sources */,
 				435E03E7196E8333000C3012 /* CAXException.cpp in Sources */,
+				430F16FE196F8DC10083B252 /* tinyxmlerror.cpp in Sources */,
+				430F16EF196F8D5F0083B252 /* Rect.cpp in Sources */,
+				430F16AC196F83490083B252 /* rtppacket.cpp in Sources */,
+				430F16B7196F83490083B252 /* rtpsources.cpp in Sources */,
+				43AE0053197913930062C9B4 /* json_value.cpp in Sources */,
+				43AE0054197913930062C9B4 /* json_writer.cpp in Sources */,
+				430F16F0196F8D5F0083B252 /* StringUtil.cpp in Sources */,
+				430F16AA196F83490083B252 /* rtpipv6address.cpp in Sources */,
+				430F16B3196F83490083B252 /* rtpsession.cpp in Sources */,
 				435E03E5196E8333000C3012 /* CADebugMacros.cpp in Sources */,
+				430F16FD196F8DC10083B252 /* tinyxml.cpp in Sources */,
+				430F16A3196F83490083B252 /* rtpbyteaddress.cpp in Sources */,
 				435E03DC196E828E000C3012 /* AQRecorder.mm in Sources */,
+				430F16BA196F83490083B252 /* rtpudpv6transmitter.cpp in Sources */,
+				430F1699196F83490083B252 /* rtcpbyepacket.cpp in Sources */,
+				430F1698196F83490083B252 /* rtcpapppacket.cpp in Sources */,
+				430F16B1196F83490083B252 /* rtprandomrands.cpp in Sources */,
+				430F16FC196F8DC10083B252 /* tinystr.cpp in Sources */,
+				430F169C196F83490083B252 /* rtcppacket.cpp in Sources */,
+				430F169D196F83490083B252 /* rtcppacketbuilder.cpp in Sources */,
+				430F1697196F83490083B252 /* rtpfaketransmitter.cpp in Sources */,
+				430F16A4196F83490083B252 /* rtpcollisionlist.cpp in Sources */,
+				430F16AE196F83490083B252 /* rtppollthread.cpp in Sources */,
+				430F16F3196F8D5F0083B252 /* zThread.cpp in Sources */,
 				435E03E6196E8333000C3012 /* CAStreamBasicDescription.cpp in Sources */,
+				430F16B9196F83490083B252 /* rtpudpv4transmitter.cpp in Sources */,
+				430F16E9196F8D5F0083B252 /* DataStream.cpp in Sources */,
+				430F16A9196F83490083B252 /* rtpipv4address.cpp in Sources */,
+				430F16A8196F83490083B252 /* rtpinternalsourcedata.cpp in Sources */,
+				430F16AF196F83490083B252 /* rtprandom.cpp in Sources */,
+				430F163F196F7A3C0083B252 /* AQPlayer.mm in Sources */,
+				430F16B8196F83490083B252 /* rtptimeutilities.cpp in Sources */,
+				430F16F1196F8D5F0083B252 /* SystemUtil.cpp in Sources */,
+				430F16B2196F83490083B252 /* rtprandomurandom.cpp in Sources */,
+				430F16EE196F8D5F0083B252 /* public.cpp in Sources */,
+				430F169A196F83490083B252 /* rtcpcompoundpacket.cpp in Sources */,
+				430F16A5196F83490083B252 /* rtpdebug.cpp in Sources */,
+				430F1706196F91430083B252 /* StreamConnection.cpp in Sources */,
+				430F169B196F83490083B252 /* rtcpcompoundpacketbuilder.cpp in Sources */,
+				430F16EC196F8D5F0083B252 /* md5.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,10 +871,42 @@
 		435E03D2196E7D9F000C3012 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				DSTROOT = /tmp/RTChat.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RTChat/RTChat-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					WEBRTC_IOS,
+					WEBRTC_POSIX,
+					WEBRTC_MAC,
+					WEBRTC_ARCH_ARM,
+					WEBRTC_ARCH_ARM_NEON,
+					WEBRTC_CLOCK_TYPE_REALTIME,
+					__STDC_CONSTANT_MACROS,
+					__STDC_FORMAT_MACROS,
+					"DYNAMIC_ANNOTATIONS_ENABLED=1",
+					"WTF_USE_DYNAMIC_ANNOTATIONS=1",
+					WEBRTC_NS_FIXED,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/RTChat/Classes",
+					"$(PROJECT_DIR)/RTChat/Classes/third_party/jsoncpp",
+					"$(PROJECT_DIR)/RTChat/Classes/third_party/nss/nspr/pr/include",
+				);
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = (
+					"-DWEBRTC_MAC",
+					"-DWEBRTC_POSIX",
+					"-DWEBRTC_IOS",
+					"-DSSL_USE_NSS",
+					"-DDARWIN",
+					"-DHAVE_BSD_FLOCK",
+					"-DHAVE_STRERROR",
+					"-D_PR_PTHREADS",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -398,9 +916,28 @@
 		435E03D3196E7D9F000C3012 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				DSTROOT = /tmp/RTChat.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RTChat/RTChat-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/RTChat/Classes",
+					"$(PROJECT_DIR)/RTChat/Classes/third_party/jsoncpp",
+					"$(PROJECT_DIR)/RTChat/Classes/third_party/nss/nspr/pr/include",
+				);
+				OTHER_CFLAGS = (
+					"-DWEBRTC_MAC",
+					"-DWEBRTC_POSIX",
+					"-DWEBRTC_IOS",
+					"-DSSL_USE_NSS",
+					"-DDARWIN",
+					"-DHAVE_BSD_FLOCK",
+					"-DHAVE_STRERROR",
+					"-D_PR_PTHREADS",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -424,8 +961,10 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "RTChatTest/RTChatTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "268B9A02-519A-4DF6-A427-560028CAEA7C";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -443,8 +982,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RTChatTest/RTChatTest-Prefix.pch";
 				INFOPLIST_FILE = "RTChatTest/RTChatTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "268B9A02-519A-4DF6-A427-560028CAEA7C";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -477,6 +1018,7 @@
 				43D64904196E9247001944DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

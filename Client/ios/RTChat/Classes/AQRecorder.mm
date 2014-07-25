@@ -48,6 +48,7 @@ Copyright (C) 2012 Apple Inc. All Rights Reserved.
 */
 
 #include "AQRecorder.h"
+#include "NetProcess/StreamConnection.h"
 
 // ____________________________________________________________________________________
 // Determine the size, in bytes, of a buffer necessary to represent the supplied number
@@ -85,6 +86,35 @@ int AQRecorder::ComputeRecordBufferSize(const AudioStreamBasicDescription *forma
 	return bytes;
 }
 
+// Copy a queue's encoder's magic cookie to an audio file.
+void AQRecorder::CopyEncoderCookieToFile()
+{
+	UInt32 propertySize;
+	// get the magic cookie, if any, from the converter
+	OSStatus err = AudioQueueGetPropertySize(mQueue, kAudioQueueProperty_MagicCookie, &propertySize);
+	
+	// we can get a noErr result and also a propertySize == 0
+	// -- if the file format does support magic cookies, but this file doesn't have one.
+	if (err == noErr && propertySize > 0) {
+		Byte *magicCookie = new Byte[propertySize];
+		UInt32 magicCookieSize;
+		XThrowIfError(AudioQueueGetProperty(mQueue, kAudioQueueProperty_MagicCookie, magicCookie, &propertySize), "get audio converter's magic cookie");
+		magicCookieSize = propertySize;	// the converter lies and tell us the wrong size
+		
+		// now set the magic cookie on the output file
+		UInt32 willEatTheCookie = false;
+        Boolean isWritable = true;
+		// the converter wants to give us one; will the file take it?
+//		err = AudioFileGetPropertyInfo(mRecordFile, kAudioFilePropertyMagicCookieData, NULL, &willEatTheCookie);
+        err = ExtAudioFileGetPropertyInfo(destinationFile, kExtAudioFileProperty_ClientDataFormat, NULL, &isWritable);
+		if (err == noErr && willEatTheCookie) {
+			err = ExtAudioFileSetProperty(destinationFile, kExtAudioFileProperty_ClientDataFormat, magicCookieSize, magicCookie);
+			XThrowIfError(err, "set audio file's magic cookie");
+		}
+		delete[] magicCookie;
+	}
+}
+
 // ____________________________________________________________________________________
 // AudioQueue callback function, called when an input buffers has been filled.
 void AQRecorder::MyInputBufferHandler(	void *								inUserData,
@@ -98,12 +128,14 @@ void AQRecorder::MyInputBufferHandler(	void *								inUserData,
 	try {
 		if (inNumPackets > 0) {
 			// write packets to file
-//			XThrowIfError(AudioFileWritePackets(aqr->mRecordFile, FALSE, inBuffer->mAudioDataByteSize,
-//											 inPacketDesc, aqr->mRecordPacket, &inNumPackets, inBuffer->mAudioData),
-//					   "AudioFileWritePackets failed");
+			XThrowIfError(AudioFileWritePackets(aqr->mRecordFile, FALSE, inBuffer->mAudioDataByteSize,
+											 inPacketDesc, aqr->mRecordPacket, &inNumPackets, inBuffer->mAudioData),
+					   "AudioFileWritePackets failed");
 			aqr->mRecordPacket += inNumPackets;
-            
+
             DebugPrint("接收到%d字节录音数据\n", inBuffer->mAudioDataByteSize);
+            
+            getStreamConnection()->sendData((const char*)inBuffer->mAudioData, inBuffer->mAudioDataByteSize);
 		}
 		
 		// if we're not stopping, re-enqueue the buffe so that it gets filled again
@@ -115,47 +147,25 @@ void AQRecorder::MyInputBufferHandler(	void *								inUserData,
 	}
 }
 
-AQRecorder::AQRecorder()
+AQRecorder::AQRecorder() //:
+//_coder(NULL)
 {
 	mIsRunning = false;
 	mRecordPacket = 0;
     mQueue = NULL;
+    
+//    _coder = new RTCoder();
+//    if (_coder) {
+//        _coder->initCoder(20);
+//    }
 }
 
 AQRecorder::~AQRecorder()
 {
 	AudioQueueDispose(mQueue, TRUE);
-//	AudioFileClose(mRecordFile);
+	AudioFileClose(mRecordFile);
 	if (mFileName) CFRelease(mFileName);
 }
-
-// ____________________________________________________________________________________
-// Copy a queue's encoder's magic cookie to an audio file.
-//void AQRecorder::CopyEncoderCookieToFile()
-//{
-//	UInt32 propertySize;
-//	// get the magic cookie, if any, from the converter		
-//	OSStatus err = AudioQueueGetPropertySize(mQueue, kAudioQueueProperty_MagicCookie, &propertySize);
-//	
-//	// we can get a noErr result and also a propertySize == 0
-//	// -- if the file format does support magic cookies, but this file doesn't have one.
-//	if (err == noErr && propertySize > 0) {
-//		Byte *magicCookie = new Byte[propertySize];
-//		UInt32 magicCookieSize;
-//		XThrowIfError(AudioQueueGetProperty(mQueue, kAudioQueueProperty_MagicCookie, magicCookie, &propertySize), "get audio converter's magic cookie");
-//		magicCookieSize = propertySize;	// the converter lies and tell us the wrong size
-//		
-//		// now set the magic cookie on the output file
-//		UInt32 willEatTheCookie = false;
-//		// the converter wants to give us one; will the file take it?
-//		err = AudioFileGetPropertyInfo(mRecordFile, kAudioFilePropertyMagicCookieData, NULL, &willEatTheCookie);
-//		if (err == noErr && willEatTheCookie) {
-//			err = AudioFileSetProperty(mRecordFile, kAudioFilePropertyMagicCookieData, magicCookieSize, magicCookie);
-//			XThrowIfError(err, "set audio file's magic cookie");
-//		}
-//		delete[] magicCookie;
-//	}
-//}
 
 void AQRecorder::SetupAudioFormat(UInt32 inFormatID)
 {
@@ -172,8 +182,7 @@ void AQRecorder::SetupAudioFormat(UInt32 inFormatID)
 //										&mRecordFormat.mChannelsPerFrame), "couldn't get input channel count");
 			
 	mRecordFormat.mFormatID = inFormatID;
-	if (inFormatID == kAudioFormatLinearPCM)
-	{
+	if (inFormatID == kAudioFormatLinearPCM) {
         mRecordFormat.mSampleRate = 44100;
         mRecordFormat.mChannelsPerFrame = 2;
 		// if we want pcm, default to signed 16-bit little-endian
@@ -182,19 +191,31 @@ void AQRecorder::SetupAudioFormat(UInt32 inFormatID)
 		mRecordFormat.mBytesPerPacket = mRecordFormat.mBytesPerFrame = (mRecordFormat.mBitsPerChannel / 8) * mRecordFormat.mChannelsPerFrame;
 		mRecordFormat.mFramesPerPacket = 1;
 	}
+    else if (inFormatID == kAudioFormatiLBC) {
+        mRecordFormat.mSampleRate = 8000;
+        mRecordFormat.mFormatID = kAudioFormatiLBC;
+        mRecordFormat.mChannelsPerFrame = 1;
+        mRecordFormat.mFramesPerPacket = 160;
+        mRecordFormat.mBytesPerPacket = 38;
+        mRecordFormat.mFormatFlags = 0;
+    }
 }
 
 void AQRecorder::StartRecord()
 {
 	int i, bufferByteSize;
 	UInt32 size;
-//	CFURLRef url = nil;
+	CFURLRef url = nil;
+    
+    CFStringRef inRecordFile = CFSTR("recordedFile.caf");
 	
 	try {		
-//		mFileName = CFStringCreateCopy(kCFAllocatorDefault, inRecordFile);
+		mFileName = CFStringCreateCopy(kCFAllocatorDefault, inRecordFile);
 
 		// specify the recording format
-		SetupAudioFormat(kAudioFormatLinearPCM);
+//		SetupAudioFormat(kAudioFormatLinearPCM);
+        SetupAudioFormat(kAudioFormatiLBC);
+//        AudioStreamBasicDescription desc = SetupIlbcAudioFormat();
 		
 		// create the queue
 		XThrowIfError(AudioQueueNewInput(
@@ -212,18 +233,27 @@ void AQRecorder::StartRecord()
 		XThrowIfError(AudioQueueGetProperty(mQueue, kAudioQueueProperty_StreamDescription,	
 										 &mRecordFormat, &size), "couldn't get queue's format");
 			
-//		NSString *recordFile = [NSTemporaryDirectory() stringByAppendingPathComponent: (NSString*)inRecordFile];
-//			
-//		url = CFURLCreateWithString(kCFAllocatorDefault, (CFStringRef)recordFile, NULL);
-//		
-//		// create the audio file
+		NSString *recordFile = [NSTemporaryDirectory() stringByAppendingPathComponent: (__bridge NSString*)inRecordFile];
+        
+        CFStringRef string = CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)recordFile, NULL, NULL, kCFStringEncodingUTF8);
+			
+		url = CFURLCreateWithString(kCFAllocatorDefault, string, NULL);
+        
+		
+		// create the audio file
 //		OSStatus status = AudioFileCreateWithURL(url, kAudioFileCAFType, &mRecordFormat, kAudioFileFlags_EraseFile, &mRecordFile);
-//		CFRelease(url);
-//        
-//        XThrowIfError(status, "AudioFileCreateWithURL failed");
-//		
-//		// copy the cookie first to give the file object as much info as we can about the data going in
-//		// not necessary for pcm, but required for some compressed audio
+        XThrowIfError(ExtAudioFileCreateWithURL(url, kAudioFileCAFType, &mRecordFormat, NULL, kAudioFileFlags_EraseFile, &destinationFile), "ExtAudioFileCreateWithURL failed!");
+        
+        size = sizeof(AudioFileID);
+        ExtAudioFileGetProperty(destinationFile, kExtAudioFileProperty_AudioFile, &size, &mRecordFile);
+        
+		CFRelease(url);
+        
+//        size = sizeof(mRecordFormat);
+//        XThrowIfError(ExtAudioFileSetProperty(destinationFile, kExtAudioFileProperty_ClientDataFormat, size, &mRecordFormat), "couldn't set destination client format");
+		
+		// copy the cookie first to give the file object as much info as we can about the data going in
+		// not necessary for pcm, but required for some compressed audio
 //		CopyEncoderCookieToFile();
 		
 		// allocate and enqueue buffers
@@ -245,7 +275,6 @@ void AQRecorder::StartRecord()
 	catch (...) {
 		fprintf(stderr, "An unknown error occurred\n");;
 	}	
-
 }
 
 void AQRecorder::StopRecord()
@@ -265,6 +294,6 @@ void AQRecorder::StopRecord()
 //		mFileName = NULL;
 //	}
 	AudioQueueDispose(mQueue, true);
-//	AudioFileClose(mRecordFile);
+	AudioFileClose(mRecordFile);
     mQueue = NULL;
 }

@@ -1,7 +1,7 @@
 /*
  
-    File: AQRecorder.h
-Abstract: Helper class for recording audio files via the AudioQueue
+    File: AQPlayer.h
+Abstract: Helper class for playing audio files via the AudioQueue
  Version: 2.5
 
 Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple
@@ -48,74 +48,113 @@ Copyright (C) 2012 Apple Inc. All Rights Reserved.
 */
 
 #include <AudioToolbox/AudioToolbox.h>
-#include <Foundation/Foundation.h>
-#include <libkern/OSAtomic.h>
 
 #include "CAStreamBasicDescription.h"
 #include "CAXException.h"
 
-#define kNumberRecordBuffers	3
+#define kNumberBuffers 3
 
-//class RTCoder;
-
-class AQRecorder 
+class AQPlayer
 {
 public:
-    AQRecorder();
-    ~AQRecorder();
+    AQPlayer();
+    ~AQPlayer();
+
+    OSStatus						StartQueue(BOOL inResume);
     
-    UInt32						GetNumberChannels() const
-    {
-        return mRecordFormat.NumberChannels();
-    }
+    OSStatus						StopQueue();
     
-    CFStringRef					GetFileName() const
-    {
-        return mFileName;
-    }
+    OSStatus						PauseQueue();
     
-    AudioQueueRef				Queue() const
+    AudioQueueRef					Queue()
     {
         return mQueue;
     }
     
-    CAStreamBasicDescription	DataFormat() const
+    CAStreamBasicDescription		DataFormat() const
     {
-        return mRecordFormat;
+        return mDataFormat;
     }
     
-    void			StartRecord();
-    
-    void			StopRecord();
-    
-    Boolean			IsRunning() const
+    Boolean							IsRunning()	const
     {
-        return mIsRunning;
+        return (mIsRunning) ? true : false;
     }
     
-    UInt64			startTime;
+    Boolean							IsInitialized()	const
+    {
+        return mIsInitialized;
+    }
     
+    CFStringRef						GetFilePath() const
+    {
+        return (mFilePath) ? mFilePath : CFSTR("");
+    }
+    
+    Boolean							IsLooping() const
+    {
+        return mIsLooping;
+    }
+    
+    void SetLooping(Boolean inIsLooping)
+    {
+        mIsLooping = inIsLooping;
+    }
+    
+    void CreateQueueForFile(CFStringRef inFilePath);
+    
+    void DisposeQueue(Boolean inDisposeFile);	
+                                    
 private:
-    void			SetupAudioFormat(UInt32 inFormatID);
+    UInt32							GetNumPacketsToRead()
+    {
+        return mNumPacketsToRead;
+    }
     
-    int				ComputeRecordBufferSize(const AudioStreamBasicDescription *format, float seconds);
+    SInt64							GetCurrentPacket()
+    {
+        return mCurrentPacket;
+    }
     
-    void			CopyEncoderCookieToFile();
+    AudioFileID						GetAudioFileID()
+    {
+        return mAudioFile;
+    }
     
-    static void     MyInputBufferHandler(void* inUserData, AudioQueueRef inAQ, AudioQueueBufferRef inBuffer, const AudioTimeStamp * inStartTime, UInt32 inNumPackets, const AudioStreamPacketDescription*	inPacketDesc);
+    void							SetCurrentPacket(SInt64 inPacket)
+    {
+        mCurrentPacket = inPacket;
+    }
     
+    void							SetupNewQueue();
+    
+    void CalculateBytesForTime(		CAStreamBasicDescription & inDesc,
+                               UInt32 inMaxPacketSize,
+                               Float64 inSeconds,
+                               UInt32 *outBufferSize,
+                               UInt32 *outNumPackets);
+    
+    static void isRunningProc(		void *              inUserData,
+                              AudioQueueRef           inAQ,
+                              AudioQueuePropertyID    inID);
+    
+    static void AQBufferCallback(	void *					inUserData,
+                                 AudioQueueRef			inAQ,
+                                 AudioQueueBufferRef		inCompleteAQBuffer);
+   
 private:
-    CFStringRef					mFileName;
-    AudioQueueRef				mQueue;
-    AudioQueueBufferRef			mBuffers[kNumberRecordBuffers];
-    AudioFileID					mRecordFile;
-    ExtAudioFileRef             destinationFile;
-    SInt64						mRecordPacket; // current packet number in record file
-    CAStreamBasicDescription	mRecordFormat;
-    Boolean						mIsRunning;
-//    RTCoder*                    _coder;
+    AudioQueueRef					mQueue;
+    AudioQueueBufferRef				mBuffers[kNumberBuffers];
+    AudioFileID						mAudioFile;
+    CFStringRef						mFilePath;
+    CAStreamBasicDescription		mDataFormat;
+    Boolean							mIsInitialized;
+    UInt32							mNumPacketsToRead;
+    SInt64							mCurrentPacket;
+    UInt32							mIsRunning;
+    Boolean							mIsDone;
+    Boolean							mIsLooping;
 };
-
 
 
 
