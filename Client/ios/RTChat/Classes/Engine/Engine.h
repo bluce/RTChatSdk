@@ -8,6 +8,5 @@
 #include "template.h"
 #include "CsvParser.h"
 #include "adler32.h"
-#include "vartype.h"
 
 using namespace std::placeholders;
