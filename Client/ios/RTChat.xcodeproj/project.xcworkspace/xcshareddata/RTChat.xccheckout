@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>1F391016-B53C-4219-9DAF-E80EFF7D348B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>RTChat</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>8C4CD7D7-0595-4EFB-AB1F-514E21D2176E</key>
+		<string>ssh://180.166.92.227:5678/~/git_repo/rtchatsdk.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Client/ios/RTChat.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>8C4CD7D7-0595-4EFB-AB1F-514E21D2176E</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://180.166.92.227:5678/~/git_repo/rtchatsdk.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>8C4CD7D7-0595-4EFB-AB1F-514E21D2176E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8C4CD7D7-0595-4EFB-AB1F-514E21D2176E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>RTChatSdk</string>
+		</dict>
+	</array>
+</dict>
+</plist>
