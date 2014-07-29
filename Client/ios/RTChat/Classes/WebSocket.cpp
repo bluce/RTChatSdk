@@ -512,7 +512,8 @@ int WebSocket::onSocketCallback(struct libwebsocket_context *ctx,
 
                 if (msg)
                 {
-                    _wsHelper->sendMessageToUIThread(msg);
+//                    _wsHelper->sendMessageToUIThread(msg);
+                    _delegate->onError(this, kErrorConnectionFailure);
                 }
             }
             break;
@@ -526,7 +527,8 @@ int WebSocket::onSocketCallback(struct libwebsocket_context *ctx,
                  * LWS_CALLBACK_CLIENT_WRITEABLE will come next service
                  */
                 libwebsocket_callback_on_writable(ctx, wsi);
-                _wsHelper->sendMessageToUIThread(msg);
+//                _wsHelper->sendMessageToUIThread(msg);
+                _delegate->onOpen(this);
             }
             break;
             
@@ -600,7 +602,9 @@ int WebSocket::onSocketCallback(struct libwebsocket_context *ctx,
                     WsMessage* msg = new WsMessage();
                     _readyState = kStateClosed;
                     msg->what = WS_MSG_TO_UITHREAD_CLOSE;
-                    _wsHelper->sendMessageToUIThread(msg);
+//                    _wsHelper->sendMessageToUIThread(msg);
+                    
+                    _delegate->onClose(this);
                 }
             }
             break;
@@ -634,7 +638,11 @@ int WebSocket::onSocketCallback(struct libwebsocket_context *ctx,
                     data->len = len;
                     msg->obj = (void*)data;
                     
-                    _wsHelper->sendMessageToUIThread(msg);
+//                    _wsHelper->sendMessageToUIThread(msg);
+                    
+                    _delegate->onMessage(this, *data);
+                    SAFE_DELETEARRAY(data->bytes);
+                    SAFE_DELETE(data);
                 }
             }
             break;
