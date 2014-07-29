@@ -35,18 +35,18 @@ void protobuf_ShutdownFile_public_2eproto();
 
 enum enCmdId {
   enNone = 0,
-  enNotifyLogicInfo = 1,
-  enLogin = 2,
-  enRequestCreateRoom = 3,
-  enReturnCreateResult = 4,
-  enRequestEnterRoom = 5,
-  enReturnEnterResult = 6,
-  enVoiceData = 7,
-  enNotifyLeaveRoom = 8
+  enRequestLogicInfo = 1,
+  enNotifyLogicInfo = 2,
+  enRequestLogin = 3,
+  enNotifyLoginResult = 4,
+  enRequestCreateRoom = 5,
+  enNotifyCreateResult = 6,
+  enRequestEnterRoom = 7,
+  enNotifyEnterResult = 8
 };
 bool enCmdId_IsValid(int value);
 const enCmdId enCmdId_MIN = enNone;
-const enCmdId enCmdId_MAX = enNotifyLeaveRoom;
+const enCmdId enCmdId_MAX = enNotifyEnterResult;
 const int enCmdId_ARRAYSIZE = enCmdId_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* enCmdId_descriptor();

@@ -11,21 +11,31 @@
 
 #include <iostream>
 #include "WebSocket.h"
+#include "MediaSample.h"
 
 class NetDataManager : public WebSocket::Delegate {
 public:
     NetDataManager();
     virtual ~NetDataManager();
     
+    void init(const std::string& controlserver);
+    
     void sendSampleMsg();
+    
+    void sendClientMsg(const unsigned char* msg, unsigned int len);
     
     virtual void onOpen(WebSocket* ws);
     virtual void onMessage(WebSocket* ws, const WebSocket::Data& data);
     virtual void onClose(WebSocket* ws);
     virtual void onError(WebSocket* ws, const WebSocket::ErrorCode& error);
     
+protected:
+    //发送心跳消息
+    void sendHelloMsg();
+    
 private:
     WebSocket*      _socket;
+    MediaSample*    _media;
 };
 
 #endif /* defined(__RTChat__netdatamanager__) */

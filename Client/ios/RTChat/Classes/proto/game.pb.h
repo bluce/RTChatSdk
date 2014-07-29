@@ -34,12 +34,11 @@ void protobuf_AssignDesc_game_2eproto();
 void protobuf_ShutdownFile_game_2eproto();
 
 class cmdNotifyLogicInfo;
-class cmdLogin;
-class cmdquestCreateRoom;
-class cmdReturnCreateResult;
+class cmdRequestLogin;
+class cmdNotifyLoginResult;
+class cmdNotifyCreateResult;
 class cmdRequestEnterRoom;
-class cmdReturnEnterResult;
-class cmdNotifyLeaveRoom;
+class cmdNotifyEnterResult;
 
 // ===================================================================
 
@@ -139,14 +138,14 @@ class cmdNotifyLogicInfo : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class cmdLogin : public ::google::protobuf::Message {
+class cmdRequestLogin : public ::google::protobuf::Message {
  public:
-  cmdLogin();
-  virtual ~cmdLogin();
+  cmdRequestLogin();
+  virtual ~cmdRequestLogin();
   
-  cmdLogin(const cmdLogin& from);
+  cmdRequestLogin(const cmdRequestLogin& from);
   
-  inline cmdLogin& operator=(const cmdLogin& from) {
+  inline cmdRequestLogin& operator=(const cmdRequestLogin& from) {
     CopyFrom(from);
     return *this;
   }
@@ -160,17 +159,17 @@ class cmdLogin : public ::google::protobuf::Message {
   }
   
   static const ::google::protobuf::Descriptor* descriptor();
-  static const cmdLogin& default_instance();
+  static const cmdRequestLogin& default_instance();
   
-  void Swap(cmdLogin* other);
+  void Swap(cmdRequestLogin* other);
   
   // implements Message ----------------------------------------------
   
-  cmdLogin* New() const;
+  cmdRequestLogin* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const cmdLogin& from);
-  void MergeFrom(const cmdLogin& from);
+  void CopyFrom(const cmdRequestLogin& from);
+  void MergeFrom(const cmdRequestLogin& from);
   void Clear();
   bool IsInitialized() const;
   
@@ -193,25 +192,25 @@ class cmdLogin : public ::google::protobuf::Message {
   
   // accessors -------------------------------------------------------
   
-  // required string id = 1;
-  inline bool has_id() const;
-  inline void clear_id();
-  static const int kIdFieldNumber = 1;
-  inline const ::std::string& id() const;
-  inline void set_id(const ::std::string& value);
-  inline void set_id(const char* value);
-  inline void set_id(const char* value, size_t size);
-  inline ::std::string* mutable_id();
-  inline ::std::string* release_id();
+  // required string uniqueid = 1;
+  inline bool has_uniqueid() const;
+  inline void clear_uniqueid();
+  static const int kUniqueidFieldNumber = 1;
+  inline const ::std::string& uniqueid() const;
+  inline void set_uniqueid(const ::std::string& value);
+  inline void set_uniqueid(const char* value);
+  inline void set_uniqueid(const char* value, size_t size);
+  inline ::std::string* mutable_uniqueid();
+  inline ::std::string* release_uniqueid();
   
-  // @@protoc_insertion_point(class_scope:Cmd.cmdLogin)
+  // @@protoc_insertion_point(class_scope:Cmd.cmdRequestLogin)
  private:
-  inline void set_has_id();
-  inline void clear_has_id();
+  inline void set_has_uniqueid();
+  inline void clear_has_uniqueid();
   
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   
-  ::std::string* id_;
+  ::std::string* uniqueid_;
   
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
@@ -221,18 +220,18 @@ class cmdLogin : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_game_2eproto();
   
   void InitAsDefaultInstance();
-  static cmdLogin* default_instance_;
+  static cmdRequestLogin* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class cmdquestCreateRoom : public ::google::protobuf::Message {
+class cmdNotifyLoginResult : public ::google::protobuf::Message {
  public:
-  cmdquestCreateRoom();
-  virtual ~cmdquestCreateRoom();
+  cmdNotifyLoginResult();
+  virtual ~cmdNotifyLoginResult();
   
-  cmdquestCreateRoom(const cmdquestCreateRoom& from);
+  cmdNotifyLoginResult(const cmdNotifyLoginResult& from);
   
-  inline cmdquestCreateRoom& operator=(const cmdquestCreateRoom& from) {
+  inline cmdNotifyLoginResult& operator=(const cmdNotifyLoginResult& from) {
     CopyFrom(from);
     return *this;
   }
@@ -246,17 +245,17 @@ class cmdquestCreateRoom : public ::google::protobuf::Message {
   }
   
   static const ::google::protobuf::Descriptor* descriptor();
-  static const cmdquestCreateRoom& default_instance();
+  static const cmdNotifyLoginResult& default_instance();
   
-  void Swap(cmdquestCreateRoom* other);
+  void Swap(cmdNotifyLoginResult* other);
   
   // implements Message ----------------------------------------------
   
-  cmdquestCreateRoom* New() const;
+  cmdNotifyLoginResult* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const cmdquestCreateRoom& from);
-  void MergeFrom(const cmdquestCreateRoom& from);
+  void CopyFrom(const cmdNotifyLoginResult& from);
+  void MergeFrom(const cmdNotifyLoginResult& from);
   void Clear();
   bool IsInitialized() const;
   
@@ -279,21 +278,21 @@ class cmdquestCreateRoom : public ::google::protobuf::Message {
   
   // accessors -------------------------------------------------------
   
-  // required uint32 ctype = 1;
-  inline bool has_ctype() const;
-  inline void clear_ctype();
-  static const int kCtypeFieldNumber = 1;
-  inline ::google::protobuf::uint32 ctype() const;
-  inline void set_ctype(::google::protobuf::uint32 value);
+  // required uint64 tempid = 1;
+  inline bool has_tempid() const;
+  inline void clear_tempid();
+  static const int kTempidFieldNumber = 1;
+  inline ::google::protobuf::uint64 tempid() const;
+  inline void set_tempid(::google::protobuf::uint64 value);
   
-  // @@protoc_insertion_point(class_scope:Cmd.cmdquestCreateRoom)
+  // @@protoc_insertion_point(class_scope:Cmd.cmdNotifyLoginResult)
  private:
-  inline void set_has_ctype();
-  inline void clear_has_ctype();
+  inline void set_has_tempid();
+  inline void clear_has_tempid();
   
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   
-  ::google::protobuf::uint32 ctype_;
+  ::google::protobuf::uint64 tempid_;
   
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
@@ -303,18 +302,18 @@ class cmdquestCreateRoom : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_game_2eproto();
   
   void InitAsDefaultInstance();
-  static cmdquestCreateRoom* default_instance_;
+  static cmdNotifyLoginResult* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class cmdReturnCreateResult : public ::google::protobuf::Message {
+class cmdNotifyCreateResult : public ::google::protobuf::Message {
  public:
-  cmdReturnCreateResult();
-  virtual ~cmdReturnCreateResult();
+  cmdNotifyCreateResult();
+  virtual ~cmdNotifyCreateResult();
   
-  cmdReturnCreateResult(const cmdReturnCreateResult& from);
+  cmdNotifyCreateResult(const cmdNotifyCreateResult& from);
   
-  inline cmdReturnCreateResult& operator=(const cmdReturnCreateResult& from) {
+  inline cmdNotifyCreateResult& operator=(const cmdNotifyCreateResult& from) {
     CopyFrom(from);
     return *this;
   }
@@ -328,17 +327,17 @@ class cmdReturnCreateResult : public ::google::protobuf::Message {
   }
   
   static const ::google::protobuf::Descriptor* descriptor();
-  static const cmdReturnCreateResult& default_instance();
+  static const cmdNotifyCreateResult& default_instance();
   
-  void Swap(cmdReturnCreateResult* other);
+  void Swap(cmdNotifyCreateResult* other);
   
   // implements Message ----------------------------------------------
   
-  cmdReturnCreateResult* New() const;
+  cmdNotifyCreateResult* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const cmdReturnCreateResult& from);
-  void MergeFrom(const cmdReturnCreateResult& from);
+  void CopyFrom(const cmdNotifyCreateResult& from);
+  void MergeFrom(const cmdNotifyCreateResult& from);
   void Clear();
   bool IsInitialized() const;
   
@@ -361,17 +360,24 @@ class cmdReturnCreateResult : public ::google::protobuf::Message {
   
   // accessors -------------------------------------------------------
   
-  // required uint64 roomid = 1;
+  // required bool isok = 1;
+  inline bool has_isok() const;
+  inline void clear_isok();
+  static const int kIsokFieldNumber = 1;
+  inline bool isok() const;
+  inline void set_isok(bool value);
+  
+  // optional uint64 roomid = 2;
   inline bool has_roomid() const;
   inline void clear_roomid();
-  static const int kRoomidFieldNumber = 1;
+  static const int kRoomidFieldNumber = 2;
   inline ::google::protobuf::uint64 roomid() const;
   inline void set_roomid(::google::protobuf::uint64 value);
   
-  // required string ip = 2;
+  // optional string ip = 3;
   inline bool has_ip() const;
   inline void clear_ip();
-  static const int kIpFieldNumber = 2;
+  static const int kIpFieldNumber = 3;
   inline const ::std::string& ip() const;
   inline void set_ip(const ::std::string& value);
   inline void set_ip(const char* value);
@@ -379,15 +385,17 @@ class cmdReturnCreateResult : public ::google::protobuf::Message {
   inline ::std::string* mutable_ip();
   inline ::std::string* release_ip();
   
-  // required uint32 port = 3;
+  // optional uint32 port = 4;
   inline bool has_port() const;
   inline void clear_port();
-  static const int kPortFieldNumber = 3;
+  static const int kPortFieldNumber = 4;
   inline ::google::protobuf::uint32 port() const;
   inline void set_port(::google::protobuf::uint32 value);
   
-  // @@protoc_insertion_point(class_scope:Cmd.cmdReturnCreateResult)
+  // @@protoc_insertion_point(class_scope:Cmd.cmdNotifyCreateResult)
  private:
+  inline void set_has_isok();
+  inline void clear_has_isok();
   inline void set_has_roomid();
   inline void clear_has_roomid();
   inline void set_has_ip();
@@ -398,18 +406,19 @@ class cmdReturnCreateResult : public ::google::protobuf::Message {
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   
   ::google::protobuf::uint64 roomid_;
-  ::std::string* ip_;
+  bool isok_;
   ::google::protobuf::uint32 port_;
+  ::std::string* ip_;
   
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
   
   friend void  protobuf_AddDesc_game_2eproto();
   friend void protobuf_AssignDesc_game_2eproto();
   friend void protobuf_ShutdownFile_game_2eproto();
   
   void InitAsDefaultInstance();
-  static cmdReturnCreateResult* default_instance_;
+  static cmdNotifyCreateResult* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -495,14 +504,14 @@ class cmdRequestEnterRoom : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class cmdReturnEnterResult : public ::google::protobuf::Message {
+class cmdNotifyEnterResult : public ::google::protobuf::Message {
  public:
-  cmdReturnEnterResult();
-  virtual ~cmdReturnEnterResult();
+  cmdNotifyEnterResult();
+  virtual ~cmdNotifyEnterResult();
   
-  cmdReturnEnterResult(const cmdReturnEnterResult& from);
+  cmdNotifyEnterResult(const cmdNotifyEnterResult& from);
   
-  inline cmdReturnEnterResult& operator=(const cmdReturnEnterResult& from) {
+  inline cmdNotifyEnterResult& operator=(const cmdNotifyEnterResult& from) {
     CopyFrom(from);
     return *this;
   }
@@ -516,17 +525,17 @@ class cmdReturnEnterResult : public ::google::protobuf::Message {
   }
   
   static const ::google::protobuf::Descriptor* descriptor();
-  static const cmdReturnEnterResult& default_instance();
+  static const cmdNotifyEnterResult& default_instance();
   
-  void Swap(cmdReturnEnterResult* other);
+  void Swap(cmdNotifyEnterResult* other);
   
   // implements Message ----------------------------------------------
   
-  cmdReturnEnterResult* New() const;
+  cmdNotifyEnterResult* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const cmdReturnEnterResult& from);
-  void MergeFrom(const cmdReturnEnterResult& from);
+  void CopyFrom(const cmdNotifyEnterResult& from);
+  void MergeFrom(const cmdNotifyEnterResult& from);
   void Clear();
   bool IsInitialized() const;
   
@@ -574,7 +583,7 @@ class cmdReturnEnterResult : public ::google::protobuf::Message {
   inline ::google::protobuf::uint32 port() const;
   inline void set_port(::google::protobuf::uint32 value);
   
-  // @@protoc_insertion_point(class_scope:Cmd.cmdReturnEnterResult)
+  // @@protoc_insertion_point(class_scope:Cmd.cmdNotifyEnterResult)
  private:
   inline void set_has_isok();
   inline void clear_has_isok();
@@ -597,89 +606,7 @@ class cmdReturnEnterResult : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_game_2eproto();
   
   void InitAsDefaultInstance();
-  static cmdReturnEnterResult* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class cmdNotifyLeaveRoom : public ::google::protobuf::Message {
- public:
-  cmdNotifyLeaveRoom();
-  virtual ~cmdNotifyLeaveRoom();
-  
-  cmdNotifyLeaveRoom(const cmdNotifyLeaveRoom& from);
-  
-  inline cmdNotifyLeaveRoom& operator=(const cmdNotifyLeaveRoom& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-  
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-  
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const cmdNotifyLeaveRoom& default_instance();
-  
-  void Swap(cmdNotifyLeaveRoom* other);
-  
-  // implements Message ----------------------------------------------
-  
-  cmdNotifyLeaveRoom* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const cmdNotifyLeaveRoom& from);
-  void MergeFrom(const cmdNotifyLeaveRoom& from);
-  void Clear();
-  bool IsInitialized() const;
-  
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-  
-  ::google::protobuf::Metadata GetMetadata() const;
-  
-  // nested types ----------------------------------------------------
-  
-  // accessors -------------------------------------------------------
-  
-  // required uint32 id = 1;
-  inline bool has_id() const;
-  inline void clear_id();
-  static const int kIdFieldNumber = 1;
-  inline ::google::protobuf::uint32 id() const;
-  inline void set_id(::google::protobuf::uint32 value);
-  
-  // @@protoc_insertion_point(class_scope:Cmd.cmdNotifyLeaveRoom)
- private:
-  inline void set_has_id();
-  inline void clear_has_id();
-  
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-  
-  ::google::protobuf::uint32 id_;
-  
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
-  
-  friend void  protobuf_AddDesc_game_2eproto();
-  friend void protobuf_AssignDesc_game_2eproto();
-  friend void protobuf_ShutdownFile_game_2eproto();
-  
-  void InitAsDefaultInstance();
-  static cmdNotifyLeaveRoom* default_instance_;
+  static cmdNotifyEnterResult* default_instance_;
 };
 // ===================================================================
 
@@ -770,166 +697,188 @@ inline void cmdNotifyLogicInfo::set_port(::google::protobuf::uint32 value) {
 
 // -------------------------------------------------------------------
 
-// cmdLogin
+// cmdRequestLogin
 
-// required string id = 1;
-inline bool cmdLogin::has_id() const {
+// required string uniqueid = 1;
+inline bool cmdRequestLogin::has_uniqueid() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void cmdLogin::set_has_id() {
+inline void cmdRequestLogin::set_has_uniqueid() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void cmdLogin::clear_has_id() {
+inline void cmdRequestLogin::clear_has_uniqueid() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void cmdLogin::clear_id() {
-  if (id_ != &::google::protobuf::internal::kEmptyString) {
-    id_->clear();
+inline void cmdRequestLogin::clear_uniqueid() {
+  if (uniqueid_ != &::google::protobuf::internal::kEmptyString) {
+    uniqueid_->clear();
   }
-  clear_has_id();
+  clear_has_uniqueid();
 }
-inline const ::std::string& cmdLogin::id() const {
-  return *id_;
+inline const ::std::string& cmdRequestLogin::uniqueid() const {
+  return *uniqueid_;
 }
-inline void cmdLogin::set_id(const ::std::string& value) {
-  set_has_id();
-  if (id_ == &::google::protobuf::internal::kEmptyString) {
-    id_ = new ::std::string;
+inline void cmdRequestLogin::set_uniqueid(const ::std::string& value) {
+  set_has_uniqueid();
+  if (uniqueid_ == &::google::protobuf::internal::kEmptyString) {
+    uniqueid_ = new ::std::string;
   }
-  id_->assign(value);
+  uniqueid_->assign(value);
 }
-inline void cmdLogin::set_id(const char* value) {
-  set_has_id();
-  if (id_ == &::google::protobuf::internal::kEmptyString) {
-    id_ = new ::std::string;
+inline void cmdRequestLogin::set_uniqueid(const char* value) {
+  set_has_uniqueid();
+  if (uniqueid_ == &::google::protobuf::internal::kEmptyString) {
+    uniqueid_ = new ::std::string;
   }
-  id_->assign(value);
+  uniqueid_->assign(value);
 }
-inline void cmdLogin::set_id(const char* value, size_t size) {
-  set_has_id();
-  if (id_ == &::google::protobuf::internal::kEmptyString) {
-    id_ = new ::std::string;
+inline void cmdRequestLogin::set_uniqueid(const char* value, size_t size) {
+  set_has_uniqueid();
+  if (uniqueid_ == &::google::protobuf::internal::kEmptyString) {
+    uniqueid_ = new ::std::string;
   }
-  id_->assign(reinterpret_cast<const char*>(value), size);
+  uniqueid_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* cmdLogin::mutable_id() {
-  set_has_id();
-  if (id_ == &::google::protobuf::internal::kEmptyString) {
-    id_ = new ::std::string;
+inline ::std::string* cmdRequestLogin::mutable_uniqueid() {
+  set_has_uniqueid();
+  if (uniqueid_ == &::google::protobuf::internal::kEmptyString) {
+    uniqueid_ = new ::std::string;
   }
-  return id_;
+  return uniqueid_;
 }
-inline ::std::string* cmdLogin::release_id() {
-  clear_has_id();
-  if (id_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* cmdRequestLogin::release_uniqueid() {
+  clear_has_uniqueid();
+  if (uniqueid_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = id_;
-    id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = uniqueid_;
+    uniqueid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
 
 // -------------------------------------------------------------------
 
-// cmdquestCreateRoom
+// cmdNotifyLoginResult
 
-// required uint32 ctype = 1;
-inline bool cmdquestCreateRoom::has_ctype() const {
+// required uint64 tempid = 1;
+inline bool cmdNotifyLoginResult::has_tempid() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void cmdquestCreateRoom::set_has_ctype() {
+inline void cmdNotifyLoginResult::set_has_tempid() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void cmdquestCreateRoom::clear_has_ctype() {
+inline void cmdNotifyLoginResult::clear_has_tempid() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void cmdquestCreateRoom::clear_ctype() {
-  ctype_ = 0u;
-  clear_has_ctype();
+inline void cmdNotifyLoginResult::clear_tempid() {
+  tempid_ = GOOGLE_ULONGLONG(0);
+  clear_has_tempid();
 }
-inline ::google::protobuf::uint32 cmdquestCreateRoom::ctype() const {
-  return ctype_;
+inline ::google::protobuf::uint64 cmdNotifyLoginResult::tempid() const {
+  return tempid_;
 }
-inline void cmdquestCreateRoom::set_ctype(::google::protobuf::uint32 value) {
-  set_has_ctype();
-  ctype_ = value;
+inline void cmdNotifyLoginResult::set_tempid(::google::protobuf::uint64 value) {
+  set_has_tempid();
+  tempid_ = value;
 }
 
 // -------------------------------------------------------------------
 
-// cmdReturnCreateResult
+// cmdNotifyCreateResult
 
-// required uint64 roomid = 1;
-inline bool cmdReturnCreateResult::has_roomid() const {
+// required bool isok = 1;
+inline bool cmdNotifyCreateResult::has_isok() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void cmdReturnCreateResult::set_has_roomid() {
+inline void cmdNotifyCreateResult::set_has_isok() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void cmdReturnCreateResult::clear_has_roomid() {
+inline void cmdNotifyCreateResult::clear_has_isok() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void cmdReturnCreateResult::clear_roomid() {
+inline void cmdNotifyCreateResult::clear_isok() {
+  isok_ = false;
+  clear_has_isok();
+}
+inline bool cmdNotifyCreateResult::isok() const {
+  return isok_;
+}
+inline void cmdNotifyCreateResult::set_isok(bool value) {
+  set_has_isok();
+  isok_ = value;
+}
+
+// optional uint64 roomid = 2;
+inline bool cmdNotifyCreateResult::has_roomid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void cmdNotifyCreateResult::set_has_roomid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void cmdNotifyCreateResult::clear_has_roomid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void cmdNotifyCreateResult::clear_roomid() {
   roomid_ = GOOGLE_ULONGLONG(0);
   clear_has_roomid();
 }
-inline ::google::protobuf::uint64 cmdReturnCreateResult::roomid() const {
+inline ::google::protobuf::uint64 cmdNotifyCreateResult::roomid() const {
   return roomid_;
 }
-inline void cmdReturnCreateResult::set_roomid(::google::protobuf::uint64 value) {
+inline void cmdNotifyCreateResult::set_roomid(::google::protobuf::uint64 value) {
   set_has_roomid();
   roomid_ = value;
 }
 
-// required string ip = 2;
-inline bool cmdReturnCreateResult::has_ip() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+// optional string ip = 3;
+inline bool cmdNotifyCreateResult::has_ip() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void cmdReturnCreateResult::set_has_ip() {
-  _has_bits_[0] |= 0x00000002u;
+inline void cmdNotifyCreateResult::set_has_ip() {
+  _has_bits_[0] |= 0x00000004u;
 }
-inline void cmdReturnCreateResult::clear_has_ip() {
-  _has_bits_[0] &= ~0x00000002u;
+inline void cmdNotifyCreateResult::clear_has_ip() {
+  _has_bits_[0] &= ~0x00000004u;
 }
-inline void cmdReturnCreateResult::clear_ip() {
+inline void cmdNotifyCreateResult::clear_ip() {
   if (ip_ != &::google::protobuf::internal::kEmptyString) {
     ip_->clear();
   }
   clear_has_ip();
 }
-inline const ::std::string& cmdReturnCreateResult::ip() const {
+inline const ::std::string& cmdNotifyCreateResult::ip() const {
   return *ip_;
 }
-inline void cmdReturnCreateResult::set_ip(const ::std::string& value) {
+inline void cmdNotifyCreateResult::set_ip(const ::std::string& value) {
   set_has_ip();
   if (ip_ == &::google::protobuf::internal::kEmptyString) {
     ip_ = new ::std::string;
   }
   ip_->assign(value);
 }
-inline void cmdReturnCreateResult::set_ip(const char* value) {
+inline void cmdNotifyCreateResult::set_ip(const char* value) {
   set_has_ip();
   if (ip_ == &::google::protobuf::internal::kEmptyString) {
     ip_ = new ::std::string;
   }
   ip_->assign(value);
 }
-inline void cmdReturnCreateResult::set_ip(const char* value, size_t size) {
+inline void cmdNotifyCreateResult::set_ip(const char* value, size_t size) {
   set_has_ip();
   if (ip_ == &::google::protobuf::internal::kEmptyString) {
     ip_ = new ::std::string;
   }
   ip_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* cmdReturnCreateResult::mutable_ip() {
+inline ::std::string* cmdNotifyCreateResult::mutable_ip() {
   set_has_ip();
   if (ip_ == &::google::protobuf::internal::kEmptyString) {
     ip_ = new ::std::string;
   }
   return ip_;
 }
-inline ::std::string* cmdReturnCreateResult::release_ip() {
+inline ::std::string* cmdNotifyCreateResult::release_ip() {
   clear_has_ip();
   if (ip_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
@@ -940,24 +889,24 @@ inline ::std::string* cmdReturnCreateResult::release_ip() {
   }
 }
 
-// required uint32 port = 3;
-inline bool cmdReturnCreateResult::has_port() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+// optional uint32 port = 4;
+inline bool cmdNotifyCreateResult::has_port() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void cmdReturnCreateResult::set_has_port() {
-  _has_bits_[0] |= 0x00000004u;
+inline void cmdNotifyCreateResult::set_has_port() {
+  _has_bits_[0] |= 0x00000008u;
 }
-inline void cmdReturnCreateResult::clear_has_port() {
-  _has_bits_[0] &= ~0x00000004u;
+inline void cmdNotifyCreateResult::clear_has_port() {
+  _has_bits_[0] &= ~0x00000008u;
 }
-inline void cmdReturnCreateResult::clear_port() {
+inline void cmdNotifyCreateResult::clear_port() {
   port_ = 0u;
   clear_has_port();
 }
-inline ::google::protobuf::uint32 cmdReturnCreateResult::port() const {
+inline ::google::protobuf::uint32 cmdNotifyCreateResult::port() const {
   return port_;
 }
-inline void cmdReturnCreateResult::set_port(::google::protobuf::uint32 value) {
+inline void cmdNotifyCreateResult::set_port(::google::protobuf::uint32 value) {
   set_has_port();
   port_ = value;
 }
@@ -990,78 +939,78 @@ inline void cmdRequestEnterRoom::set_roomid(::google::protobuf::uint64 value) {
 
 // -------------------------------------------------------------------
 
-// cmdReturnEnterResult
+// cmdNotifyEnterResult
 
 // required bool isok = 1;
-inline bool cmdReturnEnterResult::has_isok() const {
+inline bool cmdNotifyEnterResult::has_isok() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void cmdReturnEnterResult::set_has_isok() {
+inline void cmdNotifyEnterResult::set_has_isok() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void cmdReturnEnterResult::clear_has_isok() {
+inline void cmdNotifyEnterResult::clear_has_isok() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void cmdReturnEnterResult::clear_isok() {
+inline void cmdNotifyEnterResult::clear_isok() {
   isok_ = false;
   clear_has_isok();
 }
-inline bool cmdReturnEnterResult::isok() const {
+inline bool cmdNotifyEnterResult::isok() const {
   return isok_;
 }
-inline void cmdReturnEnterResult::set_isok(bool value) {
+inline void cmdNotifyEnterResult::set_isok(bool value) {
   set_has_isok();
   isok_ = value;
 }
 
 // optional string ip = 2;
-inline bool cmdReturnEnterResult::has_ip() const {
+inline bool cmdNotifyEnterResult::has_ip() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void cmdReturnEnterResult::set_has_ip() {
+inline void cmdNotifyEnterResult::set_has_ip() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void cmdReturnEnterResult::clear_has_ip() {
+inline void cmdNotifyEnterResult::clear_has_ip() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void cmdReturnEnterResult::clear_ip() {
+inline void cmdNotifyEnterResult::clear_ip() {
   if (ip_ != &::google::protobuf::internal::kEmptyString) {
     ip_->clear();
   }
   clear_has_ip();
 }
-inline const ::std::string& cmdReturnEnterResult::ip() const {
+inline const ::std::string& cmdNotifyEnterResult::ip() const {
   return *ip_;
 }
-inline void cmdReturnEnterResult::set_ip(const ::std::string& value) {
+inline void cmdNotifyEnterResult::set_ip(const ::std::string& value) {
   set_has_ip();
   if (ip_ == &::google::protobuf::internal::kEmptyString) {
     ip_ = new ::std::string;
   }
   ip_->assign(value);
 }
-inline void cmdReturnEnterResult::set_ip(const char* value) {
+inline void cmdNotifyEnterResult::set_ip(const char* value) {
   set_has_ip();
   if (ip_ == &::google::protobuf::internal::kEmptyString) {
     ip_ = new ::std::string;
   }
   ip_->assign(value);
 }
-inline void cmdReturnEnterResult::set_ip(const char* value, size_t size) {
+inline void cmdNotifyEnterResult::set_ip(const char* value, size_t size) {
   set_has_ip();
   if (ip_ == &::google::protobuf::internal::kEmptyString) {
     ip_ = new ::std::string;
   }
   ip_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* cmdReturnEnterResult::mutable_ip() {
+inline ::std::string* cmdNotifyEnterResult::mutable_ip() {
   set_has_ip();
   if (ip_ == &::google::protobuf::internal::kEmptyString) {
     ip_ = new ::std::string;
   }
   return ip_;
 }
-inline ::std::string* cmdReturnEnterResult::release_ip() {
+inline ::std::string* cmdNotifyEnterResult::release_ip() {
   clear_has_ip();
   if (ip_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
@@ -1073,51 +1022,25 @@ inline ::std::string* cmdReturnEnterResult::release_ip() {
 }
 
 // optional uint32 port = 3;
-inline bool cmdReturnEnterResult::has_port() const {
+inline bool cmdNotifyEnterResult::has_port() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void cmdReturnEnterResult::set_has_port() {
+inline void cmdNotifyEnterResult::set_has_port() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void cmdReturnEnterResult::clear_has_port() {
+inline void cmdNotifyEnterResult::clear_has_port() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void cmdReturnEnterResult::clear_port() {
+inline void cmdNotifyEnterResult::clear_port() {
   port_ = 0u;
   clear_has_port();
 }
-inline ::google::protobuf::uint32 cmdReturnEnterResult::port() const {
+inline ::google::protobuf::uint32 cmdNotifyEnterResult::port() const {
   return port_;
 }
-inline void cmdReturnEnterResult::set_port(::google::protobuf::uint32 value) {
+inline void cmdNotifyEnterResult::set_port(::google::protobuf::uint32 value) {
   set_has_port();
   port_ = value;
-}
-
-// -------------------------------------------------------------------
-
-// cmdNotifyLeaveRoom
-
-// required uint32 id = 1;
-inline bool cmdNotifyLeaveRoom::has_id() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void cmdNotifyLeaveRoom::set_has_id() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void cmdNotifyLeaveRoom::clear_has_id() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void cmdNotifyLeaveRoom::clear_id() {
-  id_ = 0u;
-  clear_has_id();
-}
-inline ::google::protobuf::uint32 cmdNotifyLeaveRoom::id() const {
-  return id_;
-}
-inline void cmdNotifyLeaveRoom::set_id(::google::protobuf::uint32 value) {
-  set_has_id();
-  id_ = value;
 }
 
 

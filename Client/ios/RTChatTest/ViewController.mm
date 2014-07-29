@@ -38,7 +38,6 @@
 //        connnection->sendLoginMsg();
 //    }
     netmanager = new NetDataManager();
-    netmanager->sendSampleMsg();
 }
 
 - (void)didReceiveMemoryWarning

@@ -20,24 +20,21 @@ namespace {
 const ::google::protobuf::Descriptor* cmdNotifyLogicInfo_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   cmdNotifyLogicInfo_reflection_ = NULL;
-const ::google::protobuf::Descriptor* cmdLogin_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* cmdRequestLogin_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  cmdLogin_reflection_ = NULL;
-const ::google::protobuf::Descriptor* cmdquestCreateRoom_descriptor_ = NULL;
+  cmdRequestLogin_reflection_ = NULL;
+const ::google::protobuf::Descriptor* cmdNotifyLoginResult_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  cmdquestCreateRoom_reflection_ = NULL;
-const ::google::protobuf::Descriptor* cmdReturnCreateResult_descriptor_ = NULL;
+  cmdNotifyLoginResult_reflection_ = NULL;
+const ::google::protobuf::Descriptor* cmdNotifyCreateResult_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  cmdReturnCreateResult_reflection_ = NULL;
+  cmdNotifyCreateResult_reflection_ = NULL;
 const ::google::protobuf::Descriptor* cmdRequestEnterRoom_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   cmdRequestEnterRoom_reflection_ = NULL;
-const ::google::protobuf::Descriptor* cmdReturnEnterResult_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* cmdNotifyEnterResult_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  cmdReturnEnterResult_reflection_ = NULL;
-const ::google::protobuf::Descriptor* cmdNotifyLeaveRoom_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  cmdNotifyLeaveRoom_reflection_ = NULL;
+  cmdNotifyEnterResult_reflection_ = NULL;
 
 }  // namespace
 
@@ -64,53 +61,54 @@ void protobuf_AssignDesc_game_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(cmdNotifyLogicInfo));
-  cmdLogin_descriptor_ = file->message_type(1);
-  static const int cmdLogin_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdLogin, id_),
+  cmdRequestLogin_descriptor_ = file->message_type(1);
+  static const int cmdRequestLogin_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdRequestLogin, uniqueid_),
   };
-  cmdLogin_reflection_ =
+  cmdRequestLogin_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      cmdLogin_descriptor_,
-      cmdLogin::default_instance_,
-      cmdLogin_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdLogin, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdLogin, _unknown_fields_),
+      cmdRequestLogin_descriptor_,
+      cmdRequestLogin::default_instance_,
+      cmdRequestLogin_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdRequestLogin, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdRequestLogin, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(cmdLogin));
-  cmdquestCreateRoom_descriptor_ = file->message_type(2);
-  static const int cmdquestCreateRoom_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdquestCreateRoom, ctype_),
+      sizeof(cmdRequestLogin));
+  cmdNotifyLoginResult_descriptor_ = file->message_type(2);
+  static const int cmdNotifyLoginResult_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdNotifyLoginResult, tempid_),
   };
-  cmdquestCreateRoom_reflection_ =
+  cmdNotifyLoginResult_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      cmdquestCreateRoom_descriptor_,
-      cmdquestCreateRoom::default_instance_,
-      cmdquestCreateRoom_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdquestCreateRoom, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdquestCreateRoom, _unknown_fields_),
+      cmdNotifyLoginResult_descriptor_,
+      cmdNotifyLoginResult::default_instance_,
+      cmdNotifyLoginResult_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdNotifyLoginResult, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdNotifyLoginResult, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(cmdquestCreateRoom));
-  cmdReturnCreateResult_descriptor_ = file->message_type(3);
-  static const int cmdReturnCreateResult_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdReturnCreateResult, roomid_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdReturnCreateResult, ip_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdReturnCreateResult, port_),
+      sizeof(cmdNotifyLoginResult));
+  cmdNotifyCreateResult_descriptor_ = file->message_type(3);
+  static const int cmdNotifyCreateResult_offsets_[4] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdNotifyCreateResult, isok_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdNotifyCreateResult, roomid_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdNotifyCreateResult, ip_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdNotifyCreateResult, port_),
   };
-  cmdReturnCreateResult_reflection_ =
+  cmdNotifyCreateResult_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      cmdReturnCreateResult_descriptor_,
-      cmdReturnCreateResult::default_instance_,
-      cmdReturnCreateResult_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdReturnCreateResult, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdReturnCreateResult, _unknown_fields_),
+      cmdNotifyCreateResult_descriptor_,
+      cmdNotifyCreateResult::default_instance_,
+      cmdNotifyCreateResult_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdNotifyCreateResult, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdNotifyCreateResult, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(cmdReturnCreateResult));
+      sizeof(cmdNotifyCreateResult));
   cmdRequestEnterRoom_descriptor_ = file->message_type(4);
   static const int cmdRequestEnterRoom_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdRequestEnterRoom, roomid_),
@@ -126,38 +124,23 @@ void protobuf_AssignDesc_game_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(cmdRequestEnterRoom));
-  cmdReturnEnterResult_descriptor_ = file->message_type(5);
-  static const int cmdReturnEnterResult_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdReturnEnterResult, isok_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdReturnEnterResult, ip_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdReturnEnterResult, port_),
+  cmdNotifyEnterResult_descriptor_ = file->message_type(5);
+  static const int cmdNotifyEnterResult_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdNotifyEnterResult, isok_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdNotifyEnterResult, ip_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdNotifyEnterResult, port_),
   };
-  cmdReturnEnterResult_reflection_ =
+  cmdNotifyEnterResult_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      cmdReturnEnterResult_descriptor_,
-      cmdReturnEnterResult::default_instance_,
-      cmdReturnEnterResult_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdReturnEnterResult, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdReturnEnterResult, _unknown_fields_),
+      cmdNotifyEnterResult_descriptor_,
+      cmdNotifyEnterResult::default_instance_,
+      cmdNotifyEnterResult_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdNotifyEnterResult, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdNotifyEnterResult, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(cmdReturnEnterResult));
-  cmdNotifyLeaveRoom_descriptor_ = file->message_type(6);
-  static const int cmdNotifyLeaveRoom_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdNotifyLeaveRoom, id_),
-  };
-  cmdNotifyLeaveRoom_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      cmdNotifyLeaveRoom_descriptor_,
-      cmdNotifyLeaveRoom::default_instance_,
-      cmdNotifyLeaveRoom_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdNotifyLeaveRoom, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cmdNotifyLeaveRoom, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(cmdNotifyLeaveRoom));
+      sizeof(cmdNotifyEnterResult));
 }
 
 namespace {
@@ -173,17 +156,15 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     cmdNotifyLogicInfo_descriptor_, &cmdNotifyLogicInfo::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    cmdLogin_descriptor_, &cmdLogin::default_instance());
+    cmdRequestLogin_descriptor_, &cmdRequestLogin::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    cmdquestCreateRoom_descriptor_, &cmdquestCreateRoom::default_instance());
+    cmdNotifyLoginResult_descriptor_, &cmdNotifyLoginResult::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    cmdReturnCreateResult_descriptor_, &cmdReturnCreateResult::default_instance());
+    cmdNotifyCreateResult_descriptor_, &cmdNotifyCreateResult::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     cmdRequestEnterRoom_descriptor_, &cmdRequestEnterRoom::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    cmdReturnEnterResult_descriptor_, &cmdReturnEnterResult::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    cmdNotifyLeaveRoom_descriptor_, &cmdNotifyLeaveRoom::default_instance());
+    cmdNotifyEnterResult_descriptor_, &cmdNotifyEnterResult::default_instance());
 }
 
 }  // namespace
@@ -191,18 +172,16 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void protobuf_ShutdownFile_game_2eproto() {
   delete cmdNotifyLogicInfo::default_instance_;
   delete cmdNotifyLogicInfo_reflection_;
-  delete cmdLogin::default_instance_;
-  delete cmdLogin_reflection_;
-  delete cmdquestCreateRoom::default_instance_;
-  delete cmdquestCreateRoom_reflection_;
-  delete cmdReturnCreateResult::default_instance_;
-  delete cmdReturnCreateResult_reflection_;
+  delete cmdRequestLogin::default_instance_;
+  delete cmdRequestLogin_reflection_;
+  delete cmdNotifyLoginResult::default_instance_;
+  delete cmdNotifyLoginResult_reflection_;
+  delete cmdNotifyCreateResult::default_instance_;
+  delete cmdNotifyCreateResult_reflection_;
   delete cmdRequestEnterRoom::default_instance_;
   delete cmdRequestEnterRoom_reflection_;
-  delete cmdReturnEnterResult::default_instance_;
-  delete cmdReturnEnterResult_reflection_;
-  delete cmdNotifyLeaveRoom::default_instance_;
-  delete cmdNotifyLeaveRoom_reflection_;
+  delete cmdNotifyEnterResult::default_instance_;
+  delete cmdNotifyEnterResult_reflection_;
 }
 
 void protobuf_AddDesc_game_2eproto() {
@@ -215,29 +194,27 @@ void protobuf_AddDesc_game_2eproto() {
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\ngame.proto\022\003Cmd\032\014public.proto\".\n\022cmdNo"
     "tifyLogicInfo\022\n\n\002ip\030\001 \002(\t\022\014\n\004port\030\002 \002(\r\""
-    "\026\n\010cmdLogin\022\n\n\002id\030\001 \002(\t\"#\n\022cmdquestCreat"
-    "eRoom\022\r\n\005ctype\030\001 \002(\r\"A\n\025cmdReturnCreateR"
-    "esult\022\016\n\006roomid\030\001 \002(\004\022\n\n\002ip\030\002 \002(\t\022\014\n\004por"
-    "t\030\003 \002(\r\"%\n\023cmdRequestEnterRoom\022\016\n\006roomid"
-    "\030\001 \002(\004\">\n\024cmdReturnEnterResult\022\014\n\004isok\030\001"
-    " \002(\010\022\n\n\002ip\030\002 \001(\t\022\014\n\004port\030\003 \001(\r\" \n\022cmdNot"
-    "ifyLeaveRoom\022\n\n\002id\030\001 \002(\r", 344);
+    "#\n\017cmdRequestLogin\022\020\n\010uniqueid\030\001 \002(\t\"&\n\024"
+    "cmdNotifyLoginResult\022\016\n\006tempid\030\001 \002(\004\"O\n\025"
+    "cmdNotifyCreateResult\022\014\n\004isok\030\001 \002(\010\022\016\n\006r"
+    "oomid\030\002 \001(\004\022\n\n\002ip\030\003 \001(\t\022\014\n\004port\030\004 \001(\r\"%\n"
+    "\023cmdRequestEnterRoom\022\016\n\006roomid\030\001 \002(\004\">\n\024"
+    "cmdNotifyEnterResult\022\014\n\004isok\030\001 \002(\010\022\n\n\002ip"
+    "\030\002 \001(\t\022\014\n\004port\030\003 \001(\r", 340);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "game.proto", &protobuf_RegisterTypes);
   cmdNotifyLogicInfo::default_instance_ = new cmdNotifyLogicInfo();
-  cmdLogin::default_instance_ = new cmdLogin();
-  cmdquestCreateRoom::default_instance_ = new cmdquestCreateRoom();
-  cmdReturnCreateResult::default_instance_ = new cmdReturnCreateResult();
+  cmdRequestLogin::default_instance_ = new cmdRequestLogin();
+  cmdNotifyLoginResult::default_instance_ = new cmdNotifyLoginResult();
+  cmdNotifyCreateResult::default_instance_ = new cmdNotifyCreateResult();
   cmdRequestEnterRoom::default_instance_ = new cmdRequestEnterRoom();
-  cmdReturnEnterResult::default_instance_ = new cmdReturnEnterResult();
-  cmdNotifyLeaveRoom::default_instance_ = new cmdNotifyLeaveRoom();
+  cmdNotifyEnterResult::default_instance_ = new cmdNotifyEnterResult();
   cmdNotifyLogicInfo::default_instance_->InitAsDefaultInstance();
-  cmdLogin::default_instance_->InitAsDefaultInstance();
-  cmdquestCreateRoom::default_instance_->InitAsDefaultInstance();
-  cmdReturnCreateResult::default_instance_->InitAsDefaultInstance();
+  cmdRequestLogin::default_instance_->InitAsDefaultInstance();
+  cmdNotifyLoginResult::default_instance_->InitAsDefaultInstance();
+  cmdNotifyCreateResult::default_instance_->InitAsDefaultInstance();
   cmdRequestEnterRoom::default_instance_->InitAsDefaultInstance();
-  cmdReturnEnterResult::default_instance_->InitAsDefaultInstance();
-  cmdNotifyLeaveRoom::default_instance_->InitAsDefaultInstance();
+  cmdNotifyEnterResult::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_game_2eproto);
 }
 
@@ -517,66 +494,66 @@ void cmdNotifyLogicInfo::Swap(cmdNotifyLogicInfo* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int cmdLogin::kIdFieldNumber;
+const int cmdRequestLogin::kUniqueidFieldNumber;
 #endif  // !_MSC_VER
 
-cmdLogin::cmdLogin()
+cmdRequestLogin::cmdRequestLogin()
   : ::google::protobuf::Message() {
   SharedCtor();
 }
 
-void cmdLogin::InitAsDefaultInstance() {
+void cmdRequestLogin::InitAsDefaultInstance() {
 }
 
-cmdLogin::cmdLogin(const cmdLogin& from)
+cmdRequestLogin::cmdRequestLogin(const cmdRequestLogin& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void cmdLogin::SharedCtor() {
+void cmdRequestLogin::SharedCtor() {
   _cached_size_ = 0;
-  id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  uniqueid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-cmdLogin::~cmdLogin() {
+cmdRequestLogin::~cmdRequestLogin() {
   SharedDtor();
 }
 
-void cmdLogin::SharedDtor() {
-  if (id_ != &::google::protobuf::internal::kEmptyString) {
-    delete id_;
+void cmdRequestLogin::SharedDtor() {
+  if (uniqueid_ != &::google::protobuf::internal::kEmptyString) {
+    delete uniqueid_;
   }
   if (this != default_instance_) {
   }
 }
 
-void cmdLogin::SetCachedSize(int size) const {
+void cmdRequestLogin::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* cmdLogin::descriptor() {
+const ::google::protobuf::Descriptor* cmdRequestLogin::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return cmdLogin_descriptor_;
+  return cmdRequestLogin_descriptor_;
 }
 
-const cmdLogin& cmdLogin::default_instance() {
+const cmdRequestLogin& cmdRequestLogin::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_game_2eproto();  return *default_instance_;
 }
 
-cmdLogin* cmdLogin::default_instance_ = NULL;
+cmdRequestLogin* cmdRequestLogin::default_instance_ = NULL;
 
-cmdLogin* cmdLogin::New() const {
-  return new cmdLogin;
+cmdRequestLogin* cmdRequestLogin::New() const {
+  return new cmdRequestLogin;
 }
 
-void cmdLogin::Clear() {
+void cmdRequestLogin::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (has_id()) {
-      if (id_ != &::google::protobuf::internal::kEmptyString) {
-        id_->clear();
+    if (has_uniqueid()) {
+      if (uniqueid_ != &::google::protobuf::internal::kEmptyString) {
+        uniqueid_->clear();
       }
     }
   }
@@ -584,20 +561,20 @@ void cmdLogin::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool cmdLogin::MergePartialFromCodedStream(
+bool cmdRequestLogin::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string id = 1;
+      // required string uniqueid = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_id()));
+                input, this->mutable_uniqueid()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->id().data(), this->id().length(),
+            this->uniqueid().data(), this->uniqueid().length(),
             ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
@@ -622,15 +599,15 @@ bool cmdLogin::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void cmdLogin::SerializeWithCachedSizes(
+void cmdRequestLogin::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required string id = 1;
-  if (has_id()) {
+  // required string uniqueid = 1;
+  if (has_uniqueid()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->id().data(), this->id().length(),
+      this->uniqueid().data(), this->uniqueid().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      1, this->id(), output);
+      1, this->uniqueid(), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -639,16 +616,16 @@ void cmdLogin::SerializeWithCachedSizes(
   }
 }
 
-::google::protobuf::uint8* cmdLogin::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* cmdRequestLogin::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required string id = 1;
-  if (has_id()) {
+  // required string uniqueid = 1;
+  if (has_uniqueid()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->id().data(), this->id().length(),
+      this->uniqueid().data(), this->uniqueid().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->id(), target);
+        1, this->uniqueid(), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -658,15 +635,15 @@ void cmdLogin::SerializeWithCachedSizes(
   return target;
 }
 
-int cmdLogin::ByteSize() const {
+int cmdRequestLogin::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string id = 1;
-    if (has_id()) {
+    // required string uniqueid = 1;
+    if (has_uniqueid()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->id());
+          this->uniqueid());
     }
     
   }
@@ -681,10 +658,10 @@ int cmdLogin::ByteSize() const {
   return total_size;
 }
 
-void cmdLogin::MergeFrom(const ::google::protobuf::Message& from) {
+void cmdRequestLogin::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const cmdLogin* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const cmdLogin*>(
+  const cmdRequestLogin* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const cmdRequestLogin*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -693,48 +670,48 @@ void cmdLogin::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void cmdLogin::MergeFrom(const cmdLogin& from) {
+void cmdRequestLogin::MergeFrom(const cmdRequestLogin& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_id()) {
-      set_id(from.id());
+    if (from.has_uniqueid()) {
+      set_uniqueid(from.uniqueid());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void cmdLogin::CopyFrom(const ::google::protobuf::Message& from) {
+void cmdRequestLogin::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void cmdLogin::CopyFrom(const cmdLogin& from) {
+void cmdRequestLogin::CopyFrom(const cmdRequestLogin& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool cmdLogin::IsInitialized() const {
+bool cmdRequestLogin::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   
   return true;
 }
 
-void cmdLogin::Swap(cmdLogin* other) {
+void cmdRequestLogin::Swap(cmdRequestLogin* other) {
   if (other != this) {
-    std::swap(id_, other->id_);
+    std::swap(uniqueid_, other->uniqueid_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
-::google::protobuf::Metadata cmdLogin::GetMetadata() const {
+::google::protobuf::Metadata cmdRequestLogin::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = cmdLogin_descriptor_;
-  metadata.reflection = cmdLogin_reflection_;
+  metadata.descriptor = cmdRequestLogin_descriptor_;
+  metadata.reflection = cmdRequestLogin_reflection_;
   return metadata;
 }
 
@@ -742,80 +719,80 @@ void cmdLogin::Swap(cmdLogin* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int cmdquestCreateRoom::kCtypeFieldNumber;
+const int cmdNotifyLoginResult::kTempidFieldNumber;
 #endif  // !_MSC_VER
 
-cmdquestCreateRoom::cmdquestCreateRoom()
+cmdNotifyLoginResult::cmdNotifyLoginResult()
   : ::google::protobuf::Message() {
   SharedCtor();
 }
 
-void cmdquestCreateRoom::InitAsDefaultInstance() {
+void cmdNotifyLoginResult::InitAsDefaultInstance() {
 }
 
-cmdquestCreateRoom::cmdquestCreateRoom(const cmdquestCreateRoom& from)
+cmdNotifyLoginResult::cmdNotifyLoginResult(const cmdNotifyLoginResult& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void cmdquestCreateRoom::SharedCtor() {
+void cmdNotifyLoginResult::SharedCtor() {
   _cached_size_ = 0;
-  ctype_ = 0u;
+  tempid_ = GOOGLE_ULONGLONG(0);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-cmdquestCreateRoom::~cmdquestCreateRoom() {
+cmdNotifyLoginResult::~cmdNotifyLoginResult() {
   SharedDtor();
 }
 
-void cmdquestCreateRoom::SharedDtor() {
+void cmdNotifyLoginResult::SharedDtor() {
   if (this != default_instance_) {
   }
 }
 
-void cmdquestCreateRoom::SetCachedSize(int size) const {
+void cmdNotifyLoginResult::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* cmdquestCreateRoom::descriptor() {
+const ::google::protobuf::Descriptor* cmdNotifyLoginResult::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return cmdquestCreateRoom_descriptor_;
+  return cmdNotifyLoginResult_descriptor_;
 }
 
-const cmdquestCreateRoom& cmdquestCreateRoom::default_instance() {
+const cmdNotifyLoginResult& cmdNotifyLoginResult::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_game_2eproto();  return *default_instance_;
 }
 
-cmdquestCreateRoom* cmdquestCreateRoom::default_instance_ = NULL;
+cmdNotifyLoginResult* cmdNotifyLoginResult::default_instance_ = NULL;
 
-cmdquestCreateRoom* cmdquestCreateRoom::New() const {
-  return new cmdquestCreateRoom;
+cmdNotifyLoginResult* cmdNotifyLoginResult::New() const {
+  return new cmdNotifyLoginResult;
 }
 
-void cmdquestCreateRoom::Clear() {
+void cmdNotifyLoginResult::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    ctype_ = 0u;
+    tempid_ = GOOGLE_ULONGLONG(0);
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
 
-bool cmdquestCreateRoom::MergePartialFromCodedStream(
+bool cmdNotifyLoginResult::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 ctype = 1;
+      // required uint64 tempid = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &ctype_)));
-          set_has_ctype();
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &tempid_)));
+          set_has_tempid();
         } else {
           goto handle_uninterpreted;
         }
@@ -839,11 +816,11 @@ bool cmdquestCreateRoom::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void cmdquestCreateRoom::SerializeWithCachedSizes(
+void cmdNotifyLoginResult::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required uint32 ctype = 1;
-  if (has_ctype()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->ctype(), output);
+  // required uint64 tempid = 1;
+  if (has_tempid()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(1, this->tempid(), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -852,11 +829,11 @@ void cmdquestCreateRoom::SerializeWithCachedSizes(
   }
 }
 
-::google::protobuf::uint8* cmdquestCreateRoom::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* cmdNotifyLoginResult::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required uint32 ctype = 1;
-  if (has_ctype()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->ctype(), target);
+  // required uint64 tempid = 1;
+  if (has_tempid()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(1, this->tempid(), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -866,15 +843,15 @@ void cmdquestCreateRoom::SerializeWithCachedSizes(
   return target;
 }
 
-int cmdquestCreateRoom::ByteSize() const {
+int cmdNotifyLoginResult::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required uint32 ctype = 1;
-    if (has_ctype()) {
+    // required uint64 tempid = 1;
+    if (has_tempid()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt32Size(
-          this->ctype());
+        ::google::protobuf::internal::WireFormatLite::UInt64Size(
+          this->tempid());
     }
     
   }
@@ -889,10 +866,10 @@ int cmdquestCreateRoom::ByteSize() const {
   return total_size;
 }
 
-void cmdquestCreateRoom::MergeFrom(const ::google::protobuf::Message& from) {
+void cmdNotifyLoginResult::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const cmdquestCreateRoom* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const cmdquestCreateRoom*>(
+  const cmdNotifyLoginResult* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const cmdNotifyLoginResult*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -901,48 +878,48 @@ void cmdquestCreateRoom::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void cmdquestCreateRoom::MergeFrom(const cmdquestCreateRoom& from) {
+void cmdNotifyLoginResult::MergeFrom(const cmdNotifyLoginResult& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_ctype()) {
-      set_ctype(from.ctype());
+    if (from.has_tempid()) {
+      set_tempid(from.tempid());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void cmdquestCreateRoom::CopyFrom(const ::google::protobuf::Message& from) {
+void cmdNotifyLoginResult::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void cmdquestCreateRoom::CopyFrom(const cmdquestCreateRoom& from) {
+void cmdNotifyLoginResult::CopyFrom(const cmdNotifyLoginResult& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool cmdquestCreateRoom::IsInitialized() const {
+bool cmdNotifyLoginResult::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   
   return true;
 }
 
-void cmdquestCreateRoom::Swap(cmdquestCreateRoom* other) {
+void cmdNotifyLoginResult::Swap(cmdNotifyLoginResult* other) {
   if (other != this) {
-    std::swap(ctype_, other->ctype_);
+    std::swap(tempid_, other->tempid_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
-::google::protobuf::Metadata cmdquestCreateRoom::GetMetadata() const {
+::google::protobuf::Metadata cmdNotifyLoginResult::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = cmdquestCreateRoom_descriptor_;
-  metadata.reflection = cmdquestCreateRoom_reflection_;
+  metadata.descriptor = cmdNotifyLoginResult_descriptor_;
+  metadata.reflection = cmdNotifyLoginResult_reflection_;
   return metadata;
 }
 
@@ -950,38 +927,40 @@ void cmdquestCreateRoom::Swap(cmdquestCreateRoom* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int cmdReturnCreateResult::kRoomidFieldNumber;
-const int cmdReturnCreateResult::kIpFieldNumber;
-const int cmdReturnCreateResult::kPortFieldNumber;
+const int cmdNotifyCreateResult::kIsokFieldNumber;
+const int cmdNotifyCreateResult::kRoomidFieldNumber;
+const int cmdNotifyCreateResult::kIpFieldNumber;
+const int cmdNotifyCreateResult::kPortFieldNumber;
 #endif  // !_MSC_VER
 
-cmdReturnCreateResult::cmdReturnCreateResult()
+cmdNotifyCreateResult::cmdNotifyCreateResult()
   : ::google::protobuf::Message() {
   SharedCtor();
 }
 
-void cmdReturnCreateResult::InitAsDefaultInstance() {
+void cmdNotifyCreateResult::InitAsDefaultInstance() {
 }
 
-cmdReturnCreateResult::cmdReturnCreateResult(const cmdReturnCreateResult& from)
+cmdNotifyCreateResult::cmdNotifyCreateResult(const cmdNotifyCreateResult& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void cmdReturnCreateResult::SharedCtor() {
+void cmdNotifyCreateResult::SharedCtor() {
   _cached_size_ = 0;
+  isok_ = false;
   roomid_ = GOOGLE_ULONGLONG(0);
   ip_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   port_ = 0u;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-cmdReturnCreateResult::~cmdReturnCreateResult() {
+cmdNotifyCreateResult::~cmdNotifyCreateResult() {
   SharedDtor();
 }
 
-void cmdReturnCreateResult::SharedDtor() {
+void cmdNotifyCreateResult::SharedDtor() {
   if (ip_ != &::google::protobuf::internal::kEmptyString) {
     delete ip_;
   }
@@ -989,28 +968,29 @@ void cmdReturnCreateResult::SharedDtor() {
   }
 }
 
-void cmdReturnCreateResult::SetCachedSize(int size) const {
+void cmdNotifyCreateResult::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* cmdReturnCreateResult::descriptor() {
+const ::google::protobuf::Descriptor* cmdNotifyCreateResult::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return cmdReturnCreateResult_descriptor_;
+  return cmdNotifyCreateResult_descriptor_;
 }
 
-const cmdReturnCreateResult& cmdReturnCreateResult::default_instance() {
+const cmdNotifyCreateResult& cmdNotifyCreateResult::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_game_2eproto();  return *default_instance_;
 }
 
-cmdReturnCreateResult* cmdReturnCreateResult::default_instance_ = NULL;
+cmdNotifyCreateResult* cmdNotifyCreateResult::default_instance_ = NULL;
 
-cmdReturnCreateResult* cmdReturnCreateResult::New() const {
-  return new cmdReturnCreateResult;
+cmdNotifyCreateResult* cmdNotifyCreateResult::New() const {
+  return new cmdNotifyCreateResult;
 }
 
-void cmdReturnCreateResult::Clear() {
+void cmdNotifyCreateResult::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    isok_ = false;
     roomid_ = GOOGLE_ULONGLONG(0);
     if (has_ip()) {
       if (ip_ != &::google::protobuf::internal::kEmptyString) {
@@ -1023,16 +1003,32 @@ void cmdReturnCreateResult::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool cmdReturnCreateResult::MergePartialFromCodedStream(
+bool cmdNotifyCreateResult::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint64 roomid = 1;
+      // required bool isok = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &isok_)));
+          set_has_isok();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(16)) goto parse_roomid;
+        break;
+      }
+      
+      // optional uint64 roomid = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_roomid:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
                  input, &roomid_)));
@@ -1040,12 +1036,12 @@ bool cmdReturnCreateResult::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(18)) goto parse_ip;
+        if (input->ExpectTag(26)) goto parse_ip;
         break;
       }
       
-      // required string ip = 2;
-      case 2: {
+      // optional string ip = 3;
+      case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_ip:
@@ -1057,12 +1053,12 @@ bool cmdReturnCreateResult::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_port;
+        if (input->ExpectTag(32)) goto parse_port;
         break;
       }
       
-      // required uint32 port = 3;
-      case 3: {
+      // optional uint32 port = 4;
+      case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_port:
@@ -1093,25 +1089,30 @@ bool cmdReturnCreateResult::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void cmdReturnCreateResult::SerializeWithCachedSizes(
+void cmdNotifyCreateResult::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required uint64 roomid = 1;
-  if (has_roomid()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64(1, this->roomid(), output);
+  // required bool isok = 1;
+  if (has_isok()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->isok(), output);
   }
   
-  // required string ip = 2;
+  // optional uint64 roomid = 2;
+  if (has_roomid()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->roomid(), output);
+  }
+  
+  // optional string ip = 3;
   if (has_ip()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->ip().data(), this->ip().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      2, this->ip(), output);
+      3, this->ip(), output);
   }
   
-  // required uint32 port = 3;
+  // optional uint32 port = 4;
   if (has_port()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->port(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->port(), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -1120,26 +1121,31 @@ void cmdReturnCreateResult::SerializeWithCachedSizes(
   }
 }
 
-::google::protobuf::uint8* cmdReturnCreateResult::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* cmdNotifyCreateResult::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required uint64 roomid = 1;
-  if (has_roomid()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(1, this->roomid(), target);
+  // required bool isok = 1;
+  if (has_isok()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->isok(), target);
   }
   
-  // required string ip = 2;
+  // optional uint64 roomid = 2;
+  if (has_roomid()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->roomid(), target);
+  }
+  
+  // optional string ip = 3;
   if (has_ip()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->ip().data(), this->ip().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->ip(), target);
+        3, this->ip(), target);
   }
   
-  // required uint32 port = 3;
+  // optional uint32 port = 4;
   if (has_port()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(3, this->port(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(4, this->port(), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -1149,25 +1155,30 @@ void cmdReturnCreateResult::SerializeWithCachedSizes(
   return target;
 }
 
-int cmdReturnCreateResult::ByteSize() const {
+int cmdNotifyCreateResult::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required uint64 roomid = 1;
+    // required bool isok = 1;
+    if (has_isok()) {
+      total_size += 1 + 1;
+    }
+    
+    // optional uint64 roomid = 2;
     if (has_roomid()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::UInt64Size(
           this->roomid());
     }
     
-    // required string ip = 2;
+    // optional string ip = 3;
     if (has_ip()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->ip());
     }
     
-    // required uint32 port = 3;
+    // optional uint32 port = 4;
     if (has_port()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::UInt32Size(
@@ -1186,10 +1197,10 @@ int cmdReturnCreateResult::ByteSize() const {
   return total_size;
 }
 
-void cmdReturnCreateResult::MergeFrom(const ::google::protobuf::Message& from) {
+void cmdNotifyCreateResult::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const cmdReturnCreateResult* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const cmdReturnCreateResult*>(
+  const cmdNotifyCreateResult* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const cmdNotifyCreateResult*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -1198,9 +1209,12 @@ void cmdReturnCreateResult::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void cmdReturnCreateResult::MergeFrom(const cmdReturnCreateResult& from) {
+void cmdNotifyCreateResult::MergeFrom(const cmdNotifyCreateResult& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_isok()) {
+      set_isok(from.isok());
+    }
     if (from.has_roomid()) {
       set_roomid(from.roomid());
     }
@@ -1214,26 +1228,27 @@ void cmdReturnCreateResult::MergeFrom(const cmdReturnCreateResult& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void cmdReturnCreateResult::CopyFrom(const ::google::protobuf::Message& from) {
+void cmdNotifyCreateResult::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void cmdReturnCreateResult::CopyFrom(const cmdReturnCreateResult& from) {
+void cmdNotifyCreateResult::CopyFrom(const cmdNotifyCreateResult& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool cmdReturnCreateResult::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+bool cmdNotifyCreateResult::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   
   return true;
 }
 
-void cmdReturnCreateResult::Swap(cmdReturnCreateResult* other) {
+void cmdNotifyCreateResult::Swap(cmdNotifyCreateResult* other) {
   if (other != this) {
+    std::swap(isok_, other->isok_);
     std::swap(roomid_, other->roomid_);
     std::swap(ip_, other->ip_);
     std::swap(port_, other->port_);
@@ -1243,11 +1258,11 @@ void cmdReturnCreateResult::Swap(cmdReturnCreateResult* other) {
   }
 }
 
-::google::protobuf::Metadata cmdReturnCreateResult::GetMetadata() const {
+::google::protobuf::Metadata cmdNotifyCreateResult::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = cmdReturnCreateResult_descriptor_;
-  metadata.reflection = cmdReturnCreateResult_reflection_;
+  metadata.descriptor = cmdNotifyCreateResult_descriptor_;
+  metadata.reflection = cmdNotifyCreateResult_reflection_;
   return metadata;
 }
 
@@ -1463,26 +1478,26 @@ void cmdRequestEnterRoom::Swap(cmdRequestEnterRoom* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int cmdReturnEnterResult::kIsokFieldNumber;
-const int cmdReturnEnterResult::kIpFieldNumber;
-const int cmdReturnEnterResult::kPortFieldNumber;
+const int cmdNotifyEnterResult::kIsokFieldNumber;
+const int cmdNotifyEnterResult::kIpFieldNumber;
+const int cmdNotifyEnterResult::kPortFieldNumber;
 #endif  // !_MSC_VER
 
-cmdReturnEnterResult::cmdReturnEnterResult()
+cmdNotifyEnterResult::cmdNotifyEnterResult()
   : ::google::protobuf::Message() {
   SharedCtor();
 }
 
-void cmdReturnEnterResult::InitAsDefaultInstance() {
+void cmdNotifyEnterResult::InitAsDefaultInstance() {
 }
 
-cmdReturnEnterResult::cmdReturnEnterResult(const cmdReturnEnterResult& from)
+cmdNotifyEnterResult::cmdNotifyEnterResult(const cmdNotifyEnterResult& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void cmdReturnEnterResult::SharedCtor() {
+void cmdNotifyEnterResult::SharedCtor() {
   _cached_size_ = 0;
   isok_ = false;
   ip_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
@@ -1490,11 +1505,11 @@ void cmdReturnEnterResult::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-cmdReturnEnterResult::~cmdReturnEnterResult() {
+cmdNotifyEnterResult::~cmdNotifyEnterResult() {
   SharedDtor();
 }
 
-void cmdReturnEnterResult::SharedDtor() {
+void cmdNotifyEnterResult::SharedDtor() {
   if (ip_ != &::google::protobuf::internal::kEmptyString) {
     delete ip_;
   }
@@ -1502,27 +1517,27 @@ void cmdReturnEnterResult::SharedDtor() {
   }
 }
 
-void cmdReturnEnterResult::SetCachedSize(int size) const {
+void cmdNotifyEnterResult::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* cmdReturnEnterResult::descriptor() {
+const ::google::protobuf::Descriptor* cmdNotifyEnterResult::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return cmdReturnEnterResult_descriptor_;
+  return cmdNotifyEnterResult_descriptor_;
 }
 
-const cmdReturnEnterResult& cmdReturnEnterResult::default_instance() {
+const cmdNotifyEnterResult& cmdNotifyEnterResult::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_game_2eproto();  return *default_instance_;
 }
 
-cmdReturnEnterResult* cmdReturnEnterResult::default_instance_ = NULL;
+cmdNotifyEnterResult* cmdNotifyEnterResult::default_instance_ = NULL;
 
-cmdReturnEnterResult* cmdReturnEnterResult::New() const {
-  return new cmdReturnEnterResult;
+cmdNotifyEnterResult* cmdNotifyEnterResult::New() const {
+  return new cmdNotifyEnterResult;
 }
 
-void cmdReturnEnterResult::Clear() {
+void cmdNotifyEnterResult::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     isok_ = false;
     if (has_ip()) {
@@ -1536,7 +1551,7 @@ void cmdReturnEnterResult::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool cmdReturnEnterResult::MergePartialFromCodedStream(
+bool cmdNotifyEnterResult::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
@@ -1606,7 +1621,7 @@ bool cmdReturnEnterResult::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void cmdReturnEnterResult::SerializeWithCachedSizes(
+void cmdNotifyEnterResult::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // required bool isok = 1;
   if (has_isok()) {
@@ -1633,7 +1648,7 @@ void cmdReturnEnterResult::SerializeWithCachedSizes(
   }
 }
 
-::google::protobuf::uint8* cmdReturnEnterResult::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* cmdNotifyEnterResult::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // required bool isok = 1;
   if (has_isok()) {
@@ -1662,7 +1677,7 @@ void cmdReturnEnterResult::SerializeWithCachedSizes(
   return target;
 }
 
-int cmdReturnEnterResult::ByteSize() const {
+int cmdNotifyEnterResult::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -1697,10 +1712,10 @@ int cmdReturnEnterResult::ByteSize() const {
   return total_size;
 }
 
-void cmdReturnEnterResult::MergeFrom(const ::google::protobuf::Message& from) {
+void cmdNotifyEnterResult::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const cmdReturnEnterResult* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const cmdReturnEnterResult*>(
+  const cmdNotifyEnterResult* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const cmdNotifyEnterResult*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -1709,7 +1724,7 @@ void cmdReturnEnterResult::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void cmdReturnEnterResult::MergeFrom(const cmdReturnEnterResult& from) {
+void cmdNotifyEnterResult::MergeFrom(const cmdNotifyEnterResult& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_isok()) {
@@ -1725,25 +1740,25 @@ void cmdReturnEnterResult::MergeFrom(const cmdReturnEnterResult& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void cmdReturnEnterResult::CopyFrom(const ::google::protobuf::Message& from) {
+void cmdNotifyEnterResult::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void cmdReturnEnterResult::CopyFrom(const cmdReturnEnterResult& from) {
+void cmdNotifyEnterResult::CopyFrom(const cmdNotifyEnterResult& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool cmdReturnEnterResult::IsInitialized() const {
+bool cmdNotifyEnterResult::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   
   return true;
 }
 
-void cmdReturnEnterResult::Swap(cmdReturnEnterResult* other) {
+void cmdNotifyEnterResult::Swap(cmdNotifyEnterResult* other) {
   if (other != this) {
     std::swap(isok_, other->isok_);
     std::swap(ip_, other->ip_);
@@ -1754,219 +1769,11 @@ void cmdReturnEnterResult::Swap(cmdReturnEnterResult* other) {
   }
 }
 
-::google::protobuf::Metadata cmdReturnEnterResult::GetMetadata() const {
+::google::protobuf::Metadata cmdNotifyEnterResult::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = cmdReturnEnterResult_descriptor_;
-  metadata.reflection = cmdReturnEnterResult_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
-const int cmdNotifyLeaveRoom::kIdFieldNumber;
-#endif  // !_MSC_VER
-
-cmdNotifyLeaveRoom::cmdNotifyLeaveRoom()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-}
-
-void cmdNotifyLeaveRoom::InitAsDefaultInstance() {
-}
-
-cmdNotifyLeaveRoom::cmdNotifyLeaveRoom(const cmdNotifyLeaveRoom& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-}
-
-void cmdNotifyLeaveRoom::SharedCtor() {
-  _cached_size_ = 0;
-  id_ = 0u;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-cmdNotifyLeaveRoom::~cmdNotifyLeaveRoom() {
-  SharedDtor();
-}
-
-void cmdNotifyLeaveRoom::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void cmdNotifyLeaveRoom::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* cmdNotifyLeaveRoom::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return cmdNotifyLeaveRoom_descriptor_;
-}
-
-const cmdNotifyLeaveRoom& cmdNotifyLeaveRoom::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_game_2eproto();  return *default_instance_;
-}
-
-cmdNotifyLeaveRoom* cmdNotifyLeaveRoom::default_instance_ = NULL;
-
-cmdNotifyLeaveRoom* cmdNotifyLeaveRoom::New() const {
-  return new cmdNotifyLeaveRoom;
-}
-
-void cmdNotifyLeaveRoom::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    id_ = 0u;
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool cmdNotifyLeaveRoom::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
-  ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 id = 1;
-      case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &id_)));
-          set_has_id();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectAtEnd()) return true;
-        break;
-      }
-      
-      default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-  return true;
-#undef DO_
-}
-
-void cmdNotifyLeaveRoom::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // required uint32 id = 1;
-  if (has_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->id(), output);
-  }
-  
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-}
-
-::google::protobuf::uint8* cmdNotifyLeaveRoom::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // required uint32 id = 1;
-  if (has_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->id(), target);
-  }
-  
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  return target;
-}
-
-int cmdNotifyLeaveRoom::ByteSize() const {
-  int total_size = 0;
-  
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required uint32 id = 1;
-    if (has_id()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt32Size(
-          this->id());
-    }
-    
-  }
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void cmdNotifyLeaveRoom::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const cmdNotifyLeaveRoom* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const cmdNotifyLeaveRoom*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void cmdNotifyLeaveRoom::MergeFrom(const cmdNotifyLeaveRoom& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_id()) {
-      set_id(from.id());
-    }
-  }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void cmdNotifyLeaveRoom::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void cmdNotifyLeaveRoom::CopyFrom(const cmdNotifyLeaveRoom& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool cmdNotifyLeaveRoom::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
-  
-  return true;
-}
-
-void cmdNotifyLeaveRoom::Swap(cmdNotifyLeaveRoom* other) {
-  if (other != this) {
-    std::swap(id_, other->id_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata cmdNotifyLeaveRoom::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = cmdNotifyLeaveRoom_descriptor_;
-  metadata.reflection = cmdNotifyLeaveRoom_reflection_;
+  metadata.descriptor = cmdNotifyEnterResult_descriptor_;
+  metadata.reflection = cmdNotifyEnterResult_reflection_;
   return metadata;
 }
 

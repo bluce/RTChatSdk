@@ -55,12 +55,12 @@ void protobuf_AddDesc_public_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\014public.proto\022\003Cmd*\305\001\n\007enCmdId\022\n\n\006enNon"
-    "e\020\000\022\025\n\021enNotifyLogicInfo\020\001\022\013\n\007enLogin\020\002\022"
-    "\027\n\023enRequestCreateRoom\020\003\022\030\n\024enReturnCrea"
-    "teResult\020\004\022\026\n\022enRequestEnterRoom\020\005\022\027\n\023en"
-    "ReturnEnterResult\020\006\022\017\n\013enVoiceData\020\007\022\025\n\021"
-    "enNotifyLeaveRoom\020\010", 219);
+    "\n\014public.proto\022\003Cmd*\325\001\n\007enCmdId\022\n\n\006enNon"
+    "e\020\000\022\026\n\022enRequestLogicInfo\020\001\022\025\n\021enNotifyL"
+    "ogicInfo\020\002\022\022\n\016enRequestLogin\020\003\022\027\n\023enNoti"
+    "fyLoginResult\020\004\022\027\n\023enRequestCreateRoom\020\005"
+    "\022\030\n\024enNotifyCreateResult\020\006\022\026\n\022enRequestE"
+    "nterRoom\020\007\022\027\n\023enNotifyEnterResult\020\010", 235);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "public.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_public_2eproto);

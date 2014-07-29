@@ -22,6 +22,9 @@
 		430F16FD196F8DC10083B252 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F7196F8DC10083B252 /* tinyxml.cpp */; };
 		430F16FE196F8DC10083B252 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F8196F8DC10083B252 /* tinyxmlerror.cpp */; };
 		430F16FF196F8DC10083B252 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F9196F8DC10083B252 /* tinyxmlparser.cpp */; };
+		43247A541987339300AF14C7 /* MediaSample.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43247A521987339300AF14C7 /* MediaSample.cpp */; };
+		43247A71198737A400AF14C7 /* libwebsockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43998BAB1986363F003C5793 /* libwebsockets.a */; };
+		43247A76198741BC00AF14C7 /* RTChatSDKMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43247A74198741BC00AF14C7 /* RTChatSDKMain.cpp */; };
 		435E03B2196E7D9F000C3012 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03B1196E7D9F000C3012 /* Foundation.framework */; };
 		435E03D8196E813C000C3012 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03D7196E813C000C3012 /* AudioToolbox.framework */; };
 		435E03E5196E8333000C3012 /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435E03DE196E8333000C3012 /* CADebugMacros.cpp */; };
@@ -127,6 +130,28 @@
 		430F16F9196F8DC10083B252 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		430F16FA196F8DC10083B252 /* tinystr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinystr.h; sourceTree = "<group>"; };
 		430F16FB196F8DC10083B252 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
+		43247A411987333E00AF14C7 /* fake_voe_external_media.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fake_voe_external_media.h; sourceTree = "<group>"; };
+		43247A421987333E00AF14C7 /* mock_voe_connection_observer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mock_voe_connection_observer.h; sourceTree = "<group>"; };
+		43247A431987333E00AF14C7 /* mock_voe_observer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mock_voe_observer.h; sourceTree = "<group>"; };
+		43247A441987333E00AF14C7 /* mock_voe_volume_control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mock_voe_volume_control.h; sourceTree = "<group>"; };
+		43247A451987333E00AF14C7 /* voe_audio_processing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = voe_audio_processing.h; sourceTree = "<group>"; };
+		43247A461987333E00AF14C7 /* voe_base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = voe_base.h; sourceTree = "<group>"; };
+		43247A471987333E00AF14C7 /* voe_codec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = voe_codec.h; sourceTree = "<group>"; };
+		43247A481987333E00AF14C7 /* voe_dtmf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = voe_dtmf.h; sourceTree = "<group>"; };
+		43247A491987333E00AF14C7 /* voe_errors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = voe_errors.h; sourceTree = "<group>"; };
+		43247A4A1987333E00AF14C7 /* voe_external_media.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = voe_external_media.h; sourceTree = "<group>"; };
+		43247A4B1987333E00AF14C7 /* voe_file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = voe_file.h; sourceTree = "<group>"; };
+		43247A4C1987333E00AF14C7 /* voe_hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = voe_hardware.h; sourceTree = "<group>"; };
+		43247A4D1987333E00AF14C7 /* voe_neteq_stats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = voe_neteq_stats.h; sourceTree = "<group>"; };
+		43247A4E1987333E00AF14C7 /* voe_network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = voe_network.h; sourceTree = "<group>"; };
+		43247A4F1987333E00AF14C7 /* voe_rtp_rtcp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = voe_rtp_rtcp.h; sourceTree = "<group>"; };
+		43247A501987333E00AF14C7 /* voe_video_sync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = voe_video_sync.h; sourceTree = "<group>"; };
+		43247A511987333E00AF14C7 /* voe_volume_control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = voe_volume_control.h; sourceTree = "<group>"; };
+		43247A521987339300AF14C7 /* MediaSample.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MediaSample.cpp; sourceTree = "<group>"; };
+		43247A531987339300AF14C7 /* MediaSample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaSample.h; sourceTree = "<group>"; };
+		43247A731987412100AF14C7 /* RTChatSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTChatSdk.h; sourceTree = "<group>"; };
+		43247A74198741BC00AF14C7 /* RTChatSDKMain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RTChatSDKMain.cpp; sourceTree = "<group>"; };
+		43247A75198741BC00AF14C7 /* RTChatSDKMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTChatSDKMain.h; sourceTree = "<group>"; };
 		435E03AE196E7D9F000C3012 /* libRTChat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRTChat.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		435E03B1196E7D9F000C3012 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		435E03B5196E7D9F000C3012 /* RTChat-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RTChat-Prefix.pch"; sourceTree = "<group>"; };
@@ -265,6 +290,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43247A71198737A400AF14C7 /* libwebsockets.a in Frameworks */,
 				43998DE8198669AD003C5793 /* libz.1.2.5.dylib in Frameworks */,
 				43D6490C196E97B9001944DC /* AudioToolbox.framework in Frameworks */,
 				43D64909196E9647001944DC /* libRTChat.a in Frameworks */,
@@ -334,6 +360,62 @@
 			path = source;
 			sourceTree = "<group>";
 		};
+		43247A3D1987333E00AF14C7 /* webrtc */ = {
+			isa = PBXGroup;
+			children = (
+				43247A3E1987333E00AF14C7 /* voice_engine */,
+			);
+			path = webrtc;
+			sourceTree = "<group>";
+		};
+		43247A3E1987333E00AF14C7 /* voice_engine */ = {
+			isa = PBXGroup;
+			children = (
+				43247A3F1987333E00AF14C7 /* include */,
+			);
+			path = voice_engine;
+			sourceTree = "<group>";
+		};
+		43247A3F1987333E00AF14C7 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				43247A401987333E00AF14C7 /* mock */,
+				43247A451987333E00AF14C7 /* voe_audio_processing.h */,
+				43247A461987333E00AF14C7 /* voe_base.h */,
+				43247A471987333E00AF14C7 /* voe_codec.h */,
+				43247A481987333E00AF14C7 /* voe_dtmf.h */,
+				43247A491987333E00AF14C7 /* voe_errors.h */,
+				43247A4A1987333E00AF14C7 /* voe_external_media.h */,
+				43247A4B1987333E00AF14C7 /* voe_file.h */,
+				43247A4C1987333E00AF14C7 /* voe_hardware.h */,
+				43247A4D1987333E00AF14C7 /* voe_neteq_stats.h */,
+				43247A4E1987333E00AF14C7 /* voe_network.h */,
+				43247A4F1987333E00AF14C7 /* voe_rtp_rtcp.h */,
+				43247A501987333E00AF14C7 /* voe_video_sync.h */,
+				43247A511987333E00AF14C7 /* voe_volume_control.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		43247A401987333E00AF14C7 /* mock */ = {
+			isa = PBXGroup;
+			children = (
+				43247A411987333E00AF14C7 /* fake_voe_external_media.h */,
+				43247A421987333E00AF14C7 /* mock_voe_connection_observer.h */,
+				43247A431987333E00AF14C7 /* mock_voe_observer.h */,
+				43247A441987333E00AF14C7 /* mock_voe_volume_control.h */,
+			);
+			path = mock;
+			sourceTree = "<group>";
+		};
+		43247A72198740EF00AF14C7 /* interface */ = {
+			isa = PBXGroup;
+			children = (
+				43247A731987412100AF14C7 /* RTChatSdk.h */,
+			);
+			path = interface;
+			sourceTree = "<group>";
+		};
 		435E03A5196E7D9F000C3012 = {
 			isa = PBXGroup;
 			children = (
@@ -389,15 +471,21 @@
 		435E03D9196E828E000C3012 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				43247A72198740EF00AF14C7 /* interface */,
+				43247A521987339300AF14C7 /* MediaSample.cpp */,
+				43247A531987339300AF14C7 /* MediaSample.h */,
+				43247A3D1987333E00AF14C7 /* webrtc */,
 				43998D7719865A99003C5793 /* NetProcess */,
 				43998BB0198645EC003C5793 /* proto */,
-				43998BAD198636DA003C5793 /* WebSocket.cpp */,
-				43998BAE198636DA003C5793 /* WebSocket.h */,
 				43AEFB761979013F0062C9B4 /* third_party */,
 				430F16F4196F8DC10083B252 /* tinyXml */,
 				430F16C0196F8D5F0083B252 /* Engine */,
 				43998D72198656D3003C5793 /* netdatamanager.cpp */,
 				43998D73198656D3003C5793 /* netdatamanager.h */,
+				43247A74198741BC00AF14C7 /* RTChatSDKMain.cpp */,
+				43247A75198741BC00AF14C7 /* RTChatSDKMain.h */,
+				43998BAD198636DA003C5793 /* WebSocket.cpp */,
+				43998BAE198636DA003C5793 /* WebSocket.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -716,6 +804,7 @@
 			files = (
 				43998DDA19865C28003C5793 /* structurally_valid.cc in Sources */,
 				43998DCB19865C28003C5793 /* generated_message_util.cc in Sources */,
+				43247A541987339300AF14C7 /* MediaSample.cpp in Sources */,
 				43998DC819865C28003C5793 /* extension_set.cc in Sources */,
 				43AE0052197913930062C9B4 /* json_reader.cpp in Sources */,
 				430F16F2196F8D5F0083B252 /* XmlParser.cpp in Sources */,
@@ -760,6 +849,7 @@
 				430F16E9196F8D5F0083B252 /* DataStream.cpp in Sources */,
 				43998DD519865C28003C5793 /* reflection_ops.cc in Sources */,
 				43998DD319865C28003C5793 /* message.cc in Sources */,
+				43247A76198741BC00AF14C7 /* RTChatSDKMain.cpp in Sources */,
 				43998BAF198636DA003C5793 /* WebSocket.cpp in Sources */,
 				43998DD019865C28003C5793 /* zero_copy_stream.cc in Sources */,
 				430F16F1196F8D5F0083B252 /* SystemUtil.cpp in Sources */,
@@ -969,11 +1059,21 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/RTChat/Classes",
+				);
 				INFOPLIST_FILE = "RTChatTest/RTChatTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/RTChat/Classes/third_party/libwebsocket/lib",
+				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "388DFEF2-844A-405D-8E2F-1559A2396E9A";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -990,11 +1090,21 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RTChatTest/RTChatTest-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/RTChat/Classes",
+				);
 				INFOPLIST_FILE = "RTChatTest/RTChatTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/RTChat/Classes/third_party/libwebsocket/lib",
+				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "388DFEF2-844A-405D-8E2F-1559A2396E9A";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
