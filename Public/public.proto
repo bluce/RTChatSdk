@@ -1,6 +1,5 @@
 package Cmd;
 
-
 //struct stBaseCmd
 //{
 //	uint16 cmdid;
@@ -36,5 +35,20 @@ enum enCmdId
 
 	/// 加入频道返回
 	enNotifyEnterResult = 8;
+
+	/// 申请房间列表
+	enRequestRoomList = 9;
+
+	/// 返回房间列表
+	enNotifyRoomList = 10;
+}
+
+
+/// 房间信息(struct)
+message stRoomInfo
+{
+	required int64 roomid = 1;
+	required string ip = 2;
+	required int32 port = 3;
 }
 
