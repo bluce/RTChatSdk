@@ -9,7 +9,6 @@
 #ifndef __RtcSameple__MediaSample__
 #define __RtcSameple__MediaSample__
 
-#include <iostream>
 #include <webrtc/test/channel_transport/include/channel_transport.h>
 #include <webrtc/voice_engine/include/voe_base.h>
 #include <webrtc/voice_engine/include/voe_volume_control.h>
@@ -24,21 +23,27 @@ using namespace webrtc::test;
 class MediaSample : public webrtc::VoiceEngineObserver {
 public:
     MediaSample();
+    
     virtual ~MediaSample();
     
-    void init();
+    bool init();
+    
+    void connectRoom(const std::string& ip, unsigned int port);
+    
+    void leaveCurrentRoom();
+    
+    void setMuteMic(bool isMicMute);
+    
+protected:
+    //设置发送编码格式为ilbc
+    void setEncodeToIlbc();
     
     virtual void CallbackOnError(int channel, int errCode);
     
-    virtual int ReceivedRTPPacket(int channel,
-                                  const void* data,
-                                  unsigned int length);
-    
-protected:
+private:
     webrtc::VoiceEngine*            _voe;
-    webrtc::VoEBase*                _voe_base;
-    VoiceChannelTransport*          _voiceSendTransport;
-    VoiceChannelTransport*          _voiceRecvTransport;
+    VoiceChannelTransport*          _voiceTransport;
+    int                             _channel;
 };
 
 #endif /* defined(__RtcSameple__MediaSample__) */

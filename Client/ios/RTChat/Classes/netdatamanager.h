@@ -20,8 +20,6 @@ public:
     
     void init(const std::string& controlserver);
     
-    void sendSampleMsg();
-    
     void sendClientMsg(const unsigned char* msg, unsigned int len);
     
     virtual void onOpen(WebSocket* ws);

@@ -10,21 +10,11 @@
 
 using namespace webrtc;
 
-MediaSample::MediaSample() //:
+MediaSample::MediaSample() :
+_voe(NULL),
+_channel(-1)
 {
     _voe = VoiceEngine::Create();
-    _voe_base = VoEBase::GetInterface(_voe);
-    _voe_base->Init();
-    
-    
-    int sendch = _voe_base->CreateChannel();
-    
-    VoENetwork* network = VoENetwork::GetInterface(_voe);
-    
-    _voiceSendTransport = new VoiceChannelTransport(network, sendch);
-    
-    _voiceSendTransport->SetSendDestination("180.168.126.249", 10086);
-    _voiceSendTransport->SetLocalReceiver(20000);
     
     init();
 }
@@ -34,45 +24,34 @@ MediaSample::~MediaSample()
     
 }
 
-void MediaSample::init()
+bool MediaSample::init()
 {
-//    if (_voiceEngine) {
-//        _voiceEngine->SetAudioDeviceModule(_audioModule.get(), NULL);
-//    }
-    VoECodec* codec = VoECodec::GetInterface(_voe);
+    if (!_voe) {
+        return false;
+    }
     
-    CodecInst inst;
-    
-    int num = codec->NumOfCodecs();
-    for (int i = 0; i < num; i++) {
-        codec->GetCodec(i, inst);
-        printf("%s\n", inst.plname);
-        if (inst.pltype == 102) {
-            codec->SetSendCodec(0, inst);
-            break;
-        }
+    VoEBase* voe_base = VoEBase::GetInterface(_voe);
+    if (voe_base) {
+        voe_base->Init();
+        _channel = voe_base->CreateChannel();
+        
+        VoENetwork* network = VoENetwork::GetInterface(_voe);
+        _voiceTransport = new VoiceChannelTransport(network, _channel);
     }
     
     VoEHardware* hardware = VoEHardware::GetInterface(_voe);
     hardware->SetLoudspeakerStatus(true);
-    
-//    VoERTP_RTCP* rtcp = VoERTP_RTCP::GetInterface(_voe);
-//    rtcp->SendApplicationDefinedRTCPPacket(0, 1, 1, "lwangxin", 8);
-    
+
+//    voe_base->SetNetEQPlayoutMode(0, kNetEqDefault);
 //    VoEVolumeControl* volumnControl = VoEVolumeControl::GetInterface(_voe);
 //    unsigned int volumn;
 //    volumnControl->GetSpeakerVolume(volumn);
 //    volumnControl->SetSpeakerVolume(volumn*10);
 //    volumnControl->SetChannelOutputVolumeScaling(0, 5);
     
-    _voe_base->StartPlayout(0);
-    _voe_base->StartReceive(0);
-    _voe_base->StartSend(0);
+    voe_base->RegisterVoiceEngineObserver(*this);
     
-    
-    _voe_base->SetNetEQPlayoutMode(0, kNetEqDefault);
-    
-    _voe_base->RegisterVoiceEngineObserver(*this);
+    return true;
 }
 
 void MediaSample::CallbackOnError(int channel, int errCode)
@@ -80,11 +59,65 @@ void MediaSample::CallbackOnError(int channel, int errCode)
     printf("channel=%d, errCode=%d", channel, errCode);
 }
 
-int MediaSample::ReceivedRTPPacket(int channel, const void *data, unsigned int length)
+void MediaSample::connectRoom(const std::string &ip, unsigned int port)
 {
-    VoENetwork* network = VoENetwork::GetInterface(_voe);
+    if (_voiceTransport) {
+        _voiceTransport->SetSendDestination(ip.c_str(), port);
+        _voiceTransport->SetLocalReceiver(20000);
+    }
     
-    return network->ReceivedRTPPacket(2, data, length);
+    VoEBase* voe_base = VoEBase::GetInterface(_voe);
+    if (voe_base) {
+        voe_base->StartPlayout(_channel);
+        voe_base->StartReceive(_channel);
+        voe_base->StartSend(_channel);
+    }
+}
+
+void MediaSample::leaveCurrentRoom()
+{
+    VoEBase* voe_base = VoEBase::GetInterface(_voe);
+    if (voe_base) {
+        voe_base->StopPlayout(_channel);
+        voe_base->StartReceive(_channel);
+        voe_base->StartSend(_channel);
+    }
+}
+
+void MediaSample::setMuteMic(bool isMicMute)
+{
+    if (!_voe) {
+        return;
+    }
+    
+    VoEBase* voe_base = VoEBase::GetInterface(_voe);
+    if (isMicMute) {
+        if (voe_base) {
+            voe_base->StopSend(_channel);
+        }
+    }
+    else {
+        if (voe_base) {
+            voe_base->StartSend(_channel);
+        }
+    }
+}
+
+//设置发送编码格式为ilbc
+void MediaSample::setEncodeToIlbc()
+{
+    VoECodec* codec = VoECodec::GetInterface(_voe);
+    CodecInst inst;
+    
+    int num = codec->NumOfCodecs();
+    for (int i = 0; i < num; i++) {
+        codec->GetCodec(i, inst);
+        printf("%s\n", inst.plname);
+        if (inst.pltype == 102) {
+            codec->SetSendCodec(_channel, inst);
+            break;
+        }
+    }
 }
 
 

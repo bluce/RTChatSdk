@@ -23,8 +23,7 @@
 		430F16FE196F8DC10083B252 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F8196F8DC10083B252 /* tinyxmlerror.cpp */; };
 		430F16FF196F8DC10083B252 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F9196F8DC10083B252 /* tinyxmlparser.cpp */; };
 		43247A541987339300AF14C7 /* MediaSample.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43247A521987339300AF14C7 /* MediaSample.cpp */; };
-		43247A71198737A400AF14C7 /* libwebsockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43998BAB1986363F003C5793 /* libwebsockets.a */; };
-		43247A76198741BC00AF14C7 /* RTChatSDKMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43247A74198741BC00AF14C7 /* RTChatSDKMain.cpp */; };
+		43247A7819876FC700AF14C7 /* RTChatSDKMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43247A74198741BC00AF14C7 /* RTChatSDKMain.cpp */; };
 		435E03B2196E7D9F000C3012 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03B1196E7D9F000C3012 /* Foundation.framework */; };
 		435E03D8196E813C000C3012 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03D7196E813C000C3012 /* AudioToolbox.framework */; };
 		435E03E5196E8333000C3012 /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435E03DE196E8333000C3012 /* CADebugMacros.cpp */; };
@@ -64,28 +63,16 @@
 		43998DDF19865C28003C5793 /* wire_format.cc in Sources */ = {isa = PBXBuildFile; fileRef = 43998DBF19865C28003C5793 /* wire_format.cc */; };
 		43998DE019865C28003C5793 /* wire_format_lite.cc in Sources */ = {isa = PBXBuildFile; fileRef = 43998DC119865C28003C5793 /* wire_format_lite.cc */; };
 		43998DE4198660B1003C5793 /* public.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 43998DE2198660B1003C5793 /* public.pb.cc */; };
-		43998DE8198669AD003C5793 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 43998DE619866803003C5793 /* libz.1.2.5.dylib */; };
 		43AE0052197913930062C9B4 /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43AE004D197913930062C9B4 /* json_reader.cpp */; };
 		43AE0053197913930062C9B4 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43AE004F197913930062C9B4 /* json_value.cpp */; };
 		43AE0054197913930062C9B4 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43AE0051197913930062C9B4 /* json_writer.cpp */; };
-		43D648D9196E9247001944DC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03B1196E7D9F000C3012 /* Foundation.framework */; };
-		43D648DA196E9247001944DC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03EE196E91AC000C3012 /* CoreGraphics.framework */; };
-		43D648DB196E9247001944DC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03C2196E7D9F000C3012 /* UIKit.framework */; };
-		43D648E1196E9247001944DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43D648DF196E9247001944DC /* InfoPlist.strings */; };
-		43D648E3196E9247001944DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D648E2196E9247001944DC /* main.m */; };
-		43D648E7196E9247001944DC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D648E6196E9247001944DC /* AppDelegate.m */; };
-		43D648EA196E9247001944DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43D648E8196E9247001944DC /* Main.storyboard */; };
-		43D648ED196E9247001944DC /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43D648EC196E9247001944DC /* ViewController.mm */; };
-		43D648EF196E9247001944DC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43D648EE196E9247001944DC /* Images.xcassets */; };
-		43D64909196E9647001944DC /* libRTChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03AE196E7D9F000C3012 /* libRTChat.a */; };
-		43D6490C196E97B9001944DC /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03D7196E813C000C3012 /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		435E03AC196E7D9F000C3012 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
+			dstPath = include;
 			dstSubfolderSpec = 16;
 			files = (
 			);
@@ -260,17 +247,6 @@
 		43AE004F197913930062C9B4 /* json_value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_value.cpp; sourceTree = "<group>"; };
 		43AE0050197913930062C9B4 /* json_valueiterator.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_valueiterator.inl; sourceTree = "<group>"; };
 		43AE0051197913930062C9B4 /* json_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_writer.cpp; sourceTree = "<group>"; };
-		43D648D8196E9247001944DC /* RTChatTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RTChatTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		43D648DE196E9247001944DC /* RTChatTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RTChatTest-Info.plist"; sourceTree = "<group>"; };
-		43D648E0196E9247001944DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		43D648E2196E9247001944DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		43D648E4196E9247001944DC /* RTChatTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RTChatTest-Prefix.pch"; sourceTree = "<group>"; };
-		43D648E5196E9247001944DC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		43D648E6196E9247001944DC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		43D648E9196E9247001944DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		43D648EB196E9247001944DC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		43D648EC196E9247001944DC /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
-		43D648EE196E9247001944DC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		43D6490A196E9797001944DC /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -283,20 +259,6 @@
 				435E03D8196E813C000C3012 /* AudioToolbox.framework in Frameworks */,
 				435E03B2196E7D9F000C3012 /* Foundation.framework in Frameworks */,
 				43998BAC1986363F003C5793 /* libwebsockets.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		43D648D5196E9247001944DC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				43247A71198737A400AF14C7 /* libwebsockets.a in Frameworks */,
-				43998DE8198669AD003C5793 /* libz.1.2.5.dylib in Frameworks */,
-				43D6490C196E97B9001944DC /* AudioToolbox.framework in Frameworks */,
-				43D64909196E9647001944DC /* libRTChat.a in Frameworks */,
-				43D648DA196E9247001944DC /* CoreGraphics.framework in Frameworks */,
-				43D648DB196E9247001944DC /* UIKit.framework in Frameworks */,
-				43D648D9196E9247001944DC /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,7 +382,6 @@
 			isa = PBXGroup;
 			children = (
 				435E03B3196E7D9F000C3012 /* RTChat */,
-				43D648DC196E9247001944DC /* RTChatTest */,
 				435E03B0196E7D9F000C3012 /* Frameworks */,
 				435E03AF196E7D9F000C3012 /* Products */,
 			);
@@ -430,7 +391,6 @@
 			isa = PBXGroup;
 			children = (
 				435E03AE196E7D9F000C3012 /* libRTChat.a */,
-				43D648D8196E9247001944DC /* RTChatTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -472,8 +432,6 @@
 			isa = PBXGroup;
 			children = (
 				43247A72198740EF00AF14C7 /* interface */,
-				43247A521987339300AF14C7 /* MediaSample.cpp */,
-				43247A531987339300AF14C7 /* MediaSample.h */,
 				43247A3D1987333E00AF14C7 /* webrtc */,
 				43998D7719865A99003C5793 /* NetProcess */,
 				43998BB0198645EC003C5793 /* proto */,
@@ -486,6 +444,8 @@
 				43247A75198741BC00AF14C7 /* RTChatSDKMain.h */,
 				43998BAD198636DA003C5793 /* WebSocket.cpp */,
 				43998BAE198636DA003C5793 /* WebSocket.h */,
+				43247A521987339300AF14C7 /* MediaSample.cpp */,
+				43247A531987339300AF14C7 /* MediaSample.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -694,31 +654,6 @@
 			path = third_party;
 			sourceTree = "<group>";
 		};
-		43D648DC196E9247001944DC /* RTChatTest */ = {
-			isa = PBXGroup;
-			children = (
-				43D648E5196E9247001944DC /* AppDelegate.h */,
-				43D648E6196E9247001944DC /* AppDelegate.m */,
-				43D648E8196E9247001944DC /* Main.storyboard */,
-				43D648EB196E9247001944DC /* ViewController.h */,
-				43D648EC196E9247001944DC /* ViewController.mm */,
-				43D648EE196E9247001944DC /* Images.xcassets */,
-				43D648DD196E9247001944DC /* Supporting Files */,
-			);
-			path = RTChatTest;
-			sourceTree = "<group>";
-		};
-		43D648DD196E9247001944DC /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				43D648DE196E9247001944DC /* RTChatTest-Info.plist */,
-				43D648DF196E9247001944DC /* InfoPlist.strings */,
-				43D648E2196E9247001944DC /* main.m */,
-				43D648E4196E9247001944DC /* RTChatTest-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -738,23 +673,6 @@
 			productName = RTChat;
 			productReference = 435E03AE196E7D9F000C3012 /* libRTChat.a */;
 			productType = "com.apple.product-type.library.static";
-		};
-		43D648D7196E9247001944DC /* RTChatTest */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 43D64902196E9247001944DC /* Build configuration list for PBXNativeTarget "RTChatTest" */;
-			buildPhases = (
-				43D648D4196E9247001944DC /* Sources */,
-				43D648D5196E9247001944DC /* Frameworks */,
-				43D648D6196E9247001944DC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = RTChatTest;
-			productName = RTChatTest;
-			productReference = 43D648D8196E9247001944DC /* RTChatTest.app */;
-			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -779,23 +697,9 @@
 			projectRoot = "";
 			targets = (
 				435E03AD196E7D9F000C3012 /* RTChat */,
-				43D648D7196E9247001944DC /* RTChatTest */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		43D648D6196E9247001944DC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				43D648EF196E9247001944DC /* Images.xcassets in Resources */,
-				43D648E1196E9247001944DC /* InfoPlist.strings in Resources */,
-				43D648EA196E9247001944DC /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		435E03AA196E7D9F000C3012 /* Sources */ = {
@@ -849,7 +753,7 @@
 				430F16E9196F8D5F0083B252 /* DataStream.cpp in Sources */,
 				43998DD519865C28003C5793 /* reflection_ops.cc in Sources */,
 				43998DD319865C28003C5793 /* message.cc in Sources */,
-				43247A76198741BC00AF14C7 /* RTChatSDKMain.cpp in Sources */,
+				43247A7819876FC700AF14C7 /* RTChatSDKMain.cpp in Sources */,
 				43998BAF198636DA003C5793 /* WebSocket.cpp in Sources */,
 				43998DD019865C28003C5793 /* zero_copy_stream.cc in Sources */,
 				430F16F1196F8D5F0083B252 /* SystemUtil.cpp in Sources */,
@@ -860,36 +764,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		43D648D4196E9247001944DC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				43D648ED196E9247001944DC /* ViewController.mm in Sources */,
-				43D648E7196E9247001944DC /* AppDelegate.m in Sources */,
-				43D648E3196E9247001944DC /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		43D648DF196E9247001944DC /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				43D648E0196E9247001944DC /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		43D648E8196E9247001944DC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				43D648E9196E9247001944DC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		435E03CF196E7D9F000C3012 /* Debug */ = {
@@ -1043,72 +918,6 @@
 			};
 			name = Release;
 		};
-		43D64903196E9247001944DC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "RTChatTest/RTChatTest-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(PROJECT_DIR)/RTChat/Classes",
-				);
-				INFOPLIST_FILE = "RTChatTest/RTChatTest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/RTChat/Classes/third_party/libwebsocket/lib",
-				);
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "388DFEF2-844A-405D-8E2F-1559A2396E9A";
-				VALID_ARCHS = "armv7 armv7s";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		43D64904196E9247001944DC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "RTChatTest/RTChatTest-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(PROJECT_DIR)/RTChat/Classes",
-				);
-				INFOPLIST_FILE = "RTChatTest/RTChatTest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/RTChat/Classes/third_party/libwebsocket/lib",
-				);
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "388DFEF2-844A-405D-8E2F-1559A2396E9A";
-				VALID_ARCHS = "armv7 armv7s";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1126,15 +935,6 @@
 			buildConfigurations = (
 				435E03D2196E7D9F000C3012 /* Debug */,
 				435E03D3196E7D9F000C3012 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		43D64902196E9247001944DC /* Build configuration list for PBXNativeTarget "RTChatTest" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				43D64903196E9247001944DC /* Debug */,
-				43D64904196E9247001944DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

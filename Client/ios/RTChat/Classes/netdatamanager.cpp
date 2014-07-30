@@ -9,11 +9,12 @@
 #include "netdatamanager.h"
 #include "NetProcess/command.h"
 #include "proto/game.pb.h"
+#include "RTChatSDKMain.h"
 
 NetDataManager::NetDataManager() :
-_socket(nullptr)
+_socket(NULL)
 {
-    _socket = new WebSocket();
+    
 }
 
 NetDataManager::~NetDataManager()
@@ -23,30 +24,10 @@ NetDataManager::~NetDataManager()
 
 void NetDataManager::init(const std::string &controlserver)
 {
-    if (_socket) {
-        _socket->init(*this, controlserver);
+    if (!_socket) {
+        _socket = new WebSocket();
     }
-}
-
-void NetDataManager::sendSampleMsg()
-{
-    Cmd::cmdRequestLogin msg;
-    msg.set_uniqueid("111");
-    
-    printf("%lu\n", sizeof(WORD));
-    printf("%lu\n", sizeof(DWORD));
-    printf("%lu\n", sizeof(stBaseCmd));
-    
-    char buff[1024] = {0};
-    msg.SerializeToArray(buff, msg.ByteSize());
-    
-    BUFFER_CMD(stBaseCmd, basecmd, 80);
-    basecmd->cmdid = Cmd::enRequestLogin;
-    basecmd->cmdlen = msg.ByteSize();
-    memcpy(basecmd->data, buff, msg.ByteSize());
-    _socket->send((const unsigned char*)basecmd, basecmd->getSize());
-    
-    _media = new MediaSample();
+    _socket->init(*this, controlserver);
 }
 
 void NetDataManager::sendClientMsg(const unsigned char *msg, unsigned int len)
@@ -65,7 +46,7 @@ void NetDataManager::sendHelloMsg()
 
 void NetDataManager::onOpen(WebSocket* ws)
 {
-    sendSampleMsg();
+    RTChatSDKMain::sharedInstance().requestLogin();
 }
 
 void NetDataManager::onMessage(WebSocket* ws, const WebSocket::Data& data)
@@ -75,27 +56,12 @@ void NetDataManager::onMessage(WebSocket* ws, const WebSocket::Data& data)
         return;
     }
     
-    BUFFER_CMD(stBaseCmd, cmd, 1024)
-    
-    
-    cmd = (stBaseCmd*)data.bytes;
-    switch (cmd->cmdid) {
-        case Cmd::enNotifyLoginResult:
-        {
-            Cmd::cmdNotifyLoginResult protomsg;
-            protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
-            
-            printf("%llu\n", protomsg.tempid());
-            break;
-        }
-        default:
-            break;
-    }
+    RTChatSDKMain::sharedInstance().onRecvMsg(data.bytes, data.len);
 }
 
 void NetDataManager::onClose(WebSocket* ws)
 {
-    int i = 9;
+    SAFE_DELETE(_socket);
 }
 
 void NetDataManager::onError(WebSocket* ws, const WebSocket::ErrorCode& error)
