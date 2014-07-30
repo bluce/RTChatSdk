@@ -9,11 +9,15 @@
 #ifndef RTChat_RTChatSdk_h
 #define RTChat_RTChatSdk_h
 
+typedef std::function<void (long long roomid)> pMsgCallFunc;
+
 class RTChatSDKMain {
 public:
     static RTChatSDKMain& sharedInstance();
     
     void initSDK(const std::string& uniqueid);
+    
+    void registerMsgCallback(const pMsgCallFunc& func);
     
     //创建房间
     void createRoom();
@@ -26,6 +30,9 @@ public:
     
     //设置本人Mac静音
     void setMuteSelf(bool isMute);
+    
+    //申请房间列表
+    void requestRoomList();
 };
 
 #endif

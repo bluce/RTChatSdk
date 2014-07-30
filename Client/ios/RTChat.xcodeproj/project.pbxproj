@@ -84,23 +84,6 @@
 		43AE0054197913930062C9B4 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43AE0051197913930062C9B4 /* json_writer.cpp */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		433E682A1987C0190002AAC3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 433E68261987C0190002AAC3 /* system_wrappers.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 430D87401986073F009E763A;
-			remoteInfo = system_wrappers;
-		};
-		433E683A1987C1830002AAC3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 433E68361987C1830002AAC3 /* G711.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 430D8E331986217B009E763A;
-			remoteInfo = G711;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		435E03AC196E7D9F000C3012 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -203,8 +186,6 @@
 		433E67941987B2850002AAC3 /* libvoice_engine.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvoice_engine.a; path = "../../../RTChatApp/DerivedData/RTChatApp/Build/Products/Debug-iphoneos/libvoice_engine.a"; sourceTree = "<group>"; };
 		433E67951987B2850002AAC3 /* libwebrtc_base.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebrtc_base.a; path = "../../../RTChatApp/DerivedData/RTChatApp/Build/Products/Debug-iphoneos/libwebrtc_base.a"; sourceTree = "<group>"; };
 		433E67961987B2850002AAC3 /* libwebrtc_utility.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebrtc_utility.a; path = "../../../RTChatApp/DerivedData/RTChatApp/Build/Products/Debug-iphoneos/libwebrtc_utility.a"; sourceTree = "<group>"; };
-		433E68261987C0190002AAC3 /* system_wrappers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = system_wrappers.xcodeproj; path = ../../../webRTC_xCode/system_wrappers/system_wrappers.xcodeproj; sourceTree = "<group>"; };
-		433E68361987C1830002AAC3 /* G711.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = G711.xcodeproj; path = ../../../webRTC_xCode/G711/G711.xcodeproj; sourceTree = "<group>"; };
 		435E03AE196E7D9F000C3012 /* libRTChat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRTChat.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		435E03B1196E7D9F000C3012 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		435E03B5196E7D9F000C3012 /* RTChat-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RTChat-Prefix.pch"; sourceTree = "<group>"; };
@@ -471,27 +452,9 @@
 			path = include;
 			sourceTree = "<group>";
 		};
-		433E68271987C0190002AAC3 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				433E682B1987C0190002AAC3 /* libsystem_wrappers.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		433E68371987C1830002AAC3 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				433E683B1987C1830002AAC3 /* libG711.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		435E03A5196E7D9F000C3012 = {
 			isa = PBXGroup;
 			children = (
-				433E68361987C1830002AAC3 /* G711.xcodeproj */,
-				433E68261987C0190002AAC3 /* system_wrappers.xcodeproj */,
 				435E03B3196E7D9F000C3012 /* RTChat */,
 				435E03B0196E7D9F000C3012 /* Frameworks */,
 				435E03AF196E7D9F000C3012 /* Products */,
@@ -846,39 +809,12 @@
 			mainGroup = 435E03A5196E7D9F000C3012;
 			productRefGroup = 435E03AF196E7D9F000C3012 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 433E68371987C1830002AAC3 /* Products */;
-					ProjectRef = 433E68361987C1830002AAC3 /* G711.xcodeproj */;
-				},
-				{
-					ProductGroup = 433E68271987C0190002AAC3 /* Products */;
-					ProjectRef = 433E68261987C0190002AAC3 /* system_wrappers.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				435E03AD196E7D9F000C3012 /* RTChat */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		433E682B1987C0190002AAC3 /* libsystem_wrappers.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libsystem_wrappers.a;
-			remoteRef = 433E682A1987C0190002AAC3 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		433E683B1987C1830002AAC3 /* libG711.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libG711.a;
-			remoteRef = 433E683A1987C1830002AAC3 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		435E03AA196E7D9F000C3012 /* Sources */ = {
@@ -1083,7 +1019,14 @@
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RTChat/RTChat-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
+					HAVE_PTHREAD,
+					HAVE_ZLIB,
+					WEBRTC_IOS,
+					WEBRTC_MAC,
+					WEBRTC_POSIX,
+				);
 				GCC_USE_STANDARD_INCLUDE_SEARCHING = YES;
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (

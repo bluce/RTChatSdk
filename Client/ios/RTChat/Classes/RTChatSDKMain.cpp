@@ -8,8 +8,6 @@
 
 #include "RTChatSDKMain.h"
 #include "netdatamanager.h"
-#include "proto/public.pb.h"
-#include "proto/game.pb.h"
 #include "NetProcess/command.h"
 #include "MediaSample.h"
 
@@ -58,13 +56,18 @@ void RTChatSDKMain::initSDK(const std::string &uniqueid)
     _uniqueid = uniqueid;
     
     if (_netDataManager) {
+        _netDataManager->init("ws://180.168.126.249:16001");
 //        _netDataManager->init("ws://180.168.126.249:16008");
-        _netDataManager->init("ws://180.168.126.249:16008");
     }
     
     if (_mediaSample) {
         _mediaSample->init();
     }
+}
+
+void RTChatSDKMain::registerMsgCallback(const pMsgCallFunc& func)
+{
+    _func = func;
 }
 
 void RTChatSDKMain::requestLogin()
@@ -73,6 +76,17 @@ void RTChatSDKMain::requestLogin()
     msg.set_uniqueid(_uniqueid);
     
     SendProtoMsg(msg, Cmd::enRequestLogin);
+}
+
+//申请房间列表
+void RTChatSDKMain::requestRoomList()
+{
+    stBaseCmd cmd;
+    cmd.cmdid = Cmd::enRequestRoomList;
+    
+    if (_netDataManager) {
+        _netDataManager->sendClientMsg((const unsigned char *)&cmd, cmd.getSize());
+    }
 }
 
 void RTChatSDKMain::createRoom()
@@ -91,6 +105,14 @@ void RTChatSDKMain::joinRoom(uint64_t roomid)
     msg.set_roomid(roomid);
     
     SendProtoMsg(msg, Cmd::enRequestEnterRoom);
+}
+
+//随机进入一个房间
+void RTChatSDKMain::randomJoinRoom()
+{
+    if (_roomInfoMap.size() != 0) {
+        joinRoom(_roomInfoMap.begin()->first);
+    }
 }
 
 void RTChatSDKMain::startTalk()
@@ -125,6 +147,8 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
                 
                 //这里需要加锁吗，待处理
                 _currentRoomID = protomsg.roomid();
+                
+                _func(_currentRoomID);
             }
             break;
         }
@@ -138,6 +162,15 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             }
             
             break;
+        }
+        case Cmd::enNotifyRoomList:
+        {
+            Cmd::cmdNotifyRoomList protomsg;
+            protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
+            
+            refreshRoomInfoMap(protomsg);
+            
+            randomJoinRoom();
         }
         default:
             break;
@@ -164,6 +197,15 @@ void RTChatSDKMain::setMuteSelf(bool isMute)
     if (_mediaSample) {
         _mediaSample->setMuteMic(isMute);
         _isMute = isMute;
+    }
+}
+
+//刷新房间列表信息
+void RTChatSDKMain::refreshRoomInfoMap(const Cmd::cmdNotifyRoomList& protomsg)
+{
+    _roomInfoMap.clear();
+    for (int i = 0; i < protomsg.info_size(); i++) {
+        _roomInfoMap[protomsg.info(i).roomid()] = protomsg.info(i);
     }
 }
 
