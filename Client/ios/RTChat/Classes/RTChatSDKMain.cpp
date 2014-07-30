@@ -58,6 +58,7 @@ void RTChatSDKMain::initSDK(const std::string &uniqueid)
     _uniqueid = uniqueid;
     
     if (_netDataManager) {
+//        _netDataManager->init("ws://180.168.126.249:16008");
         _netDataManager->init("ws://180.168.126.249:16008");
     }
     

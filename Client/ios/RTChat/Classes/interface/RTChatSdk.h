@@ -11,7 +11,7 @@
 
 class RTChatSDKMain {
 public:
-    static const RTChatSDKMain& sharedInstance();
+    static RTChatSDKMain& sharedInstance();
     
     void initSDK(const std::string& uniqueid);
     

@@ -7,22 +7,18 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+// An OS-independent sleep function.
 
-#ifndef MOCK_VOE_CONNECTION_OBSERVER_H_
-#define MOCK_VOE_CONNECTION_OBSERVER_H_
-
-#include "webrtc/voice_engine/include/voe_network.h"
-
-#include "testing/gmock/include/gmock/gmock.h"
+#ifndef WEBRTC_SYSTEM_WRAPPERS_INTERFACE_SLEEP_H_
+#define WEBRTC_SYSTEM_WRAPPERS_INTERFACE_SLEEP_H_
 
 namespace webrtc {
 
-class MockVoeConnectionObserver : public VoEConnectionObserver {
- public:
-  MOCK_METHOD2(OnPeriodicDeadOrAlive, void(int channel,
-                                           bool alive));
-};
+// This function sleeps for the specified number of milliseconds.
+// It may return early if the thread is woken by some other event,
+// such as the delivery of a signal on Unix.
+void SleepMs(int msecs);
 
-}
+}  // namespace webrtc
 
-#endif  // MOCK_VOE_CONNECTION_OBSERVER_H_
+#endif  // WEBRTC_SYSTEM_WRAPPERS_INTERFACE_SLEEP_H_

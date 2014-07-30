@@ -15,7 +15,7 @@
 
 namespace webrtc {
 
-class ViENetwork;
+//class ViENetwork;
 class VoENetwork;
 
 namespace test {
@@ -52,35 +52,35 @@ class VoiceChannelTransport : public UdpTransportData {
 };
 
 // Helper class for VideoEngine tests.
-class VideoChannelTransport : public UdpTransportData {
- public:
-  VideoChannelTransport(ViENetwork* vie_network, int channel);
-
-  virtual  ~VideoChannelTransport();
-
-  // Start implementation of UdpTransportData.
-  virtual void IncomingRTPPacket(const int8_t* incoming_rtp_packet,
-                         const int32_t packet_length,
-                         const char* /*from_ip*/,
-                         const uint16_t /*from_port*/) OVERRIDE;
-
-  virtual void IncomingRTCPPacket(const int8_t* incoming_rtcp_packet,
-                          const int32_t packet_length,
-                          const char* /*from_ip*/,
-                          const uint16_t /*from_port*/) OVERRIDE;
-  // End implementation of UdpTransportData.
-
-  // Specifies the ports to receive RTP packets on.
-  int SetLocalReceiver(uint16_t rtp_port);
-
-  // Specifies the destination port and IP address for a specified channel.
-  int SetSendDestination(const char* ip_address, uint16_t rtp_port);
-
- private:
-  int channel_;
-  ViENetwork* vie_network_;
-  UdpTransport* socket_transport_;
-};
+//class VideoChannelTransport : public UdpTransportData {
+// public:
+//  VideoChannelTransport(ViENetwork* vie_network, int channel);
+//
+//  virtual  ~VideoChannelTransport();
+//
+//  // Start implementation of UdpTransportData.
+//  virtual void IncomingRTPPacket(const int8_t* incoming_rtp_packet,
+//                         const int32_t packet_length,
+//                         const char* /*from_ip*/,
+//                         const uint16_t /*from_port*/) OVERRIDE;
+//
+//  virtual void IncomingRTCPPacket(const int8_t* incoming_rtcp_packet,
+//                          const int32_t packet_length,
+//                          const char* /*from_ip*/,
+//                          const uint16_t /*from_port*/) OVERRIDE;
+//  // End implementation of UdpTransportData.
+//
+//  // Specifies the ports to receive RTP packets on.
+//  int SetLocalReceiver(uint16_t rtp_port);
+//
+//  // Specifies the destination port and IP address for a specified channel.
+//  int SetSendDestination(const char* ip_address, uint16_t rtp_port);
+//
+// private:
+//  int channel_;
+//  ViENetwork* vie_network_;
+//  UdpTransport* socket_transport_;
+//};
 
 }  // namespace test
 }  // namespace webrtc

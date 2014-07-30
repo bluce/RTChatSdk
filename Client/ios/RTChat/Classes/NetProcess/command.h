@@ -15,6 +15,10 @@
 
 struct stBaseCmd
 {
+    stBaseCmd() {
+        cmdid = 0;
+        cmdlen = 0;
+    }
     WORD cmdid;
     DWORD cmdlen;
 	char data[0];
