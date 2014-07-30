@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		430079591973A705003DB064 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 430079581973A705003DB064 /* CoreFoundation.framework */; };
+		43072E511988EFDC00820124 /* RTChatSdk.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 43247A731987412100AF14C7 /* RTChatSdk.h */; };
 		430F16E6196F8D5F0083B252 /* adler32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16C1196F8D5F0083B252 /* adler32.cpp */; };
 		430F16E8196F8D5F0083B252 /* CsvParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16C5196F8D5F0083B252 /* CsvParser.cpp */; };
 		430F16E9196F8D5F0083B252 /* DataStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16C7196F8D5F0083B252 /* DataStream.cpp */; };
@@ -24,22 +25,12 @@
 		430F16FF196F8DC10083B252 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F9196F8DC10083B252 /* tinyxmlparser.cpp */; };
 		43247A541987339300AF14C7 /* MediaSample.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43247A521987339300AF14C7 /* MediaSample.cpp */; };
 		43247A7819876FC700AF14C7 /* RTChatSDKMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43247A74198741BC00AF14C7 /* RTChatSDKMain.cpp */; };
-		433E66C31987A2A10002AAC3 /* RTChatSdk.h in Headers */ = {isa = PBXBuildFile; fileRef = 43247A731987412100AF14C7 /* RTChatSdk.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		433E66DE1987AAD10002AAC3 /* common_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 433E66CC1987AAD10002AAC3 /* common_types.h */; };
 		433E66DF1987AAD10002AAC3 /* channel_transport.cc in Sources */ = {isa = PBXBuildFile; fileRef = 433E66CF1987AAD10002AAC3 /* channel_transport.cc */; };
-		433E66E01987AAD10002AAC3 /* channel_transport.h in Headers */ = {isa = PBXBuildFile; fileRef = 433E66D11987AAD10002AAC3 /* channel_transport.h */; };
 		433E66E11987AAD10002AAC3 /* udp_socket_manager_posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = 433E66D21987AAD10002AAC3 /* udp_socket_manager_posix.cc */; };
-		433E66E21987AAD10002AAC3 /* udp_socket_manager_posix.h in Headers */ = {isa = PBXBuildFile; fileRef = 433E66D31987AAD10002AAC3 /* udp_socket_manager_posix.h */; };
 		433E66E31987AAD10002AAC3 /* udp_socket_manager_wrapper.cc in Sources */ = {isa = PBXBuildFile; fileRef = 433E66D41987AAD10002AAC3 /* udp_socket_manager_wrapper.cc */; };
-		433E66E41987AAD10002AAC3 /* udp_socket_manager_wrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 433E66D51987AAD10002AAC3 /* udp_socket_manager_wrapper.h */; };
 		433E66E51987AAD10002AAC3 /* udp_socket_posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = 433E66D61987AAD10002AAC3 /* udp_socket_posix.cc */; };
-		433E66E61987AAD10002AAC3 /* udp_socket_posix.h in Headers */ = {isa = PBXBuildFile; fileRef = 433E66D71987AAD10002AAC3 /* udp_socket_posix.h */; };
 		433E66E71987AAD10002AAC3 /* udp_socket_wrapper.cc in Sources */ = {isa = PBXBuildFile; fileRef = 433E66D81987AAD10002AAC3 /* udp_socket_wrapper.cc */; };
-		433E66E81987AAD10002AAC3 /* udp_socket_wrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 433E66D91987AAD10002AAC3 /* udp_socket_wrapper.h */; };
-		433E66E91987AAD10002AAC3 /* udp_transport.h in Headers */ = {isa = PBXBuildFile; fileRef = 433E66DA1987AAD10002AAC3 /* udp_transport.h */; };
 		433E66EA1987AAD10002AAC3 /* udp_transport_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = 433E66DB1987AAD10002AAC3 /* udp_transport_impl.cc */; };
-		433E66EB1987AAD10002AAC3 /* udp_transport_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 433E66DC1987AAD10002AAC3 /* udp_transport_impl.h */; };
-		433E66EC1987AAD10002AAC3 /* typedefs.h in Headers */ = {isa = PBXBuildFile; fileRef = 433E66DD1987AAD10002AAC3 /* typedefs.h */; };
 		435E03B2196E7D9F000C3012 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03B1196E7D9F000C3012 /* Foundation.framework */; };
 		435E03D8196E813C000C3012 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03D7196E813C000C3012 /* AudioToolbox.framework */; };
 		435E03E5196E8333000C3012 /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435E03DE196E8333000C3012 /* CADebugMacros.cpp */; };
@@ -88,9 +79,10 @@
 		435E03AC196E7D9F000C3012 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = include;
+			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				43072E511988EFDC00820124 /* RTChatSdk.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -750,26 +742,6 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		433E66C11987A2870002AAC3 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				433E66C31987A2A10002AAC3 /* RTChatSdk.h in Headers */,
-				433E66E21987AAD10002AAC3 /* udp_socket_manager_posix.h in Headers */,
-				433E66EB1987AAD10002AAC3 /* udp_transport_impl.h in Headers */,
-				433E66E91987AAD10002AAC3 /* udp_transport.h in Headers */,
-				433E66E01987AAD10002AAC3 /* channel_transport.h in Headers */,
-				433E66DE1987AAD10002AAC3 /* common_types.h in Headers */,
-				433E66EC1987AAD10002AAC3 /* typedefs.h in Headers */,
-				433E66E81987AAD10002AAC3 /* udp_socket_wrapper.h in Headers */,
-				433E66E41987AAD10002AAC3 /* udp_socket_manager_wrapper.h in Headers */,
-				433E66E61987AAD10002AAC3 /* udp_socket_posix.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
 		435E03AD196E7D9F000C3012 /* RTChat */ = {
 			isa = PBXNativeTarget;
@@ -778,7 +750,6 @@
 				435E03AA196E7D9F000C3012 /* Sources */,
 				435E03AB196E7D9F000C3012 /* Frameworks */,
 				435E03AC196E7D9F000C3012 /* CopyFiles */,
-				433E66C11987A2870002AAC3 /* Headers */,
 			);
 			buildRules = (
 			);
