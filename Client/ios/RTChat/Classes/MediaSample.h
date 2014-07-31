@@ -34,6 +34,8 @@ public:
     
     void setMuteMic(bool isMicMute);
     
+    void closeVoiceEngine();
+    
 protected:
     //设置发送编码格式为ilbc
     void setEncodeToIlbc();

@@ -37,6 +37,10 @@ bool MediaSample::init()
         
         VoENetwork* network = VoENetwork::GetInterface(_voe);
         _voiceTransport = new VoiceChannelTransport(network, _channel);
+        
+        VoERTP_RTCP* rtcp = VoERTP_RTCP::GetInterface(_voe);
+        rtcp->SetRTCP_CNAME(_channel, "wangxin");
+
     }
     
     VoEHardware* hardware = VoEHardware::GetInterface(_voe);
@@ -71,7 +75,14 @@ void MediaSample::connectRoom(const std::string &ip, unsigned int port)
         voe_base->StartPlayout(_channel);
         voe_base->StartReceive(_channel);
         voe_base->StartSend(_channel);
+        voe_base->SetNetEQPlayoutMode(_channel, kNetEqOff);
     }
+    
+//    VoENetwork* network = VoENetwork::GetInterface(_voe);
+//    int testchannel = voe_base->CreateChannel();
+//    VoiceChannelTransport* testvoiceTransport = new VoiceChannelTransport(network, testchannel);
+//    testvoiceTransport->SetSendDestination(ip.c_str(), port);
+//    testvoiceTransport->SetLocalReceiver(20000);
 }
 
 void MediaSample::leaveCurrentRoom()
@@ -79,8 +90,8 @@ void MediaSample::leaveCurrentRoom()
     VoEBase* voe_base = VoEBase::GetInterface(_voe);
     if (voe_base) {
         voe_base->StopPlayout(_channel);
-        voe_base->StartReceive(_channel);
-        voe_base->StartSend(_channel);
+        voe_base->StopReceive(_channel);
+        voe_base->StopSend(_channel);
     }
 }
 
@@ -101,6 +112,11 @@ void MediaSample::setMuteMic(bool isMicMute)
             voe_base->StartSend(_channel);
         }
     }
+}
+
+void MediaSample::closeVoiceEngine()
+{
+    
 }
 
 //设置发送编码格式为ilbc

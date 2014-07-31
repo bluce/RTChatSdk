@@ -17,6 +17,17 @@
 class NetDataManager;
 class MediaSample;
 
+enum SdkOpState {
+    SdkSocketUnConnected = 0,
+    SdkSocketConnected,
+    SdkUserLogining,
+    SdkUserLogined,
+    SdkUserCreatingRoom,
+    SdkUserCreatedRoom,
+    SdkUserjoiningRoom,
+    SdkUserJoinedRoom,
+};
+
 typedef std::function<void (long long roomid)> pMsgCallFunc;
 
 class RTChatSDKMain {
@@ -29,9 +40,16 @@ public:
     
     static RTChatSDKMain& sharedInstance();
     
+    //sdk初始化，只能调用一次
     void initSDK(const std::string& uniqueid);
     
+    //当应用最小化时需要调用这个，清理数据
+    void freezeSDK();
+    
     void registerMsgCallback(const pMsgCallFunc& func);
+    
+    //获取SDK当前操作状态，用户发起操作前可以检测一下状态判断可否继续
+    SdkOpState getSdkState();
     
     //请求登录
     void requestLogin();
@@ -51,6 +69,13 @@ public:
     //设置本人Mac静音
     void setMuteSelf(bool isMute);
     
+    //注意。这个接口不应该暴露给上层应用使用
+    void set_SdkOpState(SdkOpState state) {
+        pthread_mutex_lock(&_mutexLock);
+        _sdkOpState = state;
+        pthread_mutex_unlock(&_mutexLock);
+    };
+    
 protected:
     void startTalk();
     
@@ -69,15 +94,27 @@ private:
     //刷新房间列表信息
     void refreshRoomInfoMap(const Cmd::cmdNotifyRoomList& protomsg);
     
+    //初始化互斥锁
+    void initMutexLock();
+    
+private:
+    NetDataManager*     _netDataManager;    //数据管理器
+    MediaSample*        _mediaSample;       //音频管理器
+    
 private:
     std::string         _uniqueid;
-    NetDataManager*     _netDataManager;
-    MediaSample*        _mediaSample;
-    uint64_t            _currentRoomID;
-    bool                _isMute;
-    RoomInfoMap         _roomInfoMap;
     
-    pMsgCallFunc        _func;
+    uint64_t            _currentRoomID; //当前进入的房间ID
+    
+    bool                _isMute;
+    
+    RoomInfoMap         _roomInfoMap;   //保存房间列表
+    
+    SdkOpState          _sdkOpState;    //保存SDK操作状态
+    
+    pthread_mutex_t     _mutexLock;      //读写锁
+    
+    pMsgCallFunc        _func;          //回调函数
 };
 
 #endif /* defined(__RTChat__RTChatSDKMain__) */

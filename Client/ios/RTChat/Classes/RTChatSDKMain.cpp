@@ -31,15 +31,19 @@ RTChatSDKMain::RTChatSDKMain() :
 _netDataManager(NULL),
 _mediaSample(NULL),
 _currentRoomID(-1),
-_isMute(false)
+_isMute(false),
+_sdkOpState(SdkSocketUnConnected)
 {
     _netDataManager = new NetDataManager;
     _mediaSample = new MediaSample;
+    
+    initMutexLock();
 }
 
 RTChatSDKMain::~RTChatSDKMain()
 {
-    
+    SAFE_DELETE(_netDataManager);
+    SAFE_DELETE(_mediaSample);
 }
 
 RTChatSDKMain& RTChatSDKMain::sharedInstance()
@@ -65,13 +69,37 @@ void RTChatSDKMain::initSDK(const std::string &uniqueid)
     }
 }
 
+//当应用最小化时需要调用这个，清理数据
+void RTChatSDKMain::freezeSDK()
+{
+    if (_netDataManager) {
+        _netDataManager->closeWebSocket();
+    }
+    
+    if (_mediaSample) {
+        _mediaSample->closeVoiceEngine();
+    }
+}
+
 void RTChatSDKMain::registerMsgCallback(const pMsgCallFunc& func)
 {
     _func = func;
 }
 
+//获取SDK当前操作状态
+SdkOpState RTChatSDKMain::getSdkState()
+{
+    return _sdkOpState;
+}
+
 void RTChatSDKMain::requestLogin()
 {
+    if (_sdkOpState < SdkSocketConnected) {
+        return;
+    }
+    
+    _sdkOpState = SdkUserLogining;
+    
     Cmd::cmdRequestLogin msg;
     msg.set_uniqueid(_uniqueid);
     
@@ -91,18 +119,30 @@ void RTChatSDKMain::requestRoomList()
 
 void RTChatSDKMain::createRoom()
 {
+    if (_sdkOpState != SdkUserLogined) {
+        return;
+    }
+    
     stBaseCmd cmd;
     cmd.cmdid = Cmd::enRequestCreateRoom;
     
     if (_netDataManager) {
         _netDataManager->sendClientMsg((const unsigned char*)&cmd, cmd.getSize());
+        
+        _sdkOpState = SdkUserCreatingRoom;
     }
 }
 
 void RTChatSDKMain::joinRoom(uint64_t roomid)
 {
+    if (_sdkOpState != SdkUserLogined) {
+        return;
+    }
+    
     Cmd::cmdRequestEnterRoom msg;
     msg.set_roomid(roomid);
+    
+    _sdkOpState = SdkUserjoiningRoom;
     
     SendProtoMsg(msg, Cmd::enRequestEnterRoom);
 }
@@ -111,7 +151,7 @@ void RTChatSDKMain::joinRoom(uint64_t roomid)
 void RTChatSDKMain::randomJoinRoom()
 {
     if (_roomInfoMap.size() != 0) {
-        joinRoom(_roomInfoMap.begin()->first);
+        joinRoom(_roomInfoMap.rbegin()->first);
     }
 }
 
@@ -135,6 +175,8 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             Cmd::cmdNotifyLoginResult protomsg;
             protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
             
+            _sdkOpState = SdkUserLogined;
+            
             break;
         }
         case Cmd::enNotifyCreateResult:
@@ -145,10 +187,15 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             if (protomsg.isok()) {
                 connectVoiceRoom(protomsg.ip(), protomsg.port());
                 
+                _sdkOpState = SdkUserCreatedRoom;
+                
                 //这里需要加锁吗，待处理
                 _currentRoomID = protomsg.roomid();
                 
                 _func(_currentRoomID);
+            }
+            else {
+                _sdkOpState = SdkSocketConnected;
             }
             break;
         }
@@ -159,6 +206,11 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             
             if (protomsg.isok()) {
                 connectVoiceRoom(protomsg.ip(), protomsg.port());
+                
+                _sdkOpState = SdkUserJoinedRoom;
+            }
+            else {
+                _sdkOpState = SdkSocketConnected;
             }
             
             break;
@@ -182,6 +234,7 @@ void RTChatSDKMain::connectVoiceRoom(const std::string& ip, unsigned int port)
 {
     if (_mediaSample) {
         _mediaSample->connectRoom(ip, port);
+//        _mediaSample->connectRoom("180.168.126.253", 20002);
     }
 }
 
@@ -207,6 +260,15 @@ void RTChatSDKMain::refreshRoomInfoMap(const Cmd::cmdNotifyRoomList& protomsg)
     for (int i = 0; i < protomsg.info_size(); i++) {
         _roomInfoMap[protomsg.info(i).roomid()] = protomsg.info(i);
     }
+}
+
+//初始化互斥锁
+void RTChatSDKMain::initMutexLock()
+{
+    pthread_mutexattr_t attr;
+    pthread_mutexattr_init(&attr);
+    pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_RECURSIVE);
+    pthread_mutex_init(&_mutexLock, &attr);
 }
 
 

@@ -419,8 +419,8 @@
 		433E66CE1987AAD10002AAC3 /* channel_transport */ = {
 			isa = PBXGroup;
 			children = (
-				433E66CF1987AAD10002AAC3 /* channel_transport.cc */,
 				433E66D01987AAD10002AAC3 /* include */,
+				433E66CF1987AAD10002AAC3 /* channel_transport.cc */,
 				433E66D21987AAD10002AAC3 /* udp_socket_manager_posix.cc */,
 				433E66D31987AAD10002AAC3 /* udp_socket_manager_posix.h */,
 				433E66D41987AAD10002AAC3 /* udp_socket_manager_wrapper.cc */,
@@ -960,12 +960,13 @@
 					"$(PROJECT_DIR)/RTChat/Classes/third_party/nss/nspr/pr/include",
 					"$(PROJECT_DIR)/RTChat/Classes/third_party",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/RTChat/Classes/third_party/libwebsocket/lib",
 					"/Users/raymon_wang/Documents/Develop/RTChatApp/DerivedData/RTChatApp/Build/Products/Debug-iphoneos",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1008,6 +1009,7 @@
 					"$(PROJECT_DIR)/RTChat/Classes/third_party/nss/nspr/pr/include",
 					"$(PROJECT_DIR)/RTChat/Classes/third_party",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/RTChat/Classes/third_party/libwebsocket/lib",

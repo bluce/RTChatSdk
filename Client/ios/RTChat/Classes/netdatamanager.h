@@ -22,18 +22,27 @@ public:
     
     void sendClientMsg(const unsigned char* msg, unsigned int len);
     
+    //关闭websocket
+    void closeWebSocket();
+    
+    //获取底层websocket状态
+    WebSocket::State getWebSocketState();
+    
     virtual void onOpen(WebSocket* ws);
     virtual void onMessage(WebSocket* ws, const WebSocket::Data& data);
     virtual void onClose(WebSocket* ws);
     virtual void onError(WebSocket* ws, const WebSocket::ErrorCode& error);
     
-protected:
+private:
+    //连接控制服务器
+    void connectControlServer();
+    
     //发送心跳消息
     void sendHelloMsg();
     
 private:
     WebSocket*      _socket;
-    MediaSample*    _media;
+    std::string     _controlServerStr;
 };
 
 #endif /* defined(__RTChat__netdatamanager__) */
