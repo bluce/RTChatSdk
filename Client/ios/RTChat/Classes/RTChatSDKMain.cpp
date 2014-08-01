@@ -60,8 +60,8 @@ void RTChatSDKMain::initSDK(const std::string &uniqueid)
     _uniqueid = uniqueid;
     
     if (_netDataManager) {
-        _netDataManager->init("ws://180.168.126.249:16001");
-//        _netDataManager->init("ws://180.168.126.249:16008");
+//        _netDataManager->init("ws://180.168.126.249:16001");
+        _netDataManager->init("ws://180.168.126.253:16001");
     }
     
     if (_mediaSample) {
@@ -234,7 +234,7 @@ void RTChatSDKMain::connectVoiceRoom(const std::string& ip, unsigned int port)
 {
     if (_mediaSample) {
         _mediaSample->connectRoom(ip, port);
-//        _mediaSample->connectRoom("180.168.126.253", 20002);
+//        _mediaSample->connectRoom("192.168.82.191", 16001);
     }
 }
 

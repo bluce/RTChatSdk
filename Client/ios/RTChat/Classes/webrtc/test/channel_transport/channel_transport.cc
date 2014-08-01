@@ -79,6 +79,12 @@ int VoiceChannelTransport::SetSendDestination(const char* ip_address,
                                               uint16_t rtp_port) {
   return socket_transport_->InitializeSendSockets(ip_address, rtp_port);
 }
+    
+int VoiceChannelTransport::sendActivateTransport(uint16_t rtpPort)
+{
+//    return socket_transport_->SendRaw((const int8_t*)"activate", 8, 0);
+    return socket_transport_->SendRTPPacketTo((const int8_t*)"r", 8, rtpPort);
+}
 
 
 //VideoChannelTransport::VideoChannelTransport(ViENetwork* vie_network,

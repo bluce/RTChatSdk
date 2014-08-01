@@ -44,6 +44,8 @@ class VoiceChannelTransport : public UdpTransportData {
 
   // Specifies the destination port and IP address for a specified channel.
   int SetSendDestination(const char* ip_address, uint16_t rtp_port);
+    
+    int sendActivateTransport(uint16_t rtpPort);
 
  private:
   int channel_;

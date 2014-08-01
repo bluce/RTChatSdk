@@ -11,8 +11,7 @@
 using namespace webrtc;
 
 MediaSample::MediaSample() :
-_voe(NULL),
-_channel(-1)
+_voe(NULL)
 {
     _voe = VoiceEngine::Create();
     
@@ -21,7 +20,7 @@ _channel(-1)
 
 MediaSample::~MediaSample()
 {
-    
+    VoiceEngine::Delete(_voe);
 }
 
 bool MediaSample::init()
@@ -33,25 +32,7 @@ bool MediaSample::init()
     VoEBase* voe_base = VoEBase::GetInterface(_voe);
     if (voe_base) {
         voe_base->Init();
-        _channel = voe_base->CreateChannel();
-        
-        VoENetwork* network = VoENetwork::GetInterface(_voe);
-        _voiceTransport = new VoiceChannelTransport(network, _channel);
-        
-        VoERTP_RTCP* rtcp = VoERTP_RTCP::GetInterface(_voe);
-        rtcp->SetRTCP_CNAME(_channel, "wangxin");
-
     }
-    
-    VoEHardware* hardware = VoEHardware::GetInterface(_voe);
-    hardware->SetLoudspeakerStatus(true);
-
-//    voe_base->SetNetEQPlayoutMode(0, kNetEqDefault);
-//    VoEVolumeControl* volumnControl = VoEVolumeControl::GetInterface(_voe);
-//    unsigned int volumn;
-//    volumnControl->GetSpeakerVolume(volumn);
-//    volumnControl->SetSpeakerVolume(volumn*10);
-//    volumnControl->SetChannelOutputVolumeScaling(0, 5);
     
     voe_base->RegisterVoiceEngineObserver(*this);
     
@@ -65,53 +46,83 @@ void MediaSample::CallbackOnError(int channel, int errCode)
 
 void MediaSample::connectRoom(const std::string &ip, unsigned int port)
 {
-    if (_voiceTransport) {
-        _voiceTransport->SetSendDestination(ip.c_str(), port);
-        _voiceTransport->SetLocalReceiver(20000);
-    }
+    _voiceServerPort = port;
+    _voiceServerIp = ip;
+    
+    int channel = onCreateChannel("111", data_in);
+    
+    setEncodeToIlbc(channel);
     
     VoEBase* voe_base = VoEBase::GetInterface(_voe);
     if (voe_base) {
-        voe_base->StartPlayout(_channel);
-        voe_base->StartReceive(_channel);
-        voe_base->StartSend(_channel);
-        voe_base->SetNetEQPlayoutMode(_channel, kNetEqOff);
+        voe_base->StartPlayout(channel);
+        voe_base->StartReceive(channel);
+        voe_base->StartSend(channel);
     }
     
-//    VoENetwork* network = VoENetwork::GetInterface(_voe);
-//    int testchannel = voe_base->CreateChannel();
-//    VoiceChannelTransport* testvoiceTransport = new VoiceChannelTransport(network, testchannel);
-//    testvoiceTransport->SetSendDestination(ip.c_str(), port);
-//    testvoiceTransport->SetLocalReceiver(20000);
+    VoEHardware* hardware = VoEHardware::GetInterface(_voe);
+    hardware->SetLoudspeakerStatus(true);
+    
+    VoEVolumeControl* volumnControl = VoEVolumeControl::GetInterface(_voe);
+    volumnControl->SetSpeakerVolume(255);
+    volumnControl->SetMicVolume(255);
+    volumnControl->SetChannelOutputVolumeScaling(channel, 10);
+    
+    onCreateChannel("222", data_out);
 }
 
 void MediaSample::leaveCurrentRoom()
 {
-    VoEBase* voe_base = VoEBase::GetInterface(_voe);
-    if (voe_base) {
-        voe_base->StopPlayout(_channel);
-        voe_base->StopReceive(_channel);
-        voe_base->StopSend(_channel);
-    }
+//    VoEBase* voe_base = VoEBase::GetInterface(_voe);
+//    if (voe_base) {
+//        voe_base->StopPlayout(_channel);
+//        voe_base->StopReceive(_channel);
+//        voe_base->StopSend(_channel);
+//    }
 }
 
 void MediaSample::setMuteMic(bool isMicMute)
 {
-    if (!_voe) {
-        return;
+//    if (!_voe) {
+//        return;
+//    }
+//    
+//    VoEBase* voe_base = VoEBase::GetInterface(_voe);
+//    if (isMicMute) {
+//        if (voe_base) {
+//            voe_base->StopSend(_channel);
+//        }
+//    }
+//    else {
+//        if (voe_base) {
+//            voe_base->StartSend(_channel);
+//        }
+//    }
+}
+
+int MediaSample::onCreateChannel(const char *cname, MediaSample::DataDirection direction)
+{
+    VoEBase* voe_base = VoEBase::GetInterface(_voe);
+    if (voe_base) {
+        int channel = voe_base->CreateChannel();
+        
+        VoENetwork* network = VoENetwork::GetInterface(_voe);
+        VoiceChannelTransport* voiceTransport = new VoiceChannelTransport(network, channel);
+        
+        voiceTransport->SetSendDestination(_voiceServerIp.c_str(), _voiceServerPort);
+//        voiceTransport->SetLocalReceiver(20000);
+        
+        VoERTP_RTCP* rtcp = VoERTP_RTCP::GetInterface(_voe);
+        rtcp->SetRTCP_CNAME(channel, cname);
+        
+        voiceTransport->sendActivateTransport(_voiceServerPort);
+        
+        _channelMap[channel] = ChannelInfo(channel, voiceTransport, direction, cname);
+        
+        return channel;
     }
     
-    VoEBase* voe_base = VoEBase::GetInterface(_voe);
-    if (isMicMute) {
-        if (voe_base) {
-            voe_base->StopSend(_channel);
-        }
-    }
-    else {
-        if (voe_base) {
-            voe_base->StartSend(_channel);
-        }
-    }
+    return -1;
 }
 
 void MediaSample::closeVoiceEngine()
@@ -119,8 +130,21 @@ void MediaSample::closeVoiceEngine()
     
 }
 
+//获取语音数据发送通道
+int MediaSample::getAudioSendOutChannel()
+{
+    int ret = 0;
+    for (auto it = _channelMap.begin(); it != _channelMap.end(); ++it) {
+        const ChannelInfo& info = it->second;
+        if (info.direction == data_out) {
+            ret = info.channelID;
+        }
+    }
+    return ret;
+}
+
 //设置发送编码格式为ilbc
-void MediaSample::setEncodeToIlbc()
+void MediaSample::setEncodeToIlbc(int channel)
 {
     VoECodec* codec = VoECodec::GetInterface(_voe);
     CodecInst inst;
@@ -128,9 +152,8 @@ void MediaSample::setEncodeToIlbc()
     int num = codec->NumOfCodecs();
     for (int i = 0; i < num; i++) {
         codec->GetCodec(i, inst);
-        printf("%s\n", inst.plname);
         if (inst.pltype == 102) {
-            codec->SetSendCodec(_channel, inst);
+            codec->SetSendCodec(channel, inst);
             break;
         }
     }
