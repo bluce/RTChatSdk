@@ -60,6 +60,12 @@ public:
     //创建房间
     void createRoom();
     
+    //加入房间
+    void joinRoom(uint64_t roomid);
+    
+    //请求排麦
+    void requestInsertMicQueue();
+    
     //收到网络线程消息
     void onRecvMsg(char* data, int len);
     
@@ -83,9 +89,6 @@ protected:
     
     //语音引擎连接语音房间
     void connectVoiceRoom(const std::string& ip, unsigned int port);
-    
-    //加入房间
-    void joinRoom(uint64_t roomid);
     
     //随机进入一个房间
     void randomJoinRoom();
