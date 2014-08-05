@@ -32,7 +32,8 @@ _netDataManager(NULL),
 _mediaSample(NULL),
 _currentRoomID(-1),
 _isMute(false),
-_sdkOpState(SdkSocketUnConnected)
+_sdkOpState(SdkSocketUnConnected),
+_sdkTempID(0)
 {
     _netDataManager = new NetDataManager;
     _mediaSample = new MediaSample;
@@ -147,6 +148,39 @@ void RTChatSDKMain::joinRoom(uint64_t roomid)
     SendProtoMsg(msg, Cmd::enRequestEnterRoom);
 }
 
+//离开房间
+void RTChatSDKMain::leaveRoom()
+{
+    stBaseCmd cmd;
+    cmd.cmdid = Cmd::enRequestLeaveRoom;
+    
+    if (_netDataManager) {
+        _netDataManager->sendClientMsg((const unsigned char*)&cmd, cmd.getSize());
+    }
+}
+
+//加入麦序
+void RTChatSDKMain::requestInsertMicQueue()
+{
+    stBaseCmd cmd;
+    cmd.cmdid = Cmd::enJoinMicQueue;
+    
+    if (_netDataManager) {
+        _netDataManager->sendClientMsg((const unsigned char*)&cmd, cmd.getSize());
+    }
+}
+
+//离开麦序
+void RTChatSDKMain::leaveMicQueue()
+{
+    stBaseCmd cmd;
+    cmd.cmdid = Cmd::enLeaveMicQueue;
+    
+    if (_netDataManager) {
+        _netDataManager->sendClientMsg((const unsigned char*)&cmd, cmd.getSize());
+    }
+}
+
 //随机进入一个房间
 void RTChatSDKMain::randomJoinRoom()
 {
@@ -176,6 +210,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
             
             _sdkOpState = SdkUserLogined;
+            _sdkTempID = protomsg.tempid();
             
             break;
         }
@@ -223,6 +258,32 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             refreshRoomInfoMap(protomsg);
             
             randomJoinRoom();
+            
+            break;
+        }
+        case Cmd::enNotifyMicQueue:
+        {
+            break;
+        }
+        case Cmd::enTakeMic:
+        {
+            Cmd::cmdTakeMic protomsg;
+            protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
+            
+            if (protomsg.tempid() == _sdkTempID) {
+                //轮到本人说话
+                if (_mediaSample) {
+                    _mediaSample->setMuteMic(false);
+                }
+            }
+            else {
+                //轮到他人说话
+                if (_mediaSample) {
+                    _mediaSample->setMuteMic(true);
+                }
+            }
+            
+            break;
         }
         default:
             break;
@@ -233,7 +294,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
 void RTChatSDKMain::connectVoiceRoom(const std::string& ip, unsigned int port)
 {
     if (_mediaSample) {
-        _mediaSample->connectRoom(ip, port);
+        _mediaSample->connectRoom(ip, port, _sdkTempID);
 //        _mediaSample->connectRoom("192.168.82.191", 16001);
     }
 }

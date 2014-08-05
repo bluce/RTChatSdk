@@ -249,6 +249,7 @@
 		43998DE2198660B1003C5793 /* public.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = public.pb.cc; sourceTree = "<group>"; };
 		43998DE3198660B1003C5793 /* public.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = public.pb.h; sourceTree = "<group>"; };
 		43998DE619866803003C5793 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		43AD8521199101E4006EAB38 /* SdkPublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SdkPublic.h; sourceTree = "<group>"; };
 		43AE0040197913930062C9B4 /* assertions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = assertions.h; sourceTree = "<group>"; };
 		43AE0041197913930062C9B4 /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = autolink.h; sourceTree = "<group>"; };
 		43AE0042197913930062C9B4 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
@@ -492,6 +493,7 @@
 				43998BAE198636DA003C5793 /* WebSocket.h */,
 				43247A521987339300AF14C7 /* MediaSample.cpp */,
 				43247A531987339300AF14C7 /* MediaSample.h */,
+				43AD8521199101E4006EAB38 /* SdkPublic.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";

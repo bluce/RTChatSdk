@@ -55,7 +55,7 @@ public:
     
     bool init();
     
-    void connectRoom(const std::string& ip, unsigned int port);
+    void connectRoom(const std::string& ip, unsigned int port, uint64_t sdkID);
     
     void leaveCurrentRoom();
     
@@ -64,7 +64,7 @@ public:
     void closeVoiceEngine();
     
     //创建数据通道
-    int onCreateChannel(const char* cname, DataDirection direction);
+    int onCreateChannel(uint64_t id, DataDirection direction);
     
 protected:
     //设置发送编码格式为ilbc

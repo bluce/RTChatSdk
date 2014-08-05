@@ -25,6 +25,9 @@ public:
     //加入房间
     void joinRoom(uint64_t roomid);
     
+    //请求排麦
+    void requestInsertMicQueue();
+    
     //获取当前的输入mic静音状态
     bool getMuteSelf();
     

@@ -7,6 +7,7 @@
 //
 
 #include "MediaSample.h"
+#include "SdkPublic.h"
 
 using namespace webrtc;
 
@@ -44,12 +45,12 @@ void MediaSample::CallbackOnError(int channel, int errCode)
     printf("channel=%d, errCode=%d", channel, errCode);
 }
 
-void MediaSample::connectRoom(const std::string &ip, unsigned int port)
+void MediaSample::connectRoom(const std::string &ip, unsigned int port, uint64_t sdkID)
 {
     _voiceServerPort = port;
     _voiceServerIp = ip;
     
-    int channel = onCreateChannel("111", data_in);
+    int channel = onCreateChannel(sdkID, data_in);
     
     setEncodeToIlbc(channel);
     
@@ -67,8 +68,6 @@ void MediaSample::connectRoom(const std::string &ip, unsigned int port)
     volumnControl->SetSpeakerVolume(255);
     volumnControl->SetMicVolume(255);
     volumnControl->SetChannelOutputVolumeScaling(channel, 10);
-    
-    onCreateChannel("222", data_out);
 }
 
 void MediaSample::leaveCurrentRoom()
@@ -83,25 +82,35 @@ void MediaSample::leaveCurrentRoom()
 
 void MediaSample::setMuteMic(bool isMicMute)
 {
-//    if (!_voe) {
-//        return;
-//    }
-//    
-//    VoEBase* voe_base = VoEBase::GetInterface(_voe);
-//    if (isMicMute) {
-//        if (voe_base) {
-//            voe_base->StopSend(_channel);
-//        }
-//    }
-//    else {
-//        if (voe_base) {
-//            voe_base->StartSend(_channel);
-//        }
-//    }
+    int channel = getAudioSendOutChannel();
+    
+    if (!_voe) {
+        return;
+    }
+    
+    VoEBase* voe_base = VoEBase::GetInterface(_voe);
+    if (isMicMute) {
+        if (voe_base) {
+            voe_base->StopSend(channel);
+        }
+    }
+    else {
+        if (voe_base) {
+            voe_base->StartSend(channel);
+        }
+    }
 }
 
-int MediaSample::onCreateChannel(const char *cname, MediaSample::DataDirection direction)
+int MediaSample::onCreateChannel(uint64_t id, MediaSample::DataDirection direction)
 {
+    std::string cname;
+    if (direction == data_in) {
+        cname = avar("%llu", id);
+    }
+    else {
+        cname = avar("%llu", id);
+    }
+    
     VoEBase* voe_base = VoEBase::GetInterface(_voe);
     if (voe_base) {
         int channel = voe_base->CreateChannel();
@@ -113,11 +122,11 @@ int MediaSample::onCreateChannel(const char *cname, MediaSample::DataDirection d
 //        voiceTransport->SetLocalReceiver(20000);
         
         VoERTP_RTCP* rtcp = VoERTP_RTCP::GetInterface(_voe);
-        rtcp->SetRTCP_CNAME(channel, cname);
+        rtcp->SetRTCP_CNAME(channel, cname.c_str());
         
         voiceTransport->sendActivateTransport(_voiceServerPort);
         
-        _channelMap[channel] = ChannelInfo(channel, voiceTransport, direction, cname);
+        _channelMap[channel] = ChannelInfo(channel, voiceTransport, direction, cname.c_str());
         
         return channel;
     }
