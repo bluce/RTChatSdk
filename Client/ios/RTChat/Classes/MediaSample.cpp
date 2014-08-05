@@ -83,21 +83,23 @@ void MediaSample::leaveCurrentRoom()
 
 void MediaSample::setMuteMic(bool isMicMute)
 {
-//    if (!_voe) {
-//        return;
-//    }
-//    
-//    VoEBase* voe_base = VoEBase::GetInterface(_voe);
-//    if (isMicMute) {
-//        if (voe_base) {
-//            voe_base->StopSend(_channel);
-//        }
-//    }
-//    else {
-//        if (voe_base) {
-//            voe_base->StartSend(_channel);
-//        }
-//    }
+    int channel = getAudioSendOutChannel();
+    
+    if (!_voe) {
+        return;
+    }
+    
+    VoEBase* voe_base = VoEBase::GetInterface(_voe);
+    if (isMicMute) {
+        if (voe_base) {
+            voe_base->StopSend(channel);
+        }
+    }
+    else {
+        if (voe_base) {
+            voe_base->StartSend(channel);
+        }
+    }
 }
 
 int MediaSample::onCreateChannel(const char *cname, MediaSample::DataDirection direction)

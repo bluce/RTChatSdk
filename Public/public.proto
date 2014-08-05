@@ -24,16 +24,16 @@ enum enCmdId
 	/// 返回登录结果 
 	enNotifyLoginResult = 4;
 
-	/// 创建频道
+	/// 创建房间
 	enRequestCreateRoom = 5;
 
-	/// 创建频道返回
+	/// 创建房间返回
 	enNotifyCreateResult = 6;
 
-	/// 加入频道
+	/// 加入房间
 	enRequestEnterRoom = 7;
 
-	/// 加入频道返回
+	/// 加入房间返回
 	enNotifyEnterResult = 8;
 
 	/// 申请房间列表
@@ -41,14 +41,42 @@ enum enCmdId
 
 	/// 返回房间列表
 	enNotifyRoomList = 10;
+
+	/// 增加收听通道
+	enAddVoiceUser = 11;
+
+	/// 加入麦序
+	enJoinMicQueue = 12;
+
+	/// 离开麦序
+	enLeaveMicQueue = 13;
+
+	/// 返回麦序
+	enNotifyMicQueue = 14;
+
+	/// 到某人聊天了
+	enTakeMic = 15;
+
+	/// 离开房间
+	enRequestLeaveRoom = 16;
 }
 
 
-/// 房间信息(struct)
+/// 房间信息
 message stRoomInfo
 {
-	required int64 roomid = 1;
-	required string ip = 2;
-	required int32 port = 3;
+	required uint64 roomid = 1;
 }
 
+/// 数据用户信息
+message stVoiceUserInfo
+{
+	required uint32 id = 1;
+}
+
+
+/// 麦序信息
+message stMicInfo
+{
+	required uint64 id = 1;
+}

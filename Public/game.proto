@@ -27,7 +27,7 @@ message cmdNotifyLoginResult
 }
 
 
-/// 创建频道返回
+/// 创建房间返回
 message cmdNotifyCreateResult
 {
 	required bool isok = 1;
@@ -37,14 +37,14 @@ message cmdNotifyCreateResult
 }
 
 
-/// 加入频道
+/// 加入房间
 message cmdRequestEnterRoom
 {
 	required uint64 roomid = 1;
 }
 
 
-/// 加入频道返回
+/// 加入房间返回
 message cmdNotifyEnterResult
 {
 	required bool isok = 1;
@@ -57,4 +57,24 @@ message cmdNotifyEnterResult
 message cmdNotifyRoomList
 {
 	repeated stRoomInfo info = 1;
+}
+
+
+/// 增加收听通道
+message cmdAddVoiceUser
+{
+	repeated stVoiceUserInfo info = 1;
+}
+
+/// 返回麦序
+message cmdNotifyMicQueue
+{
+	repeated stMicInfo info = 1;
+}
+
+/// 谁拿到了当前的麦
+message cmdTakeMic
+{
+	required uint64 tempid = 1;
+	required uint32 mtime = 2;
 }

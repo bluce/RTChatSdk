@@ -63,8 +63,14 @@ public:
     //加入房间
     void joinRoom(uint64_t roomid);
     
-    //请求排麦
+    //离开房间
+    void leaveRoom();
+    
+    //加入麦序
     void requestInsertMicQueue();
+    
+    //离开麦序
+    void leaveMicQueue();
     
     //收到网络线程消息
     void onRecvMsg(char* data, int len);
@@ -106,6 +112,8 @@ private:
     
 private:
     std::string         _uniqueid;
+    
+    uint64_t            _sdkTempID;     //服务器下发的sdk唯一标识符
     
     uint64_t            _currentRoomID; //当前进入的房间ID
     
