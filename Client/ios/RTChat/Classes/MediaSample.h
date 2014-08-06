@@ -46,7 +46,7 @@ public:
         DataDirection direction;
         char          name[32];
     };
-    typedef std::map<int, ChannelInfo> ChannelMap;
+    typedef std::map<int, ChannelInfo*> ChannelMap;
     
 public:
     MediaSample();
@@ -72,6 +72,9 @@ protected:
     
     //获取语音数据发送通道
     int getAudioSendOutChannel();
+    
+    //清除通道数据
+    void clearChannelData();
     
     virtual void CallbackOnError(int channel, int errCode);
     

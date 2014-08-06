@@ -21,6 +21,8 @@ _voe(NULL)
 
 MediaSample::~MediaSample()
 {
+    clearChannelData();
+    
     VoiceEngine::Delete(_voe);
 }
 
@@ -105,10 +107,10 @@ int MediaSample::onCreateChannel(uint64_t id, MediaSample::DataDirection directi
 {
     std::string cname;
     if (direction == data_in) {
-        cname = avar("%llu", id);
+        cname = avar("r%llu", id);
     }
     else {
-        cname = avar("%llu", id);
+        cname = avar("s%llu", id);
     }
     
     VoEBase* voe_base = VoEBase::GetInterface(_voe);
@@ -126,7 +128,7 @@ int MediaSample::onCreateChannel(uint64_t id, MediaSample::DataDirection directi
         
         voiceTransport->sendActivateTransport(_voiceServerPort);
         
-        _channelMap[channel] = ChannelInfo(channel, voiceTransport, direction, cname.c_str());
+        _channelMap[channel] = new ChannelInfo(channel, voiceTransport, direction, cname.c_str());
         
         return channel;
     }
@@ -144,12 +146,24 @@ int MediaSample::getAudioSendOutChannel()
 {
     int ret = 0;
     for (auto it = _channelMap.begin(); it != _channelMap.end(); ++it) {
-        const ChannelInfo& info = it->second;
-        if (info.direction == data_out) {
-            ret = info.channelID;
+        const ChannelInfo* info = it->second;
+        if (info->direction == data_out) {
+            ret = info->channelID;
         }
     }
     return ret;
+}
+
+//清除通道数据
+void MediaSample::clearChannelData()
+{
+    for (auto it = _channelMap.begin(); it != _channelMap.end(); ++it) {
+        if (it->second) {
+            delete it->second;
+        }
+    }
+    
+    _channelMap.clear();
 }
 
 //设置发送编码格式为ilbc

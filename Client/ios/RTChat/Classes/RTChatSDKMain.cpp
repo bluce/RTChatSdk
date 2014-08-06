@@ -261,6 +261,18 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             
             break;
         }
+        case Cmd::enAddVoiceUser:
+        {
+            Cmd::cmdAddVoiceUser protomsg;
+            protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
+            for (int i = 0; i < protomsg.info_size(); i++) {
+                if (_mediaSample) {
+                    _mediaSample->onCreateChannel(protomsg.info(i).id(), MediaSample::data_in);
+                }
+            }
+            
+            break;
+        }
         case Cmd::enNotifyMicQueue:
         {
             break;
