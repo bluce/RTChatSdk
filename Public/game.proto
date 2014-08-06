@@ -27,6 +27,13 @@ message cmdNotifyLoginResult
 }
 
 
+/// 请求创建房间
+message cmdRequestCreateRoom
+{
+	required enRoomType type = 1;
+}
+
+
 /// 创建房间返回
 message cmdNotifyCreateResult
 {

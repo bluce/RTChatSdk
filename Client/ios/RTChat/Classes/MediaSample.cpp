@@ -53,15 +53,18 @@ void MediaSample::connectRoom(const std::string &ip, unsigned int port, uint64_t
     _voiceServerIp = ip;
     
     int channel = onCreateChannel(sdkID, data_out);
+    if (channel == -1) {
+        //创建通道失败，直接返回
+        return;
+    }
     
     setEncodeToIlbc(channel);
     
-    VoEBase* voe_base = VoEBase::GetInterface(_voe);
-    if (voe_base) {
-        voe_base->StartPlayout(channel);
-        voe_base->StartReceive(channel);
-//        voe_base->StartSend(channel);
-    }
+//    VoEBase* voe_base = VoEBase::GetInterface(_voe);
+//    if (voe_base) {
+//        voe_base->StartPlayout(channel);
+//        voe_base->StartReceive(channel);
+//    }
     
 //    VoEHardware* hardware = VoEHardware::GetInterface(_voe);
 //    hardware->SetLoudspeakerStatus(true);
@@ -121,7 +124,7 @@ int MediaSample::onCreateChannel(uint64_t id, MediaSample::DataDirection directi
         VoiceChannelTransport* voiceTransport = new VoiceChannelTransport(network, channel);
         
         voiceTransport->SetSendDestination(_voiceServerIp.c_str(), _voiceServerPort);
-        voiceTransport->SetLocalReceiver(20000);
+//        voiceTransport->SetLocalReceiver(20000);
         
         VoERTP_RTCP* rtcp = VoERTP_RTCP::GetInterface(_voe);
         rtcp->SetRTCP_CNAME(channel, cname.c_str());
@@ -129,6 +132,14 @@ int MediaSample::onCreateChannel(uint64_t id, MediaSample::DataDirection directi
         rtcp->InsertExtraRTPPacket(channel, 0, false, "activate", 8);
         
         _channelMap[channel] = new ChannelInfo(channel, voiceTransport, direction, cname.c_str());
+        
+        if (direction == data_in) {
+            voe_base->StartReceive(channel);
+            voe_base->StartPlayout(channel);
+        }
+        else {
+            voe_base->StartSend(channel);
+        }
         
         return channel;
     }

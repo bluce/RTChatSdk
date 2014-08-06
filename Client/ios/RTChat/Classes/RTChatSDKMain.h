@@ -26,6 +26,8 @@ enum SdkOpState {
     SdkUserCreatedRoom,
     SdkUserjoiningRoom,
     SdkUserJoinedRoom,
+    SdkUserWaitingToken,
+    SdkUserSpeaking,
 };
 
 typedef std::function<void (long long roomid)> pMsgCallFunc;
@@ -58,7 +60,7 @@ public:
     void requestRoomList();
     
     //创建房间
-    void createRoom();
+    void createRoom(Cmd::enRoomType roomType);
     
     //加入房间
     void joinRoom(uint64_t roomid);

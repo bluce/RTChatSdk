@@ -118,20 +118,18 @@ void RTChatSDKMain::requestRoomList()
     }
 }
 
-void RTChatSDKMain::createRoom()
+void RTChatSDKMain::createRoom(Cmd::enRoomType roomType)
 {
     if (_sdkOpState != SdkUserLogined) {
         return;
     }
     
-    stBaseCmd cmd;
-    cmd.cmdid = Cmd::enRequestCreateRoom;
+    Cmd::cmdRequestCreateRoom msg;
+    msg.set_type(roomType);
     
-    if (_netDataManager) {
-        _netDataManager->sendClientMsg((const unsigned char*)&cmd, cmd.getSize());
-        
-        _sdkOpState = SdkUserCreatingRoom;
-    }
+    _sdkOpState = SdkUserCreatingRoom;
+    
+    SendProtoMsg(msg, Cmd::enRequestCreateRoom);
 }
 
 void RTChatSDKMain::joinRoom(uint64_t roomid)
@@ -157,6 +155,8 @@ void RTChatSDKMain::leaveRoom()
     if (_netDataManager) {
         _netDataManager->sendClientMsg((const unsigned char*)&cmd, cmd.getSize());
     }
+    
+    _sdkOpState = SdkUserLogined;
 }
 
 //加入麦序
@@ -168,6 +168,8 @@ void RTChatSDKMain::requestInsertMicQueue()
     if (_netDataManager) {
         _netDataManager->sendClientMsg((const unsigned char*)&cmd, cmd.getSize());
     }
+    
+    _sdkOpState = SdkUserWaitingToken;
 }
 
 //离开麦序
@@ -179,6 +181,8 @@ void RTChatSDKMain::leaveMicQueue()
     if (_netDataManager) {
         _netDataManager->sendClientMsg((const unsigned char*)&cmd, cmd.getSize());
     }
+    
+    _sdkOpState = SdkUserJoinedRoom;
 }
 
 //随机进入一个房间
@@ -279,6 +283,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
         }
         case Cmd::enTakeMic:
         {
+            break;
             Cmd::cmdTakeMic protomsg;
             protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
             
@@ -286,6 +291,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
                 //轮到本人说话
                 if (_mediaSample) {
                     _mediaSample->setMuteMic(false);
+                    _sdkOpState = SdkUserSpeaking;
                 }
             }
             else {

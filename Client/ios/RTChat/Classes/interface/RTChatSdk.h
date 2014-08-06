@@ -9,6 +9,16 @@
 #ifndef RTChat_RTChatSdk_h
 #define RTChat_RTChatSdk_h
 
+namespace Cmd {
+    enum enRoomType
+    {
+        ROOM_TYPE_MIN = 0,
+        ROOM_TYPE_QUEUE = 1,
+        ROOM_TYPE_FREE = 2,
+        ROOM_TYPE_MAX = 3,
+    };
+}
+
 typedef std::function<void (long long roomid)> pMsgCallFunc;
 
 class RTChatSDKMain {
@@ -20,7 +30,7 @@ public:
     void registerMsgCallback(const pMsgCallFunc& func);
     
     //创建房间
-    void createRoom();
+    void createRoom(Cmd::enRoomType roomType);
     
     //加入房间
     void joinRoom(uint64_t roomid);

@@ -7,6 +7,14 @@ package Cmd;
 //	char data[0];
 //};
 
+enum enRoomType
+{
+	ROOM_TYPE_MIN = 0;
+	ROOM_TYPE_QUEUE = 1;
+	ROOM_TYPE_FREE = 2;
+	ROOM_TYPE_MAX = 3;
+}
+
 
 enum enCmdId
 {
@@ -71,7 +79,7 @@ message stRoomInfo
 /// 数据用户信息
 message stVoiceUserInfo
 {
-	required uint32 id = 1;
+	required uint64 id = 1;
 }
 
 
