@@ -52,7 +52,7 @@ void MediaSample::connectRoom(const std::string &ip, unsigned int port, uint64_t
     _voiceServerPort = port;
     _voiceServerIp = ip;
     
-    int channel = onCreateChannel(sdkID, data_in);
+    int channel = onCreateChannel(sdkID, data_out);
     
     setEncodeToIlbc(channel);
     
@@ -60,11 +60,11 @@ void MediaSample::connectRoom(const std::string &ip, unsigned int port, uint64_t
     if (voe_base) {
         voe_base->StartPlayout(channel);
         voe_base->StartReceive(channel);
-        voe_base->StartSend(channel);
+//        voe_base->StartSend(channel);
     }
     
-    VoEHardware* hardware = VoEHardware::GetInterface(_voe);
-    hardware->SetLoudspeakerStatus(true);
+//    VoEHardware* hardware = VoEHardware::GetInterface(_voe);
+//    hardware->SetLoudspeakerStatus(true);
     
     VoEVolumeControl* volumnControl = VoEVolumeControl::GetInterface(_voe);
     volumnControl->SetSpeakerVolume(255);
@@ -121,12 +121,12 @@ int MediaSample::onCreateChannel(uint64_t id, MediaSample::DataDirection directi
         VoiceChannelTransport* voiceTransport = new VoiceChannelTransport(network, channel);
         
         voiceTransport->SetSendDestination(_voiceServerIp.c_str(), _voiceServerPort);
-//        voiceTransport->SetLocalReceiver(20000);
+        voiceTransport->SetLocalReceiver(20000);
         
         VoERTP_RTCP* rtcp = VoERTP_RTCP::GetInterface(_voe);
         rtcp->SetRTCP_CNAME(channel, cname.c_str());
-        
-        voiceTransport->sendActivateTransport(_voiceServerPort);
+        rtcp->RegisterRTCPObserver(channel, *this);
+        rtcp->InsertExtraRTPPacket(channel, 0, false, "activate", 8);
         
         _channelMap[channel] = new ChannelInfo(channel, voiceTransport, direction, cname.c_str());
         
@@ -180,6 +180,13 @@ void MediaSample::setEncodeToIlbc(int channel)
             break;
         }
     }
+}
+
+void MediaSample::OnApplicationDataReceived(int channel, unsigned char subType,
+                                       unsigned int name, const unsigned char* data,
+                                       unsigned short dataLengthInBytes)
+{
+    int i =0 ;
 }
 
 

@@ -21,7 +21,7 @@
 using namespace webrtc;
 using namespace webrtc::test;
 
-class MediaSample : public webrtc::VoiceEngineObserver {
+class MediaSample : public webrtc::VoiceEngineObserver, public webrtc::VoERTCPObserver {
 public:
     enum DataDirection {
         data_in = 1,
@@ -76,7 +76,13 @@ protected:
     //清除通道数据
     void clearChannelData();
     
+    //VoiceEngineObserver回调
     virtual void CallbackOnError(int channel, int errCode);
+    
+    //VoERTCPObserver回调
+    virtual void OnApplicationDataReceived(int channel, unsigned char subType,
+                                           unsigned int name, const unsigned char* data,
+                                           unsigned short dataLengthInBytes);
     
 private:
     ChannelMap                      _channelMap;
