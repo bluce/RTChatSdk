@@ -231,7 +231,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
                 //这里需要加锁吗，待处理
                 _currentRoomID = protomsg.roomid();
                 
-                _func(_currentRoomID);
+//                _func(enNotifyCreateResult, _currentRoomID);
             }
             else {
                 _sdkOpState = SdkSocketConnected;
@@ -283,7 +283,6 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
         }
         case Cmd::enTakeMic:
         {
-            break;
             Cmd::cmdTakeMic protomsg;
             protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
             

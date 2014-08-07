@@ -108,6 +108,7 @@ void MediaSample::setMuteMic(bool isMicMute)
 
 int MediaSample::onCreateChannel(uint64_t id, MediaSample::DataDirection direction)
 {
+    static int recvport = 20000;
     std::string cname;
     if (direction == data_in) {
         cname = avar("r%llu", id);
@@ -124,7 +125,7 @@ int MediaSample::onCreateChannel(uint64_t id, MediaSample::DataDirection directi
         VoiceChannelTransport* voiceTransport = new VoiceChannelTransport(network, channel);
         
         voiceTransport->SetSendDestination(_voiceServerIp.c_str(), _voiceServerPort);
-//        voiceTransport->SetLocalReceiver(20000);
+        voiceTransport->SetLocalReceiver(recvport++);
         
         VoERTP_RTCP* rtcp = VoERTP_RTCP::GetInterface(_voe);
         rtcp->SetRTCP_CNAME(channel, cname.c_str());

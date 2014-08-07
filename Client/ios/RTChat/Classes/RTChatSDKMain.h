@@ -13,24 +13,12 @@
 #include <map>
 #include "proto/public.pb.h"
 #include "proto/game.pb.h"
+#include "RTChatCommonTypes.h"
 
 class NetDataManager;
 class MediaSample;
 
-enum SdkOpState {
-    SdkSocketUnConnected = 0,
-    SdkSocketConnected,
-    SdkUserLogining,
-    SdkUserLogined,
-    SdkUserCreatingRoom,
-    SdkUserCreatedRoom,
-    SdkUserjoiningRoom,
-    SdkUserJoinedRoom,
-    SdkUserWaitingToken,
-    SdkUserSpeaking,
-};
-
-typedef std::function<void (long long roomid)> pMsgCallFunc;
+typedef std::function<void (SdkResponseCmd cmdType, const unsigned char* dataPtr, uint32_t dataSize)> pMsgCallFunc;
 
 class RTChatSDKMain {
 public:
@@ -42,12 +30,15 @@ public:
     
     static RTChatSDKMain& sharedInstance();
     
+    /*******************需要暴露给用户的接口开始**********************/
+    
     //sdk初始化，只能调用一次
     void initSDK(const std::string& uniqueid);
     
     //当应用最小化时需要调用这个，清理数据
     void freezeSDK();
     
+    //注册消息回调
     void registerMsgCallback(const pMsgCallFunc& func);
     
     //获取SDK当前操作状态，用户发起操作前可以检测一下状态判断可否继续
@@ -73,6 +64,8 @@ public:
     
     //离开麦序
     void leaveMicQueue();
+    
+    /*******************需要暴露给用户的接口结束**********************/
     
     //收到网络线程消息
     void onRecvMsg(char* data, int len);
