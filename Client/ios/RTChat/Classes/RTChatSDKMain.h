@@ -83,6 +83,10 @@ public:
         pthread_mutex_unlock(&_mutexLock);
     };
     
+    uint64_t get_sdkTempID() {
+        return _sdkTempID;
+    };
+    
 protected:
     void startTalk();
     

@@ -67,8 +67,11 @@ public:
     int onCreateChannel(uint64_t id, DataDirection direction);
     
 protected:
-    //设置发送编码格式为ilbc
-    void setEncodeToIlbc(int channel);
+    //设置发送编码格式为codeType
+    void setEncodeTypeToChannel(int channel, int codeType);
+    
+    //把发送通道编码设置为codeType
+    void setVoiceOutChannelCode(int codeType);
     
     //获取语音数据发送通道
     int getAudioSendOutChannel();
@@ -89,6 +92,7 @@ private:
     webrtc::VoiceEngine*            _voe;
     std::string                     _voiceServerIp;
     unsigned int                    _voiceServerPort;
+    unsigned int                    _recvport;
 };
 
 #endif /* defined(__RtcSameple__MediaSample__) */

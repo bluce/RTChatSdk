@@ -1,5 +1,8 @@
 package Cmd;
 
+// websocket传输的基础命令
+// 服务器和客户端之间所有的命令都是此格式传输
+//
 //struct stBaseCmd
 //{
 //	uint16 cmdid;
@@ -7,11 +10,13 @@ package Cmd;
 //	char data[0];
 //};
 
+
+/// 房间类型
 enum enRoomType
 {
-	ROOM_TYPE_MIN = 0;
-	ROOM_TYPE_QUEUE = 1;
-	ROOM_TYPE_FREE = 2;
+	ROOM_TYPE_MIN = 0; 
+	ROOM_TYPE_QUEUE = 1; /// 单人队列排麦模式(只能一个人拿麦)
+	ROOM_TYPE_FREE = 2;  /// 自由模式(最多4个人)
 	ROOM_TYPE_MAX = 3;
 }
 
@@ -51,19 +56,19 @@ enum enCmdId
 	enNotifyRoomList = 10;
 
 	/// 增加收听通道
-	enAddVoiceUser = 11;
+	enNotifyAddVoiceUser = 11;
 
 	/// 加入麦序
-	enJoinMicQueue = 12;
+	enRequestJoinMicQueue = 12;
 
 	/// 离开麦序
-	enLeaveMicQueue = 13;
+	enRequestLeaveMicQueue = 13;
 
 	/// 返回麦序
 	enNotifyMicQueue = 14;
 
 	/// 到某人聊天了
-	enTakeMic = 15;
+	enNotifyTakeMic = 15;
 
 	/// 离开房间
 	enRequestLeaveRoom = 16;

@@ -5,25 +5,52 @@ package Cmd;
 import "public.proto";
 
 
+/// 请求逻辑服务器地址
+message cmdRequestLogicInfo
+{
+	required string appid = 1;
+	required string key = 2;
+}
+
+
 /// 返回需要连接的逻辑服务器信息
 message cmdNotifyLogicInfo
 {
-	required string ip = 1;
-	required uint32 port = 2;
+	enum enLogicResult
+	{
+		LOGIC_RESULT_APPID_NOEXITS = 1;
+		LOGIC_RESULT_KEY_ERROR = 2;
+		LOGIC_RESULT_SYS_ERROR = 3;
+		LOGIC_RESULT_OK = 4;
+	}
+
+	required enLogicResult result = 1;
+	
+	optional string token = 2;
+	optional string ip = 3;
+	optional uint32 port = 4;
 }
 
 
 /// 请求登录
 message cmdRequestLogin
 {
-	required string uniqueid = 1;
+	required string token = 1;
+	required string uniqueid = 2;
 }
 
 
 /// 返回登录结果 
 message cmdNotifyLoginResult
 {
-	required uint64 tempid = 1;
+	enum enLoginResult
+	{
+		LOGIN_RESULT_TOKEN_ERROR = 1;
+		LOGIN_RESULT_OK = 2;
+	}
+	
+	required enLoginResult result = 1;
+	optional uint64 tempid = 2;
 }
 
 
@@ -39,8 +66,9 @@ message cmdNotifyCreateResult
 {
 	required bool isok = 1;
 	optional uint64 roomid = 2;
-	optional string ip = 3;
-	optional uint32 port = 4;
+	optional enRoomType type = 3;
+	optional string ip = 4;
+	optional uint32 port = 5;
 }
 
 
@@ -68,7 +96,7 @@ message cmdNotifyRoomList
 
 
 /// 增加收听通道
-message cmdAddVoiceUser
+message cmdNotifyAddVoiceUser
 {
 	repeated stVoiceUserInfo info = 1;
 }
@@ -80,7 +108,7 @@ message cmdNotifyMicQueue
 }
 
 /// 谁拿到了当前的麦
-message cmdTakeMic
+message cmdNotifyTakeMic
 {
 	required uint64 tempid = 1;
 	required uint32 mtime = 2;

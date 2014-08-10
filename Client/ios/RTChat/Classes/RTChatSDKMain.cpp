@@ -103,6 +103,7 @@ void RTChatSDKMain::requestLogin()
     
     Cmd::cmdRequestLogin msg;
     msg.set_uniqueid(_uniqueid);
+    msg.set_token("yuew89341huidy89iuh1");
     
     SendProtoMsg(msg, Cmd::enRequestLogin);
 }
@@ -163,7 +164,7 @@ void RTChatSDKMain::leaveRoom()
 void RTChatSDKMain::requestInsertMicQueue()
 {
     stBaseCmd cmd;
-    cmd.cmdid = Cmd::enJoinMicQueue;
+    cmd.cmdid = Cmd::enRequestJoinMicQueue;
     
     if (_netDataManager) {
         _netDataManager->sendClientMsg((const unsigned char*)&cmd, cmd.getSize());
@@ -176,7 +177,7 @@ void RTChatSDKMain::requestInsertMicQueue()
 void RTChatSDKMain::leaveMicQueue()
 {
     stBaseCmd cmd;
-    cmd.cmdid = Cmd::enLeaveMicQueue;
+    cmd.cmdid = Cmd::enRequestLeaveMicQueue;
     
     if (_netDataManager) {
         _netDataManager->sendClientMsg((const unsigned char*)&cmd, cmd.getSize());
@@ -206,6 +207,8 @@ void RTChatSDKMain::stopTalk()
 void RTChatSDKMain::onRecvMsg(char *data, int len)
 {
     stBaseCmd* cmd = (stBaseCmd*)data;
+    
+    printf("cmdid=%u\n", cmd->cmdid);
     
     switch (cmd->cmdid) {
         case Cmd::enNotifyLoginResult:
@@ -265,9 +268,11 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             
             break;
         }
-        case Cmd::enAddVoiceUser:
+        case Cmd::enNotifyAddVoiceUser:
         {
-            Cmd::cmdAddVoiceUser protomsg;
+            printf("接收到增加通道指令\n");
+            
+            Cmd::cmdNotifyAddVoiceUser protomsg;
             protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
             for (int i = 0; i < protomsg.info_size(); i++) {
                 if (_mediaSample) {
@@ -281,9 +286,9 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
         {
             break;
         }
-        case Cmd::enTakeMic:
+        case Cmd::enNotifyTakeMic:
         {
-            Cmd::cmdTakeMic protomsg;
+            Cmd::cmdNotifyTakeMic protomsg;
             protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
             
             if (protomsg.tempid() == _sdkTempID) {
