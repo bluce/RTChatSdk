@@ -9,16 +9,6 @@
 /* Begin PBXBuildFile section */
 		430079591973A705003DB064 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 430079581973A705003DB064 /* CoreFoundation.framework */; };
 		43072E511988EFDC00820124 /* RTChatSdk.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 43247A731987412100AF14C7 /* RTChatSdk.h */; };
-		430F16E6196F8D5F0083B252 /* adler32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16C1196F8D5F0083B252 /* adler32.cpp */; };
-		430F16E8196F8D5F0083B252 /* CsvParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16C5196F8D5F0083B252 /* CsvParser.cpp */; };
-		430F16E9196F8D5F0083B252 /* DataStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16C7196F8D5F0083B252 /* DataStream.cpp */; };
-		430F16EC196F8D5F0083B252 /* md5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16CE196F8D5F0083B252 /* md5.cpp */; };
-		430F16EE196F8D5F0083B252 /* public.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16D3196F8D5F0083B252 /* public.cpp */; };
-		430F16EF196F8D5F0083B252 /* Rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16D5196F8D5F0083B252 /* Rect.cpp */; };
-		430F16F0196F8D5F0083B252 /* StringUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16D8196F8D5F0083B252 /* StringUtil.cpp */; };
-		430F16F1196F8D5F0083B252 /* SystemUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16DA196F8D5F0083B252 /* SystemUtil.cpp */; };
-		430F16F2196F8D5F0083B252 /* XmlParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16DE196F8D5F0083B252 /* XmlParser.cpp */; };
-		430F16F3196F8D5F0083B252 /* zThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16E4196F8D5F0083B252 /* zThread.cpp */; };
 		430F16FC196F8DC10083B252 /* tinystr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F6196F8DC10083B252 /* tinystr.cpp */; };
 		430F16FD196F8DC10083B252 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F7196F8DC10083B252 /* tinyxml.cpp */; };
 		430F16FE196F8DC10083B252 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F8196F8DC10083B252 /* tinyxmlerror.cpp */; };
@@ -92,35 +82,6 @@
 
 /* Begin PBXFileReference section */
 		430079581973A705003DB064 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		430F16C1196F8D5F0083B252 /* adler32.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adler32.cpp; sourceTree = "<group>"; };
-		430F16C2196F8D5F0083B252 /* adler32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adler32.h; sourceTree = "<group>"; };
-		430F16C5196F8D5F0083B252 /* CsvParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CsvParser.cpp; sourceTree = "<group>"; };
-		430F16C6196F8D5F0083B252 /* CsvParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CsvParser.h; sourceTree = "<group>"; };
-		430F16C7196F8D5F0083B252 /* DataStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataStream.cpp; sourceTree = "<group>"; };
-		430F16C8196F8D5F0083B252 /* DataStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStream.h; sourceTree = "<group>"; };
-		430F16C9196F8D5F0083B252 /* Engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
-		430F16CE196F8D5F0083B252 /* md5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = md5.cpp; sourceTree = "<group>"; };
-		430F16CF196F8D5F0083B252 /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
-		430F16D2196F8D5F0083B252 /* NetWorks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorks.h; sourceTree = "<group>"; };
-		430F16D3196F8D5F0083B252 /* public.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = public.cpp; sourceTree = "<group>"; };
-		430F16D4196F8D5F0083B252 /* public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = public.h; sourceTree = "<group>"; };
-		430F16D5196F8D5F0083B252 /* Rect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rect.cpp; sourceTree = "<group>"; };
-		430F16D6196F8D5F0083B252 /* Rect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rect.h; sourceTree = "<group>"; };
-		430F16D7196F8D5F0083B252 /* RegExp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegExp.h; sourceTree = "<group>"; };
-		430F16D8196F8D5F0083B252 /* StringUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringUtil.cpp; sourceTree = "<group>"; };
-		430F16D9196F8D5F0083B252 /* StringUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtil.h; sourceTree = "<group>"; };
-		430F16DA196F8D5F0083B252 /* SystemUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SystemUtil.cpp; sourceTree = "<group>"; };
-		430F16DB196F8D5F0083B252 /* SystemUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUtil.h; sourceTree = "<group>"; };
-		430F16DC196F8D5F0083B252 /* template.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = template.h; sourceTree = "<group>"; };
-		430F16DD196F8D5F0083B252 /* Vector2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector2.h; sourceTree = "<group>"; };
-		430F16DE196F8D5F0083B252 /* XmlParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XmlParser.cpp; sourceTree = "<group>"; };
-		430F16DF196F8D5F0083B252 /* XmlParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlParser.h; sourceTree = "<group>"; };
-		430F16E0196F8D5F0083B252 /* zCond.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zCond.h; sourceTree = "<group>"; };
-		430F16E1196F8D5F0083B252 /* zMutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zMutex.h; sourceTree = "<group>"; };
-		430F16E2196F8D5F0083B252 /* zNoncopyable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zNoncopyable.h; sourceTree = "<group>"; };
-		430F16E3196F8D5F0083B252 /* zRWLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zRWLock.h; sourceTree = "<group>"; };
-		430F16E4196F8D5F0083B252 /* zThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = zThread.cpp; sourceTree = "<group>"; };
-		430F16E5196F8D5F0083B252 /* zThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zThread.h; sourceTree = "<group>"; };
 		430F16F6196F8DC10083B252 /* tinystr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinystr.cpp; sourceTree = "<group>"; };
 		430F16F7196F8DC10083B252 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		430F16F8196F8DC10083B252 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
@@ -288,42 +249,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		430F16C0196F8D5F0083B252 /* Engine */ = {
-			isa = PBXGroup;
-			children = (
-				430F16C1196F8D5F0083B252 /* adler32.cpp */,
-				430F16C2196F8D5F0083B252 /* adler32.h */,
-				430F16C5196F8D5F0083B252 /* CsvParser.cpp */,
-				430F16C6196F8D5F0083B252 /* CsvParser.h */,
-				430F16C7196F8D5F0083B252 /* DataStream.cpp */,
-				430F16C8196F8D5F0083B252 /* DataStream.h */,
-				430F16C9196F8D5F0083B252 /* Engine.h */,
-				430F16CE196F8D5F0083B252 /* md5.cpp */,
-				430F16CF196F8D5F0083B252 /* md5.h */,
-				430F16D2196F8D5F0083B252 /* NetWorks.h */,
-				430F16D3196F8D5F0083B252 /* public.cpp */,
-				430F16D4196F8D5F0083B252 /* public.h */,
-				430F16D5196F8D5F0083B252 /* Rect.cpp */,
-				430F16D6196F8D5F0083B252 /* Rect.h */,
-				430F16D7196F8D5F0083B252 /* RegExp.h */,
-				430F16D8196F8D5F0083B252 /* StringUtil.cpp */,
-				430F16D9196F8D5F0083B252 /* StringUtil.h */,
-				430F16DA196F8D5F0083B252 /* SystemUtil.cpp */,
-				430F16DB196F8D5F0083B252 /* SystemUtil.h */,
-				430F16DC196F8D5F0083B252 /* template.h */,
-				430F16DD196F8D5F0083B252 /* Vector2.h */,
-				430F16DE196F8D5F0083B252 /* XmlParser.cpp */,
-				430F16DF196F8D5F0083B252 /* XmlParser.h */,
-				430F16E0196F8D5F0083B252 /* zCond.h */,
-				430F16E1196F8D5F0083B252 /* zMutex.h */,
-				430F16E2196F8D5F0083B252 /* zNoncopyable.h */,
-				430F16E3196F8D5F0083B252 /* zRWLock.h */,
-				430F16E4196F8D5F0083B252 /* zThread.cpp */,
-				430F16E5196F8D5F0083B252 /* zThread.h */,
-			);
-			path = Engine;
-			sourceTree = "<group>";
-		};
 		430F16F4196F8DC10083B252 /* tinyXml */ = {
 			isa = PBXGroup;
 			children = (
@@ -487,7 +412,6 @@
 				43998BB0198645EC003C5793 /* proto */,
 				43AEFB761979013F0062C9B4 /* third_party */,
 				430F16F4196F8DC10083B252 /* tinyXml */,
-				430F16C0196F8D5F0083B252 /* Engine */,
 				43998D72198656D3003C5793 /* netdatamanager.cpp */,
 				43998D73198656D3003C5793 /* netdatamanager.h */,
 				43247A74198741BC00AF14C7 /* RTChatSDKMain.cpp */,
@@ -763,13 +687,10 @@
 				43247A541987339300AF14C7 /* MediaSample.cpp in Sources */,
 				43998DC819865C28003C5793 /* extension_set.cc in Sources */,
 				43AE0052197913930062C9B4 /* json_reader.cpp in Sources */,
-				430F16F2196F8D5F0083B252 /* XmlParser.cpp in Sources */,
-				430F16E8196F8D5F0083B252 /* CsvParser.cpp in Sources */,
 				43998DD419865C28003C5793 /* message_lite.cc in Sources */,
 				43998DC919865C28003C5793 /* extension_set_heavy.cc in Sources */,
 				43998DD219865C28003C5793 /* zero_copy_stream_impl_lite.cc in Sources */,
 				430F16FF196F8DC10083B252 /* tinyxmlparser.cpp in Sources */,
-				430F16E6196F8D5F0083B252 /* adler32.cpp in Sources */,
 				43998DD619865C28003C5793 /* repeated_field.cc in Sources */,
 				435E03E7196E8333000C3012 /* CAXException.cpp in Sources */,
 				43998DDC19865C28003C5793 /* substitute.cc in Sources */,
@@ -779,7 +700,6 @@
 				433E66E71987AAD10002AAC3 /* udp_socket_wrapper.cc in Sources */,
 				433E66E11987AAD10002AAC3 /* udp_socket_manager_posix.cc in Sources */,
 				43998DDD19865C28003C5793 /* text_format.cc in Sources */,
-				430F16EF196F8D5F0083B252 /* Rect.cpp in Sources */,
 				43998DDF19865C28003C5793 /* wire_format.cc in Sources */,
 				43998DCF19865C28003C5793 /* tokenizer.cc in Sources */,
 				43998DCA19865C28003C5793 /* generated_message_reflection.cc in Sources */,
@@ -789,7 +709,6 @@
 				43AE0053197913930062C9B4 /* json_value.cpp in Sources */,
 				43AE0054197913930062C9B4 /* json_writer.cpp in Sources */,
 				43998DE4198660B1003C5793 /* public.pb.cc in Sources */,
-				430F16F0196F8D5F0083B252 /* StringUtil.cpp in Sources */,
 				43998DD819865C28003C5793 /* common.cc in Sources */,
 				43998DCD19865C28003C5793 /* gzip_stream.cc in Sources */,
 				435E03E5196E8333000C3012 /* CADebugMacros.cpp in Sources */,
@@ -798,7 +717,6 @@
 				430F16FD196F8DC10083B252 /* tinyxml.cpp in Sources */,
 				430F16FC196F8DC10083B252 /* tinystr.cpp in Sources */,
 				433E66E31987AAD10002AAC3 /* udp_socket_manager_wrapper.cc in Sources */,
-				430F16F3196F8D5F0083B252 /* zThread.cpp in Sources */,
 				43998D71198656B5003C5793 /* game.pb.cc in Sources */,
 				433E66E51987AAD10002AAC3 /* udp_socket_posix.cc in Sources */,
 				43998DC619865C28003C5793 /* descriptor_database.cc in Sources */,
@@ -806,18 +724,14 @@
 				43998DC519865C28003C5793 /* descriptor.pb.cc in Sources */,
 				43998DDE19865C28003C5793 /* unknown_field_set.cc in Sources */,
 				435E03E6196E8333000C3012 /* CAStreamBasicDescription.cpp in Sources */,
-				430F16E9196F8D5F0083B252 /* DataStream.cpp in Sources */,
 				433E66DF1987AAD10002AAC3 /* channel_transport.cc in Sources */,
 				43998DD519865C28003C5793 /* reflection_ops.cc in Sources */,
 				43998DD319865C28003C5793 /* message.cc in Sources */,
 				43247A7819876FC700AF14C7 /* RTChatSDKMain.cpp in Sources */,
 				43998BAF198636DA003C5793 /* WebSocket.cpp in Sources */,
 				43998DD019865C28003C5793 /* zero_copy_stream.cc in Sources */,
-				430F16F1196F8D5F0083B252 /* SystemUtil.cpp in Sources */,
 				433E66EA1987AAD10002AAC3 /* udp_transport_impl.cc in Sources */,
 				43998DD719865C28003C5793 /* service.cc in Sources */,
-				430F16EE196F8D5F0083B252 /* public.cpp in Sources */,
-				430F16EC196F8D5F0083B252 /* md5.cpp in Sources */,
 				43998DDB19865C28003C5793 /* strutil.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
