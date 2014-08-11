@@ -19,7 +19,7 @@ namespace Cmd {
         ROOM_TYPE_FREE = 2,
         ROOM_TYPE_MAX = 3,
     };
-}
+};
 
 typedef std::function<void (SdkResponseCmd cmdType, const unsigned char* dataPtr, uint32_t dataSize)> pMsgCallFunc;
 

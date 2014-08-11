@@ -79,6 +79,7 @@ enum enCmdId
 message stRoomInfo
 {
 	required uint64 roomid = 1;
+	required enRoomType roomtype = 2;
 }
 
 /// 数据用户信息

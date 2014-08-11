@@ -9,9 +9,9 @@
 #ifndef RTChat_command_h
 #define RTChat_command_h
 
-#pragma pack(push, 1)
-
 #include "../SdkPublic.h"
+
+#pragma pack(push, 1)
 
 struct stBaseCmd
 {

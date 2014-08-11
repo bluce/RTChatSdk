@@ -10,6 +10,7 @@
 #include "netdatamanager.h"
 #include "NetProcess/command.h"
 #include "MediaSample.h"
+#include "SdkPublic.h"
 
 static  RTChatSDKMain* s_RTChatSDKMain = NULL;
 
@@ -61,7 +62,7 @@ void RTChatSDKMain::initSDK(const std::string &uniqueid)
     _uniqueid = uniqueid;
     
     if (_netDataManager) {
-        _netDataManager->init("ws://180.168.126.249:16001");
+        _netDataManager->init("ws://180.168.126.253:16001");
 //        _netDataManager->init("ws://180.168.126.253:16001");
     }
     
@@ -163,6 +164,9 @@ void RTChatSDKMain::leaveRoom()
 //加入麦序
 void RTChatSDKMain::requestInsertMicQueue()
 {
+    if (_sdkOpState != SdkUserJoinedRoom) {
+        return;
+    }
     stBaseCmd cmd;
     cmd.cmdid = Cmd::enRequestJoinMicQueue;
     
@@ -208,7 +212,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
 {
     stBaseCmd* cmd = (stBaseCmd*)data;
     
-    printf("cmdid=%u\n", cmd->cmdid);
+    sdklog("cmdid=%u", cmd->cmdid);
     
     switch (cmd->cmdid) {
         case Cmd::enNotifyLoginResult:
@@ -234,7 +238,12 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
                 //这里需要加锁吗，待处理
                 _currentRoomID = protomsg.roomid();
                 
-//                _func(enNotifyCreateResult, _currentRoomID);
+                
+                //回调应用数据
+                StNotifyCreateResult data;
+                data.isok = true;
+                data.roomid = protomsg.roomid();
+                _func(enNotifyCreateResult, (const unsigned char*)&data, sizeof(StNotifyCreateResult));
             }
             else {
                 _sdkOpState = SdkSocketConnected;
@@ -246,13 +255,13 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             Cmd::cmdNotifyEnterResult protomsg;
             protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
             
-            if (protomsg.isok()) {
+            if (protomsg.result() == Cmd::cmdNotifyEnterResult::ENTER_RESULT_OK) {
                 connectVoiceRoom(protomsg.ip(), protomsg.port());
                 
                 _sdkOpState = SdkUserJoinedRoom;
             }
             else {
-                _sdkOpState = SdkSocketConnected;
+                _sdkOpState = SdkUserLogined;
             }
             
             break;
@@ -264,13 +273,23 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             
             refreshRoomInfoMap(protomsg);
             
-            randomJoinRoom();
+//            randomJoinRoom();
+            
+            BUFFER_CMD(StNotifyRoomList, roomList, 1024);
+            roomList->size = protomsg.info_size();
+            for (int i = 0; i < protomsg.info_size(); i++) {
+                StRoomInfo info;
+                info.roomid = protomsg.info(i).roomid();
+//                bcopy(&info, &roomList->roominfo[i], sizeof(StRoomInfo));
+                roomList->roominfo[i] = info;
+            }
+            _func(enNotifyRoomList, (const unsigned char*)roomList, roomList->getSize());
             
             break;
         }
         case Cmd::enNotifyAddVoiceUser:
         {
-            printf("接收到增加通道指令\n");
+            sdklog("接收到增加通道指令");
             
             Cmd::cmdNotifyAddVoiceUser protomsg;
             protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
@@ -317,7 +336,6 @@ void RTChatSDKMain::connectVoiceRoom(const std::string& ip, unsigned int port)
 {
     if (_mediaSample) {
         _mediaSample->connectRoom(ip, port, _sdkTempID);
-//        _mediaSample->connectRoom("192.168.82.191", 16001);
     }
 }
 

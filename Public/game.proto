@@ -82,9 +82,18 @@ message cmdRequestEnterRoom
 /// 加入房间返回
 message cmdNotifyEnterResult
 {
-	required bool isok = 1;
-	optional string ip = 2;
-	optional uint32 port = 3;
+	enum enEnterResult
+	{
+		ENTER_RESULT_NOEXITS = 1;
+		ENTER_RESULT_FULL = 2;
+		ENTER_RESULT_OK = 3;
+		ENTER_RESULT_ERROR = 4;
+	}
+	required enEnterResult result = 1;
+	optional uint64 roomid = 2;
+	optional enRoomType type = 3;
+	optional string ip = 4;
+	optional uint32 port = 5;
 }
 
 

@@ -74,6 +74,49 @@ enum SdkResponseCmd {
 	enRequestLeaveRoom = 16,
 };
 
+struct StNotifyLoginResult {
+    bool isok;
+};
+
+struct StNotifyCreateResult {
+    bool isok;
+    uint64_t roomid;
+};
+
+struct StNotifyEnterResult {
+    bool isok;
+};
+
+struct StRoomInfo {
+    uint64_t roomid;
+};
+
+struct StNotifyRoomList {
+    uint32_t size;
+    StRoomInfo roominfo[0];
+    uint32_t getSize() const {return sizeof(StNotifyRoomList)+ sizeof(StRoomInfo)*size;}
+};
+
+struct StMicInfo {
+    StMicInfo() {
+        roomid = 0;
+    }
+    uint64_t roomid;
+};
+
+struct StNotifyMicQueue {
+    StNotifyMicQueue() {
+        bzero(this, sizeof(*this));
+    }
+    uint32_t size;
+    StMicInfo micinfo[0];
+};
+
+struct StNotifyTakeMic {
+    uint64_t tempid;    //持有麦的用户SDKID;
+    uint32_t mtime; //麦序持续时间
+};
+
 /******************回调字符串JSON格式******************/
 
 // enNotifyLoginResult, 返回登录结果
@@ -82,7 +125,7 @@ enum SdkResponseCmd {
 // enNotifyCreateResult, 创建房间返回
 // Json: {"data":{res:"true",roomid:"111",ip:"192.168.1.1",port:"8080"}}
 
-// enNotifyEnterResult, 加入房间返回
+// enEnterResult, 加入房间返回
 // Json: {"data":{res:"true",ip:"192.168.1.1",port:"8080"}}
 
 // enNotifyRoomList, 返回房间列表

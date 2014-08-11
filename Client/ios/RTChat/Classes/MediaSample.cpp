@@ -47,7 +47,7 @@ bool MediaSample::init()
 
 void MediaSample::CallbackOnError(int channel, int errCode)
 {
-    printf("channel=%d, errCode=%d", channel, errCode);
+    sdklog("channel=%d, errCode=%d", channel, errCode);
 }
 
 void MediaSample::connectRoom(const std::string &ip, unsigned int port, uint64_t sdkID)
@@ -142,7 +142,7 @@ int MediaSample::onCreateChannel(uint64_t id, MediaSample::DataDirection directi
         VoiceChannelTransport* voiceTransport = new VoiceChannelTransport(network, channel);
         
         if (voiceTransport->SetSendDestination(_voiceServerIp.c_str(), _voiceServerPort) == -1) {
-            printf("SetSendDestination 错误\n");
+            sdklog("SetSendDestination 错误\n");
         }
         
         VoERTP_RTCP* rtcp = VoERTP_RTCP::GetInterface(_voe);
@@ -153,18 +153,18 @@ int MediaSample::onCreateChannel(uint64_t id, MediaSample::DataDirection directi
         _channelMap[channel] = new ChannelInfo(channel, voiceTransport, direction, cname.c_str());
         
         if (direction == data_in) {
-            printf("发送数据之前，channel=%d, cname=%s, recvport=%d\n", channel, cname.c_str(), _recvport);
+            sdklog("发送数据之前，channel=%d, cname=%s, recvport=%d\n", channel, cname.c_str(), _recvport);
             if (voiceTransport->SetLocalReceiver(_recvport) == -1) {
-                printf("SetLocalReceiver失败\n");
+                sdklog("SetLocalReceiver失败\n");
             }
             if (voe_base->StartReceive(channel)) {
-                printf("StartReceive失败\n");
+                sdklog("StartReceive失败\n");
             }
             if (voe_base->StartPlayout(channel) == -1) {
-                printf("StartPlayout失败\n");
+                sdklog("StartPlayout失败\n");
             }
             if (voe_base->StartSend(channel) == -1) {
-                printf("StartSend失败, channel=%d\n", channel);
+                sdklog("StartSend失败, channel=%d\n", channel);
             }
             _recvport += 10;
             
@@ -172,16 +172,16 @@ int MediaSample::onCreateChannel(uint64_t id, MediaSample::DataDirection directi
         }
         else {
             if (voiceTransport->SetLocalReceiver(_recvport) == -1) {
-                printf("SetLocalReceiver失败\n");
+                sdklog("SetLocalReceiver失败\n");
             }
             if (voe_base->StartReceive(channel)) {
-                printf("StartReceive失败\n");
+                sdklog("StartReceive失败\n");
             }
             if (voe_base->StartPlayout(channel) == -1) {
-                printf("StartPlayout失败\n");
+                sdklog("StartPlayout失败\n");
             }
             if (voe_base->StartSend(channel) == -1) {
-                printf("StartSend失败, channel=%d\n", channel);
+                sdklog("StartSend失败, channel=%d\n", channel);
             }
             _recvport += 10;
         }
@@ -230,11 +230,11 @@ void MediaSample::setEncodeTypeToChannel(int channel, int codeType)
     
     int num = codec->NumOfCodecs();
     for (int i = 0; i < num; i++) {
-        printf("%s=%d\n", inst.plname, inst.pltype);
+//        sdklog("%s=%d\n", inst.plname, inst.pltype);
         codec->GetCodec(i, inst);
         if (inst.pltype == codeType) {
             if (codec->SetSendCodec(channel, inst) == -1) {
-                printf("设置编码格式为%d失败\n", inst.pltype);
+                sdklog("设置编码格式为%d失败\n", inst.pltype);
             }
             break;
         }
@@ -254,7 +254,7 @@ void MediaSample::OnApplicationDataReceived(int channel, unsigned char subType,
                                        unsigned int name, const unsigned char* data,
                                        unsigned short dataLengthInBytes)
 {
-    printf("收到关闭通道%d rtcp指令\n", channel);
+    sdklog("收到关闭通道%d rtcp指令\n", channel);
     VoEBase* voe_base = VoEBase::GetInterface(_voe);
     if (voe_base) {
         voe_base->StopSend(channel);
