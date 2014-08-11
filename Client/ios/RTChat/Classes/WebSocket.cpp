@@ -29,11 +29,11 @@
 
 #include "WebSocket.h"
 #include "../PublicUtility/CADebugMacros.h"
-#include "Engine/Engine.h"
 #include <pthread.h>
 #include <queue>
 #include <signal.h>
 #include <errno.h>
+#include "SdkPublic.h"
 
 class WsMessage
 {

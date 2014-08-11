@@ -11,7 +11,7 @@
 
 #pragma pack(push, 1)
 
-#include "../Engine/Engine.h"
+#include "../SdkPublic.h"
 
 struct stBaseCmd
 {

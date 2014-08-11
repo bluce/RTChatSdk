@@ -19,4 +19,20 @@ const char *avar(const char *pszFmt,...)
 	return szBuffer;
 }
 
+#define SAFE_DELETE(p) if(p) {delete p; p = NULL;}
+
+#define SAFE_DELETEARRAY(p) if(p) {delete [] p; p = NULL;}
+
+typedef unsigned int DWORD;
+typedef unsigned short WORD;
+
+template <class T>
+inline void constructDynamic(T *ptr) {
+    new ((void*)ptr) T();
+}
+
+#define BUFFER_CMD(cmd, name, len) char buffer##name(len); \
+    cmd* name = (cmd*)buffer##name; \
+    constructDynamic(name);
+
 #endif
