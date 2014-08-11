@@ -31,7 +31,7 @@ inline void constructDynamic(T *ptr) {
     new ((void*)ptr) T();
 }
 
-#define BUFFER_CMD(cmd, name, len) char buffer##name(len); \
+#define BUFFER_CMD(cmd, name, len) char buffer##name[len]; \
     cmd* name = (cmd*)buffer##name; \
     constructDynamic(name);
 

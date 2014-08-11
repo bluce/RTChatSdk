@@ -18,8 +18,6 @@ _voe(NULL),
 _recvport(30000)
 {
     _voe = VoiceEngine::Create();
-    _voe->SetTraceFilter(0xffff);
-    _voe->SetTraceFile("/var/mobile/Applications/1F586216-480F-4348-8082-E331692D7C23/RTChatTestAPP.app/voelog");
     
     init();
 }
