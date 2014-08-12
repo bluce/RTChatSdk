@@ -23,6 +23,8 @@ std::string avar(const char *pszFmt,...)
 
 #define SAFE_DELETEARRAY(p) if(p) {delete [] p; p = NULL;}
 
+#define MAX_BUFFER_SIZE 1024
+
 typedef unsigned int DWORD;
 typedef unsigned short WORD;
 
@@ -37,7 +39,7 @@ inline void constructDynamic(T *ptr) {
 
 void sdklog(const char *pszFmt,...)
 {
-//#ifdef DEBUG
+#ifdef DEBUG
 	static  char szBuffer[1024];
 	va_list ap;
 	va_start(ap,pszFmt);
@@ -45,7 +47,7 @@ void sdklog(const char *pszFmt,...)
 	va_end(ap);
 	
     printf("%s\n", szBuffer);
-//#endif
+#endif
 };
 
 #endif

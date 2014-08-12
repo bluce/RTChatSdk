@@ -63,7 +63,6 @@ void RTChatSDKMain::initSDK(const std::string &uniqueid)
     
     if (_netDataManager) {
         _netDataManager->init("ws://180.168.126.253:16001");
-//        _netDataManager->init("ws://180.168.126.253:16001");
     }
     
     if (_mediaSample) {
@@ -120,14 +119,19 @@ void RTChatSDKMain::requestRoomList()
     }
 }
 
-void RTChatSDKMain::createRoom(Cmd::enRoomType roomType)
+void RTChatSDKMain::createRoom(enRoomType roomType)
 {
     if (_sdkOpState != SdkUserLogined) {
         return;
     }
     
     Cmd::cmdRequestCreateRoom msg;
-    msg.set_type(roomType);
+    if (roomType == ROOM_TYPE_FREE) {
+        msg.set_type(Cmd::ROOM_TYPE_FREE);
+    }
+    else if (roomType == ROOM_TYPE_QUEUE) {
+        msg.set_type(Cmd::ROOM_TYPE_QUEUE);
+    }
     
     _sdkOpState = SdkUserCreatingRoom;
     
@@ -159,12 +163,16 @@ void RTChatSDKMain::leaveRoom()
     }
     
     _sdkOpState = SdkUserLogined;
+    
+    if (_mediaSample) {
+        _mediaSample->leaveCurrentRoom();
+    }
 }
 
 //加入麦序
 void RTChatSDKMain::requestInsertMicQueue()
 {
-    if (_sdkOpState != SdkUserJoinedRoom) {
+    if (_sdkOpState != SdkUserJoinedRoom && _sdkOpState != SdkUserCreatedRoom) {
         return;
     }
     stBaseCmd cmd;
@@ -188,6 +196,10 @@ void RTChatSDKMain::leaveMicQueue()
     }
     
     _sdkOpState = SdkUserJoinedRoom;
+    
+    if (_mediaSample) {
+        _mediaSample->setMuteMic(true);
+    }
 }
 
 //随机进入一个房间
@@ -220,8 +232,15 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             Cmd::cmdNotifyLoginResult protomsg;
             protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
             
-            _sdkOpState = SdkUserLogined;
-            _sdkTempID = protomsg.tempid();
+            if (protomsg.result() == Cmd::cmdNotifyLoginResult::LOGIN_RESULT_OK) {
+                _sdkOpState = SdkUserLogined;
+                _sdkTempID = protomsg.tempid();
+                
+                _func(enNotifyLoginResult, OPERATION_OK, NULL, 0);
+            }
+            else {
+                _func(enNotifyLoginResult, LOGIN_RESULT_TOKEN_ERROR, NULL, 0);
+            }
             
             break;
         }
@@ -240,13 +259,12 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
                 
                 
                 //回调应用数据
-                StNotifyCreateResult data;
-                data.isok = true;
-                data.roomid = protomsg.roomid();
-                _func(enNotifyCreateResult, (const unsigned char*)&data, sizeof(StNotifyCreateResult));
+                StNotifyCreateResult callbackdata(true, protomsg.roomid());
+                _func(enNotifyCreateResult, OPERATION_OK, (const unsigned char*)&callbackdata, sizeof(StNotifyCreateResult));
             }
             else {
                 _sdkOpState = SdkSocketConnected;
+                _func(enNotifyCreateResult, OPERATION_FAILED, NULL, 0);
             }
             break;
         }
@@ -259,9 +277,20 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
                 connectVoiceRoom(protomsg.ip(), protomsg.port());
                 
                 _sdkOpState = SdkUserJoinedRoom;
+                
+                if (protomsg.type() == Cmd::ROOM_TYPE_QUEUE) {
+                    StNotifyEnterResult callbackdata(protomsg.roomid(), ROOM_TYPE_QUEUE);
+                    _func(enNotifyEnterResult, OPERATION_OK, (const unsigned char*)&callbackdata, sizeof(StNotifyEnterResult));
+                }
+                else if (protomsg.type() == Cmd::ROOM_TYPE_FREE) {
+                    StNotifyEnterResult callbackdata(protomsg.roomid(), ROOM_TYPE_FREE);
+                    _func(enNotifyEnterResult, OPERATION_OK, (const unsigned char*)&callbackdata, sizeof(StNotifyEnterResult));
+                }
             }
             else {
                 _sdkOpState = SdkUserLogined;
+                
+                _func(enNotifyEnterResult, ENTER_RESULT_ERROR, NULL, 0);
             }
             
             break;
@@ -275,7 +304,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             
 //            randomJoinRoom();
             
-            BUFFER_CMD(StNotifyRoomList, roomList, 1024);
+            BUFFER_CMD(StNotifyRoomList, roomList, MAX_BUFFER_SIZE);
             roomList->size = protomsg.info_size();
             for (int i = 0; i < protomsg.info_size(); i++) {
                 StRoomInfo info;
@@ -283,7 +312,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
 //                bcopy(&info, &roomList->roominfo[i], sizeof(StRoomInfo));
                 roomList->roominfo[i] = info;
             }
-            _func(enNotifyRoomList, (const unsigned char*)roomList, roomList->getSize());
+            _func(enNotifyRoomList, OPERATION_OK, (const unsigned char*)roomList, roomList->getSize());
             
             break;
         }
@@ -299,10 +328,35 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
                 }
             }
             
+            BUFFER_CMD(StNotifyAddVoiceUser, userList, MAX_BUFFER_SIZE);
+            userList->size = protomsg.info_size();
+            for (int i = 0; i < protomsg.info_size(); i++) {
+                stVoiceUserInfo info;
+                info.userid = protomsg.info(i).id();
+                //                bcopy(&info, &roomList->roominfo[i], sizeof(StRoomInfo));
+                userList->userinfo[i] = info;
+            }
+            
+            _func(enNotifyAddVoiceUser, OPERATION_OK, (const unsigned char*)userList, userList->getSize());
+            
             break;
         }
         case Cmd::enNotifyMicQueue:
         {
+            Cmd::cmdNotifyMicQueue protomsg;
+            protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
+            
+            BUFFER_CMD(StNotifyMicQueue, micList, MAX_BUFFER_SIZE);
+            micList->size = protomsg.info_size();
+            for (int i = 0; i < protomsg.info_size(); i++) {
+                StMicInfo info;
+                info.userid = protomsg.info(i).id();
+                //                bcopy(&info, &roomList->roominfo[i], sizeof(StRoomInfo));
+                micList->micinfo[i] = info;
+            }
+            
+            _func(enNotifyAddVoiceUser, OPERATION_OK, (const unsigned char*)micList, micList->getSize());
+            
             break;
         }
         case Cmd::enNotifyTakeMic:
@@ -321,8 +375,12 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
                 //轮到他人说话
                 if (_mediaSample) {
                     _mediaSample->setMuteMic(true);
+                    _sdkOpState = SdkUserJoinedRoom;
                 }
             }
+            
+            StNotifyTakeMic micdata(protomsg.tempid(), protomsg.mtime());
+            _func(enNotifyTakeMic, OPERATION_OK, (const unsigned char*)&micdata, sizeof(StNotifyTakeMic));
             
             break;
         }

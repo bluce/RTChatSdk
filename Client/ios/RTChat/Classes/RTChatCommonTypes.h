@@ -9,6 +9,14 @@
 #ifndef RTChat_RTChatCommonTypes_h
 #define RTChat_RTChatCommonTypes_h
 
+enum enRoomType
+{
+    ROOM_TYPE_MIN = 0,
+    ROOM_TYPE_QUEUE = 1,
+    ROOM_TYPE_FREE = 2,
+    ROOM_TYPE_MAX = 3,
+};
+
 enum SdkOpState {
     SdkSocketUnConnected = 0,
     SdkSocketConnected,
@@ -56,7 +64,7 @@ enum SdkResponseCmd {
 	enNotifyRoomList = 10,
     
 	/// 增加收听通道
-	enAddVoiceUser = 11,
+	enNotifyAddVoiceUser = 11,
     
 	/// 加入麦序
 	enJoinMicQueue = 12,
@@ -68,10 +76,30 @@ enum SdkResponseCmd {
 	enNotifyMicQueue = 14,
     
 	/// 到某人聊天了
-	enTakeMic = 15,
+	enNotifyTakeMic = 15,
     
 	/// 离开房间
 	enRequestLeaveRoom = 16,
+};
+
+enum SdkErrorCode {
+    OPERATION_OK = 0,   //通用成功消息
+    OPERATION_FAILED,   //通用失败消息
+
+    LOGIC_RESULT_APPID_NOEXITS,
+    LOGIC_RESULT_KEY_ERROR,
+    LOGIC_RESULT_SYS_ERROR,
+    LOGIC_RESULT_OK,
+    
+    LOGIN_RESULT_TOKEN_ERROR,
+    LOGIN_RESULT_OK,
+    
+    ENTER_RESULT_NOEXITS,
+    ENTER_RESULT_FULL,
+    ENTER_RESULT_OK,
+    ENTER_RESULT_ERROR,
+    
+    
 };
 
 struct StNotifyLoginResult {
@@ -79,12 +107,21 @@ struct StNotifyLoginResult {
 };
 
 struct StNotifyCreateResult {
+    StNotifyCreateResult(bool ok, uint64_t id) {
+        isok = ok;
+        roomid = id;
+    }
     bool isok;
     uint64_t roomid;
 };
 
 struct StNotifyEnterResult {
-    bool isok;
+    StNotifyEnterResult(uint64_t id, enRoomType type) {
+        roomid = id;
+        roomtype = type;
+    };
+    uint64_t roomid;
+    enRoomType roomtype;
 };
 
 struct StRoomInfo {
@@ -97,11 +134,24 @@ struct StNotifyRoomList {
     uint32_t getSize() const {return sizeof(StNotifyRoomList)+ sizeof(StRoomInfo)*size;}
 };
 
+//收听用户信息
+struct stVoiceUserInfo
+{
+	uint64_t userid;
+};
+
+//增加收听用户，即房间进入新用户
+struct StNotifyAddVoiceUser {
+    uint32_t size;
+    stVoiceUserInfo userinfo[0];
+    uint32_t getSize() const {return sizeof(StNotifyAddVoiceUser)+ sizeof(stVoiceUserInfo)*size;}
+};
+
 struct StMicInfo {
     StMicInfo() {
-        roomid = 0;
+        userid = 0;
     }
-    uint64_t roomid;
+    uint64_t userid;
 };
 
 struct StNotifyMicQueue {
@@ -110,9 +160,14 @@ struct StNotifyMicQueue {
     }
     uint32_t size;
     StMicInfo micinfo[0];
+    uint32_t getSize() const {return sizeof(StNotifyMicQueue)+ sizeof(StMicInfo)*size;}
 };
 
 struct StNotifyTakeMic {
+    StNotifyTakeMic(uint64_t id, uint32_t time) {
+        tempid = id;
+        mtime = time;
+    }
     uint64_t tempid;    //持有麦的用户SDKID;
     uint32_t mtime; //麦序持续时间
 };

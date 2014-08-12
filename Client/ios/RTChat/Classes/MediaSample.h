@@ -46,6 +46,7 @@ public:
         DataDirection direction;
         char          name[32];
     };
+    
     typedef std::map<int, ChannelInfo*> ChannelMap;
     
 public:
@@ -57,9 +58,17 @@ public:
     
     void connectRoom(const std::string& ip, unsigned int port, uint64_t sdkID);
     
+    //
     void leaveCurrentRoom();
     
+    //设置输出方向MIC是否静音
     void setMuteMic(bool isMicMute);
+    
+    //设置全部通道输入方向是否接收语音
+    void setReceiveMute(bool isReceive);
+    
+    //设置1路通道输入方向是否接收语音
+    void setChannelReceiveMute(int channel, bool isReceive);
     
     void closeVoiceEngine();
     

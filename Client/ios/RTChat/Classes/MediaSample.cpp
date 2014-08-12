@@ -95,14 +95,12 @@ void MediaSample::connectRoom(const std::string &ip, unsigned int port, uint64_t
 
 void MediaSample::leaveCurrentRoom()
 {
-//    VoEBase* voe_base = VoEBase::GetInterface(_voe);
-//    if (voe_base) {
-//        voe_base->StopPlayout(_channel);
-//        voe_base->StopReceive(_channel);
-//        voe_base->StopSend(_channel);
-//    }
+    setReceiveMute(false);
+    setMuteMic(true);
+    clearChannelData();
 }
 
+//设置输出方向MIC是否静音
 void MediaSample::setMuteMic(bool isMicMute)
 {
     int channel = getAudioSendOutChannel();
@@ -120,6 +118,37 @@ void MediaSample::setMuteMic(bool isMicMute)
     else {
         if (voe_base) {
             voe_base->StartSend(channel);
+        }
+    }
+}
+
+//设置全部通道输入方向是否接收语音
+void MediaSample::setReceiveMute(bool isReceive)
+{
+    for (auto it = _channelMap.begin(); it != _channelMap.end(); ++it) {
+        int channel = it->first;
+        if (channel >= 0) {
+            setChannelReceiveMute(channel, isReceive);
+        }
+    }
+}
+
+//设置1路通道输入方向是否接收语音
+void MediaSample::setChannelReceiveMute(int channel, bool isReceive)
+{
+    if (!_voe) {
+        return;
+    }
+    
+    VoEBase* voe_base = VoEBase::GetInterface(_voe);
+    if (voe_base) {
+        if (isReceive) {
+            voe_base->StartReceive(0);
+            voe_base->StartPlayout(0);
+        }
+        else {
+            voe_base->StopReceive(0);
+            voe_base->StopPlayout(0);
         }
     }
 }

@@ -18,7 +18,7 @@
 class NetDataManager;
 class MediaSample;
 
-typedef std::function<void (SdkResponseCmd cmdType, const unsigned char* dataPtr, uint32_t dataSize)> pMsgCallFunc;
+typedef std::function<void (SdkResponseCmd cmdType, SdkErrorCode error, const unsigned char* dataPtr, uint32_t dataSize)> pMsgCallFunc;
 
 class RTChatSDKMain {
 public:
@@ -51,7 +51,7 @@ public:
     void requestRoomList();
     
     //创建房间
-    void createRoom(Cmd::enRoomType roomType);
+    void createRoom(enRoomType roomType);
     
     //加入房间
     void joinRoom(uint64_t roomid);
