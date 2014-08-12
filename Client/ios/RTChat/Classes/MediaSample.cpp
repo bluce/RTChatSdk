@@ -143,12 +143,12 @@ void MediaSample::setChannelReceiveMute(int channel, bool isReceive)
     VoEBase* voe_base = VoEBase::GetInterface(_voe);
     if (voe_base) {
         if (isReceive) {
-            voe_base->StartReceive(0);
-            voe_base->StartPlayout(0);
+            voe_base->StartReceive(channel);
+            voe_base->StartPlayout(channel);
         }
         else {
-            voe_base->StopReceive(0);
-            voe_base->StopPlayout(0);
+            voe_base->StopReceive(channel);
+            voe_base->StopPlayout(channel);
         }
     }
 }
@@ -221,9 +221,41 @@ int MediaSample::onCreateChannel(uint64_t id, MediaSample::DataDirection directi
     return -1;
 }
 
+//关闭删除数据通道
+void MediaSample::onDeleteChannel(uint64_t id, MediaSample::DataDirection direction)
+{
+    std::string cname;
+    if (direction == data_in) {
+        cname = avar("r%llu@s%llu", id, RTChatSDKMain::sharedInstance().get_sdkTempID());
+    }
+    else {
+        cname = avar("s%llu", id);
+    }
+    
+    int channel = -1;
+    for (auto it = _channelMap.begin(); it != _channelMap.end(); ++it) {
+        const ChannelInfo* info = it->second;
+        if (!strncasecmp(info->name, cname.c_str(), sizeof(info->name))) {
+            channel = info->channelID;
+            sdklog("移除%d号通道, name=%s", channel, info->name);
+            setChannelReceiveMute(channel, false);
+            VoEBase* voe_base = VoEBase::GetInterface(_voe);
+            if (voe_base) {
+                voe_base->DeleteChannel(channel);
+            }
+            delete it->second;
+            _channelMap.erase(it);
+            break;
+        }
+    }
+}
+
 void MediaSample::closeVoiceEngine()
 {
-    
+    leaveCurrentRoom();
+    _voiceServerIp = "";
+    _voiceServerPort = 0;
+    _recvport = 30000;
 }
 
 //获取语音数据发送通道

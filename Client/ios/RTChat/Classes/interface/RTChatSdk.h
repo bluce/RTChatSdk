@@ -20,6 +20,9 @@ public:
     //sdk初始化，只能调用一次
     void initSDK(const std::string& uniqueid);
     
+    //当应用最小化时需要调用这个，清理数据
+    void deInitSDK();
+    
     //注册消息回调
     void registerMsgCallback(const pMsgCallFunc& func);
     

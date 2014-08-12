@@ -122,3 +122,10 @@ message cmdNotifyTakeMic
 	required uint64 tempid = 1;
 	required uint32 mtime = 2;
 }
+
+
+/// 删除收听通道
+message cmdNotifyDelVoiceUser
+{
+	repeated stVoiceUserInfo info = 1;
+}

@@ -80,6 +80,9 @@ enum SdkResponseCmd {
     
 	/// 离开房间
 	enRequestLeaveRoom = 16,
+    
+    /// 删除一个通道
+	enNotifyDelVoiceUser = 17,
 };
 
 enum SdkErrorCode {
@@ -170,6 +173,13 @@ struct StNotifyTakeMic {
     }
     uint64_t tempid;    //持有麦的用户SDKID;
     uint32_t mtime; //麦序持续时间
+};
+
+//删除收听用户，即房间进入新用户
+struct StNotifyDelVoiceUser {
+    uint32_t size;
+    stVoiceUserInfo userinfo[0];
+    uint32_t getSize() const {return sizeof(StNotifyDelVoiceUser)+ sizeof(stVoiceUserInfo)*size;}
 };
 
 /******************回调字符串JSON格式******************/

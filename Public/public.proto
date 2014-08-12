@@ -72,6 +72,9 @@ enum enCmdId
 
 	/// 离开房间
 	enRequestLeaveRoom = 16;
+
+	/// 删除一个通道
+	enNotifyDelVoiceUser = 17;
 }
 
 

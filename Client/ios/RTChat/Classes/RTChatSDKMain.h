@@ -36,7 +36,7 @@ public:
     void initSDK(const std::string& uniqueid);
     
     //当应用最小化时需要调用这个，清理数据
-    void freezeSDK();
+    void deInitSDK();
     
     //注册消息回调
     void registerMsgCallback(const pMsgCallFunc& func);

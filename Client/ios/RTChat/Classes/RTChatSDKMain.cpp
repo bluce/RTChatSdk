@@ -62,7 +62,7 @@ void RTChatSDKMain::initSDK(const std::string &uniqueid)
     _uniqueid = uniqueid;
     
     if (_netDataManager) {
-        _netDataManager->init("ws://180.168.126.253:16001");
+        _netDataManager->init("ws://180.168.126.249:16001");
     }
     
     if (_mediaSample) {
@@ -71,7 +71,7 @@ void RTChatSDKMain::initSDK(const std::string &uniqueid)
 }
 
 //当应用最小化时需要调用这个，清理数据
-void RTChatSDKMain::freezeSDK()
+void RTChatSDKMain::deInitSDK()
 {
     if (_netDataManager) {
         _netDataManager->closeWebSocket();
@@ -80,6 +80,13 @@ void RTChatSDKMain::freezeSDK()
     if (_mediaSample) {
         _mediaSample->closeVoiceEngine();
     }
+    
+    _uniqueid = "";
+    _sdkTempID = 0;
+    _currentRoomID = 0;
+    _isMute = false;
+    _sdkOpState = SdkSocketUnConnected;
+    _func = NULL;
 }
 
 void RTChatSDKMain::registerMsgCallback(const pMsgCallFunc& func)
@@ -381,6 +388,18 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             
             StNotifyTakeMic micdata(protomsg.tempid(), protomsg.mtime());
             _func(enNotifyTakeMic, OPERATION_OK, (const unsigned char*)&micdata, sizeof(StNotifyTakeMic));
+            
+            break;
+        }
+        case Cmd::enNotifyDelVoiceUser:
+        {
+            Cmd::cmdNotifyDelVoiceUser protomsg;
+            protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
+            for (int i = 0; i < protomsg.info_size(); i++) {
+                if (_mediaSample) {
+                    _mediaSample->onDeleteChannel(protomsg.info(i).id(), MediaSample::data_in);
+                }
+            }
             
             break;
         }
