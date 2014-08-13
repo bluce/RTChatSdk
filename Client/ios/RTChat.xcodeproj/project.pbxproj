@@ -13,6 +13,30 @@
 		430F16FD196F8DC10083B252 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F7196F8DC10083B252 /* tinyxml.cpp */; };
 		430F16FE196F8DC10083B252 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F8196F8DC10083B252 /* tinyxmlerror.cpp */; };
 		430F16FF196F8DC10083B252 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F9196F8DC10083B252 /* tinyxmlparser.cpp */; };
+		431FC0D6199B4EF100CFEB6B /* libaudio_coding_module.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0B2199B4EF100CFEB6B /* libaudio_coding_module.a */; };
+		431FC0D7199B4EF100CFEB6B /* libaudio_conference_mixer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0B3199B4EF100CFEB6B /* libaudio_conference_mixer.a */; };
+		431FC0D8199B4EF100CFEB6B /* libaudio_device.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0B4199B4EF100CFEB6B /* libaudio_device.a */; };
+		431FC0D9199B4EF100CFEB6B /* libaudio_processing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0B5199B4EF100CFEB6B /* libaudio_processing.a */; };
+		431FC0DA199B4EF100CFEB6B /* libbitrate_controller.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0B6199B4EF100CFEB6B /* libbitrate_controller.a */; };
+		431FC0DB199B4EF100CFEB6B /* libCNG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0B7199B4EF100CFEB6B /* libCNG.a */; };
+		431FC0DC199B4EF100CFEB6B /* libcommon_audio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0B8199B4EF100CFEB6B /* libcommon_audio.a */; };
+		431FC0DE199B4EF100CFEB6B /* libcrnspr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0BA199B4EF100CFEB6B /* libcrnspr.a */; };
+		431FC0E0199B4EF100CFEB6B /* libcrnssckbi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0BC199B4EF100CFEB6B /* libcrnssckbi.a */; };
+		431FC0E1199B4EF100CFEB6B /* libG711.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0BD199B4EF100CFEB6B /* libG711.a */; };
+		431FC0E2199B4EF100CFEB6B /* libG722.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0BE199B4EF100CFEB6B /* libG722.a */; };
+		431FC0E3199B4EF100CFEB6B /* libiLBC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0BF199B4EF100CFEB6B /* libiLBC.a */; };
+		431FC0E4199B4EF100CFEB6B /* libiSAC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0C0199B4EF100CFEB6B /* libiSAC.a */; };
+		431FC0E5199B4EF100CFEB6B /* libiSACFix.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0C1199B4EF100CFEB6B /* libiSACFix.a */; };
+		431FC0EE199B4EF100CFEB6B /* libmedia_file.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0CA199B4EF100CFEB6B /* libmedia_file.a */; };
+		431FC0EF199B4EF100CFEB6B /* libneteq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0CB199B4EF100CFEB6B /* libneteq.a */; };
+		431FC0F2199B4EF100CFEB6B /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0CE199B4EF100CFEB6B /* libopus.a */; };
+		431FC0F3199B4EF100CFEB6B /* libPCM16B.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0CF199B4EF100CFEB6B /* libPCM16B.a */; };
+		431FC0F4199B4EF100CFEB6B /* librtp_rtcp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0D0199B4EF100CFEB6B /* librtp_rtcp.a */; };
+		431FC0F5199B4EF100CFEB6B /* libsystem_wrappers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0D1199B4EF100CFEB6B /* libsystem_wrappers.a */; };
+		431FC0F6199B4EF100CFEB6B /* libvoice_engine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0D2199B4EF100CFEB6B /* libvoice_engine.a */; };
+		431FC0F7199B4EF100CFEB6B /* libwebrtc_base.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0D3199B4EF100CFEB6B /* libwebrtc_base.a */; };
+		431FC0F8199B4EF100CFEB6B /* libwebrtc_opus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0D4199B4EF100CFEB6B /* libwebrtc_opus.a */; };
+		431FC0F9199B4EF100CFEB6B /* libwebrtc_utility.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC0D5199B4EF100CFEB6B /* libwebrtc_utility.a */; };
 		43247A541987339300AF14C7 /* MediaSample.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43247A521987339300AF14C7 /* MediaSample.cpp */; };
 		43247A7819876FC700AF14C7 /* RTChatSDKMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43247A74198741BC00AF14C7 /* RTChatSDKMain.cpp */; };
 		433E66DF1987AAD10002AAC3 /* channel_transport.cc in Sources */ = {isa = PBXBuildFile; fileRef = 433E66CF1987AAD10002AAC3 /* channel_transport.cc */; };
@@ -88,6 +112,42 @@
 		430F16F9196F8DC10083B252 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		430F16FA196F8DC10083B252 /* tinystr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinystr.h; sourceTree = "<group>"; };
 		430F16FB196F8DC10083B252 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
+		431FC0B2199B4EF100CFEB6B /* libaudio_coding_module.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libaudio_coding_module.a; path = "../../../RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos/libaudio_coding_module.a"; sourceTree = "<group>"; };
+		431FC0B3199B4EF100CFEB6B /* libaudio_conference_mixer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libaudio_conference_mixer.a; path = "../../../RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos/libaudio_conference_mixer.a"; sourceTree = "<group>"; };
+		431FC0B4199B4EF100CFEB6B /* libaudio_device.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libaudio_device.a; path = "../../../RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos/libaudio_device.a"; sourceTree = "<group>"; };
+		431FC0B5199B4EF100CFEB6B /* libaudio_processing.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libaudio_processing.a; path = "../../../RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos/libaudio_processing.a"; sourceTree = "<group>"; };
+		431FC0B6199B4EF100CFEB6B /* libbitrate_controller.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbitrate_controller.a; path = "../../../RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos/libbitrate_controller.a"; sourceTree = "<group>"; };
+		431FC0B7199B4EF100CFEB6B /* libCNG.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCNG.a; path = "../../../RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos/libCNG.a"; sourceTree = "<group>"; };
+		431FC0B8199B4EF100CFEB6B /* libcommon_audio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcommon_audio.a; path = "../../../RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos/libcommon_audio.a"; sourceTree = "<group>"; };
+		431FC0B9199B4EF100CFEB6B /* libcrnspr_osx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrnspr_osx.a; path = ../../../webRTC_xCode/crnspr/build/Debug/libcrnspr_osx.a; sourceTree = "<group>"; };
+		431FC0BA199B4EF100CFEB6B /* libcrnspr.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrnspr.a; path = "../../../webRTC_xCode/crnspr/build/Debug-iphoneos/libcrnspr.a"; sourceTree = "<group>"; };
+		431FC0BB199B4EF100CFEB6B /* libcrnssckbi_osx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrnssckbi_osx.a; path = ../../../webRTC_xCode/crnssckbi/build/Debug/libcrnssckbi_osx.a; sourceTree = "<group>"; };
+		431FC0BC199B4EF100CFEB6B /* libcrnssckbi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrnssckbi.a; path = "../../../webRTC_xCode/crnssckbi/build/Debug-iphoneos/libcrnssckbi.a"; sourceTree = "<group>"; };
+		431FC0BD199B4EF100CFEB6B /* libG711.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libG711.a; path = "../../../RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos/libG711.a"; sourceTree = "<group>"; };
+		431FC0BE199B4EF100CFEB6B /* libG722.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libG722.a; path = "../../../RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos/libG722.a"; sourceTree = "<group>"; };
+		431FC0BF199B4EF100CFEB6B /* libiLBC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libiLBC.a; path = "../../../RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos/libiLBC.a"; sourceTree = "<group>"; };
+		431FC0C0199B4EF100CFEB6B /* libiSAC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libiSAC.a; path = "../../../RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos/libiSAC.a"; sourceTree = "<group>"; };
+		431FC0C1199B4EF100CFEB6B /* libiSACFix.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libiSACFix.a; path = "../../../RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos/libiSACFix.a"; sourceTree = "<group>"; };
+		431FC0C2199B4EF100CFEB6B /* libjingle_media.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjingle_media.a; path = "../../../webRTC_xCode/libjingle_media/build/Debug-iphoneos/libjingle_media.a"; sourceTree = "<group>"; };
+		431FC0C3199B4EF100CFEB6B /* libjingle_osx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjingle_osx.a; path = ../../../webRTC_xCode/libjingle/build/Debug/libjingle_osx.a; sourceTree = "<group>"; };
+		431FC0C4199B4EF100CFEB6B /* libjingle_p2p_osx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjingle_p2p_osx.a; path = "../../../webRTC_xCode/libjingle_p2p/build/Debug-iphoneos/libjingle_p2p_osx.a"; sourceTree = "<group>"; };
+		431FC0C5199B4EF100CFEB6B /* libjingle_p2p.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjingle_p2p.a; path = "../../../webRTC_xCode/libjingle_p2p/build/Debug-iphoneos/libjingle_p2p.a"; sourceTree = "<group>"; };
+		431FC0C6199B4EF100CFEB6B /* libjingle_peerconnection_objc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjingle_peerconnection_objc.a; path = "../../../webRTC_xCode/libjingle_peerconnection_objc/build/Debug-iphoneos/libjingle_peerconnection_objc.a"; sourceTree = "<group>"; };
+		431FC0C7199B4EF100CFEB6B /* libjingle_peerconnection.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjingle_peerconnection.a; path = "../../../webRTC_xCode/jingle_peerconnection/build/Debug-iphoneos/libjingle_peerconnection.a"; sourceTree = "<group>"; };
+		431FC0C8199B4EF100CFEB6B /* libjingle_sound.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjingle_sound.a; path = "../../../webRTC_xCode/jingle_sound/build/Debug-iphoneos/libjingle_sound.a"; sourceTree = "<group>"; };
+		431FC0C9199B4EF100CFEB6B /* libjingle.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjingle.a; path = "../../../webRTC_xCode/libjingle/build/Debug-iphoneos/libjingle.a"; sourceTree = "<group>"; };
+		431FC0CA199B4EF100CFEB6B /* libmedia_file.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmedia_file.a; path = "../../../RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos/libmedia_file.a"; sourceTree = "<group>"; };
+		431FC0CB199B4EF100CFEB6B /* libneteq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libneteq.a; path = "../../../RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos/libneteq.a"; sourceTree = "<group>"; };
+		431FC0CC199B4EF100CFEB6B /* libnss_static_osx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnss_static_osx.a; path = ../../../webRTC_xCode/nss_static/build/Debug/libnss_static_osx.a; sourceTree = "<group>"; };
+		431FC0CD199B4EF100CFEB6B /* libnss_static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnss_static.a; path = "../../../webRTC_xCode/nss_static/build/Debug-iphoneos/libnss_static.a"; sourceTree = "<group>"; };
+		431FC0CE199B4EF100CFEB6B /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopus.a; path = "../../../RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos/libopus.a"; sourceTree = "<group>"; };
+		431FC0CF199B4EF100CFEB6B /* libPCM16B.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPCM16B.a; path = "../../../RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos/libPCM16B.a"; sourceTree = "<group>"; };
+		431FC0D0199B4EF100CFEB6B /* librtp_rtcp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librtp_rtcp.a; path = "../../../RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos/librtp_rtcp.a"; sourceTree = "<group>"; };
+		431FC0D1199B4EF100CFEB6B /* libsystem_wrappers.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsystem_wrappers.a; path = "../../../RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos/libsystem_wrappers.a"; sourceTree = "<group>"; };
+		431FC0D2199B4EF100CFEB6B /* libvoice_engine.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvoice_engine.a; path = "../../../RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos/libvoice_engine.a"; sourceTree = "<group>"; };
+		431FC0D3199B4EF100CFEB6B /* libwebrtc_base.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebrtc_base.a; path = "../../../RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos/libwebrtc_base.a"; sourceTree = "<group>"; };
+		431FC0D4199B4EF100CFEB6B /* libwebrtc_opus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebrtc_opus.a; path = "../../../RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos/libwebrtc_opus.a"; sourceTree = "<group>"; };
+		431FC0D5199B4EF100CFEB6B /* libwebrtc_utility.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebrtc_utility.a; path = "../../../RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos/libwebrtc_utility.a"; sourceTree = "<group>"; };
 		43247A451987333E00AF14C7 /* voe_audio_processing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = voe_audio_processing.h; sourceTree = "<group>"; };
 		43247A461987333E00AF14C7 /* voe_base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = voe_base.h; sourceTree = "<group>"; };
 		43247A471987333E00AF14C7 /* voe_codec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = voe_codec.h; sourceTree = "<group>"; };
@@ -239,6 +299,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				431FC0D6199B4EF100CFEB6B /* libaudio_coding_module.a in Frameworks */,
+				431FC0D7199B4EF100CFEB6B /* libaudio_conference_mixer.a in Frameworks */,
+				431FC0D8199B4EF100CFEB6B /* libaudio_device.a in Frameworks */,
+				431FC0D9199B4EF100CFEB6B /* libaudio_processing.a in Frameworks */,
+				431FC0DA199B4EF100CFEB6B /* libbitrate_controller.a in Frameworks */,
+				431FC0DB199B4EF100CFEB6B /* libCNG.a in Frameworks */,
+				431FC0DC199B4EF100CFEB6B /* libcommon_audio.a in Frameworks */,
+				431FC0DE199B4EF100CFEB6B /* libcrnspr.a in Frameworks */,
+				431FC0E0199B4EF100CFEB6B /* libcrnssckbi.a in Frameworks */,
+				431FC0E1199B4EF100CFEB6B /* libG711.a in Frameworks */,
+				431FC0E2199B4EF100CFEB6B /* libG722.a in Frameworks */,
+				431FC0E3199B4EF100CFEB6B /* libiLBC.a in Frameworks */,
+				431FC0E4199B4EF100CFEB6B /* libiSAC.a in Frameworks */,
+				431FC0E5199B4EF100CFEB6B /* libiSACFix.a in Frameworks */,
+				431FC0EE199B4EF100CFEB6B /* libmedia_file.a in Frameworks */,
+				431FC0EF199B4EF100CFEB6B /* libneteq.a in Frameworks */,
+				431FC0F2199B4EF100CFEB6B /* libopus.a in Frameworks */,
+				431FC0F3199B4EF100CFEB6B /* libPCM16B.a in Frameworks */,
+				431FC0F4199B4EF100CFEB6B /* librtp_rtcp.a in Frameworks */,
+				431FC0F5199B4EF100CFEB6B /* libsystem_wrappers.a in Frameworks */,
+				431FC0F6199B4EF100CFEB6B /* libvoice_engine.a in Frameworks */,
+				431FC0F7199B4EF100CFEB6B /* libwebrtc_base.a in Frameworks */,
+				431FC0F8199B4EF100CFEB6B /* libwebrtc_opus.a in Frameworks */,
+				431FC0F9199B4EF100CFEB6B /* libwebrtc_utility.a in Frameworks */,
 				430079591973A705003DB064 /* CoreFoundation.framework in Frameworks */,
 				435E03D8196E813C000C3012 /* AudioToolbox.framework in Frameworks */,
 				435E03B2196E7D9F000C3012 /* Foundation.framework in Frameworks */,
@@ -373,6 +457,42 @@
 		435E03B0196E7D9F000C3012 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				431FC0B2199B4EF100CFEB6B /* libaudio_coding_module.a */,
+				431FC0B3199B4EF100CFEB6B /* libaudio_conference_mixer.a */,
+				431FC0B4199B4EF100CFEB6B /* libaudio_device.a */,
+				431FC0B5199B4EF100CFEB6B /* libaudio_processing.a */,
+				431FC0B6199B4EF100CFEB6B /* libbitrate_controller.a */,
+				431FC0B7199B4EF100CFEB6B /* libCNG.a */,
+				431FC0B8199B4EF100CFEB6B /* libcommon_audio.a */,
+				431FC0B9199B4EF100CFEB6B /* libcrnspr_osx.a */,
+				431FC0BA199B4EF100CFEB6B /* libcrnspr.a */,
+				431FC0BB199B4EF100CFEB6B /* libcrnssckbi_osx.a */,
+				431FC0BC199B4EF100CFEB6B /* libcrnssckbi.a */,
+				431FC0BD199B4EF100CFEB6B /* libG711.a */,
+				431FC0BE199B4EF100CFEB6B /* libG722.a */,
+				431FC0BF199B4EF100CFEB6B /* libiLBC.a */,
+				431FC0C0199B4EF100CFEB6B /* libiSAC.a */,
+				431FC0C1199B4EF100CFEB6B /* libiSACFix.a */,
+				431FC0C2199B4EF100CFEB6B /* libjingle_media.a */,
+				431FC0C3199B4EF100CFEB6B /* libjingle_osx.a */,
+				431FC0C4199B4EF100CFEB6B /* libjingle_p2p_osx.a */,
+				431FC0C5199B4EF100CFEB6B /* libjingle_p2p.a */,
+				431FC0C6199B4EF100CFEB6B /* libjingle_peerconnection_objc.a */,
+				431FC0C7199B4EF100CFEB6B /* libjingle_peerconnection.a */,
+				431FC0C8199B4EF100CFEB6B /* libjingle_sound.a */,
+				431FC0C9199B4EF100CFEB6B /* libjingle.a */,
+				431FC0CA199B4EF100CFEB6B /* libmedia_file.a */,
+				431FC0CB199B4EF100CFEB6B /* libneteq.a */,
+				431FC0CC199B4EF100CFEB6B /* libnss_static_osx.a */,
+				431FC0CD199B4EF100CFEB6B /* libnss_static.a */,
+				431FC0CE199B4EF100CFEB6B /* libopus.a */,
+				431FC0CF199B4EF100CFEB6B /* libPCM16B.a */,
+				431FC0D0199B4EF100CFEB6B /* librtp_rtcp.a */,
+				431FC0D1199B4EF100CFEB6B /* libsystem_wrappers.a */,
+				431FC0D2199B4EF100CFEB6B /* libvoice_engine.a */,
+				431FC0D3199B4EF100CFEB6B /* libwebrtc_base.a */,
+				431FC0D4199B4EF100CFEB6B /* libwebrtc_opus.a */,
+				431FC0D5199B4EF100CFEB6B /* libwebrtc_utility.a */,
 				43998DE619866803003C5793 /* libz.1.2.5.dylib */,
 				430079581973A705003DB064 /* CoreFoundation.framework */,
 				43D6490A196E9797001944DC /* CoreAudio.framework */,
@@ -848,6 +968,20 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/RTChat/Classes/third_party/libwebsocket/lib",
 					"/Users/raymon_wang/Documents/Develop/RTChatApp/DerivedData/RTChatApp/Build/Products/Debug-iphoneos",
+					"/Users/raymon_wang/Documents/Develop/RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos",
+					/Users/raymon_wang/Documents/Develop/webRTC_xCode/crnspr/build/Debug,
+					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/crnspr/build/Debug-iphoneos",
+					/Users/raymon_wang/Documents/Develop/webRTC_xCode/crnssckbi/build/Debug,
+					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/crnssckbi/build/Debug-iphoneos",
+					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/libjingle_media/build/Debug-iphoneos",
+					/Users/raymon_wang/Documents/Develop/webRTC_xCode/libjingle/build/Debug,
+					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/libjingle_p2p/build/Debug-iphoneos",
+					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/libjingle_peerconnection_objc/build/Debug-iphoneos",
+					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/jingle_peerconnection/build/Debug-iphoneos",
+					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/jingle_sound/build/Debug-iphoneos",
+					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/libjingle/build/Debug-iphoneos",
+					/Users/raymon_wang/Documents/Develop/webRTC_xCode/nss_static/build/Debug,
+					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/nss_static/build/Debug-iphoneos",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "";
@@ -902,6 +1036,20 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/RTChat/Classes/third_party/libwebsocket/lib",
 					"/Users/raymon_wang/Documents/Develop/RTChatApp/DerivedData/RTChatApp/Build/Products/Debug-iphoneos",
+					"/Users/raymon_wang/Documents/Develop/RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Release-iphoneos",
+					/Users/raymon_wang/Documents/Develop/webRTC_xCode/crnspr/build/Debug,
+					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/crnspr/build/Debug-iphoneos",
+					/Users/raymon_wang/Documents/Develop/webRTC_xCode/crnssckbi/build/Debug,
+					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/crnssckbi/build/Debug-iphoneos",
+					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/libjingle_media/build/Debug-iphoneos",
+					/Users/raymon_wang/Documents/Develop/webRTC_xCode/libjingle/build/Debug,
+					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/libjingle_p2p/build/Debug-iphoneos",
+					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/libjingle_peerconnection_objc/build/Debug-iphoneos",
+					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/jingle_peerconnection/build/Debug-iphoneos",
+					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/jingle_sound/build/Debug-iphoneos",
+					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/libjingle/build/Debug-iphoneos",
+					/Users/raymon_wang/Documents/Develop/webRTC_xCode/nss_static/build/Debug,
+					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/nss_static/build/Debug-iphoneos",
 				);
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
