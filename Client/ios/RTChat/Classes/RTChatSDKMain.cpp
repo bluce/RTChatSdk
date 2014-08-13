@@ -243,11 +243,13 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
                 _sdkOpState = SdkUserLogined;
                 _sdkTempID = protomsg.tempid();
                 
-                _func(enNotifyLoginResult, OPERATION_OK, NULL, 0);
+                StNotifyLoginResult callbackdata(protomsg.result(), protomsg.tempid());
+                _func(enNotifyLoginResult, OPERATION_OK, (const unsigned char*)&callbackdata, sizeof(StNotifyLoginResult));
             }
             else {
                 _func(enNotifyLoginResult, LOGIN_RESULT_TOKEN_ERROR, NULL, 0);
             }
+            
             
             break;
         }

@@ -106,7 +106,12 @@ enum SdkErrorCode {
 };
 
 struct StNotifyLoginResult {
+    StNotifyLoginResult(bool res, uint64_t id) {
+        isok = res;
+        tempid = id;
+    }
     bool isok;
+    uint64_t tempid;
 };
 
 struct StNotifyCreateResult {
