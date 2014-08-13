@@ -40,6 +40,16 @@ bool MediaSample::init()
         voe_base->Init();
     }
     
+    VoEAudioProcessing* voe_audioProcessing = VoEAudioProcessing::GetInterface(_voe);
+    if (voe_audioProcessing) {
+        voe_audioProcessing->SetAecmMode(kAecmLoudSpeakerphone, true);
+        voe_audioProcessing->SetEcStatus(true, kEcConference);
+        voe_audioProcessing->SetNsStatus(true, kNsConference);
+        voe_audioProcessing->SetAgcStatus(true);
+        
+        int i = 0;
+    }
+    
     voe_base->RegisterVoiceEngineObserver(*this);
     
     return true;
@@ -84,13 +94,13 @@ void MediaSample::connectRoom(const std::string &ip, unsigned int port, uint64_t
 //        voe_base->StartReceive(channel);
 //    }
     
-//    VoEHardware* hardware = VoEHardware::GetInterface(_voe);
-//    hardware->SetLoudspeakerStatus(true);
+    VoEHardware* hardware = VoEHardware::GetInterface(_voe);
+    hardware->SetLoudspeakerStatus(true);
     
     VoEVolumeControl* volumnControl = VoEVolumeControl::GetInterface(_voe);
     volumnControl->SetSpeakerVolume(255);
     volumnControl->SetMicVolume(255);
-    volumnControl->SetChannelOutputVolumeScaling(channel, 10);
+    volumnControl->SetChannelOutputVolumeScaling(channel, 3);
 }
 
 void MediaSample::leaveCurrentRoom()

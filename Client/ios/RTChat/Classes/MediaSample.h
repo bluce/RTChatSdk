@@ -17,6 +17,7 @@
 #include <webrtc/voice_engine/include/voe_rtp_rtcp.h>
 #include <webrtc/voice_engine/include/voe_codec.h>
 #include <webrtc/voice_engine/include/voe_network.h>
+#include <webrtc/voice_engine/include/voe_audio_processing.h>
 
 using namespace webrtc;
 using namespace webrtc::test;
