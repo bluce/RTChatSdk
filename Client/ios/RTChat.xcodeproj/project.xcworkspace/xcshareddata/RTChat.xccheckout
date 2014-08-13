@@ -10,6 +10,8 @@
 	<string>RTChat</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>1ABF6850-7708-4A1D-8377-A9944A48FEBA</key>
+		<string>ssh://180.166.92.227:5678/~/git_repo/webRTC_xCode.git</string>
 		<key>8C4CD7D7-0595-4EFB-AB1F-514E21D2176E</key>
 		<string>ssh://180.166.92.227:5678/~/git_repo/rtchatsdk.git</string>
 	</dict>
@@ -17,6 +19,8 @@
 	<string>Client/ios/RTChat.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>1ABF6850-7708-4A1D-8377-A9944A48FEBA</key>
+		<string>../../../../../webRTC_xCode</string>
 		<key>8C4CD7D7-0595-4EFB-AB1F-514E21D2176E</key>
 		<string>../../../..</string>
 	</dict>
@@ -35,6 +39,14 @@
 			<string>8C4CD7D7-0595-4EFB-AB1F-514E21D2176E</string>
 			<key>IDESourceControlWCCName</key>
 			<string>RTChatSdk</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1ABF6850-7708-4A1D-8377-A9944A48FEBA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>webRTC_xCode</string>
 		</dict>
 	</array>
 </dict>
