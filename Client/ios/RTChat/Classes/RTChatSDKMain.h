@@ -33,19 +33,22 @@ public:
     /*******************需要暴露给用户的接口开始**********************/
     
     //sdk初始化，只能调用一次
-    void initSDK(const std::string& uniqueid);
-    
-    //当应用最小化时需要调用这个，清理数据
-    void deInitSDK();
+    void initSDK(const std::string& appid, const std::string& key, const char* uniqueid = NULL);
     
     //注册消息回调
     void registerMsgCallback(const pMsgCallFunc& func);
+    
+    //激活SDK
+    void activateSDK();
+    
+    //当应用最小化时需要调用这个，清理数据
+    void deActivateSDK();
     
     //获取SDK当前操作状态，用户发起操作前可以检测一下状态判断可否继续
     SdkOpState getSdkState();
     
     //请求登录
-    void requestLogin();
+    void requestLogin(const char* uniqueid = NULL);
     
     //申请房间列表
     void requestRoomList();
@@ -66,6 +69,9 @@ public:
     void leaveMicQueue();
     
     /*******************需要暴露给用户的接口结束**********************/
+    
+    //请求逻辑服务器地址
+    void requestLogicServerInfo(const std::string& appid, const std::string& key);
     
     //收到网络线程消息
     void onRecvMsg(char* data, int len);
@@ -110,7 +116,12 @@ private:
     MediaSample*        _mediaSample;       //音频管理器
     
 private:
+    std::string         _appid;
+    std::string         _appkey;
     std::string         _uniqueid;
+    std::string         _token;
+    std::string         _logicIP;       //逻辑服务器IP
+    uint32_t            _logicPort;     //逻辑服务器PORT
     
     uint64_t            _sdkTempID;     //服务器下发的sdk唯一标识符
     

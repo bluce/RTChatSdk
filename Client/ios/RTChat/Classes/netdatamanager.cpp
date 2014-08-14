@@ -10,6 +10,7 @@
 #include "NetProcess/command.h"
 #include "proto/game.pb.h"
 #include "RTChatSDKMain.h"
+#include "public.h"
 
 NetDataManager::NetDataManager() :
 _socket(NULL)
@@ -93,12 +94,12 @@ void NetDataManager::onMessage(WebSocket* ws, const WebSocket::Data& data)
 
 void NetDataManager::onClose(WebSocket* ws)
 {
-    
+    Public::sdklog("连接被关闭");
 }
 
 void NetDataManager::onError(WebSocket* ws, const WebSocket::ErrorCode& error)
 {
-    
+    Public::sdklog("连接发生错误");
 }
 
 

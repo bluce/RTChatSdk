@@ -43,7 +43,6 @@
 		431FC2B0199B8C0A00CFEB6B /* libneteq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC2A1199B8BA200CFEB6B /* libneteq.a */; };
 		431FC2B1199B8C1600CFEB6B /* librtp_rtcp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC29B199B8B8B00CFEB6B /* librtp_rtcp.a */; };
 		431FC2B2199B8C1600CFEB6B /* libwebrtc_opus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC294199B8B8400CFEB6B /* libwebrtc_opus.a */; };
-		431FC2B3199B8C1A00CFEB6B /* libexpat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC187199B83DE00CFEB6B /* libexpat.a */; };
 		43247A541987339300AF14C7 /* MediaSample.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43247A521987339300AF14C7 /* MediaSample.cpp */; };
 		43247A7819876FC700AF14C7 /* RTChatSDKMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43247A74198741BC00AF14C7 /* RTChatSDKMain.cpp */; };
 		433E66DF1987AAD10002AAC3 /* channel_transport.cc in Sources */ = {isa = PBXBuildFile; fileRef = 433E66CF1987AAD10002AAC3 /* channel_transport.cc */; };
@@ -95,6 +94,7 @@
 		43AE0052197913930062C9B4 /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43AE004D197913930062C9B4 /* json_reader.cpp */; };
 		43AE0053197913930062C9B4 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43AE004F197913930062C9B4 /* json_value.cpp */; };
 		43AE0054197913930062C9B4 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43AE0051197913930062C9B4 /* json_writer.cpp */; };
+		43BBA617199C644E00504C0C /* libexpat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BBA615199C61F200504C0C /* libexpat.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,13 +167,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 4398310D198F6E650090EABA;
 			remoteInfo = crssl;
-		};
-		431FC186199B83DE00CFEB6B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 431FC182199B83DD00CFEB6B /* expat.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 43AD794B19907938006EAB38;
-			remoteInfo = expat;
 		};
 		431FC18C199B83E200CFEB6B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -378,6 +371,62 @@
 			remoteGlobalIDString = 430D8F4A19862490009E763A;
 			remoteInfo = neteq;
 		};
+		43BBA614199C61F200504C0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 43BBA610199C61F200504C0C /* expat.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 43AD794B19907938006EAB38;
+			remoteInfo = expat;
+		};
+		43BBA618199C645E00504C0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 43BBA610199C61F200504C0C /* expat.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 43AD794A19907938006EAB38;
+			remoteInfo = expat;
+		};
+		43BBA639199C654100504C0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 431FC17C199B83D800CFEB6B /* crssl.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4398310C198F6E650090EABA;
+			remoteInfo = crssl;
+		};
+		43BBA652199C654E00504C0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 431FC19A199B83FA00CFEB6B /* nss_static.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 43AD7A3E1990809E006EAB38;
+			remoteInfo = nss_static;
+		};
+		43BBA654199C656C00504C0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 431FC1C7199B842100CFEB6B /* usrsctp.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 43983380198F87EE0090EABA;
+			remoteInfo = usrsctp;
+		};
+		43BBA656199C657600504C0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 431FC1A9199B840300CFEB6B /* paced_sender.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4398352F198FACD30090EABA;
+			remoteInfo = paced_sender;
+		};
+		43BBA658199C657C00504C0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 431FC1B5199B840F00CFEB6B /* rbe_components.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 439834D0198FAAC60090EABA;
+			remoteInfo = rbe_components;
+		};
+		43BBA65A199C658B00504C0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 431FC1BB199B841800CFEB6B /* srtp.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 439831A0198F760B0090EABA;
+			remoteInfo = srtp;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -413,7 +462,6 @@
 		431FC16D199B83CF00CFEB6B /* common_audio.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = common_audio.xcodeproj; path = ../../../webRTC_xCode/common_audio/common_audio.xcodeproj; sourceTree = "<group>"; };
 		431FC173199B83D400CFEB6B /* crnssckbi.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = crnssckbi.xcodeproj; path = ../../../webRTC_xCode/crnssckbi/crnssckbi.xcodeproj; sourceTree = "<group>"; };
 		431FC17C199B83D800CFEB6B /* crssl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = crssl.xcodeproj; path = ../../../webRTC_xCode/crssl/crssl.xcodeproj; sourceTree = "<group>"; };
-		431FC182199B83DD00CFEB6B /* expat.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = expat.xcodeproj; path = ../../../webRTC_xCode/expat/expat.xcodeproj; sourceTree = "<group>"; };
 		431FC188199B83E200CFEB6B /* G711.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = G711.xcodeproj; path = ../../../webRTC_xCode/G711/G711.xcodeproj; sourceTree = "<group>"; };
 		431FC18E199B83E700CFEB6B /* G722.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = G722.xcodeproj; path = ../../../webRTC_xCode/G722/G722.xcodeproj; sourceTree = "<group>"; };
 		431FC194199B83EC00CFEB6B /* iLBC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iLBC.xcodeproj; path = ../../../webRTC_xCode/iLBC/iLBC.xcodeproj; sourceTree = "<group>"; };
@@ -577,6 +625,7 @@
 		43AE004F197913930062C9B4 /* json_value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_value.cpp; sourceTree = "<group>"; };
 		43AE0050197913930062C9B4 /* json_valueiterator.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_valueiterator.inl; sourceTree = "<group>"; };
 		43AE0051197913930062C9B4 /* json_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_writer.cpp; sourceTree = "<group>"; };
+		43BBA610199C61F200504C0C /* expat.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = expat.xcodeproj; path = ../../../webRTC_xCode/expat/expat.xcodeproj; sourceTree = "<group>"; };
 		43D6490A196E9797001944DC /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -585,7 +634,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				431FC2B3199B8C1A00CFEB6B /* libexpat.a in Frameworks */,
+				43BBA617199C644E00504C0C /* libexpat.a in Frameworks */,
 				431FC2B1199B8C1600CFEB6B /* librtp_rtcp.a in Frameworks */,
 				431FC2B2199B8C1600CFEB6B /* libwebrtc_opus.a in Frameworks */,
 				431FC2AE199B8C0A00CFEB6B /* libiSAC.a in Frameworks */,
@@ -715,14 +764,6 @@
 			isa = PBXGroup;
 			children = (
 				431FC181199B83D800CFEB6B /* libcrssl.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		431FC183199B83DD00CFEB6B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				431FC187199B83DE00CFEB6B /* libexpat.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -991,6 +1032,7 @@
 		435E03B0196E7D9F000C3012 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				43BBA610199C61F200504C0C /* expat.xcodeproj */,
 				431FC2A8199B8BEC00CFEB6B /* media_file.xcodeproj */,
 				431FC2A2199B8BAE00CFEB6B /* iSAC.xcodeproj */,
 				431FC29C199B8BA200CFEB6B /* neteq.xcodeproj */,
@@ -1011,7 +1053,6 @@
 				431FC194199B83EC00CFEB6B /* iLBC.xcodeproj */,
 				431FC18E199B83E700CFEB6B /* G722.xcodeproj */,
 				431FC188199B83E200CFEB6B /* G711.xcodeproj */,
-				431FC182199B83DD00CFEB6B /* expat.xcodeproj */,
 				431FC17C199B83D800CFEB6B /* crssl.xcodeproj */,
 				431FC173199B83D400CFEB6B /* crnssckbi.xcodeproj */,
 				431FC16D199B83CF00CFEB6B /* common_audio.xcodeproj */,
@@ -1280,6 +1321,14 @@
 			path = third_party;
 			sourceTree = "<group>";
 		};
+		43BBA611199C61F200504C0C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				43BBA615199C61F200504C0C /* libexpat.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1294,6 +1343,13 @@
 			buildRules = (
 			);
 			dependencies = (
+				43BBA65B199C658B00504C0C /* PBXTargetDependency */,
+				43BBA659199C657C00504C0C /* PBXTargetDependency */,
+				43BBA657199C657600504C0C /* PBXTargetDependency */,
+				43BBA655199C656C00504C0C /* PBXTargetDependency */,
+				43BBA653199C654E00504C0C /* PBXTargetDependency */,
+				43BBA63A199C654100504C0C /* PBXTargetDependency */,
+				43BBA619199C645E00504C0C /* PBXTargetDependency */,
 				431FC2B7199B8C7300CFEB6B /* PBXTargetDependency */,
 				431FC2B5199B8C7000CFEB6B /* PBXTargetDependency */,
 				431FC261199B8AB100CFEB6B /* PBXTargetDependency */,
@@ -1366,8 +1422,8 @@
 					ProjectRef = 431FC17C199B83D800CFEB6B /* crssl.xcodeproj */;
 				},
 				{
-					ProductGroup = 431FC183199B83DD00CFEB6B /* Products */;
-					ProjectRef = 431FC182199B83DD00CFEB6B /* expat.xcodeproj */;
+					ProductGroup = 43BBA611199C61F200504C0C /* Products */;
+					ProjectRef = 43BBA610199C61F200504C0C /* expat.xcodeproj */;
 				},
 				{
 					ProductGroup = 431FC189199B83E200CFEB6B /* Products */;
@@ -1528,13 +1584,6 @@
 			remoteRef = 431FC180199B83D800CFEB6B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		431FC187199B83DE00CFEB6B /* libexpat.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libexpat.a;
-			remoteRef = 431FC186199B83DE00CFEB6B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		431FC18D199B83E200CFEB6B /* libG711.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1682,6 +1731,13 @@
 			remoteRef = 431FC2AC199B8BEC00CFEB6B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		43BBA615199C61F200504C0C /* libexpat.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libexpat.a;
+			remoteRef = 43BBA614199C61F200504C0C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1786,6 +1842,41 @@
 			isa = PBXTargetDependency;
 			name = neteq;
 			targetProxy = 431FC2B6199B8C7300CFEB6B /* PBXContainerItemProxy */;
+		};
+		43BBA619199C645E00504C0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = expat;
+			targetProxy = 43BBA618199C645E00504C0C /* PBXContainerItemProxy */;
+		};
+		43BBA63A199C654100504C0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = crssl;
+			targetProxy = 43BBA639199C654100504C0C /* PBXContainerItemProxy */;
+		};
+		43BBA653199C654E00504C0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = nss_static;
+			targetProxy = 43BBA652199C654E00504C0C /* PBXContainerItemProxy */;
+		};
+		43BBA655199C656C00504C0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = usrsctp;
+			targetProxy = 43BBA654199C656C00504C0C /* PBXContainerItemProxy */;
+		};
+		43BBA657199C657600504C0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = paced_sender;
+			targetProxy = 43BBA656199C657600504C0C /* PBXContainerItemProxy */;
+		};
+		43BBA659199C657C00504C0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = rbe_components;
+			targetProxy = 43BBA658199C657C00504C0C /* PBXContainerItemProxy */;
+		};
+		43BBA65B199C658B00504C0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = srtp;
+			targetProxy = 43BBA65A199C658B00504C0C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

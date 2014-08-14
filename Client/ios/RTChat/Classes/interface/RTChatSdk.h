@@ -18,16 +18,19 @@ public:
     static RTChatSDKMain& sharedInstance();
     
     //sdk初始化，只能调用一次
-    void initSDK(const std::string& uniqueid);
-    
-    //当应用最小化时需要调用这个，清理数据
-    void deInitSDK();
+    void initSDK(const std::string& appid, const std::string& key, const char* uniqueid = NULL);
     
     //注册消息回调
     void registerMsgCallback(const pMsgCallFunc& func);
     
+    //激活SDK
+    void activateSDK();
+    
+    //当应用最小化时需要调用这个，清理数据
+    void deActivateSDK();
+    
     //请求登录
-    void requestLogin();
+    void requestLogin(const char* uniqueid);
     
     //申请房间列表
     void requestRoomList();

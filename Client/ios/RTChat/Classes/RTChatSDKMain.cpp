@@ -32,10 +32,17 @@ static  RTChatSDKMain* s_RTChatSDKMain = NULL;
 RTChatSDKMain::RTChatSDKMain() :
 _netDataManager(NULL),
 _mediaSample(NULL),
-_currentRoomID(-1),
+_currentRoomID(0),
 _isMute(false),
 _sdkOpState(SdkSocketUnConnected),
-_sdkTempID(0)
+_sdkTempID(0),
+_appid(""),
+_appkey(""),
+_token(""),
+_uniqueid(""),
+_logicIP(""),
+_logicPort(0),
+_func(NULL)
 {
     _netDataManager = new NetDataManager;
     _mediaSample = new MediaSample;
@@ -58,12 +65,23 @@ RTChatSDKMain& RTChatSDKMain::sharedInstance()
     return *s_RTChatSDKMain;
 }
 
-void RTChatSDKMain::initSDK(const std::string &uniqueid)
+void RTChatSDKMain::initSDK(const std::string &appid, const std::string &key, const char* uniqueid)
 {
-    _uniqueid = uniqueid;
+    _appid = appid;
+    _appkey = key;
     
+    if (uniqueid != NULL) {
+        _uniqueid = uniqueid;
+    }
+    
+    activateSDK();
+}
+
+//激活SDK
+void RTChatSDKMain::activateSDK()
+{
     if (_netDataManager) {
-//        _netDataManager->init("ws://180.168.126.249:16001");
+        //        _netDataManager->init("ws://180.168.126.249:16001");
         _netDataManager->init("ws://122.11.47.93:16001");
     }
     
@@ -73,7 +91,7 @@ void RTChatSDKMain::initSDK(const std::string &uniqueid)
 }
 
 //当应用最小化时需要调用这个，清理数据
-void RTChatSDKMain::deInitSDK()
+void RTChatSDKMain::deActivateSDK()
 {
     if (_netDataManager) {
         _netDataManager->closeWebSocket();
@@ -88,7 +106,7 @@ void RTChatSDKMain::deInitSDK()
     _currentRoomID = 0;
     _isMute = false;
     _sdkOpState = SdkSocketUnConnected;
-    _func = NULL;
+//    _func = NULL;
 }
 
 void RTChatSDKMain::registerMsgCallback(const pMsgCallFunc& func)
@@ -102,8 +120,15 @@ SdkOpState RTChatSDKMain::getSdkState()
     return _sdkOpState;
 }
 
-void RTChatSDKMain::requestLogin()
+void RTChatSDKMain::requestLogin(const char* uniqueid)
 {
+    if (uniqueid != NULL) {
+        _uniqueid = uniqueid;
+    }
+    if (_uniqueid == "") {
+        return;
+    }
+    
     if (_sdkOpState < SdkSocketConnected) {
         return;
     }
@@ -115,6 +140,15 @@ void RTChatSDKMain::requestLogin()
     msg.set_token("yuew89341huidy89iuh1");
     
     SendProtoMsg(msg, Cmd::enRequestLogin);
+}
+
+//请求逻辑服务器地址
+void RTChatSDKMain::requestLogicServerInfo(const std::string& appid, const std::string& key)
+{
+    stBaseCmd cmd;
+    cmd.cmdid = Cmd::enRequestLogicInfo;
+    
+    
 }
 
 //申请房间列表
