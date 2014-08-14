@@ -33,7 +33,8 @@
 #include <queue>
 #include <signal.h>
 #include <errno.h>
-#include "SdkPublic.h"
+#include "public.h"
+#include "defines.h"
 
 class WsMessage
 {

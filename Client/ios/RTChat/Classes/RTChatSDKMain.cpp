@@ -10,7 +10,8 @@
 #include "netdatamanager.h"
 #include "NetProcess/command.h"
 #include "MediaSample.h"
-#include "SdkPublic.h"
+#include "defines.h"
+#include "public.h"
 
 static  RTChatSDKMain* s_RTChatSDKMain = NULL;
 
@@ -232,7 +233,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
 {
     stBaseCmd* cmd = (stBaseCmd*)data;
     
-    sdklog("cmdid=%u", cmd->cmdid);
+    Public::sdklog("cmdid=%u", cmd->cmdid);
     
     switch (cmd->cmdid) {
         case Cmd::enNotifyLoginResult:
@@ -328,7 +329,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
         }
         case Cmd::enNotifyAddVoiceUser:
         {
-            sdklog("接收到增加通道指令");
+            Public::sdklog("接收到增加通道指令");
             
             Cmd::cmdNotifyAddVoiceUser protomsg;
             protomsg.ParseFromArray(cmd->data, cmd->cmdlen);

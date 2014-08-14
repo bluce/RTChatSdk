@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		430079591973A705003DB064 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 430079581973A705003DB064 /* CoreFoundation.framework */; };
 		43072E511988EFDC00820124 /* RTChatSdk.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 43247A731987412100AF14C7 /* RTChatSdk.h */; };
+		43095C4C199C54E2003C23B3 /* public.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43095C4A199C54E2003C23B3 /* public.cpp */; };
 		430F16FC196F8DC10083B252 /* tinystr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F6196F8DC10083B252 /* tinystr.cpp */; };
 		430F16FD196F8DC10083B252 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F7196F8DC10083B252 /* tinyxml.cpp */; };
 		430F16FE196F8DC10083B252 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F8196F8DC10083B252 /* tinyxmlerror.cpp */; };
@@ -395,6 +396,8 @@
 
 /* Begin PBXFileReference section */
 		430079581973A705003DB064 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		43095C4A199C54E2003C23B3 /* public.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = public.cpp; sourceTree = "<group>"; };
+		43095C4B199C54E2003C23B3 /* public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = public.h; sourceTree = "<group>"; };
 		430F16F6196F8DC10083B252 /* tinystr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinystr.cpp; sourceTree = "<group>"; };
 		430F16F7196F8DC10083B252 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		430F16F8196F8DC10083B252 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
@@ -556,7 +559,7 @@
 		43998DE2198660B1003C5793 /* public.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = public.pb.cc; sourceTree = "<group>"; };
 		43998DE3198660B1003C5793 /* public.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = public.pb.h; sourceTree = "<group>"; };
 		43998DE619866803003C5793 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
-		43AD8521199101E4006EAB38 /* SdkPublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SdkPublic.h; sourceTree = "<group>"; };
+		43AD8521199101E4006EAB38 /* defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = defines.h; sourceTree = "<group>"; };
 		43AE0040197913930062C9B4 /* assertions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = assertions.h; sourceTree = "<group>"; };
 		43AE0041197913930062C9B4 /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = autolink.h; sourceTree = "<group>"; };
 		43AE0042197913930062C9B4 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
@@ -1065,7 +1068,9 @@
 				43998BAE198636DA003C5793 /* WebSocket.h */,
 				43247A521987339300AF14C7 /* MediaSample.cpp */,
 				43247A531987339300AF14C7 /* MediaSample.h */,
-				43AD8521199101E4006EAB38 /* SdkPublic.h */,
+				43AD8521199101E4006EAB38 /* defines.h */,
+				43095C4A199C54E2003C23B3 /* public.cpp */,
+				43095C4B199C54E2003C23B3 /* public.h */,
 				4374E72519932BD0000CE39F /* RTChatCommonTypes.h */,
 			);
 			path = Classes;
@@ -1686,6 +1691,7 @@
 			files = (
 				43998DDA19865C28003C5793 /* structurally_valid.cc in Sources */,
 				43998DCB19865C28003C5793 /* generated_message_util.cc in Sources */,
+				43095C4C199C54E2003C23B3 /* public.cpp in Sources */,
 				43247A541987339300AF14C7 /* MediaSample.cpp in Sources */,
 				43998DC819865C28003C5793 /* extension_set.cc in Sources */,
 				43AE0052197913930062C9B4 /* json_reader.cpp in Sources */,
@@ -1910,6 +1916,7 @@
 					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/nss_static/build/Debug-iphoneos",
 					"/Users/raymon_wang/Documents/Develop/RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Debug-iphoneos",
 				);
+				LLVM_LTO = YES;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
@@ -1917,7 +1924,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "arm64 armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -1933,6 +1940,7 @@
 				DSTROOT = /tmp/RTChat.dst;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_ENABLE_TRIGRAPHS = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -1981,13 +1989,14 @@
 					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/nss_static/build/Debug-iphoneos",
 					"/Users/raymon_wang/Documents/Develop/RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Debug-iphoneos",
 				);
+				LLVM_LTO = YES;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "arm64 armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;
 		};

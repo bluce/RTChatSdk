@@ -9,7 +9,7 @@
 #ifndef RTChat_command_h
 #define RTChat_command_h
 
-#include "../SdkPublic.h"
+#include "../defines.h"
 
 #pragma pack(push, 1)
 

@@ -7,7 +7,8 @@
 //
 
 #include "MediaSample.h"
-#include "SdkPublic.h"
+#include "defines.h"
+#include "public.h"
 #include "RTChatSDKMain.h"
 #include <webrtc/voice_engine/include/voe_file.h>
 
@@ -46,8 +47,6 @@ bool MediaSample::init()
         voe_audioProcessing->SetEcStatus(true, kEcConference);
         voe_audioProcessing->SetNsStatus(true, kNsConference);
         voe_audioProcessing->SetAgcStatus(true);
-        
-        int i = 0;
     }
     
     voe_base->RegisterVoiceEngineObserver(*this);
@@ -57,7 +56,7 @@ bool MediaSample::init()
 
 void MediaSample::CallbackOnError(int channel, int errCode)
 {
-    sdklog("channel=%d, errCode=%d", channel, errCode);
+    Public::sdklog("channel=%d, errCode=%d", channel, errCode);
 }
 
 void MediaSample::connectRoom(const std::string &ip, unsigned int port, uint64_t sdkID)
@@ -167,10 +166,10 @@ int MediaSample::onCreateChannel(uint64_t id, MediaSample::DataDirection directi
 {
     std::string cname;
     if (direction == data_in) {
-        cname = avar("r%llu@s%llu", id, RTChatSDKMain::sharedInstance().get_sdkTempID());
+        cname = Public::SdkAvar("r%llu@s%llu", id, RTChatSDKMain::sharedInstance().get_sdkTempID());
     }
     else {
-        cname = avar("s%llu", id);
+        cname = Public::SdkAvar("s%llu", id);
     }
     
     VoEBase* voe_base = VoEBase::GetInterface(_voe);
@@ -181,7 +180,7 @@ int MediaSample::onCreateChannel(uint64_t id, MediaSample::DataDirection directi
         VoiceChannelTransport* voiceTransport = new VoiceChannelTransport(network, channel);
         
         if (voiceTransport->SetSendDestination(_voiceServerIp.c_str(), _voiceServerPort) == -1) {
-            sdklog("SetSendDestination 错误\n");
+            Public::sdklog("SetSendDestination 错误\n");
         }
         
         VoERTP_RTCP* rtcp = VoERTP_RTCP::GetInterface(_voe);
@@ -192,18 +191,18 @@ int MediaSample::onCreateChannel(uint64_t id, MediaSample::DataDirection directi
         _channelMap[channel] = new ChannelInfo(channel, voiceTransport, direction, cname.c_str());
         
         if (direction == data_in) {
-            sdklog("发送数据之前，channel=%d, cname=%s, recvport=%d\n", channel, cname.c_str(), _recvport);
+            Public::sdklog("发送数据之前，channel=%d, cname=%s, recvport=%d\n", channel, cname.c_str(), _recvport);
             if (voiceTransport->SetLocalReceiver(_recvport) == -1) {
-                sdklog("SetLocalReceiver失败\n");
+                Public::sdklog("SetLocalReceiver失败\n");
             }
             if (voe_base->StartReceive(channel)) {
-                sdklog("StartReceive失败\n");
+                Public::sdklog("StartReceive失败\n");
             }
             if (voe_base->StartPlayout(channel) == -1) {
-                sdklog("StartPlayout失败\n");
+                Public::sdklog("StartPlayout失败\n");
             }
             if (voe_base->StartSend(channel) == -1) {
-                sdklog("StartSend失败, channel=%d\n", channel);
+                Public::sdklog("StartSend失败, channel=%d\n", channel);
             }
             _recvport += 10;
             
@@ -211,16 +210,16 @@ int MediaSample::onCreateChannel(uint64_t id, MediaSample::DataDirection directi
         }
         else {
             if (voiceTransport->SetLocalReceiver(_recvport) == -1) {
-                sdklog("SetLocalReceiver失败\n");
+                Public::sdklog("SetLocalReceiver失败\n");
             }
             if (voe_base->StartReceive(channel)) {
-                sdklog("StartReceive失败\n");
+                Public::sdklog("StartReceive失败\n");
             }
             if (voe_base->StartPlayout(channel) == -1) {
-                sdklog("StartPlayout失败\n");
+                Public::sdklog("StartPlayout失败\n");
             }
             if (voe_base->StartSend(channel) == -1) {
-                sdklog("StartSend失败, channel=%d\n", channel);
+                Public::sdklog("StartSend失败, channel=%d\n", channel);
             }
             _recvport += 10;
         }
@@ -236,10 +235,10 @@ void MediaSample::onDeleteChannel(uint64_t id, MediaSample::DataDirection direct
 {
     std::string cname;
     if (direction == data_in) {
-        cname = avar("r%llu@s%llu", id, RTChatSDKMain::sharedInstance().get_sdkTempID());
+        cname = Public::SdkAvar("r%llu@s%llu", id, RTChatSDKMain::sharedInstance().get_sdkTempID());
     }
     else {
-        cname = avar("s%llu", id);
+        cname = Public::SdkAvar("s%llu", id);
     }
     
     int channel = -1;
@@ -247,7 +246,7 @@ void MediaSample::onDeleteChannel(uint64_t id, MediaSample::DataDirection direct
         const ChannelInfo* info = it->second;
         if (!strncasecmp(info->name, cname.c_str(), sizeof(info->name))) {
             channel = info->channelID;
-            sdklog("移除%d号通道, name=%s", channel, info->name);
+            Public::sdklog("移除%d号通道, name=%s", channel, info->name);
             setChannelReceiveMute(channel, false);
             VoEBase* voe_base = VoEBase::GetInterface(_voe);
             if (voe_base) {
@@ -305,7 +304,7 @@ void MediaSample::setEncodeTypeToChannel(int channel, int codeType)
         codec->GetCodec(i, inst);
         if (inst.pltype == codeType) {
             if (codec->SetSendCodec(channel, inst) == -1) {
-                sdklog("设置编码格式为%d失败\n", inst.pltype);
+                Public::sdklog("设置编码格式为%d失败\n", inst.pltype);
             }
             break;
         }
@@ -325,7 +324,7 @@ void MediaSample::OnApplicationDataReceived(int channel, unsigned char subType,
                                        unsigned int name, const unsigned char* data,
                                        unsigned short dataLengthInBytes)
 {
-    sdklog("收到关闭通道%d rtcp指令\n", channel);
+    Public::sdklog("收到关闭通道%d rtcp指令\n", channel);
     VoEBase* voe_base = VoEBase::GetInterface(_voe);
     if (voe_base) {
         voe_base->StopSend(channel);
