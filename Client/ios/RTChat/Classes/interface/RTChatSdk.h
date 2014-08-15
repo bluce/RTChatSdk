@@ -10,6 +10,7 @@
 #define RTChat_RTChatSdk_h
 
 #include "RTChatCommonTypes.h"
+#include <functional>
 
 typedef std::function<void (SdkResponseCmd cmdType, SdkErrorCode error, const unsigned char* dataPtr, uint32_t dataSize)> pMsgCallFunc;
 

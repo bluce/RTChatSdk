@@ -9,6 +9,9 @@
 #ifndef RTChat_RTChatCommonTypes_h
 #define RTChat_RTChatCommonTypes_h
 
+#include <strings.h>
+#include <stdint.h>
+
 enum enRoomType
 {
     ROOM_TYPE_MIN = 0,
