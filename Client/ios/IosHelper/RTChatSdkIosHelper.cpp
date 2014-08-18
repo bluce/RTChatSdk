@@ -87,11 +87,80 @@ void RTChatSdkIosHelper::visit()
         case enNotifyLoginResult:
         {
             StNotifyLoginResult* data = (StNotifyLoginResult*)stCallBackData->data;
-            if (stCallBackData->error == OPERATION_OK) {
-                _sdktempid = data->tempid;
+            if (_voiceDelegate) {
+                _voiceDelegate->onNotifyLoginResult(stCallBackData->error, data->tempid);
             }
-            else {
-                printf("登录失败\n");
+            break;
+        }
+        case enNotifyCreateResult:
+        {
+            StNotifyCreateResult* data = (StNotifyCreateResult*)stCallBackData->data;
+            if (_voiceDelegate) {
+                _voiceDelegate->onNotifyCreateResult(stCallBackData->error, data->roomid, data->roomtype);
+            }
+            break;
+        }
+        case enNotifyEnterResult:
+        {
+            StNotifyEnterResult* data = (StNotifyEnterResult*)stCallBackData->data;
+            if (_voiceDelegate) {
+                _voiceDelegate->onNotifyEnterResult(stCallBackData->error, data->roomid, data->roomtype);
+            }
+            break;
+        }
+        case enNotifyRoomList:
+        {
+            std::vector<StRoomInfo> infoVec;
+            StNotifyRoomList* data = (StNotifyRoomList*)stCallBackData->data;
+            for (int i = 0; i < data->size; i++) {
+                infoVec.push_back(data->roominfo[i]);
+            }
+            if (_voiceDelegate) {
+                _voiceDelegate->onNotifyRoomList(stCallBackData->error, infoVec);
+            }
+            break;
+        }
+        case enNotifyAddVoiceUser:
+        {
+            std::vector<StVoiceUserInfo> infoVec;
+            StNotifyAddVoiceUser* data = (StNotifyAddVoiceUser*)stCallBackData->data;
+            for (int i = 0; i < data->size; i++) {
+                infoVec.push_back(data->userinfo[i]);
+            }
+            if (_voiceDelegate) {
+                _voiceDelegate->onNotifyAddVoiceUser(stCallBackData->error, infoVec);
+            }
+            break;
+        }
+        case enNotifyDelVoiceUser:
+        {
+            std::vector<StVoiceUserInfo> infoVec;
+            StNotifyDelVoiceUser* data = (StNotifyDelVoiceUser*)stCallBackData->data;
+            for (int i = 0; i < data->size; i++) {
+                infoVec.push_back(data->userinfo[i]);
+            }
+            if (_voiceDelegate) {
+                _voiceDelegate->onNotifyDelVoiceUser(stCallBackData->error, infoVec);
+            }
+            break;
+        }
+        case enNotifyMicQueue:
+        {
+            std::vector<StMicInfo> infoVec;
+            StNotifyMicQueue* data = (StNotifyMicQueue*)stCallBackData->data;
+            for (int i = 0; i < data->size; i++) {
+                infoVec.push_back(data->micinfo[i]);
+            }
+            if (_voiceDelegate) {
+                _voiceDelegate->onNotifyMicQueue(stCallBackData->error, infoVec);
+            }
+            break;
+        }
+        case enNotifyTakeMic:
+        {
+            StNotifyTakeMic* data = (StNotifyTakeMic*)stCallBackData->data;
+            if (_voiceDelegate) {
+                _voiceDelegate->onNotifyTakeMic(stCallBackData->error, data->tempid, data->mtime);
             }
             break;
         }

@@ -16,19 +16,21 @@
 
 class RTChatSdkIosHelperDelegate {
 public:
-    virtual void onNotifyLoginResult() = 0;
+    virtual void onNotifyLoginResult(SdkErrorCode error, uint64_t tempid) {};
     
-    virtual void onNotifyCreateResult() = 0;
+    virtual void onNotifyCreateResult(SdkErrorCode error, uint64_t roomid, enRoomType roomtype) {};
     
-    virtual void onNotifyEnterResult() = 0;
+    virtual void onNotifyEnterResult(SdkErrorCode error, uint64_t roomid, enRoomType roomtype) {};
     
-    virtual void onNotifyRoomList() = 0;
+    virtual void onNotifyRoomList(SdkErrorCode error, const std::vector<StRoomInfo> infoVec) {};
     
-    virtual void onNotifyMicQueue() = 0;
+    virtual void onNotifyAddVoiceUser(SdkErrorCode error, const std::vector<StVoiceUserInfo> infoVec) {};
     
-    virtual void onNotifyTakeMic() = 0;
+    virtual void onNotifyDelVoiceUser(SdkErrorCode error, const std::vector<StVoiceUserInfo> infoVec) {};
     
-    virtual void onNotifyDelVoiceUser() = 0;
+    virtual void onNotifyMicQueue(SdkErrorCode error, const std::vector<StMicInfo> infoVec) {};
+    
+    virtual void onNotifyTakeMic(SdkErrorCode error, uint64_t tempid, uint32_t mtime) {};
 };
 
 class RTChatSdkIosHelper {
