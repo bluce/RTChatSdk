@@ -203,11 +203,14 @@ struct StNotifyMicQueue {
 };
 
 struct StNotifyTakeMic {
-    StNotifyTakeMic(uint64_t id, uint32_t time) {
+    StNotifyTakeMic(uint64_t id, const char* uniqueidstr, uint32_t time) {
         tempid = id;
+        bzero(uniqueid, sizeof(uniqueid));
+        bcopy(uniqueidstr, uniqueid, sizeof(uniqueid));
         mtime = time;
     }
     uint64_t tempid;    //持有麦的用户SDKID;
+    char uniqueid[64];  //应用侧用户ID
     uint32_t mtime; //麦序持续时间
 };
 

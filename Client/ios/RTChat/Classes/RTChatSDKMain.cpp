@@ -81,8 +81,8 @@ void RTChatSDKMain::initSDK(const std::string &appid, const std::string &key, co
 void RTChatSDKMain::activateSDK()
 {
     if (_netDataManager) {
-        //        _netDataManager->init("ws://180.168.126.249:16001");
-        _netDataManager->init("ws://122.11.47.93:16001");
+        _netDataManager->init("ws://180.168.126.249:16001");
+//        _netDataManager->init("ws://122.11.47.93:16001");
     }
     
     if (_mediaSample) {
@@ -351,6 +351,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
                 StRoomInfo info;
                 info.roomid = protomsg.info(i).roomid();
                 info.roomtype = (enRoomType)protomsg.info(i).roomtype();
+                info.num = protomsg.info(i).num();
 //                bcopy(&info, &roomList->roominfo[i], sizeof(StRoomInfo));
                 roomList->roominfo[i] = info;
             }
@@ -421,7 +422,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
                 }
             }
             
-            StNotifyTakeMic micdata(protomsg.tempid(), protomsg.mtime());
+            StNotifyTakeMic micdata(protomsg.tempid(), protomsg.uniqueid().c_str(), protomsg.mtime());
             _func(enNotifyTakeMic, OPERATION_OK, (const unsigned char*)&micdata, sizeof(StNotifyTakeMic));
             
             break;
