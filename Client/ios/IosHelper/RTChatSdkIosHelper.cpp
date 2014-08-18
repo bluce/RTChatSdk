@@ -164,6 +164,42 @@ void RTChatSdkIosHelper::visit()
             }
             break;
         }
+        case enNotifySomeEnterRoom:
+        {
+            std::vector<stRoomUserInfo> infoVec;
+            StNotifySomeEnterRoom* data = (StNotifySomeEnterRoom*)stCallBackData->data;
+            for (int i = 0; i < data->size; i++) {
+                infoVec.push_back(data->userinfo[i]);
+            }
+            if (_voiceDelegate) {
+                _voiceDelegate->onNotifySomeEnterRoom(stCallBackData->error, infoVec);
+            }
+            break;
+        }
+        case enNotifySomeLeaveRoom:
+        {
+            StNotifySomeLeaveRoom* data = (StNotifySomeLeaveRoom*)stCallBackData->data;
+            if (_voiceDelegate) {
+                _voiceDelegate->onNotifySomeLeaveRoom(stCallBackData->error, data->tempid);
+            }
+            break;
+        }
+        case enNotifyRandChat:
+        {
+            StNotifyRandChat* data = (StNotifyRandChat*)stCallBackData->data;
+            if (_voiceDelegate) {
+                _voiceDelegate->onNotifyRandChat(stCallBackData->error, data->uniqueid, data->roomid);
+            }
+
+            break;
+        }
+        case enReturnRandChat:
+        {
+            if (_voiceDelegate) {
+                _voiceDelegate->onReturnRandChat(stCallBackData->error);
+            }
+            break;
+        }
         default:
             break;
     }
