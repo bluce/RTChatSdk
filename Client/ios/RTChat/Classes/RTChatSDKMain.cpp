@@ -304,7 +304,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
                 
                 
                 //回调应用数据
-                StNotifyCreateResult callbackdata(true, protomsg.roomid());
+                StNotifyCreateResult callbackdata(true, protomsg.roomid(), (enRoomType)protomsg.type());
                 _func(enNotifyCreateResult, OPERATION_OK, (const unsigned char*)&callbackdata, sizeof(StNotifyCreateResult));
             }
             else {
@@ -354,6 +354,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             for (int i = 0; i < protomsg.info_size(); i++) {
                 StRoomInfo info;
                 info.roomid = protomsg.info(i).roomid();
+                info.roomtype = (enRoomType)protomsg.info(i).roomtype();
 //                bcopy(&info, &roomList->roominfo[i], sizeof(StRoomInfo));
                 roomList->roominfo[i] = info;
             }
@@ -376,7 +377,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             BUFFER_CMD(StNotifyAddVoiceUser, userList, MAX_BUFFER_SIZE);
             userList->size = protomsg.info_size();
             for (int i = 0; i < protomsg.info_size(); i++) {
-                stVoiceUserInfo info;
+                StVoiceUserInfo info;
                 info.userid = protomsg.info(i).id();
                 //                bcopy(&info, &roomList->roominfo[i], sizeof(StRoomInfo));
                 userList->userinfo[i] = info;

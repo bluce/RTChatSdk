@@ -118,12 +118,14 @@ struct StNotifyLoginResult {
 };
 
 struct StNotifyCreateResult {
-    StNotifyCreateResult(bool ok, uint64_t id) {
+    StNotifyCreateResult(bool ok, uint64_t id, enRoomType type) {
         isok = ok;
         roomid = id;
+        roomtype = type;
     }
     bool isok;
     uint64_t roomid;
+    enRoomType roomtype;
 };
 
 struct StNotifyEnterResult {
@@ -137,6 +139,7 @@ struct StNotifyEnterResult {
 
 struct StRoomInfo {
     uint64_t roomid;
+    enRoomType roomtype;
 };
 
 struct StNotifyRoomList {
@@ -146,7 +149,7 @@ struct StNotifyRoomList {
 };
 
 //收听用户信息
-struct stVoiceUserInfo
+struct StVoiceUserInfo
 {
 	uint64_t userid;
 };
@@ -154,8 +157,8 @@ struct stVoiceUserInfo
 //增加收听用户，即房间进入新用户
 struct StNotifyAddVoiceUser {
     uint32_t size;
-    stVoiceUserInfo userinfo[0];
-    uint32_t getSize() const {return sizeof(StNotifyAddVoiceUser)+ sizeof(stVoiceUserInfo)*size;}
+    StVoiceUserInfo userinfo[0];
+    uint32_t getSize() const {return sizeof(StNotifyAddVoiceUser)+ sizeof(StVoiceUserInfo)*size;}
 };
 
 struct StMicInfo {
@@ -186,8 +189,8 @@ struct StNotifyTakeMic {
 //删除收听用户，即房间进入新用户
 struct StNotifyDelVoiceUser {
     uint32_t size;
-    stVoiceUserInfo userinfo[0];
-    uint32_t getSize() const {return sizeof(StNotifyDelVoiceUser)+ sizeof(stVoiceUserInfo)*size;}
+    StVoiceUserInfo userinfo[0];
+    uint32_t getSize() const {return sizeof(StNotifyDelVoiceUser)+ sizeof(StVoiceUserInfo)*size;}
 };
 
 /******************回调字符串JSON格式******************/
