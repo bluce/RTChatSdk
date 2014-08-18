@@ -58,6 +58,7 @@ message cmdNotifyLoginResult
 message cmdRequestCreateRoom
 {
 	required enRoomType type = 1;
+	required enRoomReason reason = 2;
 }
 
 
@@ -67,8 +68,9 @@ message cmdNotifyCreateResult
 	required bool isok = 1;
 	optional uint64 roomid = 2;
 	optional enRoomType type = 3;
-	optional string ip = 4;
-	optional uint32 port = 5;
+	optional enRoomReason reason = 4;
+	optional string ip = 5;
+	optional uint32 port = 6;
 }
 
 
@@ -92,8 +94,8 @@ message cmdNotifyEnterResult
 	required enEnterResult result = 1;
 	optional uint64 roomid = 2;
 	optional enRoomType type = 3;
-	optional string ip = 4;
-	optional uint32 port = 5;
+	optional string ip = 5;
+	optional uint32 port = 6;
 }
 
 
@@ -120,7 +122,8 @@ message cmdNotifyMicQueue
 message cmdNotifyTakeMic
 {
 	required uint64 tempid = 1;
-	required uint32 mtime = 2;
+	required string uniqueid = 2;
+	required uint32 mtime = 3;
 }
 
 
@@ -129,3 +132,35 @@ message cmdNotifyDelVoiceUser
 {
 	repeated stVoiceUserInfo info = 1;
 }
+
+
+/// 通知有人进入房间
+message cmdNotifySomeEnterRoom
+{
+	repeated stRoomUserInfo info = 1;
+}
+
+
+/// 通知有人离开房间
+message cmdNotifySomeLeaveRoom
+{
+	required uint64 tempid = 1;
+}
+
+
+/// 有人想和你随机聊天
+message cmdNotifyRandChat
+{
+	required uint64 tempid = 1;
+	required string uniqueid = 2;
+	required uint64 roomid = 3;
+}
+
+
+/// 告知随机聊天结果
+message cmdReturnRandChat
+{
+	required bool isok = 1;
+	optional uint64 tempid = 2;
+}
+

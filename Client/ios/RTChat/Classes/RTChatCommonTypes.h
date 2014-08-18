@@ -15,9 +15,20 @@
 enum enRoomType
 {
     ROOM_TYPE_MIN = 0,
-    ROOM_TYPE_QUEUE = 1,
-    ROOM_TYPE_FREE = 2,
-    ROOM_TYPE_MAX = 3,
+    ROOM_TYPE_QUEUE = 1, /// 单人队列排麦模式(只能一个人拿麦)
+	ROOM_TYPE_FREE = 2,  /// 自由模式(最多4个人)
+	ROOM_TYPE_TWO = 3,   /// 二人模式
+	ROOM_TYPE_ONLY = 4,   /// 抢麦模式
+    ROOM_TYPE_MAX = 5,
+};
+
+/// 创建房间的理由
+enum enRoomReason
+{
+	ROOM_REASON_MIN = 0,
+	ROOM_REASON_NORMAL = 1,
+	ROOM_REASON_RANDCHAT = 2,
+	ROOM_REASON_MAX = 3,
 };
 
 enum SdkOpState {
@@ -86,6 +97,18 @@ enum SdkResponseCmd {
     
     /// 删除一个通道
 	enNotifyDelVoiceUser = 17,
+    
+    /// 通知有人进入房间
+	enNotifySomeEnterRoom = 18,
+    
+	/// 有人想和你随机聊天
+	enNotifyRandChat = 21,
+    
+	/// 返回是否要随机聊天
+	enReturnRandChat = 22,
+    
+    /// 有人离开房间
+	enNotifySomeLeaveRoom = 19,
 };
 
 enum SdkErrorCode {
@@ -140,6 +163,7 @@ struct StNotifyEnterResult {
 struct StRoomInfo {
     uint64_t roomid;
     enRoomType roomtype;
+    uint32_t num;
 };
 
 struct StNotifyRoomList {
@@ -163,9 +187,10 @@ struct StNotifyAddVoiceUser {
 
 struct StMicInfo {
     StMicInfo() {
-        userid = 0;
+        tempid = 0;
     }
-    uint64_t userid;
+    uint64_t tempid;     //SDK内部用户ID
+    char uniqueid[64];  //应用侧用户ID
 };
 
 struct StNotifyMicQueue {
@@ -191,6 +216,46 @@ struct StNotifyDelVoiceUser {
     uint32_t size;
     StVoiceUserInfo userinfo[0];
     uint32_t getSize() const {return sizeof(StNotifyDelVoiceUser)+ sizeof(StVoiceUserInfo)*size;}
+};
+
+struct stRoomUserInfo {
+    uint64_t tempid;     //SDK内部用户ID
+    char uniqueid[64];  //应用侧用户ID
+};
+
+//通知有人进入房间
+struct StNotifySomeEnterRoom {
+    uint32_t size;
+    stRoomUserInfo userinfo[0];
+    uint32_t getSize() const {return sizeof(StNotifySomeEnterRoom)+ sizeof(stRoomUserInfo)*size;}
+};
+
+//通知有人离开房间
+struct StNotifySomeLeaveRoom {
+    uint64_t tempid;
+};
+
+//有人想和你随机聊天
+struct StNotifyRandChat {
+    StNotifyRandChat(uint64_t id, const char* uniqueidstr, uint64_t rid) {
+        tempid = id;
+        bzero(uniqueid, sizeof(uniqueid));
+        bcopy(uniqueidstr, uniqueid, sizeof(uniqueid));
+        roomid = rid;
+    }
+    uint64_t tempid;
+	char uniqueid[64];
+	uint64_t roomid;
+};
+
+/// 告知发起随机聊天结果
+struct StReturnRandChat {
+    StReturnRandChat(bool res, uint64_t id) {
+        isok = res;
+        tempid = id;
+    }
+    bool isok;
+    uint64_t tempid;
 };
 
 /******************回调字符串JSON格式******************/

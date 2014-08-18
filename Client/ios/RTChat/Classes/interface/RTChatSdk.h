@@ -37,7 +37,7 @@ public:
     void requestRoomList();
     
     //创建房间
-    void createRoom(enRoomType roomType);
+    void createRoom(enRoomType roomType, enRoomReason reason);
     
     //加入房间
     void joinRoom(uint64_t roomid);

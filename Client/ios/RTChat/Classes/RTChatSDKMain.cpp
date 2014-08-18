@@ -162,19 +162,15 @@ void RTChatSDKMain::requestRoomList()
     }
 }
 
-void RTChatSDKMain::createRoom(enRoomType roomType)
+void RTChatSDKMain::createRoom(enRoomType roomType, enRoomReason reason)
 {
     if (_sdkOpState != SdkUserLogined) {
         return;
     }
     
     Cmd::cmdRequestCreateRoom msg;
-    if (roomType == ROOM_TYPE_FREE) {
-        msg.set_type(Cmd::ROOM_TYPE_FREE);
-    }
-    else if (roomType == ROOM_TYPE_QUEUE) {
-        msg.set_type(Cmd::ROOM_TYPE_QUEUE);
-    }
+    msg.set_type((Cmd::enRoomType)roomType);
+    msg.set_reason((Cmd::enRoomReason)reason);
     
     _sdkOpState = SdkUserCreatingRoom;
     
@@ -396,8 +392,8 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             micList->size = protomsg.info_size();
             for (int i = 0; i < protomsg.info_size(); i++) {
                 StMicInfo info;
-                info.userid = protomsg.info(i).id();
-                //                bcopy(&info, &roomList->roominfo[i], sizeof(StRoomInfo));
+                info.tempid = protomsg.info(i).tempid();
+                bcopy(protomsg.info(i).uniqueid().c_str(), info.uniqueid, sizeof(info.tempid));
                 micList->micinfo[i] = info;
             }
             
@@ -438,6 +434,60 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
                 if (_mediaSample) {
                     _mediaSample->onDeleteChannel(protomsg.info(i).id(), MediaSample::data_in);
                 }
+            }
+            
+            break;
+        }
+        case Cmd::enNotifySomeEnterRoom:
+        {
+            Cmd::cmdNotifySomeEnterRoom protomsg;
+            protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
+            
+            BUFFER_CMD(StNotifySomeEnterRoom, userList, MAX_BUFFER_SIZE);
+            userList->size = protomsg.info_size();
+            for (int i = 0; i < protomsg.info_size(); i++) {
+                stRoomUserInfo info;
+                info.tempid = protomsg.info(i).tempid();
+                bcopy(protomsg.info(i).uniqueid().c_str(), info.uniqueid, sizeof(info.uniqueid));
+                userList->userinfo[i] = info;
+            }
+            
+            _func(enNotifySomeEnterRoom, OPERATION_OK, (const unsigned char*)userList, userList->getSize());
+            
+            break;
+        }
+        case Cmd::enNotifySomeLeaveRoom:
+        {
+            Cmd::cmdNotifySomeLeaveRoom protomsg;
+            protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
+            
+            StNotifySomeLeaveRoom callbackdata;
+            callbackdata.tempid = protomsg.tempid();
+            
+            _func(enNotifySomeLeaveRoom, OPERATION_OK, (const unsigned char*)&callbackdata, sizeof(StNotifySomeLeaveRoom));
+            
+            break;
+        }
+        case Cmd::enNotifyRandChat:
+        {
+            Cmd::cmdNotifyRandChat protomsg;
+            protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
+            
+            StNotifyRandChat callbackdata(protomsg.tempid(), protomsg.uniqueid().c_str(), protomsg.roomid());
+            _func(enNotifyRandChat, OPERATION_OK, (const unsigned char*)&callbackdata, sizeof(StNotifyRandChat));
+            break;
+        }
+        case Cmd::enReturnRandChat:
+        {
+            Cmd::cmdReturnRandChat protomsg;
+            protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
+            
+            StReturnRandChat callbackdata(protomsg.isok(), protomsg.tempid());
+            if (protomsg.isok()) {
+                _func(enNotifyRandChat, OPERATION_OK, (const unsigned char*)&callbackdata, sizeof(StNotifyRandChat));
+            }
+            else {
+                _func(enNotifyRandChat, OPERATION_FAILED, (const unsigned char*)&callbackdata, sizeof(StNotifyRandChat));
             }
             
             break;

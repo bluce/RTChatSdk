@@ -17,7 +17,19 @@ enum enRoomType
 	ROOM_TYPE_MIN = 0; 
 	ROOM_TYPE_QUEUE = 1; /// 单人队列排麦模式(只能一个人拿麦)
 	ROOM_TYPE_FREE = 2;  /// 自由模式(最多4个人)
-	ROOM_TYPE_MAX = 3;
+	ROOM_TYPE_TWO = 3;   /// 二人模式
+	ROOM_TYPE_ONLY = 4;   /// 抢麦模式
+	ROOM_TYPE_MAX = 5;
+}
+
+
+/// 创建房间的理由
+enum enRoomReason
+{
+	ROOM_REASON_MIN = 0;
+	ROOM_REASON_NORMAL = 1;
+	ROOM_REASON_RANDCHAT = 2;
+	ROOM_REASON_MAX = 3;
 }
 
 
@@ -75,6 +87,18 @@ enum enCmdId
 
 	/// 删除一个通道
 	enNotifyDelVoiceUser = 17;
+
+	/// 通知有人进入房间
+	enNotifySomeEnterRoom = 18;
+
+	/// 有人想和你随机聊天
+	enNotifyRandChat = 21;
+
+	/// 返回是否要随机聊天
+	enReturnRandChat = 22;
+
+	/// 有人离开房间
+	enNotifySomeLeaveRoom = 19;
 }
 
 
@@ -83,6 +107,7 @@ message stRoomInfo
 {
 	required uint64 roomid = 1;
 	required enRoomType roomtype = 2;
+	required uint32 num = 3;
 }
 
 /// 数据用户信息
@@ -95,5 +120,14 @@ message stVoiceUserInfo
 /// 麦序信息
 message stMicInfo
 {
-	required uint64 id = 1;
+	required uint64 tempid = 1;
+	required string uniqueid = 2;
+}
+
+
+/// 房间用户信息
+message stRoomUserInfo
+{
+	required uint64 tempid = 1;
+	required string uniqueid = 2;
 }
