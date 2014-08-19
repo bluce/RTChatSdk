@@ -50,6 +50,9 @@ public:
     
     //离开麦序
     void leaveMicQueue();
+    
+    //是否接收随机聊天，临时增加的接口
+    void returnRandChatRes(bool isAccept, uint64_t srctempid);
 };
 
 #endif

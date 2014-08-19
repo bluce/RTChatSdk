@@ -241,6 +241,20 @@ void RTChatSDKMain::leaveMicQueue()
     }
 }
 
+//是否接收随机聊天，临时增加的接口
+void RTChatSDKMain::returnRandChatRes(bool isAccept, uint64_t srctempid)
+{
+    if (_sdkOpState != SdkUserLogined) {
+        return;
+    }
+    
+    Cmd::cmdReturnRandChat msg;
+    msg.set_isok(isAccept);
+    msg.set_tempid(srctempid);
+    
+    SendProtoMsg(msg, Cmd::enReturnRandChat);
+}
+
 //随机进入一个房间
 void RTChatSDKMain::randomJoinRoom()
 {
@@ -485,10 +499,10 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             
             StReturnRandChat callbackdata(protomsg.isok(), protomsg.tempid());
             if (protomsg.isok()) {
-                _func(enNotifyRandChat, OPERATION_OK, (const unsigned char*)&callbackdata, sizeof(StNotifyRandChat));
+                _func(enReturnRandChat, OPERATION_OK, (const unsigned char*)&callbackdata, sizeof(StNotifyRandChat));
             }
             else {
-                _func(enNotifyRandChat, OPERATION_FAILED, (const unsigned char*)&callbackdata, sizeof(StNotifyRandChat));
+                _func(enReturnRandChat, OPERATION_FAILED, (const unsigned char*)&callbackdata, sizeof(StNotifyRandChat));
             }
             
             break;

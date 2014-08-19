@@ -246,9 +246,9 @@ struct StNotifyRandChat {
         bcopy(uniqueidstr, uniqueid, sizeof(uniqueid));
         roomid = rid;
     }
-    uint64_t tempid;
-	char uniqueid[64];
-	uint64_t roomid;
+    uint64_t tempid;    //对方SDK唯一ID
+	char uniqueid[64];  //对方应用或昵称ID
+	uint64_t roomid;    //已建立好的房间ID
 };
 
 /// 告知发起随机聊天结果
