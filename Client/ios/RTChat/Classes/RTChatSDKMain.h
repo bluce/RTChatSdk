@@ -71,6 +71,9 @@ public:
     //是否接收随机聊天，临时增加的接口
     void returnRandChatRes(bool isAccept, uint64_t srctempid);
     
+    //设置本人Mac静音
+    void setMuteSelf(bool isMute);
+    
     /*******************需要暴露给用户的接口结束**********************/
     
     //请求逻辑服务器地址
@@ -81,9 +84,6 @@ public:
     
     //获取当前的输入mic静音状态
     bool getMuteSelf();
-    
-    //设置本人Mac静音
-    void setMuteSelf(bool isMute);
     
     //注意。这个接口不应该暴露给上层应用使用
     void set_SdkOpState(SdkOpState state) {

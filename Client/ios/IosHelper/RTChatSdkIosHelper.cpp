@@ -120,30 +120,30 @@ void RTChatSdkIosHelper::visit()
             }
             break;
         }
-        case enNotifyAddVoiceUser:
-        {
-            std::vector<StVoiceUserInfo> infoVec;
-            StNotifyAddVoiceUser* data = (StNotifyAddVoiceUser*)stCallBackData->data;
-            for (int i = 0; i < data->size; i++) {
-                infoVec.push_back(data->userinfo[i]);
-            }
-            if (_voiceDelegate) {
-                _voiceDelegate->onNotifyAddVoiceUser(stCallBackData->error, infoVec);
-            }
-            break;
-        }
-        case enNotifyDelVoiceUser:
-        {
-            std::vector<StVoiceUserInfo> infoVec;
-            StNotifyDelVoiceUser* data = (StNotifyDelVoiceUser*)stCallBackData->data;
-            for (int i = 0; i < data->size; i++) {
-                infoVec.push_back(data->userinfo[i]);
-            }
-            if (_voiceDelegate) {
-                _voiceDelegate->onNotifyDelVoiceUser(stCallBackData->error, infoVec);
-            }
-            break;
-        }
+//        case enNotifyAddVoiceUser:
+//        {
+//            std::vector<StVoiceUserInfo> infoVec;
+//            StNotifyAddVoiceUser* data = (StNotifyAddVoiceUser*)stCallBackData->data;
+//            for (int i = 0; i < data->size; i++) {
+//                infoVec.push_back(data->userinfo[i]);
+//            }
+//            if (_voiceDelegate) {
+//                _voiceDelegate->onNotifyAddVoiceUser(stCallBackData->error, infoVec);
+//            }
+//            break;
+//        }
+//        case enNotifyDelVoiceUser:
+//        {
+//            std::vector<StVoiceUserInfo> infoVec;
+//            StNotifyDelVoiceUser* data = (StNotifyDelVoiceUser*)stCallBackData->data;
+//            for (int i = 0; i < data->size; i++) {
+//                infoVec.push_back(data->userinfo[i]);
+//            }
+//            if (_voiceDelegate) {
+//                _voiceDelegate->onNotifyDelVoiceUser(stCallBackData->error, infoVec);
+//            }
+//            break;
+//        }
         case enNotifyMicQueue:
         {
             std::vector<StMicInfo> infoVec;
@@ -188,7 +188,7 @@ void RTChatSdkIosHelper::visit()
         {
             StNotifyRandChat* data = (StNotifyRandChat*)stCallBackData->data;
             if (_voiceDelegate) {
-                _voiceDelegate->onNotifyRandChat(stCallBackData->error, data->uniqueid, data->roomid);
+                _voiceDelegate->onNotifyRandChat(stCallBackData->error, data->tempid, data->uniqueid, data->roomid);
             }
 
             break;

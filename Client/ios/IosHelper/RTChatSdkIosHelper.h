@@ -47,7 +47,7 @@ public:
     virtual void onNotifySomeLeaveRoom(SdkErrorCode error, uint64_t tempid) {};
     
     //通知有人想和你随机聊天
-    virtual void onNotifyRandChat(SdkErrorCode error, const std::string uniqueidstr, uint64_t roomid) {};
+    virtual void onNotifyRandChat(SdkErrorCode error, uint64_t srctempid, const std::string uniqueidstr, uint64_t roomid) {};
     
     //告知发起随机聊天结果
     virtual void onReturnRandChat(SdkErrorCode error) {};
