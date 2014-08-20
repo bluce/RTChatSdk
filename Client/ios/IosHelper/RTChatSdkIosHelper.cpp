@@ -15,7 +15,7 @@ static RTChatSdkIosHelper* s_RTChatSdkIosHelper = NULL;
 RTChatSdkIosHelper::RTChatSdkIosHelper() :
 _voiceDelegate(NULL)
 {
-    pthread_mutex_init(&_mutexlock, PTHREAD_MUTEX_NORMAL);
+    pthread_mutex_init(&_mutexlock, 0);
 }
 
 RTChatSdkIosHelper::~RTChatSdkIosHelper()
