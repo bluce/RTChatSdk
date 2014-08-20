@@ -408,7 +408,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             for (int i = 0; i < protomsg.info_size(); i++) {
                 StMicInfo info;
                 info.tempid = protomsg.info(i).tempid();
-                bcopy(protomsg.info(i).uniqueid().c_str(), info.uniqueid, sizeof(info.tempid));
+                bcopy(protomsg.info(i).uniqueid().c_str(), info.uniqueid, sizeof(info.uniqueid));
                 micList->micinfo[i] = info;
             }
             
