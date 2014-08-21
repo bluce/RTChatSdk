@@ -105,7 +105,7 @@ void MediaSample::connectRoom(const std::string &ip, unsigned int port, uint64_t
 void MediaSample::leaveCurrentRoom()
 {
     setReceiveMute(false);
-    setMuteMic(true);
+    setWetherSendVoiceData(false);
     clearChannelData();
 }
 
@@ -118,15 +118,42 @@ void MediaSample::setMuteMic(bool isMicMute)
         return;
     }
     
+    VoEVolumeControl* volumeControl = VoEVolumeControl::GetInterface(_voe);
+    if (volumeControl) {
+        volumeControl->SetInputMute(channel, isMicMute);
+    }
+    
+//    VoEBase* voe_base = VoEBase::GetInterface(_voe);
+//    if (isMicMute) {
+//        if (voe_base) {
+//            voe_base->StopSend(channel);
+//        }
+//    }
+//    else {
+//        if (voe_base) {
+//            voe_base->StartSend(channel);
+//        }
+//    }
+}
+
+//设置是否发送语音数据
+void MediaSample::setWetherSendVoiceData(bool isSend)
+{
+    int channel = getAudioSendOutChannel();
+    
+    if (!_voe) {
+        return;
+    }
+    
     VoEBase* voe_base = VoEBase::GetInterface(_voe);
-    if (isMicMute) {
+    if (isSend) {
         if (voe_base) {
-            voe_base->StopSend(channel);
+            voe_base->StartSend(channel);
         }
     }
     else {
         if (voe_base) {
-            voe_base->StartSend(channel);
+            voe_base->StopSend(channel);
         }
     }
 }

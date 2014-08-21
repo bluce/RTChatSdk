@@ -68,6 +68,9 @@ public:
     //设置全部通道输入方向是否接收语音
     void setReceiveMute(bool isReceive);
     
+    //设置是否发送语音数据
+    void setWetherSendVoiceData(bool isSend);
+    
     //设置1路通道输入方向是否接收语音
     void setChannelReceiveMute(int channel, bool isReceive);
     
