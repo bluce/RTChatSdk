@@ -424,14 +424,14 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             if (protomsg.tempid() == _sdkTempID) {
                 //轮到本人说话
                 if (_mediaSample) {
-                    _mediaSample->setMuteMic(false);
+                    _mediaSample->setWetherSendVoiceData(true);
                     _sdkOpState = SdkUserSpeaking;
                 }
             }
             else {
                 //轮到他人说话
                 if (_mediaSample) {
-                    _mediaSample->setMuteMic(true);
+                    _mediaSample->setWetherSendVoiceData(false);
                     _sdkOpState = SdkUserJoinedRoom;
                 }
             }

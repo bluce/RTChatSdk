@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		430079591973A705003DB064 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 430079581973A705003DB064 /* CoreFoundation.framework */; };
-		43072E511988EFDC00820124 /* RTChatSdk.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 43247A731987412100AF14C7 /* RTChatSdk.h */; };
 		43095C4C199C54E2003C23B3 /* public.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43095C4A199C54E2003C23B3 /* public.cpp */; };
 		430F16FC196F8DC10083B252 /* tinystr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F6196F8DC10083B252 /* tinystr.cpp */; };
 		430F16FD196F8DC10083B252 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F7196F8DC10083B252 /* tinyxml.cpp */; };
@@ -56,7 +55,6 @@
 		435E03E5196E8333000C3012 /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435E03DE196E8333000C3012 /* CADebugMacros.cpp */; };
 		435E03E6196E8333000C3012 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435E03E1196E8333000C3012 /* CAStreamBasicDescription.cpp */; };
 		435E03E7196E8333000C3012 /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435E03E3196E8333000C3012 /* CAXException.cpp */; };
-		4374E72619932C04000CE39F /* RTChatCommonTypes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4374E72519932BD0000CE39F /* RTChatCommonTypes.h */; };
 		43998BAC1986363F003C5793 /* libwebsockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43998BAB1986363F003C5793 /* libwebsockets.a */; };
 		43998BAF198636DA003C5793 /* WebSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43998BAD198636DA003C5793 /* WebSocket.cpp */; };
 		43998D71198656B5003C5793 /* game.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 43998D6F198656B5003C5793 /* game.pb.cc */; };
@@ -95,6 +93,8 @@
 		43AE0053197913930062C9B4 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43AE004F197913930062C9B4 /* json_value.cpp */; };
 		43AE0054197913930062C9B4 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43AE0051197913930062C9B4 /* json_writer.cpp */; };
 		43BBA617199C644E00504C0C /* libexpat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BBA615199C61F200504C0C /* libexpat.a */; };
+		43BDF28A19A5D06E00410106 /* RTChatSdk.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 43247A731987412100AF14C7 /* RTChatSdk.h */; };
+		43BDF28B19A5D07300410106 /* RTChatCommonTypes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4374E72519932BD0000CE39F /* RTChatCommonTypes.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -436,8 +436,8 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
-				43072E511988EFDC00820124 /* RTChatSdk.h in CopyFiles */,
-				4374E72619932C04000CE39F /* RTChatCommonTypes.h in CopyFiles */,
+				43BDF28A19A5D06E00410106 /* RTChatSdk.h in CopyFiles */,
+				43BDF28B19A5D07300410106 /* RTChatCommonTypes.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1986,7 +1986,7 @@
 					"$(PROJECT_DIR)/RTChat/Classes/third_party",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LD_NO_PIE = YES;
+				LD_NO_PIE = NO;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/RTChat/Classes/third_party/libwebsocket/lib",
@@ -2059,7 +2059,7 @@
 					"$(PROJECT_DIR)/RTChat/Classes/third_party",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LD_NO_PIE = YES;
+				LD_NO_PIE = NO;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/RTChat/Classes/third_party/libwebsocket/lib",
