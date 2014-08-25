@@ -37,6 +37,13 @@ RTChatSdkIosHelper& RTChatSdkIosHelper::instance()
     return *s_RTChatSdkIosHelper;
 }
 
+void RTChatSdkIosHelper::init(const std::string& appid, const std::string& key, const char* uniqueid)
+{
+    RTChatSDKMain::sharedInstance().initSDK(appid, key, uniqueid);
+    
+    initCallBack();
+}
+
 void RTChatSdkIosHelper::RTChatCallBack(SdkResponseCmd cmdType, SdkErrorCode error, const unsigned char* dataPtr, uint32_t dataSize)
 {
     pthread_mutex_lock(&_mutexlock);
