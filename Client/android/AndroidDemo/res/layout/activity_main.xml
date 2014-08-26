@@ -1,0 +1,97 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+    
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="200dip"
+        android:layout_height="350dip" >
+    </ListView>
+    
+     <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="300dip"
+        android:orientation="vertical"
+        android:layout_toRightOf="@+id/listView1"
+        android:layout_marginTop="50dip">
+        <TextView 
+	    android:text="no room" 
+	    android:layout_height="wrap_content" 
+	    android:textSize="20dip" 
+	    android:layout_width="fill_parent" 
+	    android:id="@+id/theroomnumb" />
+        
+         <TextView 
+	    android:text="no one is speaking" 
+	    android:layout_height="wrap_content" 
+	    android:textSize="20dip" 
+	    android:layout_width="fill_parent" 
+	    android:id="@+id/whospeaking" />
+         
+        <LinearLayout
+        android:id="@+id/micCtrArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="50dip"
+        >
+        
+            <Button
+            android:id="@+id/takeMic"
+            android:layout_width="wrap_content"
+            android:layout_height="60dip"
+            android:text="请求麦" />
+
+           <Button
+            android:id="@+id/leaveMic"
+            android:layout_width="wrap_content"
+            android:layout_height="60dip"
+            android:text="释放麦" />
+        </LinearLayout> 
+        
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/listView1">
+        <Button
+            android:id="@+id/Btncreatefreeroom"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="创建自由房间" />
+
+           <Button
+            android:id="@+id/Btncreatequeueroom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="创建麦序房间" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/linearLayout1">
+        <Button
+            android:id="@+id/reqroomlist"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="请求房间列表" />
+
+           <Button
+            android:id="@+id/leaveroom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="退出房间" />
+    </LinearLayout>
+
+  
+</RelativeLayout>
