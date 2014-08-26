@@ -236,9 +236,9 @@ void RTChatSDKMain::leaveMicQueue()
     
     _sdkOpState = SdkUserJoinedRoom;
     
-    if (_mediaSample) {
-        _mediaSample->setMuteMic(true);
-    }
+//    if (_mediaSample) {
+//        _mediaSample->setMuteMic(true);
+//    }
 }
 
 //是否接收随机聊天，临时增加的接口
