@@ -15,7 +15,7 @@ static RTChatSdkIosHelper* s_RTChatSdkIosHelper = NULL;
 RTChatSdkIosHelper::RTChatSdkIosHelper() :
 _voiceDelegate(NULL)
 {
-    pthread_mutex_init(&_mutexlock, PTHREAD_MUTEX_NORMAL);
+    pthread_mutex_init(&_mutexlock, 0);
 }
 
 RTChatSdkIosHelper::~RTChatSdkIosHelper()
@@ -35,6 +35,13 @@ RTChatSdkIosHelper& RTChatSdkIosHelper::instance()
     }
     
     return *s_RTChatSdkIosHelper;
+}
+
+void RTChatSdkIosHelper::init(const std::string& appid, const std::string& key, const char* uniqueid)
+{
+    RTChatSDKMain::sharedInstance().initSDK(appid, key, uniqueid);
+    
+    initCallBack();
 }
 
 void RTChatSdkIosHelper::RTChatCallBack(SdkResponseCmd cmdType, SdkErrorCode error, const unsigned char* dataPtr, uint32_t dataSize)

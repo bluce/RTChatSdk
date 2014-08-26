@@ -77,6 +77,9 @@ public:
     
     static RTChatSdkIosHelper& instance();
     
+    void init(const std::string& appid, const std::string& key, const char* uniqueid = NULL);
+    
+    //初始化回调函数
     void initCallBack();
     
     void RTChatCallBack(SdkResponseCmd cmdType, SdkErrorCode error = OPERATION_OK, const unsigned char* dataPtr = NULL, uint32_t dataSize = 0);

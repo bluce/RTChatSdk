@@ -81,8 +81,8 @@ void RTChatSDKMain::initSDK(const std::string &appid, const std::string &key, co
 void RTChatSDKMain::activateSDK()
 {
     if (_netDataManager) {
-        _netDataManager->init("ws://180.168.126.249:16001");
-//        _netDataManager->init("ws://122.11.47.93:16001");
+//        _netDataManager->init("ws://180.168.126.249:16001");
+        _netDataManager->init("ws://122.11.47.93:16001");
     }
     
     if (_mediaSample) {
@@ -424,14 +424,14 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             if (protomsg.tempid() == _sdkTempID) {
                 //轮到本人说话
                 if (_mediaSample) {
-                    _mediaSample->setMuteMic(false);
+                    _mediaSample->setWetherSendVoiceData(true);
                     _sdkOpState = SdkUserSpeaking;
                 }
             }
             else {
                 //轮到他人说话
                 if (_mediaSample) {
-                    _mediaSample->setMuteMic(true);
+                    _mediaSample->setWetherSendVoiceData(false);
                     _sdkOpState = SdkUserJoinedRoom;
                 }
             }
@@ -532,6 +532,28 @@ void RTChatSDKMain::setMuteSelf(bool isMute)
     if (_mediaSample) {
         _mediaSample->setMuteMic(isMute);
         _isMute = isMute;
+    }
+}
+
+//开始录制麦克风数据
+bool RTChatSDKMain::startRecordVoice(const char* filename)
+{
+    if (_mediaSample) {
+        return _mediaSample->startRecordVoice(filename);
+    }
+    else {
+        return false;
+    }
+}
+
+//停止录制麦克风数据
+bool RTChatSDKMain::stopRecordVoice()
+{
+    if (_mediaSample) {
+        return _mediaSample->stopRecordVoice();
+    }
+    else {
+        return false;
     }
 }
 
