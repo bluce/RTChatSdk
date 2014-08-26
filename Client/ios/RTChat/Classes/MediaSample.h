@@ -59,7 +59,7 @@ public:
     
     void connectRoom(const std::string& ip, unsigned int port, uint64_t sdkID);
     
-    //
+    //离开当前房间
     void leaveCurrentRoom();
     
     //设置输出方向MIC是否静音

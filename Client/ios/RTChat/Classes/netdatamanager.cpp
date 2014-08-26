@@ -72,12 +72,14 @@ void NetDataManager::closeWebSocket()
 //发送心跳消息
 void NetDataManager::sendHelloMsg()
 {
+    Public::sdklog("发送心跳消息");
     stHelloCmd cmd;
     _socket->send((const unsigned char*)&cmd, sizeof(stHelloCmd));
 }
 
 void NetDataManager::onOpen(WebSocket* ws)
 {
+    Public::sdklog("连接已打开");
     RTChatSDKMain::sharedInstance().set_SdkOpState(SdkSocketConnected);
     RTChatSDKMain::sharedInstance().requestLogin();
 }
