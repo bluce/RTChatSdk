@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		430079591973A705003DB064 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 430079581973A705003DB064 /* CoreFoundation.framework */; };
+		4307F4A319AC3D0A00D059C3 /* RTChatBuffStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4307F4A119AC3D0A00D059C3 /* RTChatBuffStream.cpp */; };
 		43095C4C199C54E2003C23B3 /* public.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43095C4A199C54E2003C23B3 /* public.cpp */; };
 		430F16FC196F8DC10083B252 /* tinystr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F6196F8DC10083B252 /* tinystr.cpp */; };
 		430F16FD196F8DC10083B252 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F7196F8DC10083B252 /* tinyxml.cpp */; };
@@ -445,6 +446,8 @@
 
 /* Begin PBXFileReference section */
 		430079581973A705003DB064 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		4307F4A119AC3D0A00D059C3 /* RTChatBuffStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RTChatBuffStream.cpp; sourceTree = "<group>"; };
+		4307F4A219AC3D0A00D059C3 /* RTChatBuffStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTChatBuffStream.h; sourceTree = "<group>"; };
 		43095C4A199C54E2003C23B3 /* public.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = public.cpp; sourceTree = "<group>"; };
 		43095C4B199C54E2003C23B3 /* public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = public.h; sourceTree = "<group>"; };
 		430F16F6196F8DC10083B252 /* tinystr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinystr.cpp; sourceTree = "<group>"; };
@@ -1113,6 +1116,8 @@
 				43095C4A199C54E2003C23B3 /* public.cpp */,
 				43095C4B199C54E2003C23B3 /* public.h */,
 				4374E72519932BD0000CE39F /* RTChatCommonTypes.h */,
+				4307F4A119AC3D0A00D059C3 /* RTChatBuffStream.cpp */,
+				4307F4A219AC3D0A00D059C3 /* RTChatBuffStream.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1773,6 +1778,7 @@
 				43AE0053197913930062C9B4 /* json_value.cpp in Sources */,
 				43AE0054197913930062C9B4 /* json_writer.cpp in Sources */,
 				43998DE4198660B1003C5793 /* public.pb.cc in Sources */,
+				4307F4A319AC3D0A00D059C3 /* RTChatBuffStream.cpp in Sources */,
 				43998DD819865C28003C5793 /* common.cc in Sources */,
 				43998DCD19865C28003C5793 /* gzip_stream.cc in Sources */,
 				435E03E5196E8333000C3012 /* CADebugMacros.cpp in Sources */,

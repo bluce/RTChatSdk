@@ -47,9 +47,11 @@ bool MediaSample::init()
         voe_audioProcessing->SetEcStatus(true, kEcConference);
         voe_audioProcessing->SetNsStatus(true, kNsConference);
         voe_audioProcessing->SetAgcStatus(true);
+        voe_audioProcessing->Release();
     }
     
     voe_base->RegisterVoiceEngineObserver(*this);
+    voe_base->Release();
     
     return true;
 }
@@ -94,12 +96,18 @@ void MediaSample::connectRoom(const std::string &ip, unsigned int port, uint64_t
 //    }
     
     VoEHardware* hardware = VoEHardware::GetInterface(_voe);
-    hardware->SetLoudspeakerStatus(true);
+    if (hardware) {
+        hardware->SetLoudspeakerStatus(true);
+        hardware->Release();
+    }
     
     VoEVolumeControl* volumnControl = VoEVolumeControl::GetInterface(_voe);
-    volumnControl->SetSpeakerVolume(255);
-    volumnControl->SetMicVolume(255);
-    volumnControl->SetChannelOutputVolumeScaling(channel, 3);
+    if (volumnControl) {
+        volumnControl->SetSpeakerVolume(255);
+        volumnControl->SetMicVolume(255);
+        volumnControl->SetChannelOutputVolumeScaling(channel, 3);
+        volumnControl->Release();
+    }
 }
 
 void MediaSample::leaveCurrentRoom()
@@ -121,6 +129,7 @@ void MediaSample::setMuteMic(bool isMicMute)
     VoEVolumeControl* volumeControl = VoEVolumeControl::GetInterface(_voe);
     if (volumeControl) {
         volumeControl->SetInputMute(channel, isMicMute);
+        volumeControl->Release();
     }
     
 //    VoEBase* voe_base = VoEBase::GetInterface(_voe);
@@ -149,11 +158,13 @@ void MediaSample::setWetherSendVoiceData(bool isSend)
     if (isSend) {
         if (voe_base) {
             voe_base->StartSend(channel);
+            voe_base->Release();
         }
     }
     else {
         if (voe_base) {
             voe_base->StopSend(channel);
+            voe_base->Release();
         }
     }
 }
@@ -186,6 +197,7 @@ void MediaSample::setChannelReceiveMute(int channel, bool isReceive)
             voe_base->StopReceive(channel);
             voe_base->StopPlayout(channel);
         }
+        voe_base->Release();
     }
 }
 
@@ -205,15 +217,19 @@ int MediaSample::onCreateChannel(uint64_t id, MediaSample::DataDirection directi
         
         VoENetwork* network = VoENetwork::GetInterface(_voe);
         VoiceChannelTransport* voiceTransport = new VoiceChannelTransport(network, channel);
+        network->Release();
         
         if (voiceTransport->SetSendDestination(_voiceServerIp.c_str(), _voiceServerPort) == -1) {
             Public::sdklog("SetSendDestination 错误\n");
         }
         
         VoERTP_RTCP* rtcp = VoERTP_RTCP::GetInterface(_voe);
-        rtcp->SetRTCP_CNAME(channel, cname.c_str());
-        rtcp->RegisterRTCPObserver(channel, *this);
-        rtcp->InsertExtraRTPPacket(channel, 20, false, "activate", 8);
+        if (rtcp) {
+            rtcp->SetRTCP_CNAME(channel, cname.c_str());
+            rtcp->RegisterRTCPObserver(channel, *this);
+            rtcp->InsertExtraRTPPacket(channel, 20, false, "activate", 8);
+            rtcp->Release();
+        }
         
         _channelMap[channel] = new ChannelInfo(channel, voiceTransport, direction, cname.c_str());
         
@@ -251,6 +267,8 @@ int MediaSample::onCreateChannel(uint64_t id, MediaSample::DataDirection directi
             _recvport += 10;
         }
         
+        voe_base->Release();
+        
         return channel;
     }
     
@@ -269,13 +287,13 @@ void MediaSample::onDeleteChannel(uint64_t id, MediaSample::DataDirection direct
     }
     
     int channel = -1;
+    VoEBase* voe_base = VoEBase::GetInterface(_voe);
     for (auto it = _channelMap.begin(); it != _channelMap.end(); ++it) {
         const ChannelInfo* info = it->second;
         if (!strncasecmp(info->name, cname.c_str(), sizeof(info->name))) {
             channel = info->channelID;
             Public::sdklog("移除%d号通道, name=%s", channel, info->name);
             setChannelReceiveMute(channel, false);
-            VoEBase* voe_base = VoEBase::GetInterface(_voe);
             if (voe_base) {
                 voe_base->DeleteChannel(channel);
             }
@@ -284,6 +302,61 @@ void MediaSample::onDeleteChannel(uint64_t id, MediaSample::DataDirection direct
             break;
         }
     }
+    
+    if (voe_base) {
+        voe_base->Release();
+    }
+}
+
+//开始录制麦克风数据
+bool MediaSample::startRecordVoice(const char* filename)
+{
+    bool result = false;
+    if (!_voe) {
+        return false;
+    }
+    
+    VoECodec* codec = VoECodec::GetInterface(_voe);
+    CodecInst inst;
+    
+    int num = codec->NumOfCodecs();
+    for (int i = 0; i < num; i++) {
+        //        sdklog("%s=%d\n", inst.plname, inst.pltype);
+        codec->GetCodec(i, inst);
+        if (inst.pltype == 102) {
+            break;
+        }
+    }
+    codec->Release();
+    
+    VoEFile* voeFile = VoEFile::GetInterface(_voe);
+    if (voeFile) {
+        if (voeFile->StartRecordingMicrophone(filename, &inst) != -1) {
+            result = true;
+        }
+        voeFile->Release();
+    }
+    
+    return result;
+}
+
+//停止录制麦克风数据
+bool MediaSample::stopRecordVoice()
+{
+    int result = false;
+    if (!_voe) {
+        return false;
+    }
+    
+    VoEFile* voeFile = VoEFile::GetInterface(_voe);
+    if (voeFile) {
+        if (voeFile->StopRecordingMicrophone() != -1) {
+            result = true;
+        }
+        voeFile->Release();
+    }
+    
+    return result;
 }
 
 void MediaSample::closeVoiceEngine()
@@ -336,6 +409,7 @@ void MediaSample::setEncodeTypeToChannel(int channel, int codeType)
             break;
         }
     }
+    codec->Release();
 }
 
 //把发送通道编码设置为codeType
@@ -355,6 +429,7 @@ void MediaSample::OnApplicationDataReceived(int channel, unsigned char subType,
     VoEBase* voe_base = VoEBase::GetInterface(_voe);
     if (voe_base) {
         voe_base->StopSend(channel);
+        voe_base->Release();
     }
 }
 

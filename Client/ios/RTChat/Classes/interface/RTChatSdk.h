@@ -56,6 +56,12 @@ public:
     
     //设置本人Mac静音
     void setMuteSelf(bool isMute);
+    
+    //开始录制麦克风数据
+    bool startRecordVoice(const char* filename);
+    
+    //停止录制麦克风数据
+    bool stopRecordVoice();
 };
 
 #endif

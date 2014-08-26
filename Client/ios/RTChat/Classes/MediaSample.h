@@ -82,6 +82,12 @@ public:
     //关闭删除数据通道
     void onDeleteChannel(uint64_t id, DataDirection direction);
     
+    //开始录制麦克风数据
+    bool startRecordVoice(const char* filename);
+    
+    //停止录制麦克风数据
+    bool stopRecordVoice();
+    
 protected:
     //设置发送编码格式为codeType
     void setEncodeTypeToChannel(int channel, int codeType);
