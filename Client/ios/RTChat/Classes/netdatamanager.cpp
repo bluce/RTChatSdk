@@ -97,6 +97,7 @@ void NetDataManager::onMessage(WebSocket* ws, const WebSocket::Data& data)
 void NetDataManager::onClose(WebSocket* ws)
 {
     Public::sdklog("连接被关闭");
+    RTChatSDKMain::sharedInstance().set_SdkOpState(SdkSocketUnConnected);
 }
 
 void NetDataManager::onError(WebSocket* ws, const WebSocket::ErrorCode& error)

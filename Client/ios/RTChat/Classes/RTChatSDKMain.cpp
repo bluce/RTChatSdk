@@ -81,8 +81,8 @@ void RTChatSDKMain::initSDK(const std::string &appid, const std::string &key, co
 void RTChatSDKMain::activateSDK()
 {
     if (_netDataManager) {
-        _netDataManager->init("ws://180.168.126.249:16001");
-//        _netDataManager->init("ws://122.11.47.93:16001");
+//        _netDataManager->init("ws://180.168.126.249:16001");
+        _netDataManager->init("ws://122.11.47.93:16001");
     }
     
     if (_mediaSample) {
@@ -101,7 +101,7 @@ void RTChatSDKMain::deActivateSDK()
         _mediaSample->closeVoiceEngine();
     }
     
-    _uniqueid = "";
+//    _uniqueid = "";
     _sdkTempID = 0;
     _currentRoomID = 0;
     _isMute = false;
@@ -140,6 +140,8 @@ void RTChatSDKMain::requestLogin(const char* uniqueid)
     msg.set_token("yuew89341huidy89iuh1");
     
     SendProtoMsg(msg, Cmd::enRequestLogin);
+    
+    Public::sdklog("发送登录消息完成");
 }
 
 //请求逻辑服务器地址
