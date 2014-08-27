@@ -102,7 +102,7 @@ void RTChatSDKMain::deActivateSDK()
     }
     
 //    _uniqueid = "";
-    _sdkTempID = 0;
+//    _sdkTempID = 0;
     _currentRoomID = 0;
     _isMute = false;
     _sdkOpState = SdkSocketUnConnected;
@@ -138,6 +138,7 @@ void RTChatSDKMain::requestLogin(const char* uniqueid)
     Cmd::cmdRequestLogin msg;
     msg.set_uniqueid(_uniqueid);
     msg.set_token("yuew89341huidy89iuh1");
+    msg.set_tempid(_sdkTempID);
     
     SendProtoMsg(msg, Cmd::enRequestLogin);
     
@@ -462,6 +463,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             
             BUFFER_CMD(StNotifySomeEnterRoom, userList, MAX_BUFFER_SIZE);
             userList->size = protomsg.info_size();
+            userList->needClearOld = (protomsg.reason() == Cmd::cmdNotifySomeEnterRoom::ENTER_REASON_NEW) ? true : false;
             for (int i = 0; i < protomsg.info_size(); i++) {
                 stRoomUserInfo info;
                 info.tempid = protomsg.info(i).tempid();

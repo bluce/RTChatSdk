@@ -12,6 +12,7 @@
 #include <iostream>
 #include "WebSocket.h"
 #include "MediaSample.h"
+#include "TimeCounter.h"
 
 class NetDataManager : public WebSocket::Delegate {
 public:
@@ -33,6 +34,9 @@ public:
     virtual void onClose(WebSocket* ws);
     virtual void onError(WebSocket* ws, const WebSocket::ErrorCode& error);
     
+protected:
+    void connnectionTimeOut();
+    
 private:
     //连接控制服务器
     void connectControlServer();
@@ -43,6 +47,7 @@ private:
 private:
     WebSocket*      _socket;
     std::string     _controlServerStr;
+    TimeCounter     _counter;
 };
 
 #endif /* defined(__RTChat__netdatamanager__) */

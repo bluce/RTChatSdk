@@ -228,7 +228,12 @@ struct stRoomUserInfo {
 
 //通知有人进入房间
 struct StNotifySomeEnterRoom {
-    uint32_t size;
+    StNotifySomeEnterRoom(){
+        size = 0;
+        needClearOld = false;
+    }
+    uint32_t    size;
+    bool        needClearOld;
     stRoomUserInfo userinfo[0];
     uint32_t getSize() const {return sizeof(StNotifySomeEnterRoom)+ sizeof(stRoomUserInfo)*size;}
 };

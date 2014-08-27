@@ -57,6 +57,7 @@ WebSocket::State NetDataManager::getWebSocketState()
 //连接控制服务器
 void NetDataManager::connectControlServer()
 {
+    Public::sdklog("In connectControlServer");
     if (!_socket) {
         _socket = new WebSocket();
     }
@@ -66,6 +67,7 @@ void NetDataManager::connectControlServer()
 //关闭websocket
 void NetDataManager::closeWebSocket()
 {
+    Public::sdklog("In closeWebSocket");
     SAFE_DELETE(_socket);
 }
 
@@ -82,12 +84,26 @@ void NetDataManager::onOpen(WebSocket* ws)
     Public::sdklog("连接已打开");
     RTChatSDKMain::sharedInstance().set_SdkOpState(SdkSocketConnected);
     RTChatSDKMain::sharedInstance().requestLogin();
+    
+    _counter.startCounter();
+    _counter.resetTicker();
+    _counter.registerTimeOutCallBack(72, std::bind(&NetDataManager::connnectionTimeOut, this));
+}
+
+void NetDataManager::connnectionTimeOut()
+{
+    Public::sdklog("心跳超时回调");
+    closeWebSocket();
+    connectControlServer();
 }
 
 void NetDataManager::onMessage(WebSocket* ws, const WebSocket::Data& data)
 {
     if (data.len == 2) {    //心跳消息
         sendHelloMsg();
+        
+        //重置计时器
+        _counter.resetTicker();
         return;
     }
     

@@ -37,6 +37,7 @@ message cmdRequestLogin
 {
 	required string token = 1;
 	required string uniqueid = 2;
+	optional uint64 tempid = 3;
 }
 
 
@@ -137,7 +138,14 @@ message cmdNotifyDelVoiceUser
 /// 通知有人进入房间
 message cmdNotifySomeEnterRoom
 {
-	repeated stRoomUserInfo info = 1;
+	enum enEnterReason
+	{
+		ENTER_REASON_NEW = 1;   /// 新加的 
+		ENTER_REASON_RECON = 2; /// 重连，先清除
+	}
+
+	required enEnterReason reason = 1;
+	repeated stRoomUserInfo info = 2;
 }
 
 
@@ -151,16 +159,16 @@ message cmdNotifySomeLeaveRoom
 /// 有人想和你随机聊天
 message cmdNotifyRandChat
 {
-	required uint64 tempid = 1;
-	required string uniqueid = 2;
-	required uint64 roomid = 3;
+	required uint64 tempid = 1; /// 这个人想和你随机聊天
+	required string uniqueid = 2; /// 游戏的唯一id
+	required uint64 roomid = 3; /// 这个人在这个房间等你
 }
 
 
 /// 告知随机聊天结果
 message cmdReturnRandChat
 {
-	required bool isok = 1;
-	optional uint64 tempid = 2;
+	required bool isok = 1; /// 想去还是不想去
+	optional uint64 tempid = 2; /// 想去和这个人聊天
 }
 

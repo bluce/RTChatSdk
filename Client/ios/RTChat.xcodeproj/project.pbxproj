@@ -96,6 +96,7 @@
 		43BBA617199C644E00504C0C /* libexpat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BBA615199C61F200504C0C /* libexpat.a */; };
 		43BDF28A19A5D06E00410106 /* RTChatSdk.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 43247A731987412100AF14C7 /* RTChatSdk.h */; };
 		43BDF28B19A5D07300410106 /* RTChatCommonTypes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4374E72519932BD0000CE39F /* RTChatCommonTypes.h */; };
+		43E6066C19ADBFF700181658 /* TimeCounter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43E6066A19ADBFF700181658 /* TimeCounter.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -630,6 +631,8 @@
 		43AE0051197913930062C9B4 /* json_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_writer.cpp; sourceTree = "<group>"; };
 		43BBA610199C61F200504C0C /* expat.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = expat.xcodeproj; path = ../../../webRTC_xCode/expat/expat.xcodeproj; sourceTree = "<group>"; };
 		43D6490A196E9797001944DC /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		43E6066A19ADBFF700181658 /* TimeCounter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeCounter.cpp; sourceTree = "<group>"; };
+		43E6066B19ADBFF700181658 /* TimeCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeCounter.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1118,6 +1121,8 @@
 				4374E72519932BD0000CE39F /* RTChatCommonTypes.h */,
 				4307F4A119AC3D0A00D059C3 /* RTChatBuffStream.cpp */,
 				4307F4A219AC3D0A00D059C3 /* RTChatBuffStream.h */,
+				43E6066A19ADBFF700181658 /* TimeCounter.cpp */,
+				43E6066B19ADBFF700181658 /* TimeCounter.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1801,6 +1806,7 @@
 				43998BAF198636DA003C5793 /* WebSocket.cpp in Sources */,
 				43998DD019865C28003C5793 /* zero_copy_stream.cc in Sources */,
 				433E66EA1987AAD10002AAC3 /* udp_transport_impl.cc in Sources */,
+				43E6066C19ADBFF700181658 /* TimeCounter.cpp in Sources */,
 				43998DD719865C28003C5793 /* service.cc in Sources */,
 				43998DDB19865C28003C5793 /* strutil.cc in Sources */,
 			);
