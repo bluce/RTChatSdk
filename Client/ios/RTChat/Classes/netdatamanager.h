@@ -23,8 +23,8 @@ public:
     
     void sendClientMsg(const unsigned char* msg, unsigned int len);
     
-    //关闭websocket
-    void closeWebSocket();
+    //销毁websocket
+    void destroyWebSocket();
     
     //获取底层websocket状态
     WebSocket::State getWebSocketState();
@@ -35,6 +35,8 @@ public:
     virtual void onError(WebSocket* ws, const WebSocket::ErrorCode& error);
     
 protected:
+    static bool Run(ThreadObj obj);
+    bool Process();
     void connnectionTimeOut();
     
 private:
@@ -44,10 +46,18 @@ private:
     //发送心跳消息
     void sendHelloMsg();
     
+    //是否达到最大重连次数
+    bool haveReachMaxRetryCount();
+    
 private:
-    WebSocket*      _socket;
-    std::string     _controlServerStr;
-    TimeCounter     _counter;
+    bool                _haveInited;
+    bool                _needCloseConnection;
+    ThreadWrapper*      _workThread;
+    pthread_mutex_t     _mutexlock;
+    WebSocket*          _socket;
+    std::string         _controlServerStr;
+    TimeCounter         _counter;
+    int                 _retrycount;    //重连次数
 };
 
 #endif /* defined(__RTChat__netdatamanager__) */

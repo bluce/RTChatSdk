@@ -11,33 +11,89 @@
 #include "proto/game.pb.h"
 #include "RTChatSDKMain.h"
 #include "public.h"
+#include <unistd.h>
+
+static int maxretrycount = 10;
 
 NetDataManager::NetDataManager() :
-_socket(NULL)
+_haveInited(false),
+_socket(NULL),
+_workThread(NULL),
+_retrycount(0),
+_needCloseConnection(false)
 {
+    pthread_mutex_init(&_mutexlock, 0);
+    _workThread = ThreadWrapper::CreateThread(NetDataManager::Run, this, kNormalPriority, "WorkThread");
     
+    unsigned int id = 0;
+    if (_workThread) {
+        _workThread->Start(id);
+    }
 }
 
 NetDataManager::~NetDataManager()
 {
-    
+    if (_workThread) {
+        _workThread->Stop();
+    }
+    SAFE_DELETE(_workThread);
 }
 
 void NetDataManager::init(const std::string &controlserver)
 {
     _controlServerStr = controlserver;
     
-    connectControlServer();
+    _haveInited = true;
+}
+
+bool NetDataManager::Run(ThreadObj obj)
+{
+    NetDataManager* mgr = static_cast<NetDataManager*>(obj);
+    
+    return mgr->Process();
+}
+
+bool NetDataManager::Process()
+{
+    int needcloseconnection;
+    
+    pthread_mutex_lock(&_mutexlock);
+    needcloseconnection = _needCloseConnection;
+    pthread_mutex_unlock(&_mutexlock);
+    
+    if (needcloseconnection && _socket) {
+        _socket->close();
+        pthread_mutex_lock(&_mutexlock);
+        _needCloseConnection = false;
+        pthread_mutex_unlock(&_mutexlock);
+        return true;
+    }
+    
+    
+    if (!_socket && _haveInited && !haveReachMaxRetryCount()) {
+        connectControlServer();
+    }
+    
+    if (_socket && _socket->onSubThreadLoop() == 0) {
+        return true;
+    }
+    else {
+        sleep(1);
+        return true;
+    }
 }
 
 void NetDataManager::sendClientMsg(const unsigned char *msg, unsigned int len)
 {
-    if (!_socket) {
-        connectControlServer();
-    }
-    else if (getWebSocketState() == WebSocket::kStateClosed) {
-        SAFE_DELETE(_socket);
-        connectControlServer();
+//    if (!_socket) {
+//        connectControlServer();
+//    }
+//    else if (getWebSocketState() == WebSocket::State::CLOSED) {
+//        SAFE_DELETE(_socket);
+//        connectControlServer();
+//    }
+    if (_haveInited && !_socket) {
+        _retrycount = 0;
     }
     
     if (_socket) {
@@ -51,23 +107,29 @@ WebSocket::State NetDataManager::getWebSocketState()
         return _socket->getReadyState();
     }
     
-    return WebSocket::kStateClosed;
+    return WebSocket::State::CLOSED;
 }
 
 //连接控制服务器
 void NetDataManager::connectControlServer()
 {
     Public::sdklog("In connectControlServer");
+    
     if (!_socket) {
         _socket = new WebSocket();
     }
     _socket->init(*this, _controlServerStr);
+    
+    _socket->onSubThreadStarted();
+    
+    _retrycount++;
+    Public::sdklog("第%d次连接", _retrycount);
 }
 
 //关闭websocket
-void NetDataManager::closeWebSocket()
+void NetDataManager::destroyWebSocket()
 {
-    Public::sdklog("In closeWebSocket");
+    Public::sdklog("In destroyWebSocket");
     SAFE_DELETE(_socket);
 }
 
@@ -79,22 +141,33 @@ void NetDataManager::sendHelloMsg()
     _socket->send((const unsigned char*)&cmd, sizeof(stHelloCmd));
 }
 
+//是否达到最大重连次数
+bool NetDataManager::haveReachMaxRetryCount()
+{
+    return _retrycount >= maxretrycount;
+}
+
 void NetDataManager::onOpen(WebSocket* ws)
 {
     Public::sdklog("连接已打开");
+    
+    _retrycount = 0;
+    
     RTChatSDKMain::sharedInstance().set_SdkOpState(SdkSocketConnected);
     RTChatSDKMain::sharedInstance().requestLogin();
     
     _counter.startCounter();
     _counter.resetTicker();
-    _counter.registerTimeOutCallBack(72, std::bind(&NetDataManager::connnectionTimeOut, this));
+    _counter.registerTimeOutCallBack(20, std::bind(&NetDataManager::connnectionTimeOut, this));
 }
 
 void NetDataManager::connnectionTimeOut()
 {
     Public::sdklog("心跳超时回调");
-    closeWebSocket();
-    connectControlServer();
+    
+    pthread_mutex_lock(&_mutexlock);
+    _needCloseConnection = true;
+    pthread_mutex_unlock(&_mutexlock);
 }
 
 void NetDataManager::onMessage(WebSocket* ws, const WebSocket::Data& data)
@@ -113,12 +186,15 @@ void NetDataManager::onMessage(WebSocket* ws, const WebSocket::Data& data)
 void NetDataManager::onClose(WebSocket* ws)
 {
     Public::sdklog("连接被关闭");
+    destroyWebSocket();
     RTChatSDKMain::sharedInstance().set_SdkOpState(SdkSocketUnConnected);
 }
 
 void NetDataManager::onError(WebSocket* ws, const WebSocket::ErrorCode& error)
 {
     Public::sdklog("连接发生错误");
+    destroyWebSocket();
+    RTChatSDKMain::sharedInstance().set_SdkOpState(SdkSocketUnConnected);
 }
 
 
