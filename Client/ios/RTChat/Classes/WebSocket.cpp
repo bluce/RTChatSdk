@@ -543,7 +543,7 @@ int WebSocket::onSocketCallback(struct libwebsocket_context *ctx,
                         
                         size_t remaining = data->len - data->issued;
                         size_t n = std::min(remaining, c_bufferSize );
-                        Public::sdklog("[websocket:send] total: %d, sent: %d, remaining: %d, buffer size: %d", static_cast<int>(data->len), static_cast<int>(data->issued), static_cast<int>(remaining), static_cast<int>(n));
+//                        Public::sdklog("[websocket:send] total: %d, sent: %d, remaining: %d, buffer size: %d", static_cast<int>(data->len), static_cast<int>(data->issued), static_cast<int>(remaining), static_cast<int>(n));
                         
                         unsigned char* buf = new unsigned char[LWS_SEND_BUFFER_PRE_PADDING + n + LWS_SEND_BUFFER_POST_PADDING];
                         
@@ -573,7 +573,7 @@ int WebSocket::onSocketCallback(struct libwebsocket_context *ctx,
                         }
                         
                         bytesWrite = libwebsocket_write(wsi,  &buf[LWS_SEND_BUFFER_PRE_PADDING], n, (libwebsocket_write_protocol)writeProtocol);
-                        Public::sdklog("[websocket:send] bytesWrite => %d", bytesWrite);
+//                        Public::sdklog("[websocket:send] bytesWrite => %d", bytesWrite);
                         
                         // Buffer overrun?
                         if (bytesWrite < 0)

@@ -37,6 +37,7 @@ NetDataManager::~NetDataManager()
         _workThread->Stop();
     }
     SAFE_DELETE(_workThread);
+    SAFE_DELETE(_socket);
 }
 
 void NetDataManager::init(const std::string &controlserver)
