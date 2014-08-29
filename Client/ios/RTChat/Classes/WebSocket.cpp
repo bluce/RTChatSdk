@@ -232,7 +232,7 @@ WebSocket::WebSocket()
 
 WebSocket::~WebSocket()
 {
-    close();
+//    close();
 //    CC_SAFE_RELEASE_NULL(_wsHelper);
     
     for (int i = 0; _wsProtocols[i].callback != nullptr; ++i)

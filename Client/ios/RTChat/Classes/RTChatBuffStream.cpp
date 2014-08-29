@@ -31,6 +31,11 @@ bool RTChatBuffStream::Write(const void *buf, int len)
     }
 }
 
+int RTChatBuffStream::Read(void *buf, int len)
+{
+    return 0;
+}
+
 int RTChatBuffStream::Rewind()
 {
     _curSize = 0;

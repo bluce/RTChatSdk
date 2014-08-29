@@ -359,6 +359,30 @@ bool MediaSample::stopRecordVoice()
     return result;
 }
 
+//开始播放本地录制的音频
+bool MediaSample::startPlayLocalStream(InStream* instream)
+{
+    if (!_voe) {
+        return false;
+    }
+    
+    VoEBase* voeBase = VoEBase::GetInterface(_voe);
+    int channel = 0;
+    if (voeBase) {
+        channel = voeBase->CreateChannel();
+        voeBase->Release();
+    }
+    
+    VoEFile* voeFile = VoEFile::GetInterface(_voe);
+    if (voeFile) {
+        if (voeFile->StartPlayingFileLocally(channel, instream) != -1) {
+        }
+        voeFile->Release();
+    }
+    
+    return true;
+}
+
 void MediaSample::closeVoiceEngine()
 {
     leaveCurrentRoom();

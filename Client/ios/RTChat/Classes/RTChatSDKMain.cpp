@@ -80,6 +80,7 @@ void RTChatSDKMain::initSDK(const std::string &appid, const std::string &key, co
 //激活SDK
 void RTChatSDKMain::activateSDK()
 {
+    Public::sdklog("激活SDK");
     if (_netDataManager) {
         _netDataManager->init("ws://180.168.126.249:16001");
 //        _netDataManager->init("ws://122.11.47.93:16001");
@@ -93,7 +94,9 @@ void RTChatSDKMain::activateSDK()
 //当应用最小化时需要调用这个，清理数据
 void RTChatSDKMain::deActivateSDK()
 {
+    Public::sdklog("冻结SDK");
     if (_netDataManager) {
+        _netDataManager->deactive();
         _netDataManager->destroyWebSocket();
     }
     
@@ -506,7 +509,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
         }
         case Cmd::enNotifySomeEnterRoom:
         {
-            Public::sdklog("接收到用户进入指令");
+            Public::sdklog("接收到通知有用户进入房间指令");
             
             if (_sdkOpState == SdkUserJoinedRoom) {
                 Cmd::cmdNotifySomeEnterRoom protomsg;
@@ -622,6 +625,18 @@ bool RTChatSDKMain::stopRecordVoice()
     else {
         return false;
     }
+}
+
+//开始播放录制数据
+bool RTChatSDKMain::startPlayLocalVoice(const char *voiceUrl)
+{
+//    if (_mediaSample) {
+//        return _mediaSample->startPlayLocalStream(<#webrtc::InStream *instream#>);
+//    }
+//    else {
+//        return false;
+//    }
+    return true;
 }
 
 //刷新房间列表信息

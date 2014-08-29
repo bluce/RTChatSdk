@@ -80,6 +80,9 @@ public:
     //停止录制麦克风数据
     bool stopRecordVoice();
     
+    //开始播放录制数据
+    bool startPlayLocalVoice(const char* voiceUrl);
+    
     /*******************需要暴露给用户的接口结束**********************/
     
     //请求逻辑服务器地址

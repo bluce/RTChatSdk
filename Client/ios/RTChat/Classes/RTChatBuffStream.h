@@ -12,12 +12,15 @@
 #include <iostream>
 #include <common_types.h>
 
-class RTChatBuffStream : public webrtc::OutStream {
+class RTChatBuffStream : public webrtc::OutStream, public webrtc::InStream {
 public:
     RTChatBuffStream(int maxbuffsize);
     virtual ~RTChatBuffStream();
     
     virtual bool Write(const void *buf,int len);
+    
+    virtual int Read(void *buf,int len);
+    
     virtual int Rewind();
     
     int get_size();

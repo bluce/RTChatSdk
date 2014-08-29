@@ -21,6 +21,10 @@ public:
     
     void init(const std::string& controlserver);
     
+    void activity();
+    
+    void deactive();
+    
     void sendClientMsg(const unsigned char* msg, unsigned int len);
     
     //销毁websocket

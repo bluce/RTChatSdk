@@ -24,11 +24,6 @@ _needCloseConnection(false)
 {
     pthread_mutex_init(&_mutexlock, 0);
     _workThread = ThreadWrapper::CreateThread(NetDataManager::Run, this, kNormalPriority, "WorkThread");
-    
-    unsigned int id = 0;
-    if (_workThread) {
-        _workThread->Start(id);
-    }
 }
 
 NetDataManager::~NetDataManager()
@@ -45,6 +40,24 @@ void NetDataManager::init(const std::string &controlserver)
     _controlServerStr = controlserver;
     
     _haveInited = true;
+    
+    activity();
+}
+
+void NetDataManager::activity()
+{
+    unsigned int id = 0;
+    
+    if (_workThread) {
+        _workThread->Start(id);
+    }
+}
+
+void NetDataManager::deactive()
+{
+    if (_workThread) {
+        _workThread->Stop();
+    }
 }
 
 bool NetDataManager::Run(ThreadObj obj)
@@ -137,7 +150,7 @@ void NetDataManager::destroyWebSocket()
 //发送心跳消息
 void NetDataManager::sendHelloMsg()
 {
-    Public::sdklog("发送心跳消息");
+//    Public::sdklog("发送心跳消息");
     stHelloCmd cmd;
     _socket->send((const unsigned char*)&cmd, sizeof(stHelloCmd));
 }

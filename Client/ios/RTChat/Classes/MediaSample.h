@@ -88,6 +88,9 @@ public:
     //停止录制麦克风数据
     bool stopRecordVoice();
     
+    //开始播放本地录制的音频
+    bool startPlayLocalStream(InStream* instream);
+    
 protected:
     //设置发送编码格式为codeType
     void setEncodeTypeToChannel(int channel, int codeType);
