@@ -37,7 +37,7 @@ enum SdkOpState {
     SdkUserLogining,
     SdkUserLogined,
     SdkUserCreatingRoom,
-    SdkUserCreatedRoom,
+//    SdkUserCreatedRoom,
     SdkUserjoiningRoom,
     SdkUserJoinedRoom,
     SdkUserWaitingToken,
@@ -115,6 +115,7 @@ enum SdkErrorCode {
     OPERATION_OK = 0,   //通用成功消息
     OPERATION_FAILED,   //通用失败消息
 
+    /* 异步回调消息错误码开始 */
     LOGIC_RESULT_APPID_NOEXITS,
     LOGIC_RESULT_KEY_ERROR,
     LOGIC_RESULT_SYS_ERROR,
@@ -127,7 +128,7 @@ enum SdkErrorCode {
     ENTER_RESULT_FULL,
     ENTER_RESULT_OK,
     ENTER_RESULT_ERROR,
-    
+    /* 异步回调消息错误码结束 */
     
 };
 

@@ -48,25 +48,25 @@ public:
     SdkOpState getSdkState();
     
     //请求登录
-    void requestLogin(const char* uniqueid = NULL);
+    SdkErrorCode requestLogin(const char* uniqueid = NULL);
     
     //申请房间列表
-    void requestRoomList();
+    SdkErrorCode requestRoomList();
     
     //创建房间
-    void createRoom(enRoomType roomType, enRoomReason reason);
+    SdkErrorCode createRoom(enRoomType roomType, enRoomReason reason);
     
     //加入房间
-    void joinRoom(uint64_t roomid);
+    SdkErrorCode joinRoom(uint64_t roomid);
     
     //离开房间
-    void leaveRoom();
+    SdkErrorCode leaveRoom();
     
     //加入麦序
-    void requestInsertMicQueue();
+    SdkErrorCode requestInsertMicQueue();
     
     //离开麦序
-    void leaveMicQueue();
+    SdkErrorCode leaveMicQueue();
     
     //是否接收随机聊天，临时增加的接口
     void returnRandChatRes(bool isAccept, uint64_t srctempid);
