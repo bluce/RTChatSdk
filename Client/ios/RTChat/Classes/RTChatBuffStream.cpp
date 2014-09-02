@@ -9,7 +9,8 @@
 #include "RTChatBuffStream.h"
 
 RTChatBuffStream::RTChatBuffStream(int maxbuffsize) :
-_curSize(0)
+_curWriteSize(0),
+_curReadSize(0)
 {
     _buffVec.resize(maxbuffsize);
 }
@@ -21,9 +22,9 @@ RTChatBuffStream::~RTChatBuffStream()
 
 bool RTChatBuffStream::Write(const void *buf, int len)
 {
-    if (len <= _buffVec.size() - _curSize) {
-        bcopy(buf, &_buffVec[_curSize], len);
-        _curSize += len;
+    if (len <= _buffVec.size() - _curWriteSize) {
+        bcopy(buf, &_buffVec[_curWriteSize], len);
+        _curWriteSize += len;
         return true;
     }
     else {
@@ -33,18 +34,33 @@ bool RTChatBuffStream::Write(const void *buf, int len)
 
 int RTChatBuffStream::Read(void *buf, int len)
 {
-    return 0;
+    if (len < (_curWriteSize - _curReadSize)) {
+        bcopy(&_buffVec[_curReadSize], buf, len);
+        _curReadSize += len;
+        return len;
+    }
+    else {
+        bcopy(&_buffVec[_curReadSize], buf, (_curWriteSize - _curReadSize));
+        return _curWriteSize - _curReadSize;
+    }
 }
 
-int RTChatBuffStream::Rewind()
+//int RTChatBuffStream::Rewind()
+//{
+//    _curReadSize = 0;
+//    _curWriteSize = 0;
+//    return 0;
+//}
+
+const RTChatBuffStream::BuffVec& RTChatBuffStream::getBuffVec()
 {
-    _curSize = 0;
-    return 0;
+    return _buffVec;
 }
 
-int RTChatBuffStream::get_size()
+///获得实际数据长度
+int RTChatBuffStream::get_datasize()
 {
-    return _curSize;
+    return _curWriteSize;
 }
 
 

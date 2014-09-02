@@ -14,6 +14,8 @@
 
 class RTChatBuffStream : public webrtc::OutStream, public webrtc::InStream {
 public:
+    typedef std::vector<unsigned char> BuffVec;
+public:
     RTChatBuffStream(int maxbuffsize);
     virtual ~RTChatBuffStream();
     
@@ -21,13 +23,17 @@ public:
     
     virtual int Read(void *buf,int len);
     
-    virtual int Rewind();
+//    virtual int Rewind();
     
-    int get_size();
+    const BuffVec& getBuffVec();
+    
+    ///获得实际数据长度
+    int get_datasize();
     
 private:
-    std::vector<unsigned char>      _buffVec;
-    int                             _curSize;
+    BuffVec                         _buffVec;
+    int                             _curWriteSize;
+    int                             _curReadSize;
 };
 
 #endif /* defined(__RTChat__RTChatBuffStream__) */

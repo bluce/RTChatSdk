@@ -1,0 +1,39 @@
+//
+//  HttpProcess.h
+//  RTChat
+//
+//  Created by raymon_wang on 14-9-2.
+//  Copyright (c) 2014年 yunwei. All rights reserved.
+//
+
+#ifndef __RTChat__HttpProcess__
+#define __RTChat__HttpProcess__
+
+#include <iostream>
+
+enum HttpDirection {
+    HttpProcess_DownLoad,
+    HttpProcess_Upload,
+};
+
+typedef std::function<void (HttpDirection direction, const char* ptr, int size)> CallBackFunc;
+
+class HttpProcess {
+public:
+    HttpProcess();
+    virtual ~HttpProcess();
+    
+    static HttpProcess& instance();
+    
+    void registerCallBack(const CallBackFunc& func);
+    
+    void postContent(const char* urlstr, const unsigned char* data, int datasize);
+    
+    void requestContent(const char *urlstr);
+    
+private:
+    bool            _isrunning;
+    CallBackFunc    _func;
+};
+
+#endif /* defined(__RTChat__HttpProcess__) */

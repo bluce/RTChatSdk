@@ -167,8 +167,14 @@ void NetDataManager::onOpen(WebSocket* ws)
     
     _retrycount = 0;
     
-    RTChatSDKMain::sharedInstance().set_SdkOpState(SdkSocketConnected);
-    RTChatSDKMain::sharedInstance().requestLogin();
+    if (RTChatSDKMain::sharedInstance().getSdkState() == SdkControlConnecting) {
+        RTChatSDKMain::sharedInstance().set_SdkOpState(SdkControlConnected);
+        RTChatSDKMain::sharedInstance().requestLogicInfo();
+    }
+    else if (RTChatSDKMain::sharedInstance().getSdkState() == SdkGateWaySocketConnecting) {
+        RTChatSDKMain::sharedInstance().set_SdkOpState(SdkGateWaySocketConnected);
+        RTChatSDKMain::sharedInstance().requestLogin();
+    }
     
     _counter.startCounter();
     _counter.resetTicker();
@@ -201,14 +207,24 @@ void NetDataManager::onClose(WebSocket* ws)
 {
     Public::sdklog("连接被关闭");
     destroyWebSocket();
-    RTChatSDKMain::sharedInstance().set_SdkOpState(SdkSocketUnConnected);
+    if (RTChatSDKMain::sharedInstance().getSdkState() == SdkControlConnected) {
+        RTChatSDKMain::sharedInstance().set_SdkOpState(SdkControlUnConnected);
+    }
+    else if (RTChatSDKMain::sharedInstance().getSdkState() >= SdkGateWaySocketConnected) {
+        RTChatSDKMain::sharedInstance().set_SdkOpState(SdkControlConnected);
+    }
 }
 
 void NetDataManager::onError(WebSocket* ws, const WebSocket::ErrorCode& error)
 {
     Public::sdklog("连接发生错误");
     destroyWebSocket();
-    RTChatSDKMain::sharedInstance().set_SdkOpState(SdkSocketUnConnected);
+    if (RTChatSDKMain::sharedInstance().getSdkState() == SdkControlConnected) {
+        RTChatSDKMain::sharedInstance().set_SdkOpState(SdkControlUnConnected);
+    }
+    else if (RTChatSDKMain::sharedInstance().getSdkState() >= SdkGateWaySocketConnected) {
+        RTChatSDKMain::sharedInstance().set_SdkOpState(SdkControlConnected);
+    }
 }
 
 

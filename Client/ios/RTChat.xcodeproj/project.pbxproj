@@ -14,6 +14,19 @@
 		430F16FD196F8DC10083B252 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F7196F8DC10083B252 /* tinyxml.cpp */; };
 		430F16FE196F8DC10083B252 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F8196F8DC10083B252 /* tinyxmlerror.cpp */; };
 		430F16FF196F8DC10083B252 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F9196F8DC10083B252 /* tinyxmlparser.cpp */; };
+		4314C79719B46404000F5323 /* RTChatBuffStreamPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4314C78319B46362000F5323 /* RTChatBuffStreamPool.cpp */; };
+		4314C7AD19B477D3000F5323 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4314C7A719B477D3000F5323 /* libcurl.a */; };
+		4314C7AE19B477D3000F5323 /* libwebp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4314C7A819B477D3000F5323 /* libwebp.a */; };
+		4314C7C419B4903F000F5323 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4314C7B219B4903F000F5323 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		4314C7C519B4903F000F5323 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4314C7B419B4903F000F5323 /* AFHTTPRequestOperationManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		4314C7C619B4903F000F5323 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4314C7B619B4903F000F5323 /* AFHTTPSessionManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		4314C7C719B4903F000F5323 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4314C7B919B4903F000F5323 /* AFNetworkReachabilityManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		4314C7C819B4903F000F5323 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4314C7BB19B4903F000F5323 /* AFSecurityPolicy.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		4314C7C919B4903F000F5323 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4314C7BD19B4903F000F5323 /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		4314C7CA19B4903F000F5323 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4314C7BF19B4903F000F5323 /* AFURLRequestSerialization.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		4314C7CB19B4903F000F5323 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4314C7C119B4903F000F5323 /* AFURLResponseSerialization.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		4314C7CC19B4903F000F5323 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4314C7C319B4903F000F5323 /* AFURLSessionManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		4314C7CF19B49091000F5323 /* CmdHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4314C7CE19B49091000F5323 /* CmdHandler.m */; };
 		431FC14C199B824C00CFEB6B /* libaudio_coding_module.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC145199B821E00CFEB6B /* libaudio_coding_module.a */; };
 		431FC14D199B824C00CFEB6B /* libaudio_conference_mixer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC14B199B823D00CFEB6B /* libaudio_conference_mixer.a */; };
 		431FC1E5199B84C100CFEB6B /* libaudio_device.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC15A199B83A400CFEB6B /* libaudio_device.a */; };
@@ -45,6 +58,7 @@
 		431FC2B2199B8C1600CFEB6B /* libwebrtc_opus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC294199B8B8400CFEB6B /* libwebrtc_opus.a */; };
 		43247A541987339300AF14C7 /* MediaSample.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43247A521987339300AF14C7 /* MediaSample.cpp */; };
 		43247A7819876FC700AF14C7 /* RTChatSDKMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43247A74198741BC00AF14C7 /* RTChatSDKMain.cpp */; };
+		432D4E5319B597B600AD7B6A /* HttpProcess.mm in Sources */ = {isa = PBXBuildFile; fileRef = 432D4E5019B5970800AD7B6A /* HttpProcess.mm */; };
 		433E66DF1987AAD10002AAC3 /* channel_transport.cc in Sources */ = {isa = PBXBuildFile; fileRef = 433E66CF1987AAD10002AAC3 /* channel_transport.cc */; };
 		433E66E11987AAD10002AAC3 /* udp_socket_manager_posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = 433E66D21987AAD10002AAC3 /* udp_socket_manager_posix.cc */; };
 		433E66E31987AAD10002AAC3 /* udp_socket_manager_wrapper.cc in Sources */ = {isa = PBXBuildFile; fileRef = 433E66D41987AAD10002AAC3 /* udp_socket_manager_wrapper.cc */; };
@@ -457,6 +471,43 @@
 		430F16F9196F8DC10083B252 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		430F16FA196F8DC10083B252 /* tinystr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinystr.h; sourceTree = "<group>"; };
 		430F16FB196F8DC10083B252 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
+		4314C78319B46362000F5323 /* RTChatBuffStreamPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RTChatBuffStreamPool.cpp; sourceTree = "<group>"; };
+		4314C78419B46362000F5323 /* RTChatBuffStreamPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTChatBuffStreamPool.h; sourceTree = "<group>"; };
+		4314C79D19B477D3000F5323 /* curl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curl.h; sourceTree = "<group>"; };
+		4314C79E19B477D3000F5323 /* curlbuild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curlbuild.h; sourceTree = "<group>"; };
+		4314C79F19B477D3000F5323 /* curlrules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curlrules.h; sourceTree = "<group>"; };
+		4314C7A019B477D3000F5323 /* curlver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curlver.h; sourceTree = "<group>"; };
+		4314C7A119B477D3000F5323 /* easy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = easy.h; sourceTree = "<group>"; };
+		4314C7A219B477D3000F5323 /* mprintf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mprintf.h; sourceTree = "<group>"; };
+		4314C7A319B477D3000F5323 /* multi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = multi.h; sourceTree = "<group>"; };
+		4314C7A419B477D3000F5323 /* stdcheaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdcheaders.h; sourceTree = "<group>"; };
+		4314C7A519B477D3000F5323 /* typecheck-gcc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "typecheck-gcc.h"; sourceTree = "<group>"; };
+		4314C7A719B477D3000F5323 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcurl.a; sourceTree = "<group>"; };
+		4314C7A819B477D3000F5323 /* libwebp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwebp.a; sourceTree = "<group>"; };
+		4314C7AA19B477D3000F5323 /* decode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = decode.h; sourceTree = "<group>"; };
+		4314C7AB19B477D3000F5323 /* encode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = encode.h; sourceTree = "<group>"; };
+		4314C7AC19B477D3000F5323 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
+		4314C7B119B4903F000F5323 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
+		4314C7B219B4903F000F5323 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
+		4314C7B319B4903F000F5323 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
+		4314C7B419B4903F000F5323 /* AFHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperationManager.m; sourceTree = "<group>"; };
+		4314C7B519B4903F000F5323 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		4314C7B619B4903F000F5323 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
+		4314C7B719B4903F000F5323 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
+		4314C7B819B4903F000F5323 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		4314C7B919B4903F000F5323 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		4314C7BA19B4903F000F5323 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
+		4314C7BB19B4903F000F5323 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
+		4314C7BC19B4903F000F5323 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
+		4314C7BD19B4903F000F5323 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
+		4314C7BE19B4903F000F5323 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
+		4314C7BF19B4903F000F5323 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
+		4314C7C019B4903F000F5323 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
+		4314C7C119B4903F000F5323 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
+		4314C7C219B4903F000F5323 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
+		4314C7C319B4903F000F5323 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		4314C7CD19B49091000F5323 /* CmdHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CmdHandler.h; sourceTree = "<group>"; };
+		4314C7CE19B49091000F5323 /* CmdHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CmdHandler.m; sourceTree = "<group>"; };
 		431FC140199B821E00CFEB6B /* audio_coding_module.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = audio_coding_module.xcodeproj; path = ../../../webRTC_xCode/audio_coding_module/audio_coding_module.xcodeproj; sourceTree = "<group>"; };
 		431FC146199B823D00CFEB6B /* audio_conference_mixer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = audio_conference_mixer.xcodeproj; path = ../../../webRTC_xCode/audio_conference_mixer/audio_conference_mixer.xcodeproj; sourceTree = "<group>"; };
 		431FC153199B83A400CFEB6B /* audio_device.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = audio_device.xcodeproj; path = ../../../webRTC_xCode/audio_device/audio_device.xcodeproj; sourceTree = "<group>"; };
@@ -504,6 +555,8 @@
 		43247A731987412100AF14C7 /* RTChatSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTChatSdk.h; sourceTree = "<group>"; };
 		43247A74198741BC00AF14C7 /* RTChatSDKMain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RTChatSDKMain.cpp; sourceTree = "<group>"; };
 		43247A75198741BC00AF14C7 /* RTChatSDKMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTChatSDKMain.h; sourceTree = "<group>"; };
+		432D4E5019B5970800AD7B6A /* HttpProcess.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HttpProcess.mm; sourceTree = "<group>"; };
+		432D4E5119B5970800AD7B6A /* HttpProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpProcess.h; sourceTree = "<group>"; };
 		433E66CC1987AAD10002AAC3 /* common_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common_types.h; sourceTree = "<group>"; };
 		433E66CF1987AAD10002AAC3 /* channel_transport.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = channel_transport.cc; sourceTree = "<group>"; };
 		433E66D11987AAD10002AAC3 /* channel_transport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = channel_transport.h; sourceTree = "<group>"; };
@@ -655,6 +708,7 @@
 				431FC1E9199B84C200CFEB6B /* libcommon_audio.a in Frameworks */,
 				431FC1EB199B84C200CFEB6B /* libcrnssckbi.a in Frameworks */,
 				431FC1EE199B84C200CFEB6B /* libG711.a in Frameworks */,
+				4314C7AD19B477D3000F5323 /* libcurl.a in Frameworks */,
 				431FC1EF199B84C200CFEB6B /* libG722.a in Frameworks */,
 				431FC1F0199B84C200CFEB6B /* libiLBC.a in Frameworks */,
 				431FC1F1199B84C200CFEB6B /* libiSACFix.a in Frameworks */,
@@ -668,6 +722,7 @@
 				431FC1FB199B84C200CFEB6B /* libvoice_engine.a in Frameworks */,
 				431FC1FC199B84C200CFEB6B /* libwebrtc_base.a in Frameworks */,
 				431FC1FD199B84C200CFEB6B /* libwebrtc_utility.a in Frameworks */,
+				4314C7AE19B477D3000F5323 /* libwebp.a in Frameworks */,
 				431FC14C199B824C00CFEB6B /* libaudio_coding_module.a in Frameworks */,
 				431FC14D199B824C00CFEB6B /* libaudio_conference_mixer.a in Frameworks */,
 				430079591973A705003DB064 /* CoreFoundation.framework in Frameworks */,
@@ -699,6 +754,77 @@
 				430F16F9196F8DC10083B252 /* tinyxmlparser.cpp */,
 			);
 			path = source;
+			sourceTree = "<group>";
+		};
+		4314C79B19B477D3000F5323 /* libcurl */ = {
+			isa = PBXGroup;
+			children = (
+				4314C79C19B477D3000F5323 /* curl */,
+				4314C7A619B477D3000F5323 /* libraries */,
+				4314C7A919B477D3000F5323 /* webp */,
+			);
+			path = libcurl;
+			sourceTree = "<group>";
+		};
+		4314C79C19B477D3000F5323 /* curl */ = {
+			isa = PBXGroup;
+			children = (
+				4314C79D19B477D3000F5323 /* curl.h */,
+				4314C79E19B477D3000F5323 /* curlbuild.h */,
+				4314C79F19B477D3000F5323 /* curlrules.h */,
+				4314C7A019B477D3000F5323 /* curlver.h */,
+				4314C7A119B477D3000F5323 /* easy.h */,
+				4314C7A219B477D3000F5323 /* mprintf.h */,
+				4314C7A319B477D3000F5323 /* multi.h */,
+				4314C7A419B477D3000F5323 /* stdcheaders.h */,
+				4314C7A519B477D3000F5323 /* typecheck-gcc.h */,
+			);
+			path = curl;
+			sourceTree = "<group>";
+		};
+		4314C7A619B477D3000F5323 /* libraries */ = {
+			isa = PBXGroup;
+			children = (
+				4314C7A719B477D3000F5323 /* libcurl.a */,
+				4314C7A819B477D3000F5323 /* libwebp.a */,
+			);
+			path = libraries;
+			sourceTree = "<group>";
+		};
+		4314C7A919B477D3000F5323 /* webp */ = {
+			isa = PBXGroup;
+			children = (
+				4314C7AA19B477D3000F5323 /* decode.h */,
+				4314C7AB19B477D3000F5323 /* encode.h */,
+				4314C7AC19B477D3000F5323 /* types.h */,
+			);
+			path = webp;
+			sourceTree = "<group>";
+		};
+		4314C7B019B4903F000F5323 /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				4314C7B119B4903F000F5323 /* AFHTTPRequestOperation.h */,
+				4314C7B219B4903F000F5323 /* AFHTTPRequestOperation.m */,
+				4314C7B319B4903F000F5323 /* AFHTTPRequestOperationManager.h */,
+				4314C7B419B4903F000F5323 /* AFHTTPRequestOperationManager.m */,
+				4314C7B519B4903F000F5323 /* AFHTTPSessionManager.h */,
+				4314C7B619B4903F000F5323 /* AFHTTPSessionManager.m */,
+				4314C7B719B4903F000F5323 /* AFNetworking.h */,
+				4314C7B819B4903F000F5323 /* AFNetworkReachabilityManager.h */,
+				4314C7B919B4903F000F5323 /* AFNetworkReachabilityManager.m */,
+				4314C7BA19B4903F000F5323 /* AFSecurityPolicy.h */,
+				4314C7BB19B4903F000F5323 /* AFSecurityPolicy.m */,
+				4314C7BC19B4903F000F5323 /* AFURLConnectionOperation.h */,
+				4314C7BD19B4903F000F5323 /* AFURLConnectionOperation.m */,
+				4314C7BE19B4903F000F5323 /* AFURLRequestSerialization.h */,
+				4314C7BF19B4903F000F5323 /* AFURLRequestSerialization.m */,
+				4314C7C019B4903F000F5323 /* AFURLResponseSerialization.h */,
+				4314C7C119B4903F000F5323 /* AFURLResponseSerialization.m */,
+				4314C7C219B4903F000F5323 /* AFURLSessionManager.h */,
+				4314C7C319B4903F000F5323 /* AFURLSessionManager.m */,
+			);
+			path = AFNetworking;
 			sourceTree = "<group>";
 		};
 		431FC141199B821E00CFEB6B /* Products */ = {
@@ -1121,6 +1247,8 @@
 				4374E72519932BD0000CE39F /* RTChatCommonTypes.h */,
 				4307F4A119AC3D0A00D059C3 /* RTChatBuffStream.cpp */,
 				4307F4A219AC3D0A00D059C3 /* RTChatBuffStream.h */,
+				4314C78319B46362000F5323 /* RTChatBuffStreamPool.cpp */,
+				4314C78419B46362000F5323 /* RTChatBuffStreamPool.h */,
 				43E6066A19ADBFF700181658 /* TimeCounter.cpp */,
 				43E6066B19ADBFF700181658 /* TimeCounter.h */,
 			);
@@ -1180,7 +1308,11 @@
 		43998D7719865A99003C5793 /* NetProcess */ = {
 			isa = PBXGroup;
 			children = (
+				4314C7CD19B49091000F5323 /* CmdHandler.h */,
+				4314C7CE19B49091000F5323 /* CmdHandler.m */,
 				43998D7E19865ABA003C5793 /* command.h */,
+				432D4E5019B5970800AD7B6A /* HttpProcess.mm */,
+				432D4E5119B5970800AD7B6A /* HttpProcess.h */,
 			);
 			path = NetProcess;
 			sourceTree = "<group>";
@@ -1324,6 +1456,8 @@
 		43AEFB761979013F0062C9B4 /* third_party */ = {
 			isa = PBXGroup;
 			children = (
+				4314C7B019B4903F000F5323 /* AFNetworking */,
+				4314C79B19B477D3000F5323 /* libcurl */,
 				43998D7F19865C28003C5793 /* google */,
 				43998BA71986363F003C5793 /* libwebsocket */,
 				43AE003E197913930062C9B4 /* jsoncpp */,
@@ -1763,6 +1897,7 @@
 				43AE0052197913930062C9B4 /* json_reader.cpp in Sources */,
 				43998DD419865C28003C5793 /* message_lite.cc in Sources */,
 				43998DC919865C28003C5793 /* extension_set_heavy.cc in Sources */,
+				4314C7C919B4903F000F5323 /* AFURLConnectionOperation.m in Sources */,
 				43998DD219865C28003C5793 /* zero_copy_stream_impl_lite.cc in Sources */,
 				430F16FF196F8DC10083B252 /* tinyxmlparser.cpp in Sources */,
 				43998DD619865C28003C5793 /* repeated_field.cc in Sources */,
@@ -1775,33 +1910,44 @@
 				433E66E11987AAD10002AAC3 /* udp_socket_manager_posix.cc in Sources */,
 				43998DDD19865C28003C5793 /* text_format.cc in Sources */,
 				43998DDF19865C28003C5793 /* wire_format.cc in Sources */,
+				4314C7C419B4903F000F5323 /* AFHTTPRequestOperation.m in Sources */,
+				4314C7C719B4903F000F5323 /* AFNetworkReachabilityManager.m in Sources */,
 				43998DCF19865C28003C5793 /* tokenizer.cc in Sources */,
+				4314C7CF19B49091000F5323 /* CmdHandler.m in Sources */,
 				43998DCA19865C28003C5793 /* generated_message_reflection.cc in Sources */,
 				43998DC419865C28003C5793 /* descriptor.cc in Sources */,
 				43998DD919865C28003C5793 /* once.cc in Sources */,
 				43998DCC19865C28003C5793 /* coded_stream.cc in Sources */,
 				43AE0053197913930062C9B4 /* json_value.cpp in Sources */,
+				4314C7CB19B4903F000F5323 /* AFURLResponseSerialization.m in Sources */,
 				43AE0054197913930062C9B4 /* json_writer.cpp in Sources */,
 				43998DE4198660B1003C5793 /* public.pb.cc in Sources */,
+				4314C7C819B4903F000F5323 /* AFSecurityPolicy.m in Sources */,
 				4307F4A319AC3D0A00D059C3 /* RTChatBuffStream.cpp in Sources */,
 				43998DD819865C28003C5793 /* common.cc in Sources */,
+				4314C79719B46404000F5323 /* RTChatBuffStreamPool.cpp in Sources */,
 				43998DCD19865C28003C5793 /* gzip_stream.cc in Sources */,
 				435E03E5196E8333000C3012 /* CADebugMacros.cpp in Sources */,
 				43998DC719865C28003C5793 /* dynamic_message.cc in Sources */,
 				43998DCE19865C28003C5793 /* printer.cc in Sources */,
 				430F16FD196F8DC10083B252 /* tinyxml.cpp in Sources */,
 				430F16FC196F8DC10083B252 /* tinystr.cpp in Sources */,
+				4314C7C619B4903F000F5323 /* AFHTTPSessionManager.m in Sources */,
 				433E66E31987AAD10002AAC3 /* udp_socket_manager_wrapper.cc in Sources */,
 				43998D71198656B5003C5793 /* game.pb.cc in Sources */,
 				433E66E51987AAD10002AAC3 /* udp_socket_posix.cc in Sources */,
 				43998DC619865C28003C5793 /* descriptor_database.cc in Sources */,
 				43998D751986570C003C5793 /* netdatamanager.cpp in Sources */,
 				43998DC519865C28003C5793 /* descriptor.pb.cc in Sources */,
+				4314C7CC19B4903F000F5323 /* AFURLSessionManager.m in Sources */,
 				43998DDE19865C28003C5793 /* unknown_field_set.cc in Sources */,
 				435E03E6196E8333000C3012 /* CAStreamBasicDescription.cpp in Sources */,
 				433E66DF1987AAD10002AAC3 /* channel_transport.cc in Sources */,
 				43998DD519865C28003C5793 /* reflection_ops.cc in Sources */,
+				432D4E5319B597B600AD7B6A /* HttpProcess.mm in Sources */,
 				43998DD319865C28003C5793 /* message.cc in Sources */,
+				4314C7CA19B4903F000F5323 /* AFURLRequestSerialization.m in Sources */,
+				4314C7C519B4903F000F5323 /* AFHTTPRequestOperationManager.m in Sources */,
 				43247A7819876FC700AF14C7 /* RTChatSDKMain.cpp in Sources */,
 				43998BAF198636DA003C5793 /* WebSocket.cpp in Sources */,
 				43998DD019865C28003C5793 /* zero_copy_stream.cc in Sources */,
@@ -2018,6 +2164,7 @@
 					/Users/raymon_wang/Documents/Develop/webRTC_xCode/nss_static/build/Debug,
 					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/nss_static/build/Debug-iphoneos",
 					"/Users/raymon_wang/Documents/Develop/RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Debug-iphoneos",
+					"$(PROJECT_DIR)/RTChat/Classes/third_party/libcurl/libraries",
 				);
 				LLVM_LTO = NO;
 				ONLY_ACTIVE_ARCH = NO;
@@ -2091,6 +2238,7 @@
 					/Users/raymon_wang/Documents/Develop/webRTC_xCode/nss_static/build/Debug,
 					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/nss_static/build/Debug-iphoneos",
 					"/Users/raymon_wang/Documents/Develop/RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Debug-iphoneos",
+					"$(PROJECT_DIR)/RTChat/Classes/third_party/libcurl/libraries",
 				);
 				LLVM_LTO = YES;
 				OTHER_CFLAGS = "";

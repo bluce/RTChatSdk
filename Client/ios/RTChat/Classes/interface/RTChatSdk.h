@@ -58,10 +58,16 @@ public:
     void setMuteSelf(bool isMute);
     
     //开始录制麦克风数据
-    bool startRecordVoice(const char* filename);
+    bool startRecordVoice();
     
     //停止录制麦克风数据
     bool stopRecordVoice();
+    
+    //开始播放录制数据
+    bool startPlayLocalVoice(const char* voiceUrl);
+    
+    //停止播放数据
+    bool stopPlayLocalVoice();
 };
 
 #endif

@@ -10,8 +10,16 @@
 #include "netdatamanager.h"
 #include "NetProcess/command.h"
 #include "MediaSample.h"
+#include "RTChatBuffStream.h"
+#include "RTChatBuffStreamPool.h"
 #include "defines.h"
 #include "public.h"
+
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <unistd.h>
 
 static  RTChatSDKMain* s_RTChatSDKMain = NULL;
 
@@ -34,18 +42,25 @@ _netDataManager(NULL),
 _mediaSample(NULL),
 _currentRoomID(0),
 _isMute(false),
-_sdkOpState(SdkSocketUnConnected),
+_sdkOpState(SdkControlUnConnected),
 _sdkTempID(0),
 _appid(""),
 _appkey(""),
 _token(""),
 _uniqueid(""),
-_logicIP(""),
-_logicPort(0),
-_func(NULL)
+_gateWayIP(""),
+_gateWayPort(0),
+_func(NULL),
+_buffStream(NULL),
+_playBuffPool(NULL)
 {
     _netDataManager = new NetDataManager;
     _mediaSample = new MediaSample;
+    _buffStream = new RTChatBuffStream(512000);
+    _playBuffPool = new RTChatBuffStreamPool(5);
+    if (_playBuffPool) {
+        _playBuffPool->init();
+    }
     
     initMutexLock();
 }
@@ -54,6 +69,8 @@ RTChatSDKMain::~RTChatSDKMain()
 {
     SAFE_DELETE(_netDataManager);
     SAFE_DELETE(_mediaSample);
+    SAFE_DELETE(_buffStream);
+    SAFE_DELETE(_playBuffPool);
 }
 
 RTChatSDKMain& RTChatSDKMain::sharedInstance()
@@ -75,16 +92,21 @@ void RTChatSDKMain::initSDK(const std::string &appid, const std::string &key, co
     }
     
     activateSDK();
+    
+    HttpProcess::instance().registerCallBack(std::bind(&RTChatSDKMain::httpRequestCallBack, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 }
 
 //激活SDK
 void RTChatSDKMain::activateSDK()
 {
     Public::sdklog("激活SDK");
-    if (_netDataManager) {
-        _netDataManager->init("ws://180.168.126.249:16001");
-//        _netDataManager->init("ws://122.11.47.93:16001");
+    if (_sdkOpState < SdkGateWaySocketConnected) {
+        openControlConnection();
     }
+    else {
+        openGateWayConnection();
+    }
+    
     
     if (_mediaSample) {
         _mediaSample->init();
@@ -108,7 +130,13 @@ void RTChatSDKMain::deActivateSDK()
 //    _sdkTempID = 0;
     _currentRoomID = 0;
     _isMute = false;
-    _sdkOpState = SdkSocketUnConnected;
+    
+    if (_sdkOpState >= SdkGateWaySocketConnected) {
+        _sdkOpState = SdkControlConnected;
+    }
+    else {
+        _sdkOpState = SdkControlUnConnected;
+    }
 //    _func = NULL;
 }
 
@@ -123,6 +151,22 @@ SdkOpState RTChatSDKMain::getSdkState()
     return _sdkOpState;
 }
 
+///请求逻辑服务器地址
+SdkErrorCode RTChatSDKMain::requestLogicInfo()
+{
+    if (_appid == "" || _appkey == "") {
+        return OPERATION_FAILED;
+    }
+    
+    Cmd::cmdRequestLogicInfo msg;
+    msg.set_appid(_appid);
+    msg.set_key(_appkey);
+    
+    SendProtoMsg(msg, Cmd::enRequestLogicInfo);
+    
+    return OPERATION_OK;
+}
+
 SdkErrorCode RTChatSDKMain::requestLogin(const char* uniqueid)
 {
     if (uniqueid != NULL) {
@@ -132,7 +176,7 @@ SdkErrorCode RTChatSDKMain::requestLogin(const char* uniqueid)
         return OPERATION_FAILED;
     }
     
-    if (_sdkOpState < SdkSocketConnected) {
+    if (_sdkOpState < SdkGateWaySocketConnected) {
         return OPERATION_FAILED;
     }
     
@@ -148,15 +192,6 @@ SdkErrorCode RTChatSDKMain::requestLogin(const char* uniqueid)
     Public::sdklog("发送登录消息完成");
     
     return OPERATION_OK;
-}
-
-//请求逻辑服务器地址
-void RTChatSDKMain::requestLogicServerInfo(const std::string& appid, const std::string& key)
-{
-    stBaseCmd cmd;
-    cmd.cmdid = Cmd::enRequestLogicInfo;
-    
-    
 }
 
 //申请房间列表
@@ -292,6 +327,107 @@ void RTChatSDKMain::randomJoinRoom()
     }
 }
 
+///打开控制连接
+void RTChatSDKMain::openControlConnection()
+{
+    if (_netDataManager) {
+        _netDataManager->init("ws://180.168.126.249:16008");
+    }
+    _sdkOpState = SdkControlConnecting;
+}
+
+///关闭控制连接
+void RTChatSDKMain::closeControlConnection()
+{
+    if (_netDataManager) {
+        _netDataManager->deactive();
+        _netDataManager->destroyWebSocket();
+    }
+}
+
+///打开网关服务器连接
+void RTChatSDKMain::openGateWayConnection()
+{
+    if (_gateWayIP == "" || _gateWayPort == 0) {
+        return;
+    }
+    
+    if (_netDataManager) {
+        _netDataManager->init(Public::SdkAvar("ws://%s:%u", _gateWayIP.c_str(), _gateWayPort));
+    }
+    
+    _sdkOpState = SdkGateWaySocketConnecting;
+}
+
+//上传录制的语音数据
+void RTChatSDKMain::uploadVoiceData()
+{
+    const RTChatBuffStream::BuffVec& buffvec = _buffStream->getBuffVec();
+    HttpProcess::instance().postContent("http://122.11.47.94:10000/wangpan.php", &buffvec[0], _buffStream->get_datasize());
+    
+//    int s = socket(AF_INET, SOCK_STREAM, 0);
+//    struct sockaddr_in addr;
+//    addr.sin_family = AF_INET;
+//    addr.sin_port = htons(10000);
+//    addr.sin_addr.s_addr = inet_addr("122.11.47.94");
+//    
+//    connect(s, (struct sockaddr*)&addr, sizeof(addr));
+//    
+//    
+//    
+//    std::string header("");
+//    std::string content("");
+//    
+//    //----------------------post头开始--------------------------------
+//    header += "POST ";
+//    header += "/wangpan.php";
+//    header += " HTTP/1.1\r\n";
+//    header += "Host: 122.11.47.94:10000\r\n";
+//    header += "User-Agent: Mozilla/4.0\r\n";
+//    header += "Connection: Keep-Alive\r\n";
+//    header += "Accept: */*\r\n";
+//    header += "Pragma: no-cache\r\n";
+//    header += "Content-Type: multipart/form-data; charset=\"gb2312\"; boundary=----------------------------64b23e4066ed\r\n";
+//    
+//    content += "------------------------------64b23e4066ed\r\n";
+//    content += "Content-Disposition: form-data; name=\"file\"; filename=\"1.txt\"\r\n";
+//    content += "Content-Type: aapplication/octet-stream\r\n\r\n";
+//    
+//    //post尾时间戳
+//    std::string strContent("\r\n------------------------------64b23e4066ed\r\n");
+//    char temp[64] = {0};
+//    //注意下面这个参数Content-Length，这个参数值是：http请求头长度+请求尾长度+文件总长度
+//    sprintf(temp, "Content-Length: %u\r\n\r\n", content.length() + 1024 + strContent.length());
+//    header += temp;
+//    std::string str_http_request;
+//    str_http_request.append(header).append(content);
+//    //----------------------post头结束-----------------------------------
+//    
+//    send(s, str_http_request.c_str(), str_http_request.length(), 0);
+//    
+//    sleep(1);
+//    
+//    char* buff = new char[1024];
+//    int total = 0;
+//    while (total < 1024) {
+//        int size = send(s, &buff[total], 1024-total, 0);
+//        total += size;
+//    }
+//    sleep(1);
+//    
+//    send(s, strContent.c_str(), strContent.length(),0);
+//    
+//    shutdown(s, 2);
+}
+
+//调用底层引擎播放流
+void RTChatSDKMain::playVoiceStream(RTChatBuffStream *instream)
+{
+    if (_mediaSample && instream) {
+        _mediaSample->startPlayLocalStream(instream);
+    }
+}
+
 void RTChatSDKMain::startTalk()
 {
     
@@ -309,6 +445,19 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
     Public::sdklog("cmdid=%u", cmd->cmdid);
     
     switch (cmd->cmdid) {
+        case Cmd::enNotifyLogicInfo:
+        {
+            Cmd::cmdNotifyLogicInfo protomsg;
+            protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
+            
+            _gateWayIP = protomsg.gateip();
+            _gateWayPort = protomsg.gateport();
+            
+            closeControlConnection();
+            openGateWayConnection();
+            
+            break;
+        }
         case Cmd::enNotifyLoginResult:
         {
             Cmd::cmdNotifyLoginResult protomsg;
@@ -351,7 +500,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
                 _func(enNotifyCreateResult, OPERATION_OK, (const unsigned char*)&callbackdata, sizeof(StNotifyCreateResult));
             }
             else {
-                _sdkOpState = SdkSocketConnected;
+                _sdkOpState = SdkGateWaySocketConnected;
                 _func(enNotifyCreateResult, OPERATION_FAILED, NULL, 0);
             }
             break;
@@ -596,6 +745,34 @@ bool RTChatSDKMain::getMuteSelf()
     return _isMute;
 }
 
+//http请求回调函数
+void RTChatSDKMain::httpRequestCallBack(HttpDirection direction, const char *ptr, int size)
+{
+    if (direction == HttpProcess_Upload) {
+        if (!ptr) {
+            //失败
+            _func(enRequestRec, OPERATION_FAILED, NULL, 0);
+        }
+        else {
+            StRequestRec callbackdata;
+            callbackdata.isok = true;
+            strncpy(callbackdata.urlbuf, ptr, size);
+            _func(enRequestRec, OPERATION_OK, (const unsigned char*)&callbackdata, sizeof(StRequestRec));
+        }
+    }
+    else {
+        if (!ptr) {
+            //失败
+            //Todo...
+        }
+        else {
+            _playBuffPool->updateCurrentBuff(_downloadingfileurl, ptr, size);
+            RTChatBuffStream* instream = _playBuffPool->getAvailableBuff(_downloadingfileurl)->buffstream;
+            playVoiceStream(instream);
+        }
+    }
+}
+
 //设置本人Mac静音
 void RTChatSDKMain::setMuteSelf(bool isMute)
 {
@@ -606,10 +783,10 @@ void RTChatSDKMain::setMuteSelf(bool isMute)
 }
 
 //开始录制麦克风数据
-bool RTChatSDKMain::startRecordVoice(const char* filename)
+bool RTChatSDKMain::startRecordVoice()
 {
     if (_mediaSample) {
-        return _mediaSample->startRecordVoice(filename);
+        return _mediaSample->startRecordVoice(_buffStream);
     }
     else {
         return false;
@@ -619,24 +796,51 @@ bool RTChatSDKMain::startRecordVoice(const char* filename)
 //停止录制麦克风数据
 bool RTChatSDKMain::stopRecordVoice()
 {
+    bool result = false;
     if (_mediaSample) {
-        return _mediaSample->stopRecordVoice();
+        if ( (result = _mediaSample->stopRecordVoice()) ) {
+            uploadVoiceData();
+        }
     }
     else {
         return false;
     }
+    
+    return result;
 }
 
 //开始播放录制数据
 bool RTChatSDKMain::startPlayLocalVoice(const char *voiceUrl)
 {
-//    if (_mediaSample) {
-//        return _mediaSample->startPlayLocalStream(<#webrtc::InStream *instream#>);
-//    }
-//    else {
-//        return false;
-//    }
+    RTChatBuffStream* instream = NULL;
+    
+    if (_playBuffPool) {
+        RTChatBuffStreamPool::StBuffInfo* info = _playBuffPool->getAvailableBuff(voiceUrl);
+        if (info && !info->needDownload) {
+            instream = info->buffstream;
+            playVoiceStream(instream);
+        }
+        else {
+            HttpProcess::instance().requestContent(voiceUrl);
+            _downloadingfileurl = voiceUrl;
+        }
+    }
+    else {
+        return false;
+    }
+    
     return true;
+}
+
+//停止播放数据
+bool RTChatSDKMain::stopPlayLocalVoice()
+{
+    if (_mediaSample) {
+        return _mediaSample->stopPlayLocalStream();
+    }
+    else {
+        return false;
+    }
 }
 
 //刷新房间列表信息

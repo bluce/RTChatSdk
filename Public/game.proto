@@ -26,9 +26,9 @@ message cmdNotifyLogicInfo
 
 	required enLogicResult result = 1;
 	
-	optional string token = 2;
-	optional string ip = 3;
-	optional uint32 port = 4;
+	optional string token = 2;   /// 登录token
+	optional string gateip = 3; /// 返回登录服务器的ip
+	optional uint32 gateport = 4; /// 登录服务器的端口
 }
 
 
@@ -51,8 +51,9 @@ message cmdNotifyLoginResult
 	}
 	
 	required enLoginResult result = 1;
-	optional uint64 tempid = 2;
+	optional uint64 tempid = 2;   /// 唯一识别id
 }
+
 
 
 /// 请求创建房间
@@ -172,3 +173,16 @@ message cmdReturnRandChat
 	optional uint64 tempid = 2; /// 想去和这个人聊天
 }
 
+/// 请求更新权限
+message cmdRequestUpdatePower
+{
+	required uint64 tempid = 1;
+	required enPowerType power = 2;
+}
+
+/// 通知更新权限(更新显示)
+message cmdNotifyUpdatePower
+{
+	required uint64 tempid = 1;
+	required enPowerType power = 2;
+}

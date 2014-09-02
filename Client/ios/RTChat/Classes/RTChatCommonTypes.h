@@ -32,8 +32,12 @@ enum enRoomReason
 };
 
 enum SdkOpState {
-    SdkSocketUnConnected = 0,
-    SdkSocketConnected,
+    SdkControlUnConnected = 0,
+    SdkControlConnecting,
+    SdkControlConnected,
+    SdkGateWaySocketUnConnected,
+    SdkGateWaySocketConnecting,
+    SdkGateWaySocketConnected,
     SdkUserLogining,
     SdkUserLogined,
     SdkUserCreatingRoom,
@@ -101,14 +105,27 @@ enum SdkResponseCmd {
     /// 通知有人进入房间
 	enNotifySomeEnterRoom = 18,
     
+    /// 有人离开房间
+	enNotifySomeLeaveRoom = 19,
+    
 	/// 有人想和你随机聊天
 	enNotifyRandChat = 21,
     
 	/// 返回是否要随机聊天
 	enReturnRandChat = 22,
     
-    /// 有人离开房间
-	enNotifySomeLeaveRoom = 19,
+    /// 更新权限
+	enRequestUpdatePower = 23,
+    
+	/// 通知更新权限
+	enNotifyUpdatePower = 24,
+    
+	/// 请求录音
+	enRequestRec = 25,
+    
+	/// 请求播放
+	enRequestPlay = 26,
+    
 };
 
 enum SdkErrorCode {
@@ -265,6 +282,15 @@ struct StReturnRandChat {
     }
     bool isok;
     uint64_t tempid;
+};
+
+/// 请求录音结果
+struct StRequestRec {
+    StRequestRec(){
+        bzero(this, sizeof(*this));
+    }
+    bool isok;
+    char urlbuf[256];    //返回录音文件获取url
 };
 
 /******************回调字符串JSON格式******************/

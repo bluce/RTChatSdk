@@ -14,9 +14,12 @@
 #include "proto/public.pb.h"
 #include "proto/game.pb.h"
 #include "RTChatCommonTypes.h"
+#include "NetProcess/HttpProcess.h"
 
 class NetDataManager;
 class MediaSample;
+class RTChatBuffStream;
+class RTChatBuffStreamPool;
 
 typedef std::function<void (SdkResponseCmd cmdType, SdkErrorCode error, const unsigned char* dataPtr, uint32_t dataSize)> pMsgCallFunc;
 
@@ -47,6 +50,9 @@ public:
     //获取SDK当前操作状态，用户发起操作前可以检测一下状态判断可否继续
     SdkOpState getSdkState();
     
+    ///请求逻辑服务器地址
+    SdkErrorCode requestLogicInfo();
+    
     //请求登录
     SdkErrorCode requestLogin(const char* uniqueid = NULL);
     
@@ -75,7 +81,7 @@ public:
     void setMuteSelf(bool isMute);
     
     //开始录制麦克风数据
-    bool startRecordVoice(const char* filename);
+    bool startRecordVoice();
     
     //停止录制麦克风数据
     bool stopRecordVoice();
@@ -83,10 +89,10 @@ public:
     //开始播放录制数据
     bool startPlayLocalVoice(const char* voiceUrl);
     
-    /*******************需要暴露给用户的接口结束**********************/
+    //停止播放数据
+    bool stopPlayLocalVoice();
     
-    //请求逻辑服务器地址
-    void requestLogicServerInfo(const std::string& appid, const std::string& key);
+    /*******************需要暴露给用户的接口结束**********************/
     
     //收到网络线程消息
     void onRecvMsg(char* data, int len);
@@ -105,6 +111,9 @@ public:
         return _sdkTempID;
     };
     
+    //http请求回调函数
+    void httpRequestCallBack(HttpDirection direction, const char* ptr, int size);
+    
 protected:
     void startTalk();
     
@@ -115,6 +124,21 @@ protected:
     
     //随机进入一个房间
     void randomJoinRoom();
+    
+    ///打开控制连接
+    void openControlConnection();
+    
+    ///关闭控制连接
+    void closeControlConnection();
+    
+    ///打开网关服务器连接
+    void openGateWayConnection();
+    
+    //上传录制的语音数据
+    void uploadVoiceData();
+    
+    //调用底层引擎播放流
+    void playVoiceStream(RTChatBuffStream* instream);
     
 private:
     //刷新房间列表信息
@@ -132,8 +156,8 @@ private:
     std::string         _appkey;
     std::string         _uniqueid;
     std::string         _token;
-    std::string         _logicIP;       //逻辑服务器IP
-    uint32_t            _logicPort;     //逻辑服务器PORT
+    std::string         _gateWayIP;       //网关服务器IP
+    uint32_t            _gateWayPort;     //网关服务器PORT
     
     uint64_t            _sdkTempID;     //服务器下发的sdk唯一标识符
     
@@ -148,6 +172,10 @@ private:
     pthread_mutex_t     _mutexLock;      //读写锁
     
     pMsgCallFunc        _func;          //回调函数
+    
+    RTChatBuffStream*       _buffStream;    //录音缓冲区
+    RTChatBuffStreamPool*   _playBuffPool;  //播放缓冲池
+    const char*             _downloadingfileurl; //临时存放下载中的文件名
 };
 
 #endif /* defined(__RTChat__RTChatSDKMain__) */

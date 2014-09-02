@@ -27,11 +27,34 @@ enum enRoomType
 enum enRoomReason
 {
 	ROOM_REASON_MIN = 0;
-	ROOM_REASON_NORMAL = 1;
-	ROOM_REASON_RANDCHAT = 2;
+	ROOM_REASON_NORMAL = 1; ///   正常的系统创建房间
+	ROOM_REASON_RANDCHAT = 2; /// 为测试加的随机聊天房间(类型是二人房间)
 	ROOM_REASON_MAX = 3;
 }
 
+
+/// 权限类型
+enum enPowerType
+{
+	POWER_TYPE_NORMAL = 1; /// 普通的人
+	POWER_TYPE_MASTER = 2; /// 房主
+	POWER_TYPE_ADMIN = 3; /// 管理员(房主分配的)
+}
+
+/// 录音返回
+enum enRecordType
+{
+	RECORD_TYPE_MIN = 0;
+	RECORD_TYPE_MAX = 1;
+}
+
+
+/// 播放返回
+enum enPlayType
+{
+	PLAY_TYPE_MIN = 0;
+	PLAY_TYPE_MAX = 1;
+}
 
 enum enCmdId
 {
@@ -91,14 +114,26 @@ enum enCmdId
 	/// 通知有人进入房间
 	enNotifySomeEnterRoom = 18;
 
+	/// 有人离开房间
+	enNotifySomeLeaveRoom = 19;
+
 	/// 有人想和你随机聊天
 	enNotifyRandChat = 21;
 
 	/// 返回是否要随机聊天
 	enReturnRandChat = 22;
 
-	/// 有人离开房间
-	enNotifySomeLeaveRoom = 19;
+	/// 更新权限
+	enRequestUpdatePower = 23;
+
+	/// 通知更新权限
+	enNotifyUpdatePower = 24;
+
+	/// 请求录音
+	enRequestRec = 25;
+
+	/// 请求播放
+	enRequestPlay = 26;
 }
 
 
@@ -107,21 +142,21 @@ message stRoomInfo
 {
 	required uint64 roomid = 1;
 	required enRoomType roomtype = 2;
-	required uint32 num = 3;
+	required uint32 num = 3; /// 房间当前人数(也是为测试增加的),不主动刷新，需要主动请求
 }
 
 /// 数据用户信息
 message stVoiceUserInfo
 {
-	required uint64 id = 1;
+	required uint64 id = 1; /// 增加一个voice user 此id不确定目标
 }
 
 
 /// 麦序信息
 message stMicInfo
 {
-	required uint64 tempid = 1;
-	required string uniqueid = 2;
+	required uint64 tempid = 1; /// 语音服务器的用户识别id
+	required string uniqueid = 2; /// 游戏的唯一 id
 }
 
 

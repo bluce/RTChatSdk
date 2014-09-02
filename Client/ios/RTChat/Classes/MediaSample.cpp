@@ -16,7 +16,8 @@ using namespace webrtc;
 
 MediaSample::MediaSample() :
 _voe(NULL),
-_recvport(30000)
+_recvport(30000),
+_playChannel(-1)
 {
     _voe = VoiceEngine::Create();
     
@@ -309,7 +310,7 @@ void MediaSample::onDeleteChannel(uint64_t id, MediaSample::DataDirection direct
 }
 
 //开始录制麦克风数据
-bool MediaSample::startRecordVoice(const char* filename)
+bool MediaSample::startRecordVoice(OutStream* outstream)
 {
     bool result = false;
     if (!_voe) {
@@ -323,7 +324,7 @@ bool MediaSample::startRecordVoice(const char* filename)
     for (int i = 0; i < num; i++) {
         //        sdklog("%s=%d\n", inst.plname, inst.pltype);
         codec->GetCodec(i, inst);
-        if (inst.pltype == 102) {
+        if (inst.pltype == 0) {
             break;
         }
     }
@@ -331,7 +332,7 @@ bool MediaSample::startRecordVoice(const char* filename)
     
     VoEFile* voeFile = VoEFile::GetInterface(_voe);
     if (voeFile) {
-        if (voeFile->StartRecordingMicrophone(filename, &inst) != -1) {
+        if (voeFile->StartRecordingMicrophone(outstream, &inst) != -1) {
             result = true;
         }
         voeFile->Release();
@@ -362,25 +363,55 @@ bool MediaSample::stopRecordVoice()
 //开始播放本地录制的音频
 bool MediaSample::startPlayLocalStream(InStream* instream)
 {
+    bool result = false;
     if (!_voe) {
         return false;
     }
     
     VoEBase* voeBase = VoEBase::GetInterface(_voe);
-    int channel = 0;
     if (voeBase) {
-        channel = voeBase->CreateChannel();
+        _playChannel = voeBase->CreateChannel();
+        voeBase->StartPlayout(_playChannel);
         voeBase->Release();
     }
     
     VoEFile* voeFile = VoEFile::GetInterface(_voe);
     if (voeFile) {
-        if (voeFile->StartPlayingFileLocally(channel, instream) != -1) {
+        if (voeFile->StartPlayingFileLocally(_playChannel, instream) != -1) {
+            result = true;
         }
         voeFile->Release();
     }
     
-    return true;
+    return result;
+}
+
+//停止播放录制的音频
+bool MediaSample::stopPlayLocalStream()
+{
+    bool result = false;
+    if (!_voe) {
+        return false;
+    }
+    
+    VoEFile* voeFile = VoEFile::GetInterface(_voe);
+    if (voeFile) {
+        if (voeFile->StopPlayingFileLocally(_playChannel) != -1) {
+            result = true;
+        }
+        voeFile->Release();
+    }
+    
+    VoEBase* voeBase = VoEBase::GetInterface(_voe);
+    if (voeBase) {
+        voeBase->StopPlayout(_playChannel);
+        voeBase->DeleteChannel(_playChannel);
+        voeBase->Release();
+    }
+    
+    _playChannel = -1;
+    
+    return result;
 }
 
 void MediaSample::closeVoiceEngine()

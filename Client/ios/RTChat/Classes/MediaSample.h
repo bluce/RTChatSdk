@@ -18,6 +18,7 @@
 #include <webrtc/voice_engine/include/voe_codec.h>
 #include <webrtc/voice_engine/include/voe_network.h>
 #include <webrtc/voice_engine/include/voe_audio_processing.h>
+#include "RTChatBuffStream.h"
 
 using namespace webrtc;
 using namespace webrtc::test;
@@ -83,13 +84,16 @@ public:
     void onDeleteChannel(uint64_t id, DataDirection direction);
     
     //开始录制麦克风数据
-    bool startRecordVoice(const char* filename);
+    bool startRecordVoice(OutStream* outstream);
     
     //停止录制麦克风数据
     bool stopRecordVoice();
     
     //开始播放本地录制的音频
     bool startPlayLocalStream(InStream* instream);
+    
+    //停止播放录制的音频
+    bool stopPlayLocalStream();
     
 protected:
     //设置发送编码格式为codeType
@@ -118,6 +122,7 @@ private:
     std::string                     _voiceServerIp;
     unsigned int                    _voiceServerPort;
     unsigned int                    _recvport;
+    int                             _playChannel;
 };
 
 #endif /* defined(__RtcSameple__MediaSample__) */
