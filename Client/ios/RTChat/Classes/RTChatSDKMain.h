@@ -35,64 +35,64 @@ public:
     
     /*******************需要暴露给用户的接口开始**********************/
     
-    //sdk初始化，只能调用一次
+    //sdk初始化，只能调用一次(主线程)
     void initSDK(const std::string& appid, const std::string& key, const char* uniqueid = NULL);
     
-    //注册消息回调
+    //注册消息回调(主线程)
     void registerMsgCallback(const pMsgCallFunc& func);
     
-    //激活SDK
+    //激活SDK(主线程)
     void activateSDK();
     
-    //当应用最小化时需要调用这个，清理数据
+    //当应用最小化时需要调用这个，清理数据(主线程)
     void deActivateSDK();
     
     //获取SDK当前操作状态，用户发起操作前可以检测一下状态判断可否继续
     SdkOpState getSdkState();
     
-    ///请求逻辑服务器地址
-    SdkErrorCode requestLogicInfo();
-    
-    //请求登录
-    SdkErrorCode requestLogin(const char* uniqueid = NULL);
-    
-    //申请房间列表
+    //申请房间列表(主线程)
     SdkErrorCode requestRoomList();
     
-    //创建房间
+    //创建房间(主线程)
     SdkErrorCode createRoom(enRoomType roomType, enRoomReason reason);
     
-    //加入房间
+    //加入房间(主线程)
     SdkErrorCode joinRoom(uint64_t roomid);
     
-    //离开房间
+    //离开房间(主线程)
     SdkErrorCode leaveRoom();
     
-    //加入麦序
+    //加入麦序(主线程)
     SdkErrorCode requestInsertMicQueue();
     
-    //离开麦序
+    //离开麦序(主线程)
     SdkErrorCode leaveMicQueue();
     
-    //是否接收随机聊天，临时增加的接口
+    //是否接收随机聊天，临时增加的接口(主线程)
     void returnRandChatRes(bool isAccept, uint64_t srctempid);
     
-    //设置本人Mac静音
+    //设置本人Mac静音(主线程)
     void setMuteSelf(bool isMute);
     
-    //开始录制麦克风数据
+    //开始录制麦克风数据(主线程)
     bool startRecordVoice();
     
-    //停止录制麦克风数据
+    //停止录制麦克风数据(主线程)
     bool stopRecordVoice();
     
-    //开始播放录制数据
+    //开始播放录制数据(主线程)
     bool startPlayLocalVoice(const char* voiceUrl);
     
-    //停止播放数据
+    //停止播放数据(主线程)
     bool stopPlayLocalVoice();
     
     /*******************需要暴露给用户的接口结束**********************/
+    
+    ///请求逻辑服务器地址(工作线程)
+    SdkErrorCode requestLogicInfo();
+    
+    ///请求登录(工作线程)
+    SdkErrorCode requestLogin(const char* uniqueid = NULL);
     
     //收到网络线程消息
     void onRecvMsg(char* data, int len);
@@ -115,10 +115,6 @@ public:
     void httpRequestCallBack(HttpDirection direction, const char* ptr, int size);
     
 protected:
-    void startTalk();
-    
-    void stopTalk();
-    
     //语音引擎连接语音房间
     void connectVoiceRoom(const std::string& ip, unsigned int port);
     
@@ -139,6 +135,9 @@ protected:
     
     //调用底层引擎播放流
     void playVoiceStream(RTChatBuffStream* instream);
+    
+    //录音超过最大时间回调
+    void recordTimeExceed(int time);
     
 private:
     //刷新房间列表信息
@@ -176,6 +175,10 @@ private:
     RTChatBuffStream*       _buffStream;    //录音缓冲区
     RTChatBuffStreamPool*   _playBuffPool;  //播放缓冲池
     const char*             _downloadingfileurl; //临时存放下载中的文件名
+    
+    bool                _isrecording;       //录音标志
+    time_t              _recordstarttime;   //录音开始时间
+    time_t              _recordduration;    //录音持续时间
 };
 
 #endif /* defined(__RTChat__RTChatSDKMain__) */

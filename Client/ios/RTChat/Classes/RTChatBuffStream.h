@@ -30,6 +30,9 @@ public:
     ///获得实际数据长度
     int get_datasize();
     
+    //重置BUFF等待写入
+    void resetBuffStream();
+    
 private:
     BuffVec                         _buffVec;
     int                             _curWriteSize;

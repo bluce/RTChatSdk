@@ -40,6 +40,8 @@ bool MediaSample::init()
     VoEBase* voe_base = VoEBase::GetInterface(_voe);
     if (voe_base) {
         voe_base->Init();
+        voe_base->RegisterVoiceEngineObserver(*this);
+        voe_base->Release();
     }
     
     VoEAudioProcessing* voe_audioProcessing = VoEAudioProcessing::GetInterface(_voe);
@@ -51,9 +53,12 @@ bool MediaSample::init()
         voe_audioProcessing->Release();
     }
     
-    voe_base->RegisterVoiceEngineObserver(*this);
-    voe_base->Release();
-    
+    VoEHardware* hardware = VoEHardware::GetInterface(_voe);
+    if (hardware) {
+        hardware->SetLoudspeakerStatus(true);
+        hardware->Release();
+    }
+
     return true;
 }
 
@@ -89,18 +94,6 @@ void MediaSample::connectRoom(const std::string &ip, unsigned int port, uint64_t
     }
     
     setEncodeTypeToChannel(channel, 102);
-    
-//    VoEBase* voe_base = VoEBase::GetInterface(_voe);
-//    if (voe_base) {
-//        voe_base->StartPlayout(channel);
-//        voe_base->StartReceive(channel);
-//    }
-    
-    VoEHardware* hardware = VoEHardware::GetInterface(_voe);
-    if (hardware) {
-        hardware->SetLoudspeakerStatus(true);
-        hardware->Release();
-    }
     
     VoEVolumeControl* volumnControl = VoEVolumeControl::GetInterface(_voe);
     if (volumnControl) {
@@ -322,9 +315,8 @@ bool MediaSample::startRecordVoice(OutStream* outstream)
     
     int num = codec->NumOfCodecs();
     for (int i = 0; i < num; i++) {
-        //        sdklog("%s=%d\n", inst.plname, inst.pltype);
         codec->GetCodec(i, inst);
-        if (inst.pltype == 0) {
+        if (inst.pltype == 102) {
             break;
         }
     }
@@ -377,7 +369,7 @@ bool MediaSample::startPlayLocalStream(InStream* instream)
     
     VoEFile* voeFile = VoEFile::GetInterface(_voe);
     if (voeFile) {
-        if (voeFile->StartPlayingFileLocally(_playChannel, instream) != -1) {
+        if (voeFile->StartPlayingFileLocally(_playChannel, instream, kFileFormatCompressedFile) != -1) {
             result = true;
         }
         voeFile->Release();
@@ -412,6 +404,12 @@ bool MediaSample::stopPlayLocalStream()
     _playChannel = -1;
     
     return result;
+}
+
+//获得录音数据时长
+uint64_t MediaSample::getRecordStreamTimeLength(OutStream* outstream)
+{
+    return 0;
 }
 
 void MediaSample::closeVoiceEngine()

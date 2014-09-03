@@ -52,11 +52,20 @@ _gateWayIP(""),
 _gateWayPort(0),
 _func(NULL),
 _buffStream(NULL),
-_playBuffPool(NULL)
+_playBuffPool(NULL),
+_isrecording(false),
+_recordstarttime(0),
+_recordduration(0)
 {
     _netDataManager = new NetDataManager;
+    
+    //创建语音引擎
     _mediaSample = new MediaSample;
-    _buffStream = new RTChatBuffStream(512000);
+    
+    //创建录音缓冲区
+    _buffStream = new RTChatBuffStream(128000);
+    
+    //创建播放缓冲池
     _playBuffPool = new RTChatBuffStreamPool(5);
     if (_playBuffPool) {
         _playBuffPool->init();
@@ -94,6 +103,12 @@ void RTChatSDKMain::initSDK(const std::string &appid, const std::string &key, co
     activateSDK();
     
     HttpProcess::instance().registerCallBack(std::bind(&RTChatSDKMain::httpRequestCallBack, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+}
+
+//注册消息回调
+void RTChatSDKMain::registerMsgCallback(const pMsgCallFunc& func)
+{
+    _func = func;
 }
 
 //激活SDK
@@ -138,11 +153,6 @@ void RTChatSDKMain::deActivateSDK()
         _sdkOpState = SdkControlUnConnected;
     }
 //    _func = NULL;
-}
-
-void RTChatSDKMain::registerMsgCallback(const pMsgCallFunc& func)
-{
-    _func = func;
 }
 
 //获取SDK当前操作状态
@@ -332,6 +342,7 @@ void RTChatSDKMain::openControlConnection()
 {
     if (_netDataManager) {
         _netDataManager->init("ws://180.168.126.249:16008");
+        _netDataManager->activity();
     }
     _sdkOpState = SdkControlConnecting;
 }
@@ -340,7 +351,7 @@ void RTChatSDKMain::openControlConnection()
 void RTChatSDKMain::closeControlConnection()
 {
     if (_netDataManager) {
-        _netDataManager->deactive();
+//        _netDataManager->deactive();
         _netDataManager->destroyWebSocket();
     }
 }
@@ -428,14 +439,12 @@ void RTChatSDKMain::playVoiceStream(RTChatBuffStream *instream)
     }
 }
 
-void RTChatSDKMain::startTalk()
+//录音超过最大时间回调
+void RTChatSDKMain::recordTimeExceed(int time)
 {
+    Public::sdklog("录音时间超长%d", time);
     
-}
-
-void RTChatSDKMain::stopTalk()
-{
-    
+    stopRecordVoice();
 }
 
 void RTChatSDKMain::onRecvMsg(char *data, int len)
@@ -454,6 +463,9 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             _gateWayPort = protomsg.gateport();
             
             closeControlConnection();
+            
+            _sdkOpState = SdkGateWaySocketUnConnected;
+            
             openGateWayConnection();
             
             break;
@@ -745,7 +757,7 @@ bool RTChatSDKMain::getMuteSelf()
     return _isMute;
 }
 
-//http请求回调函数
+//http请求回调函数(主线程工作)
 void RTChatSDKMain::httpRequestCallBack(HttpDirection direction, const char *ptr, int size)
 {
     if (direction == HttpProcess_Upload) {
@@ -756,6 +768,7 @@ void RTChatSDKMain::httpRequestCallBack(HttpDirection direction, const char *ptr
         else {
             StRequestRec callbackdata;
             callbackdata.isok = true;
+            callbackdata.voicetime = _recordduration;
             strncpy(callbackdata.urlbuf, ptr, size);
             _func(enRequestRec, OPERATION_OK, (const unsigned char*)&callbackdata, sizeof(StRequestRec));
         }
@@ -764,11 +777,17 @@ void RTChatSDKMain::httpRequestCallBack(HttpDirection direction, const char *ptr
         if (!ptr) {
             //失败
             //Todo...
+            _func(enRequestPlay, OPERATION_FAILED, NULL, 0);
         }
         else {
-            _playBuffPool->updateCurrentBuff(_downloadingfileurl, ptr, size);
-            RTChatBuffStream* instream = _playBuffPool->getAvailableBuff(_downloadingfileurl)->buffstream;
-            playVoiceStream(instream);
+            RTChatBuffStream* instream = _playBuffPool->updateCurrentBuff(_downloadingfileurl, ptr, size);
+            if (instream) {
+                playVoiceStream(instream);
+                _func(enRequestPlay, OPERATION_OK, NULL, 0);
+            }
+            else {
+                _func(enRequestPlay, OPERATION_FAILED, NULL, 0);
+            }
         }
     }
 }
@@ -785,7 +804,17 @@ void RTChatSDKMain::setMuteSelf(bool isMute)
 //开始录制麦克风数据
 bool RTChatSDKMain::startRecordVoice()
 {
+    if (_isrecording) {
+        return false;
+    }
+    
     if (_mediaSample) {
+        pthread_mutex_lock(&_mutexLock);
+        _isrecording = true;
+        pthread_mutex_unlock(&_mutexLock);
+        
+        TimeCounter::instance().registerTimeOutCallBack(20, std::bind(&RTChatSDKMain::recordTimeExceed, this, std::placeholders::_1));
+        _recordstarttime = time(NULL);
         return _mediaSample->startRecordVoice(_buffStream);
     }
     else {
@@ -796,10 +825,25 @@ bool RTChatSDKMain::startRecordVoice()
 //停止录制麦克风数据
 bool RTChatSDKMain::stopRecordVoice()
 {
+    bool isrecording;
+    
+    pthread_mutex_lock(&_mutexLock);
+    isrecording = _isrecording;
+    pthread_mutex_unlock(&_mutexLock);
+    
+    if (!isrecording) {
+        return false;
+    }
+    
     bool result = false;
     if (_mediaSample) {
         if ( (result = _mediaSample->stopRecordVoice()) ) {
             uploadVoiceData();
+            
+            pthread_mutex_lock(&_mutexLock);
+            _recordduration = time(NULL) - _recordstarttime;
+            _isrecording = false;
+            pthread_mutex_unlock(&_mutexLock);
         }
     }
     else {

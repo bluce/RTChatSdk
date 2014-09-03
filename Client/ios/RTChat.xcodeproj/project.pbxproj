@@ -15,8 +15,6 @@
 		430F16FE196F8DC10083B252 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F8196F8DC10083B252 /* tinyxmlerror.cpp */; };
 		430F16FF196F8DC10083B252 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F9196F8DC10083B252 /* tinyxmlparser.cpp */; };
 		4314C79719B46404000F5323 /* RTChatBuffStreamPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4314C78319B46362000F5323 /* RTChatBuffStreamPool.cpp */; };
-		4314C7AD19B477D3000F5323 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4314C7A719B477D3000F5323 /* libcurl.a */; };
-		4314C7AE19B477D3000F5323 /* libwebp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4314C7A819B477D3000F5323 /* libwebp.a */; };
 		4314C7C419B4903F000F5323 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4314C7B219B4903F000F5323 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4314C7C519B4903F000F5323 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4314C7B419B4903F000F5323 /* AFHTTPRequestOperationManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4314C7C619B4903F000F5323 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4314C7B619B4903F000F5323 /* AFHTTPSessionManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -708,7 +706,6 @@
 				431FC1E9199B84C200CFEB6B /* libcommon_audio.a in Frameworks */,
 				431FC1EB199B84C200CFEB6B /* libcrnssckbi.a in Frameworks */,
 				431FC1EE199B84C200CFEB6B /* libG711.a in Frameworks */,
-				4314C7AD19B477D3000F5323 /* libcurl.a in Frameworks */,
 				431FC1EF199B84C200CFEB6B /* libG722.a in Frameworks */,
 				431FC1F0199B84C200CFEB6B /* libiLBC.a in Frameworks */,
 				431FC1F1199B84C200CFEB6B /* libiSACFix.a in Frameworks */,
@@ -722,7 +719,6 @@
 				431FC1FB199B84C200CFEB6B /* libvoice_engine.a in Frameworks */,
 				431FC1FC199B84C200CFEB6B /* libwebrtc_base.a in Frameworks */,
 				431FC1FD199B84C200CFEB6B /* libwebrtc_utility.a in Frameworks */,
-				4314C7AE19B477D3000F5323 /* libwebp.a in Frameworks */,
 				431FC14C199B824C00CFEB6B /* libaudio_coding_module.a in Frameworks */,
 				431FC14D199B824C00CFEB6B /* libaudio_conference_mixer.a in Frameworks */,
 				430079591973A705003DB064 /* CoreFoundation.framework in Frameworks */,

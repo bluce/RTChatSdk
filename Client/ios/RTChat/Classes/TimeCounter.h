@@ -15,31 +15,48 @@
 
 using namespace webrtc;
 
-typedef std::function<void (void)> callbackfunc;
+typedef std::function<void (int)> callbackfunc;
 
 class TimeCounter {
+public:
+    struct StCallBackInfo {
+        StCallBackInfo(int id, int period, const callbackfunc& func){
+            _id = id;
+            _period = period;
+            _func = func;
+            _starttime = time(NULL);
+        }
+        int             _id;
+        callbackfunc    _func;
+        uint64_t        _starttime;
+        int             _period;
+    };
+    typedef std::vector<StCallBackInfo> CallBackInfoVec;
+    
 public:
     TimeCounter();
     virtual ~TimeCounter();
     
-    void resetTicker();
+    static TimeCounter& instance();
     
-    void registerTimeOutCallBack(int period, const callbackfunc& func);
+    int registerTimeOutCallBack(int period, const callbackfunc& func);
     
     void startCounter();
     
-    void stopCounter();
+    void resetCallBackInfoTime(int id);
+    
+    void destroyCallBackInfo(int id);
     
 protected:
     static bool Run(ThreadObj obj);
     bool Process();
     
 private:
-    int                 _ticker;
-    int                 _period;
     ThreadWrapper*      _thread;
     pthread_mutex_t     _mutexlock;
     callbackfunc        _pfunc;
+    CallBackInfoVec     _callBackInfoVec;
+    int                 _infoid;
 };
 
 #endif /* defined(__RTChat__TimeCounter__) */

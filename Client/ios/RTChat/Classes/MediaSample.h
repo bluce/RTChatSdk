@@ -95,6 +95,9 @@ public:
     //停止播放录制的音频
     bool stopPlayLocalStream();
     
+    //获得录音数据时长
+    uint64_t getRecordStreamTimeLength(OutStream* outstream);
+    
 protected:
     //设置发送编码格式为codeType
     void setEncodeTypeToChannel(int channel, int codeType);

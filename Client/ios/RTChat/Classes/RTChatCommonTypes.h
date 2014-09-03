@@ -291,6 +291,7 @@ struct StRequestRec {
     }
     bool isok;
     char urlbuf[256];    //返回录音文件获取url
+    uint64_t voicetime;     //录音文件时长
 };
 
 /******************回调字符串JSON格式******************/

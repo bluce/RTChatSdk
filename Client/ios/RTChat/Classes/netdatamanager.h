@@ -41,7 +41,9 @@ public:
 protected:
     static bool Run(ThreadObj obj);
     bool Process();
-    void connnectionTimeOut();
+    
+    //超时回调
+    void connnectionTimeOut(int period);
     
 private:
     //连接控制服务器
@@ -60,8 +62,8 @@ private:
     pthread_mutex_t     _mutexlock;
     WebSocket*          _socket;
     std::string         _controlServerStr;
-    TimeCounter         _counter;
     int                 _retrycount;    //重连次数
+    int                 _callBackID; //回调函数注册ID
 };
 
 #endif /* defined(__RTChat__netdatamanager__) */

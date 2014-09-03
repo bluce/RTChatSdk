@@ -12,6 +12,7 @@ RTChatBuffStreamPool::RTChatBuffStreamPool(int poolsize) :
 _currentwriteindex(0)
 {
     _poolVec.resize(poolsize);
+    _poolsize = poolsize;
 }
 
 RTChatBuffStreamPool::~RTChatBuffStreamPool()
@@ -41,17 +42,24 @@ RTChatBuffStreamPool::StBuffInfo* RTChatBuffStreamPool::getAvailableBuff(const c
 }
 
 //更新当前位置的缓冲区内存
-void RTChatBuffStreamPool::updateCurrentBuff(const char* name, const char* ptr, int size)
+RTChatBuffStream* RTChatBuffStreamPool::updateCurrentBuff(const char* name, const char* ptr, int size)
 {
-    StBuffInfo* info = _poolVec[_currentwriteindex++];
+    StBuffInfo* info = _poolVec[_currentwriteindex];
+    
+    //更改下次覆盖的内存索引位
+    _currentwriteindex = (_currentwriteindex + 1 == _poolsize) ? 0 : (_currentwriteindex + 1);
+    
     if (!info) {
-        return;
+        return NULL;
     }
     strncpy(info->buffname, name, sizeof(info->buffname));
     if (info->buffstream) {
+        info->buffstream->resetBuffStream();
         info->buffstream->Write(ptr, size);
         info->needDownload = false;
     }
+    
+    return info->buffstream;
 }
 
 void RTChatBuffStreamPool::clear_data()

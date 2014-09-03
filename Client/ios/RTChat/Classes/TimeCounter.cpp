@@ -9,14 +9,17 @@
 #include "TimeCounter.h"
 #include "public.h"
 
+static TimeCounter* s_TimeCounter = NULL;
+
 TimeCounter::TimeCounter() :
-_ticker(0),
-_period(0),
-_thread(NULL)
+_thread(NULL),
+_infoid(0)
 {
     pthread_mutex_init(&_mutexlock, 0);
     
     _thread = ThreadWrapper::CreateThread(TimeCounter::Run, this, kNormalPriority, "TimeCounterThread");
+    
+    startCounter();
 }
 
 TimeCounter::~TimeCounter()
@@ -28,11 +31,13 @@ TimeCounter::~TimeCounter()
     }
 }
 
-void TimeCounter::resetTicker()
+TimeCounter& TimeCounter::instance()
 {
-    pthread_mutex_lock(&_mutexlock);
-    _ticker = 0;
-    pthread_mutex_unlock(&_mutexlock);
+    if (!s_TimeCounter) {
+        s_TimeCounter = new TimeCounter();
+    }
+    
+    return *s_TimeCounter;
 }
 
 void TimeCounter::startCounter()
@@ -43,17 +48,39 @@ void TimeCounter::startCounter()
     }
 }
 
-void TimeCounter::stopCounter()
+void TimeCounter::resetCallBackInfoTime(int id)
 {
-    if (_thread) {
-        _thread->Stop();
+    pthread_mutex_lock(&_mutexlock);
+    for (auto it = _callBackInfoVec.begin(); it != _callBackInfoVec.end(); ++it) {
+        StCallBackInfo& info = *it;
+        if (info._id == id) {
+            info._starttime = time(NULL);
+            break;
+        }
     }
+    pthread_mutex_unlock(&_mutexlock);
 }
 
-void TimeCounter::registerTimeOutCallBack(int period, const callbackfunc &func)
+void TimeCounter::destroyCallBackInfo(int id)
 {
-    _pfunc = func;
-    _period = period;
+    pthread_mutex_lock(&_mutexlock);
+    for (auto it = _callBackInfoVec.begin(); it != _callBackInfoVec.end();) {
+        StCallBackInfo& info = *it;
+        if (info._id == id) {
+            _callBackInfoVec.erase(it++);
+            break;
+        }
+    }
+    pthread_mutex_unlock(&_mutexlock);
+}
+
+int TimeCounter::registerTimeOutCallBack(int period, const callbackfunc &func)
+{
+    pthread_mutex_lock(&_mutexlock);
+    _callBackInfoVec.push_back(StCallBackInfo(_infoid++, period, func));
+    pthread_mutex_unlock(&_mutexlock);
+    
+    return _infoid;
 }
 
 bool TimeCounter::Run(ThreadObj obj)
@@ -65,18 +92,32 @@ bool TimeCounter::Run(ThreadObj obj)
 
 bool TimeCounter::Process()
 {
-    timespec t;
-    t.tv_sec = 1;
-    t.tv_nsec = 0;
-    nanosleep(&t, NULL);
+//    pthread_mutex_lock(&_mutexlock);
+//    _ticker++;
+//    if (_ticker > _period) {
+//        _pfunc();
+//        stopCounter();
+//    }
+//    pthread_mutex_unlock(&_mutexlock);
     
     pthread_mutex_lock(&_mutexlock);
-    _ticker++;
-    if (_ticker > _period) {
-        _pfunc();
-        stopCounter();
+    time_t currenttime = time(NULL);
+    for (auto it = _callBackInfoVec.begin(); it != _callBackInfoVec.end();) {
+        const StCallBackInfo& info = *it;
+        if (currenttime - info._starttime >= info._period) {
+            info._func(info._period);
+            _callBackInfoVec.erase(it);
+        }
+        else {
+            it++;
+        }
     }
     pthread_mutex_unlock(&_mutexlock);
+    
+    timespec t;
+    t.tv_sec = 0;
+    t.tv_nsec = 1000;
+    nanosleep(&t, NULL);
     
     return true;
 }

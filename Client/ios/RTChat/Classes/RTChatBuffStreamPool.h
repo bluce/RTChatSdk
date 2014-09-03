@@ -39,7 +39,7 @@ public:
     StBuffInfo* getAvailableBuff(const char* name);
     
     //更新当前位置的缓冲区内存
-    void updateCurrentBuff(const char* name, const char* ptr, int size);
+    RTChatBuffStream* updateCurrentBuff(const char* name, const char* ptr, int size);
     
     void clear_data();
     
@@ -49,6 +49,7 @@ protected:
 private:
     PoolVec     _poolVec;
     int         _currentwriteindex;
+    int         _poolsize;
 };
 
 #endif /* defined(__RTChat__RTChatBuffStreamPool__) */

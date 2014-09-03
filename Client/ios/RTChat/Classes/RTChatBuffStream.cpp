@@ -7,6 +7,7 @@
 //
 
 #include "RTChatBuffStream.h"
+#include "public.h"
 
 RTChatBuffStream::RTChatBuffStream(int maxbuffsize) :
 _curWriteSize(0),
@@ -25,6 +26,7 @@ bool RTChatBuffStream::Write(const void *buf, int len)
     if (len <= _buffVec.size() - _curWriteSize) {
         bcopy(buf, &_buffVec[_curWriteSize], len);
         _curWriteSize += len;
+//        Public::sdklog("当前已写入缓冲区%d字节", _curWriteSize);
         return true;
     }
     else {
@@ -41,6 +43,7 @@ int RTChatBuffStream::Read(void *buf, int len)
     }
     else {
         bcopy(&_buffVec[_curReadSize], buf, (_curWriteSize - _curReadSize));
+        _curReadSize += (_curWriteSize - _curReadSize);
         return _curWriteSize - _curReadSize;
     }
 }
@@ -61,6 +64,13 @@ const RTChatBuffStream::BuffVec& RTChatBuffStream::getBuffVec()
 int RTChatBuffStream::get_datasize()
 {
     return _curWriteSize;
+}
+
+//重置BUFF等待写入
+void RTChatBuffStream::resetBuffStream()
+{
+    _curReadSize = 0;
+    _curWriteSize = 0;
 }
 
 

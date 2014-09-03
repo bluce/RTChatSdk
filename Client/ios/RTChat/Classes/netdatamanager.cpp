@@ -24,6 +24,8 @@ _needCloseConnection(false)
 {
     pthread_mutex_init(&_mutexlock, 0);
     _workThread = ThreadWrapper::CreateThread(NetDataManager::Run, this, kNormalPriority, "WorkThread");
+    
+    _callBackID = TimeCounter::instance().registerTimeOutCallBack(20, std::bind(&NetDataManager::connnectionTimeOut, this, std::placeholders::_1));
 }
 
 NetDataManager::~NetDataManager()
@@ -40,8 +42,6 @@ void NetDataManager::init(const std::string &controlserver)
     _controlServerStr = controlserver;
     
     _haveInited = true;
-    
-    activity();
 }
 
 void NetDataManager::activity()
@@ -82,7 +82,6 @@ bool NetDataManager::Process()
         pthread_mutex_unlock(&_mutexlock);
         return true;
     }
-    
     
     if (!_socket && _haveInited && !haveReachMaxRetryCount()) {
         connectControlServer();
@@ -175,13 +174,10 @@ void NetDataManager::onOpen(WebSocket* ws)
         RTChatSDKMain::sharedInstance().set_SdkOpState(SdkGateWaySocketConnected);
         RTChatSDKMain::sharedInstance().requestLogin();
     }
-    
-    _counter.startCounter();
-    _counter.resetTicker();
-    _counter.registerTimeOutCallBack(20, std::bind(&NetDataManager::connnectionTimeOut, this));
 }
 
-void NetDataManager::connnectionTimeOut()
+//超时回调
+void NetDataManager::connnectionTimeOut(int period)
 {
     Public::sdklog("心跳超时回调");
     
@@ -195,8 +191,8 @@ void NetDataManager::onMessage(WebSocket* ws, const WebSocket::Data& data)
     if (data.len == 2) {    //心跳消息
         sendHelloMsg();
         
-        //重置计时器
-        _counter.resetTicker();
+        TimeCounter::instance().resetCallBackInfoTime(_callBackID);
+        
         return;
     }
     
@@ -206,7 +202,11 @@ void NetDataManager::onMessage(WebSocket* ws, const WebSocket::Data& data)
 void NetDataManager::onClose(WebSocket* ws)
 {
     Public::sdklog("连接被关闭");
+    
+    TimeCounter::instance().destroyCallBackInfo(_callBackID);
+    
     destroyWebSocket();
+    
     if (RTChatSDKMain::sharedInstance().getSdkState() == SdkControlConnected) {
         RTChatSDKMain::sharedInstance().set_SdkOpState(SdkControlUnConnected);
     }
