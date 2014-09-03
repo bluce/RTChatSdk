@@ -230,6 +230,22 @@ void RTChatSdkIosHelper::visit()
             }
             break;
         }
+        case enNotifyUpdatePower:
+        {
+            StNotifyUpdatePower* data = (StNotifyUpdatePower*)stCallBackData->data;
+            if (_voiceDelegate) {
+                _voiceDelegate->onNotifyUpdatePower(stCallBackData->error, data->tempid, data->power);
+            }
+            break;
+        }
+        case enNotifyAssignResult:
+        {
+            StNotifyAssignResult* data = (StNotifyAssignResult*)stCallBackData->data;
+            if (_voiceDelegate) {
+                _voiceDelegate->onNotifyAssignResult(stCallBackData->error, data->result);
+            }
+            break;
+        }
         default:
             break;
     }

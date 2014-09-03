@@ -57,6 +57,12 @@ public:
     
     //通知播放返回
     virtual void onNotifyRequestPlay(SdkErrorCode error, std::string urlstring) {};
+    
+    /// 通知房间用户更新权限(更新显示)
+    virtual void onNotifyUpdatePower(SdkErrorCode error, uint64_t tempid, enPowerType type) {};
+    
+    /// 分配麦返回结果
+    virtual void onNotifyAssignResult(SdkErrorCode error, enAssignResult) {};
 };
 
 class RTChatSdkIosHelper {
