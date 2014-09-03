@@ -51,6 +51,12 @@ public:
     
     //告知发起随机聊天结果
     virtual void onReturnRandChat(SdkErrorCode error) {};
+    
+    //通知录音返回
+    virtual void onNotifyRequestRec(SdkErrorCode error, std::string urlstring, uint64_t duration) {};
+    
+    //通知播放返回
+    virtual void onNotifyRequestPlay(SdkErrorCode error, std::string urlstring) {};
 };
 
 class RTChatSdkIosHelper {
@@ -77,22 +83,27 @@ public:
     
     static RTChatSdkIosHelper& instance();
     
+    //帮助类初始化
     void init(const std::string& appid, const std::string& key, const char* uniqueid = NULL);
     
     //初始化回调函数
     void initCallBack();
     
+    //语音引擎回调函数
     void RTChatCallBack(SdkResponseCmd cmdType, SdkErrorCode error = OPERATION_OK, const unsigned char* dataPtr = NULL, uint32_t dataSize = 0);
     
+    //设置代理指针
     void setDelegate(RTChatSdkIosHelperDelegate* delegate);
     
+    //获取代理指针
     RTChatSdkIosHelperDelegate* getDelegate();
     
+    //此函数需要在游戏帧循环调用
     void visit();
     
 protected:
     pthread_mutex_t         _mutexlock;     //SDK写数据线程锁
-    MsgQueue                _msgQueue;
+    MsgQueue                _msgQueue;      //消息队列
     
 private:
     RTChatSdkIosHelperDelegate*          _voiceDelegate;

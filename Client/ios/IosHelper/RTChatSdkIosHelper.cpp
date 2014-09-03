@@ -39,9 +39,9 @@ RTChatSdkIosHelper& RTChatSdkIosHelper::instance()
 
 void RTChatSdkIosHelper::init(const std::string& appid, const std::string& key, const char* uniqueid)
 {
-    RTChatSDKMain::sharedInstance().initSDK(appid, key, uniqueid);
-    
     initCallBack();
+    
+    RTChatSDKMain::sharedInstance().initSDK(appid, key, uniqueid);
 }
 
 void RTChatSdkIosHelper::RTChatCallBack(SdkResponseCmd cmdType, SdkErrorCode error, const unsigned char* dataPtr, uint32_t dataSize)
@@ -175,6 +175,9 @@ void RTChatSdkIosHelper::visit()
         {
             std::vector<stRoomUserInfo> infoVec;
             StNotifySomeEnterRoom* data = (StNotifySomeEnterRoom*)stCallBackData->data;
+            if (data->needClearOld) {
+                infoVec.clear();
+            }
             for (int i = 0; i < data->size; i++) {
                 infoVec.push_back(data->userinfo[i]);
             }
@@ -204,6 +207,26 @@ void RTChatSdkIosHelper::visit()
         {
             if (_voiceDelegate) {
                 _voiceDelegate->onReturnRandChat(stCallBackData->error);
+            }
+            break;
+        }
+        case enRequestRec:
+        {
+            StRequestRec* data = (StRequestRec*)stCallBackData->data;
+            if (_voiceDelegate) {
+                if (!data) {
+                    _voiceDelegate->onNotifyRequestRec(stCallBackData->error, "", 0);
+                }
+                else {
+                    _voiceDelegate->onNotifyRequestRec(stCallBackData->error, data->urlbuf, data->voicetime);
+                }
+            }
+            break;
+        }
+        case enRequestPlay:
+        {
+            if (_voiceDelegate) {
+                _voiceDelegate->onNotifyRequestPlay(stCallBackData->error, "");
             }
             break;
         }
