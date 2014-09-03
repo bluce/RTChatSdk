@@ -76,11 +76,13 @@ void TimeCounter::destroyCallBackInfo(int id)
 
 int TimeCounter::registerTimeOutCallBack(int period, const callbackfunc &func)
 {
+    int ret;
     pthread_mutex_lock(&_mutexlock);
+    ret = _infoid;
     _callBackInfoVec.push_back(StCallBackInfo(_infoid++, period, func));
     pthread_mutex_unlock(&_mutexlock);
     
-    return _infoid;
+    return ret;
 }
 
 bool TimeCounter::Run(ThreadObj obj)

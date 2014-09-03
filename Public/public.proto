@@ -134,6 +134,21 @@ enum enCmdId
 
 	/// 请求播放
 	enRequestPlay = 26;
+
+	/// 请求漂流瓶
+	enRequestRandPlay = 27;
+
+	/// 通知漂流瓶
+	enNotifyRandPlay = 28;
+
+	/// 分配麦
+	enRequestAssignMic = 29;
+
+	/// 分配返回结果 
+	enNotifyAssignResult = 30;
+
+	/// 更新权限结果
+	enNotifyUpdatePowerResult = 31;
 }
 
 

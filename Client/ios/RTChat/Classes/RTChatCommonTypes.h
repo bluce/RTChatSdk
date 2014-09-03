@@ -31,6 +31,23 @@ enum enRoomReason
 	ROOM_REASON_MAX = 3,
 };
 
+/// 房间权限类型
+enum enPowerType
+{
+	POWER_TYPE_NORMAL = 1, /// 普通的人
+	POWER_TYPE_MASTER = 2, /// 房主
+	POWER_TYPE_ADMIN = 3, /// 管理员(房主分配的)
+};
+
+enum enAssignResult
+{
+    ASSIGN_RESULT_NOPOWER,
+    ASSIGN_RESULT_TYPEERR,
+    ASSIGN_RESULT_NOUSER,
+    ASSIGN_RESULT_SYSERR,
+};
+
+
 enum SdkOpState {
     SdkControlUnConnected = 0,
     SdkControlConnecting,
@@ -126,6 +143,20 @@ enum SdkResponseCmd {
 	/// 请求播放
 	enRequestPlay = 26,
     
+    /// 请求漂流瓶
+	enRequestRandPlay = 27,
+    
+	/// 通知漂流瓶
+	enNotifyRandPlay = 28,
+    
+	/// 分配麦
+	enRequestAssignMic = 29,
+    
+	/// 分配返回结果
+	enNotifyAssignResult = 30,
+    
+	/// 更新权限结果
+	enNotifyUpdatePowerResult = 31,
 };
 
 enum SdkErrorCode {
@@ -292,6 +323,24 @@ struct StRequestRec {
     bool isok;
     char urlbuf[256];    //返回录音文件获取url
     uint64_t voicetime;     //录音文件时长
+};
+
+/// 通知更新权限(更新显示)
+struct StNotifyUpdatePower {
+    StNotifyUpdatePower(uint64_t id, enPowerType type) {
+        tempid = id;
+        power = type;
+    }
+	uint64_t tempid;
+	enPowerType power;
+};
+
+/// 分配麦返回结果
+struct StNotifyAssignResult {
+    StNotifyAssignResult(enAssignResult reason) {
+        result = reason;
+    }
+	enAssignResult result;
 };
 
 /******************回调字符串JSON格式******************/

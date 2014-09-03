@@ -86,6 +86,12 @@ public:
     //停止播放数据(主线程)
     bool stopPlayLocalVoice();
     
+    //请求更改排麦房权限
+    bool requestUpdatePower(uint64_t othertempid, enPowerType powertype);
+    
+    /// 分配麦
+    bool requestAssignMic(uint64_t othertempid);
+    
     /*******************需要暴露给用户的接口结束**********************/
     
     ///请求逻辑服务器地址(工作线程)
@@ -138,6 +144,9 @@ protected:
     
     //录音超过最大时间回调
     void recordTimeExceed(int time);
+    
+    /// 请求发送漂流瓶(测试用接口)
+    bool requestRandPlay(const std::string& url);
     
 private:
     //刷新房间列表信息

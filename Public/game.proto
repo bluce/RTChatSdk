@@ -180,9 +180,59 @@ message cmdRequestUpdatePower
 	required enPowerType power = 2;
 }
 
+/// 更新返回结果
+message cmdNotifyUpdatePowerResult
+{
+	enum enUpdateResult
+	{
+		UPDATE_RESULT_NOPOWER = 1;
+		UPDATE_RESULT_TYPEERR = 2;
+		UPDATE_RESULT_NOUSER = 3;
+		UPDATE_RESULT_SYSERR = 4;
+	}
+	
+	required enUpdateResult result = 1;
+}
+
+
 /// 通知更新权限(更新显示)
 message cmdNotifyUpdatePower
 {
 	required uint64 tempid = 1;
 	required enPowerType power = 2;
+}
+
+
+/// 分配麦
+message cmdRequestAssignMic
+{
+	required uint64 tempid = 1;
+}
+
+/// 返回结果
+message cmdNotifyAssignResult
+{
+	enum enAssignResult
+	{
+		ASSIGN_RESULT_NOPOWER = 1;
+		ASSIGN_RESULT_TYPEERR = 2;
+		ASSIGN_RESULT_NOUSER = 3;
+		ASSIGN_RESULT_SYSERR = 4;
+	}
+
+	required enAssignResult result = 1;
+}
+
+
+/// 请求漂流瓶
+message cmdRequestRandPlay
+{
+	required string url = 2;
+}
+
+/// 通知漂流瓶
+message cmdNotifyRandPlay
+{
+	required uint64 tempid = 1;
+	required string url = 2;
 }

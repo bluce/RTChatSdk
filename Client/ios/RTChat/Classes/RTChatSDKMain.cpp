@@ -447,6 +447,21 @@ void RTChatSDKMain::recordTimeExceed(int time)
     stopRecordVoice();
 }
 
+/// 请求发送漂流瓶(测试用接口)
+bool RTChatSDKMain::requestRandPlay(const std::string& url)
+{
+    if (_sdkOpState >= SdkUserCreatingRoom) {
+        return OPERATION_FAILED;
+    }
+    
+    Cmd::cmdRequestRandPlay msg;
+    msg.set_url(url);
+    
+    SendProtoMsg(msg, Cmd::enReturnRandChat);
+    
+    return OPERATION_OK;
+}
+
 void RTChatSDKMain::onRecvMsg(char *data, int len)
 {
     stBaseCmd* cmd = (stBaseCmd*)data;
@@ -738,6 +753,46 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             
             break;
         }
+        case Cmd::enNotifyUpdatePowerResult:
+        {
+            Public::sdklog("接收到操作反馈结果");
+            break;
+        }
+        case Cmd::enNotifyUpdatePower:
+        {
+            Public::sdklog("接收到更改用户权限指令");
+            
+            Cmd::cmdNotifyUpdatePower protomsg;
+            protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
+            
+            StNotifyUpdatePower callbackdata(protomsg.tempid(), (enPowerType)protomsg.power());
+            _func(enNotifyUpdatePower, OPERATION_OK, (const unsigned char*)&callbackdata, sizeof(StNotifyUpdatePower));
+            
+            break;
+        }
+        case Cmd::enNotifyAssignResult:
+        {
+            Public::sdklog("分配麦操作反馈结果");
+            
+            Cmd::cmdNotifyAssignResult protomsg;
+            protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
+            
+            StNotifyAssignResult callbackdata((enAssignResult)protomsg.result());
+            _func(enNotifyAssignResult, OPERATION_FAILED, (const unsigned char*)&callbackdata, sizeof(StNotifyAssignResult));
+            
+            break;
+        }
+        case Cmd::enNotifyRandPlay:
+        {
+            Public::sdklog("收到漂流瓶");
+            
+            Cmd::cmdNotifyRandPlay protomsg;
+            protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
+            
+            startPlayLocalVoice(protomsg.url().c_str());
+            
+            break;
+        }
         default:
             break;
     }
@@ -771,6 +826,9 @@ void RTChatSDKMain::httpRequestCallBack(HttpDirection direction, const char *ptr
             callbackdata.voicetime = _recordduration;
             strncpy(callbackdata.urlbuf, ptr, size);
             _func(enRequestRec, OPERATION_OK, (const unsigned char*)&callbackdata, sizeof(StRequestRec));
+            
+            //测试代码
+            requestRandPlay(callbackdata.urlbuf);
         }
     }
     else {
@@ -885,6 +943,37 @@ bool RTChatSDKMain::stopPlayLocalVoice()
     else {
         return false;
     }
+}
+
+//请求更改排麦房权限
+bool RTChatSDKMain::requestUpdatePower(uint64_t othertempid, enPowerType powertype)
+{
+    if (_sdkOpState < SdkUserJoinedRoom) {
+        return OPERATION_FAILED;
+    }
+    
+    Cmd::cmdRequestUpdatePower msg;
+    msg.set_tempid(othertempid);
+    msg.set_power((Cmd::enPowerType)powertype);
+    
+    SendProtoMsg(msg, Cmd::enRequestCreateRoom);
+    
+    return OPERATION_OK;
+}
+
+/// 分配麦
+bool RTChatSDKMain::requestAssignMic(uint64_t othertempid)
+{
+    if (_sdkOpState < SdkUserJoinedRoom) {
+        return OPERATION_FAILED;
+    }
+    
+    Cmd::cmdRequestAssignMic msg;
+    msg.set_tempid(othertempid);
+    
+    SendProtoMsg(msg, Cmd::enRequestAssignMic);
+    
+    return OPERATION_OK;
 }
 
 //刷新房间列表信息
