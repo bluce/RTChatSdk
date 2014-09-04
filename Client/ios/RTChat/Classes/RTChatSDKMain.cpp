@@ -457,7 +457,7 @@ bool RTChatSDKMain::requestRandPlay(const std::string& url)
     Cmd::cmdRequestRandPlay msg;
     msg.set_url(url);
     
-    SendProtoMsg(msg, Cmd::enReturnRandChat);
+    SendProtoMsg(msg, Cmd::enRequestRandPlay);
     
     return OPERATION_OK;
 }

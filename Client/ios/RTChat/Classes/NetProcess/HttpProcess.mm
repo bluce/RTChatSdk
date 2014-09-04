@@ -59,7 +59,7 @@ void HttpProcess::requestContent(const char *urlstr)
 {
     _isrunning = true;
     
-    NSString* url = [NSString stringWithFormat:@"%s", urlstr];
+    NSString* url = [NSString stringWithUTF8String:urlstr];
     [[CmdHandler sharedInstance] getFile:url reqParams:nil completBlock:^(id res) {
         NSData* data = (NSData*)res;
         if (res == nil) {
