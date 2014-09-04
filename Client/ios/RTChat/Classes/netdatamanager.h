@@ -21,17 +21,28 @@ public:
     
     void init(const std::string& controlserver);
     
+    /// 开启网络工作线程
     void activity();
     
+    /// 停止网络工作线程
     void deactive();
     
+    /// 发送客户端消息给服务器
     void sendClientMsg(const unsigned char* msg, unsigned int len);
     
-    //销毁websocket
+    ///销毁websocket
     void destroyWebSocket();
     
     //获取底层websocket状态
     WebSocket::State getWebSocketState();
+    
+    /// 重置重连次数
+    void resetRetryCount();
+    
+    /// 获得重连次数
+    int getRetryCount();
+    
+    bool Process();
     
     virtual void onOpen(WebSocket* ws);
     virtual void onMessage(WebSocket* ws, const WebSocket::Data& data);
@@ -39,9 +50,6 @@ public:
     virtual void onError(WebSocket* ws, const WebSocket::ErrorCode& error);
     
 protected:
-    static bool Run(ThreadObj obj);
-    bool Process();
-    
     //超时回调
     void connnectionTimeOut(int period);
     
@@ -58,12 +66,10 @@ private:
 private:
     bool                _haveInited;
     bool                _needCloseConnection;
-    ThreadWrapper*      _workThread;
     pthread_mutex_t     _mutexlock;
     WebSocket*          _socket;
     std::string         _controlServerStr;
     int                 _retrycount;    //重连次数
-    int                 _callBackID; //回调函数注册ID
 };
 
 #endif /* defined(__RTChat__netdatamanager__) */

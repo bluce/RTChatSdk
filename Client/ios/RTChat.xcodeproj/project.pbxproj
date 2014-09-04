@@ -10,6 +10,7 @@
 		430079591973A705003DB064 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 430079581973A705003DB064 /* CoreFoundation.framework */; };
 		4307F4A319AC3D0A00D059C3 /* RTChatBuffStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4307F4A119AC3D0A00D059C3 /* RTChatBuffStream.cpp */; };
 		43095C4C199C54E2003C23B3 /* public.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43095C4A199C54E2003C23B3 /* public.cpp */; };
+		430B19A819B84A7400BE772E /* RTChatSDKMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43247A74198741BC00AF14C7 /* RTChatSDKMain.cpp */; };
 		430F16FC196F8DC10083B252 /* tinystr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F6196F8DC10083B252 /* tinystr.cpp */; };
 		430F16FD196F8DC10083B252 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F7196F8DC10083B252 /* tinyxml.cpp */; };
 		430F16FE196F8DC10083B252 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F8196F8DC10083B252 /* tinyxmlerror.cpp */; };
@@ -55,7 +56,6 @@
 		431FC2B1199B8C1600CFEB6B /* librtp_rtcp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC29B199B8B8B00CFEB6B /* librtp_rtcp.a */; };
 		431FC2B2199B8C1600CFEB6B /* libwebrtc_opus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC294199B8B8400CFEB6B /* libwebrtc_opus.a */; };
 		43247A541987339300AF14C7 /* MediaSample.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43247A521987339300AF14C7 /* MediaSample.cpp */; };
-		43247A7819876FC700AF14C7 /* RTChatSDKMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43247A74198741BC00AF14C7 /* RTChatSDKMain.cpp */; };
 		432D4E5319B597B600AD7B6A /* HttpProcess.mm in Sources */ = {isa = PBXBuildFile; fileRef = 432D4E5019B5970800AD7B6A /* HttpProcess.mm */; };
 		433E66DF1987AAD10002AAC3 /* channel_transport.cc in Sources */ = {isa = PBXBuildFile; fileRef = 433E66CF1987AAD10002AAC3 /* channel_transport.cc */; };
 		433E66E11987AAD10002AAC3 /* udp_socket_manager_posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = 433E66D21987AAD10002AAC3 /* udp_socket_manager_posix.cc */; };
@@ -1888,6 +1888,7 @@
 				43998DDA19865C28003C5793 /* structurally_valid.cc in Sources */,
 				43998DCB19865C28003C5793 /* generated_message_util.cc in Sources */,
 				43095C4C199C54E2003C23B3 /* public.cpp in Sources */,
+				430B19A819B84A7400BE772E /* RTChatSDKMain.cpp in Sources */,
 				43247A541987339300AF14C7 /* MediaSample.cpp in Sources */,
 				43998DC819865C28003C5793 /* extension_set.cc in Sources */,
 				43AE0052197913930062C9B4 /* json_reader.cpp in Sources */,
@@ -1944,7 +1945,6 @@
 				43998DD319865C28003C5793 /* message.cc in Sources */,
 				4314C7CA19B4903F000F5323 /* AFURLRequestSerialization.m in Sources */,
 				4314C7C519B4903F000F5323 /* AFHTTPRequestOperationManager.m in Sources */,
-				43247A7819876FC700AF14C7 /* RTChatSDKMain.cpp in Sources */,
 				43998BAF198636DA003C5793 /* WebSocket.cpp in Sources */,
 				43998DD019865C28003C5793 /* zero_copy_stream.cc in Sources */,
 				433E66EA1987AAD10002AAC3 /* udp_transport_impl.cc in Sources */,

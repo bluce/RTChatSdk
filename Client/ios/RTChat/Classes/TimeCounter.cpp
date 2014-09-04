@@ -11,9 +11,8 @@
 
 static TimeCounter* s_TimeCounter = NULL;
 
-TimeCounter::TimeCounter() :
-_thread(NULL),
-_infoid(0)
+TimeCounter::TimeCounter():
+_thread(NULL)
 {
     pthread_mutex_init(&_mutexlock, 0);
     
@@ -48,38 +47,37 @@ void TimeCounter::startCounter()
     }
 }
 
-void TimeCounter::resetCallBackInfoTime(int id)
+void TimeCounter::resetCallBackInfoTime(const char *keyname)
 {
     pthread_mutex_lock(&_mutexlock);
-    for (auto it = _callBackInfoVec.begin(); it != _callBackInfoVec.end(); ++it) {
-        StCallBackInfo& info = *it;
-        if (info._id == id) {
-            info._starttime = time(NULL);
-            break;
-        }
+    
+    auto it = _callBackInfoMap.find(keyname);
+    if (it != _callBackInfoMap.end()) {
+        StCallBackInfo& info = *it->second;
+        info._starttime = time(NULL);
+    }
+    
+    pthread_mutex_unlock(&_mutexlock);
+}
+
+void TimeCounter::destroyCallBackInfo(const char *keyname)
+{
+    pthread_mutex_lock(&_mutexlock);
+    
+    auto it = _callBackInfoMap.find(keyname);
+    if (it != _callBackInfoMap.end()) {
+        _callBackInfoMap.erase(it);
     }
     pthread_mutex_unlock(&_mutexlock);
 }
 
-void TimeCounter::destroyCallBackInfo(int id)
+int TimeCounter::registerTimeOutCallBack(const char *keyname, int period, const callbackfunc &func)
 {
+    int ret = 0;
     pthread_mutex_lock(&_mutexlock);
-    for (auto it = _callBackInfoVec.begin(); it != _callBackInfoVec.end();) {
-        StCallBackInfo& info = *it;
-        if (info._id == id) {
-            _callBackInfoVec.erase(it);
-            break;
-        }
-    }
-    pthread_mutex_unlock(&_mutexlock);
-}
+    
+    _callBackInfoMap[keyname] = new StCallBackInfo(period, func);
 
-int TimeCounter::registerTimeOutCallBack(int period, const callbackfunc &func)
-{
-    int ret;
-    pthread_mutex_lock(&_mutexlock);
-    ret = _infoid;
-    _callBackInfoVec.push_back(StCallBackInfo(_infoid++, period, func));
     pthread_mutex_unlock(&_mutexlock);
     
     return ret;
@@ -94,21 +92,13 @@ bool TimeCounter::Run(ThreadObj obj)
 
 bool TimeCounter::Process()
 {
-//    pthread_mutex_lock(&_mutexlock);
-//    _ticker++;
-//    if (_ticker > _period) {
-//        _pfunc();
-//        stopCounter();
-//    }
-//    pthread_mutex_unlock(&_mutexlock);
-    
     pthread_mutex_lock(&_mutexlock);
     time_t currenttime = time(NULL);
-    for (auto it = _callBackInfoVec.begin(); it != _callBackInfoVec.end();) {
-        const StCallBackInfo& info = *it;
+    for (auto it = _callBackInfoMap.begin(); it != _callBackInfoMap.end();) {
+        const StCallBackInfo& info = *it->second;
         if (currenttime - info._starttime >= info._period) {
             info._func(info._period);
-            _callBackInfoVec.erase(it);
+            _callBackInfoMap.erase(it++);
         }
         else {
             it++;

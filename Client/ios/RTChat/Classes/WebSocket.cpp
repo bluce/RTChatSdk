@@ -284,7 +284,7 @@ bool WebSocket::init(const Delegate& delegate,
     _path = path;
     _SSLConnection = useSSL ? 1 : 0;
     
-    Public::sdklog("[WebSocket::init] _host: %s, _port: %d, _path: %s", _host.c_str(), _port, _path.c_str());
+    Public::sdklog("    [WebSocket::init] _host: %s, _port: %d, _path: %s", _host.c_str(), _port, _path.c_str());
 
     size_t protocolCount = 0;
     if (protocols && protocols->size() > 0)
@@ -377,7 +377,7 @@ void WebSocket::close()
         return;
     }
     
-    Public::sdklog("websocket (%p) connection closed by client", this);
+    Public::sdklog("    websocket (%p) connection closed by client", this);
     _readyState = State::CLOSED;
 
 //    _wsHelper->joinSubThread();
@@ -678,7 +678,7 @@ int WebSocket::onSocketCallback(struct libwebsocket_context *ctx,
         case LWS_CALLBACK_CLOSED:
             {
                 
-                Public::sdklog("%s", "connection closing..");
+                Public::sdklog("    %s", "connection closing..");
 
 //                _wsHelper->quitSubThread();
                 

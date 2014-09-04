@@ -18,22 +18,14 @@ static int maxretrycount = 10;
 NetDataManager::NetDataManager() :
 _haveInited(false),
 _socket(NULL),
-_workThread(NULL),
 _retrycount(0),
 _needCloseConnection(false)
 {
     pthread_mutex_init(&_mutexlock, 0);
-    _workThread = ThreadWrapper::CreateThread(NetDataManager::Run, this, kNormalPriority, "WorkThread");
-    
-    _callBackID = TimeCounter::instance().registerTimeOutCallBack(20, std::bind(&NetDataManager::connnectionTimeOut, this, std::placeholders::_1));
 }
 
 NetDataManager::~NetDataManager()
 {
-    if (_workThread) {
-        _workThread->Stop();
-    }
-    SAFE_DELETE(_workThread);
     SAFE_DELETE(_socket);
 }
 
@@ -46,25 +38,12 @@ void NetDataManager::init(const std::string &controlserver)
 
 void NetDataManager::activity()
 {
-    unsigned int id = 0;
-    
-    if (_workThread) {
-        _workThread->Start(id);
-    }
+
 }
 
 void NetDataManager::deactive()
 {
-    if (_workThread) {
-        _workThread->Stop();
-    }
-}
-
-bool NetDataManager::Run(ThreadObj obj)
-{
-    NetDataManager* mgr = static_cast<NetDataManager*>(obj);
     
-    return mgr->Process();
 }
 
 bool NetDataManager::Process()
@@ -105,10 +84,6 @@ void NetDataManager::sendClientMsg(const unsigned char *msg, unsigned int len)
 //        SAFE_DELETE(_socket);
 //        connectControlServer();
 //    }
-    if (_haveInited && !_socket) {
-        _retrycount = 0;
-    }
-    
     if (_socket) {
         _socket->send(msg, len);
     }
@@ -123,10 +98,28 @@ WebSocket::State NetDataManager::getWebSocketState()
     return WebSocket::State::CLOSED;
 }
 
+/// 重置重连次数
+void NetDataManager::resetRetryCount()
+{
+    pthread_mutex_lock(&_mutexlock);
+    _retrycount = 0;
+    pthread_mutex_unlock(&_mutexlock);
+}
+
+/// 获得重连次数
+int NetDataManager::getRetryCount()
+{
+    int count;
+    pthread_mutex_lock(&_mutexlock);
+    count = _retrycount;
+    pthread_mutex_unlock(&_mutexlock);
+    return count;
+}
+
 //连接控制服务器
 void NetDataManager::connectControlServer()
 {
-    Public::sdklog("In connectControlServer");
+    Public::sdklog("  In connectControlServer");
     
     if (!_socket) {
         _socket = new WebSocket();
@@ -135,14 +128,17 @@ void NetDataManager::connectControlServer()
     
     _socket->onSubThreadStarted();
     
+    pthread_mutex_unlock(&_mutexlock);
     _retrycount++;
-    Public::sdklog("第%d次连接", _retrycount);
+    pthread_mutex_unlock(&_mutexlock);
+    
+    Public::sdklog("  第%d次连接", _retrycount);
 }
 
-//关闭websocket
+///关闭websocket
 void NetDataManager::destroyWebSocket()
 {
-    Public::sdklog("In destroyWebSocket");
+    Public::sdklog("  In destroyWebSocket");
     SAFE_DELETE(_socket);
 }
 
@@ -157,29 +153,29 @@ void NetDataManager::sendHelloMsg()
 //是否达到最大重连次数
 bool NetDataManager::haveReachMaxRetryCount()
 {
-    return _retrycount >= maxretrycount;
+    return getRetryCount() >= maxretrycount;
 }
 
 void NetDataManager::onOpen(WebSocket* ws)
 {
-    Public::sdklog("连接已打开");
+    Public::sdklog("  连接已打开");
     
-    _retrycount = 0;
+    resetRetryCount();
     
-    if (RTChatSDKMain::sharedInstance().getSdkState() == SdkControlConnecting) {
+    if (RTChatSDKMain::sharedInstance().getSdkState() < SdkGateWaySocketUnConnected) {
         RTChatSDKMain::sharedInstance().set_SdkOpState(SdkControlConnected);
-        RTChatSDKMain::sharedInstance().requestLogicInfo();
     }
-    else if (RTChatSDKMain::sharedInstance().getSdkState() == SdkGateWaySocketConnecting) {
+    else if (RTChatSDKMain::sharedInstance().getSdkState() >= SdkGateWaySocketUnConnected) {
         RTChatSDKMain::sharedInstance().set_SdkOpState(SdkGateWaySocketConnected);
-        RTChatSDKMain::sharedInstance().requestLogin();
     }
+    
+    TimeCounter::instance().registerTimeOutCallBack("nettimeout", 20, std::bind(&NetDataManager::connnectionTimeOut, this, std::placeholders::_1));
 }
 
 //超时回调
 void NetDataManager::connnectionTimeOut(int period)
 {
-    Public::sdklog("心跳超时回调");
+    Public::sdklog("  心跳超时回调");
     
     pthread_mutex_lock(&_mutexlock);
     _needCloseConnection = true;
@@ -191,7 +187,7 @@ void NetDataManager::onMessage(WebSocket* ws, const WebSocket::Data& data)
     if (data.len == 2) {    //心跳消息
         sendHelloMsg();
         
-        TimeCounter::instance().resetCallBackInfoTime(_callBackID);
+        TimeCounter::instance().resetCallBackInfoTime("nettimeout");
         
         return;
     }
@@ -201,29 +197,29 @@ void NetDataManager::onMessage(WebSocket* ws, const WebSocket::Data& data)
 
 void NetDataManager::onClose(WebSocket* ws)
 {
-    Public::sdklog("连接被关闭");
+    Public::sdklog("  连接被关闭");
     
-    TimeCounter::instance().destroyCallBackInfo(_callBackID);
+    TimeCounter::instance().destroyCallBackInfo("nettimeout");
     
     destroyWebSocket();
     
-    if (RTChatSDKMain::sharedInstance().getSdkState() == SdkControlConnected) {
+    if (RTChatSDKMain::sharedInstance().getSdkState() < SdkGateWaySocketUnConnected) {
         RTChatSDKMain::sharedInstance().set_SdkOpState(SdkControlUnConnected);
     }
-    else if (RTChatSDKMain::sharedInstance().getSdkState() >= SdkGateWaySocketConnected) {
-        RTChatSDKMain::sharedInstance().set_SdkOpState(SdkControlConnected);
+    else if (RTChatSDKMain::sharedInstance().getSdkState() > SdkGateWaySocketUnConnected) {
+        RTChatSDKMain::sharedInstance().set_SdkOpState(SdkGateWaySocketUnConnected);
     }
 }
 
 void NetDataManager::onError(WebSocket* ws, const WebSocket::ErrorCode& error)
 {
-    Public::sdklog("连接发生错误");
+    Public::sdklog("  连接发生错误");
     destroyWebSocket();
-    if (RTChatSDKMain::sharedInstance().getSdkState() == SdkControlConnected) {
+    if (RTChatSDKMain::sharedInstance().getSdkState() < SdkGateWaySocketUnConnected) {
         RTChatSDKMain::sharedInstance().set_SdkOpState(SdkControlUnConnected);
     }
-    else if (RTChatSDKMain::sharedInstance().getSdkState() >= SdkGateWaySocketConnected) {
-        RTChatSDKMain::sharedInstance().set_SdkOpState(SdkControlConnected);
+    else if (RTChatSDKMain::sharedInstance().getSdkState() > SdkGateWaySocketUnConnected) {
+        RTChatSDKMain::sharedInstance().set_SdkOpState(SdkGateWaySocketUnConnected);
     }
 }
 

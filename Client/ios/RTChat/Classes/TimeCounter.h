@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <functional>
+#include <map>
 #include "webrtc/system_wrappers/interface/thread_wrapper.h"
 
 using namespace webrtc;
@@ -20,18 +21,17 @@ typedef std::function<void (int)> callbackfunc;
 class TimeCounter {
 public:
     struct StCallBackInfo {
-        StCallBackInfo(int id, int period, const callbackfunc& func){
-            _id = id;
+        StCallBackInfo(int period, const callbackfunc& func) {
             _period = period;
             _func = func;
             _starttime = time(NULL);
-        }
-        int             _id;
+        };
         callbackfunc    _func;
         uint64_t        _starttime;
         int             _period;
     };
-    typedef std::vector<StCallBackInfo> CallBackInfoVec;
+    
+    typedef std::map<std::string , StCallBackInfo*> CallBackInfoVec;
     
 public:
     TimeCounter();
@@ -39,13 +39,13 @@ public:
     
     static TimeCounter& instance();
     
-    int registerTimeOutCallBack(int period, const callbackfunc& func);
+    int registerTimeOutCallBack(const char* keyname, int period, const callbackfunc& func);
     
     void startCounter();
     
-    void resetCallBackInfoTime(int id);
+    void resetCallBackInfoTime(const char* keyname);
     
-    void destroyCallBackInfo(int id);
+    void destroyCallBackInfo(const char* keyname);
     
 protected:
     static bool Run(ThreadObj obj);
@@ -54,9 +54,7 @@ protected:
 private:
     ThreadWrapper*      _thread;
     pthread_mutex_t     _mutexlock;
-    callbackfunc        _pfunc;
-    CallBackInfoVec     _callBackInfoVec;
-    int                 _infoid;
+    CallBackInfoVec     _callBackInfoMap;
 };
 
 #endif /* defined(__RTChat__TimeCounter__) */

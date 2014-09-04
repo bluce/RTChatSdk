@@ -52,6 +52,7 @@ enum SdkOpState {
     SdkControlUnConnected = 0,
     SdkControlConnecting,
     SdkControlConnected,
+    SdkWaitingGateWayInfo,
     SdkGateWaySocketUnConnected,
     SdkGateWaySocketConnecting,
     SdkGateWaySocketConnected,

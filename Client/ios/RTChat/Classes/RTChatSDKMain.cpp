@@ -55,7 +55,8 @@ _buffStream(NULL),
 _playBuffPool(NULL),
 _isrecording(false),
 _recordstarttime(0),
-_recordduration(0)
+_recordduration(0),
+_workThread(NULL)
 {
     _netDataManager = new NetDataManager;
     
@@ -71,6 +72,8 @@ _recordduration(0)
         _playBuffPool->init();
     }
     
+    _workThread = ThreadWrapper::CreateThread(RTChatSDKMain::Run, this, kNormalPriority, "MainWorkThread");
+    
     initMutexLock();
 }
 
@@ -80,6 +83,11 @@ RTChatSDKMain::~RTChatSDKMain()
     SAFE_DELETE(_mediaSample);
     SAFE_DELETE(_buffStream);
     SAFE_DELETE(_playBuffPool);
+    
+    if (_workThread) {
+        _workThread->Stop();
+    }
+    SAFE_DELETE(_workThread);
 }
 
 RTChatSDKMain& RTChatSDKMain::sharedInstance()
@@ -115,16 +123,26 @@ void RTChatSDKMain::registerMsgCallback(const pMsgCallFunc& func)
 void RTChatSDKMain::activateSDK()
 {
     Public::sdklog("激活SDK");
-    if (_sdkOpState < SdkGateWaySocketConnected) {
+    if (_func == NULL) {
+        return;
+    }
+    
+    SdkOpState currentstate = getSdkState();
+    
+    if (currentstate < SdkGateWaySocketUnConnected) {
         openControlConnection();
     }
     else {
         openGateWayConnection();
     }
     
-    
     if (_mediaSample) {
         _mediaSample->init();
+    }
+    
+    unsigned int id = 0;
+    if (_workThread) {
+        _workThread->Start(id);
     }
 }
 
@@ -133,7 +151,7 @@ void RTChatSDKMain::deActivateSDK()
 {
     Public::sdklog("冻结SDK");
     if (_netDataManager) {
-        _netDataManager->deactive();
+//        _netDataManager->deactive();
         _netDataManager->destroyWebSocket();
     }
     
@@ -146,67 +164,40 @@ void RTChatSDKMain::deActivateSDK()
     _currentRoomID = 0;
     _isMute = false;
     
-    if (_sdkOpState >= SdkGateWaySocketConnected) {
-        _sdkOpState = SdkControlConnected;
+    SdkOpState currentstate = getSdkState();
+    
+    if (currentstate >= SdkGateWaySocketUnConnected) {
+        set_SdkOpState(SdkGateWaySocketUnConnected);
     }
     else {
-        _sdkOpState = SdkControlUnConnected;
+        set_SdkOpState(SdkControlUnConnected);
     }
-//    _func = NULL;
+    
+    if (_workThread) {
+        _workThread->Stop();
+    }
 }
 
 //获取SDK当前操作状态
 SdkOpState RTChatSDKMain::getSdkState()
 {
-    return _sdkOpState;
+    SdkOpState currentstate;
+    pthread_mutex_lock(&_mutexLock);
+    currentstate = _sdkOpState;
+    pthread_mutex_unlock(&_mutexLock);
+    return currentstate;
 }
 
-///请求逻辑服务器地址
-SdkErrorCode RTChatSDKMain::requestLogicInfo()
-{
-    if (_appid == "" || _appkey == "") {
-        return OPERATION_FAILED;
-    }
-    
-    Cmd::cmdRequestLogicInfo msg;
-    msg.set_appid(_appid);
-    msg.set_key(_appkey);
-    
-    SendProtoMsg(msg, Cmd::enRequestLogicInfo);
-    
-    return OPERATION_OK;
-}
-
-SdkErrorCode RTChatSDKMain::requestLogin(const char* uniqueid)
-{
-    if (uniqueid != NULL) {
-        _uniqueid = uniqueid;
-    }
-    if (_uniqueid == "") {
-        return OPERATION_FAILED;
-    }
-    
-    if (_sdkOpState < SdkGateWaySocketConnected) {
-        return OPERATION_FAILED;
-    }
-    
-    _sdkOpState = SdkUserLogining;
-    
-    Cmd::cmdRequestLogin msg;
-    msg.set_uniqueid(_uniqueid);
-    msg.set_token("yuew89341huidy89iuh1");
-    msg.set_tempid(_sdkTempID);
-    
-    SendProtoMsg(msg, Cmd::enRequestLogin);
-    
-    Public::sdklog("发送登录消息完成");
-    
-    return OPERATION_OK;
-}
-
-//申请房间列表
+/// 申请房间列表(主线程)
 SdkErrorCode RTChatSDKMain::requestRoomList()
 {
+    tryConnectServer();
+    
+    SdkOpState currentstate = getSdkState();
+    if (currentstate < SdkUserLogined) {
+        return OPERATION_FAILED;
+    }
+    
     stBaseCmd cmd;
     cmd.cmdid = Cmd::enRequestRoomList;
     
@@ -217,9 +208,13 @@ SdkErrorCode RTChatSDKMain::requestRoomList()
     return OPERATION_OK;
 }
 
+//创建房间(主线程)
 SdkErrorCode RTChatSDKMain::createRoom(enRoomType roomType, enRoomReason reason)
 {
-    if (_sdkOpState != SdkUserLogined) {
+    tryConnectServer();
+    
+    SdkOpState currentstate = getSdkState();
+    if (currentstate != SdkUserLogined) {
         return OPERATION_FAILED;
     }
     
@@ -227,7 +222,7 @@ SdkErrorCode RTChatSDKMain::createRoom(enRoomType roomType, enRoomReason reason)
     msg.set_type((Cmd::enRoomType)roomType);
     msg.set_reason((Cmd::enRoomReason)reason);
     
-    _sdkOpState = SdkUserCreatingRoom;
+    set_SdkOpState(SdkUserCreatingRoom);
     
     SendProtoMsg(msg, Cmd::enRequestCreateRoom);
     
@@ -236,14 +231,17 @@ SdkErrorCode RTChatSDKMain::createRoom(enRoomType roomType, enRoomReason reason)
 
 SdkErrorCode RTChatSDKMain::joinRoom(uint64_t roomid)
 {
-    if (_sdkOpState != SdkUserLogined) {
+    tryConnectServer();
+    
+    SdkOpState currentstate = getSdkState();
+    if (currentstate != SdkUserLogined) {
         return OPERATION_FAILED;
     }
     
     Cmd::cmdRequestEnterRoom msg;
     msg.set_roomid(roomid);
     
-    _sdkOpState = SdkUserjoiningRoom;
+    set_SdkOpState(SdkUserjoiningRoom);
     
     SendProtoMsg(msg, Cmd::enRequestEnterRoom);
     
@@ -253,7 +251,10 @@ SdkErrorCode RTChatSDKMain::joinRoom(uint64_t roomid)
 //离开房间
 SdkErrorCode RTChatSDKMain::leaveRoom()
 {
-    if (_sdkOpState < SdkUserjoiningRoom) {
+    tryConnectServer();
+    
+    SdkOpState currentstate = getSdkState();
+    if (currentstate < SdkUserjoiningRoom) {
         return OPERATION_FAILED;
     }
     
@@ -268,7 +269,7 @@ SdkErrorCode RTChatSDKMain::leaveRoom()
         _mediaSample->leaveCurrentRoom();
     }
     
-    _sdkOpState = SdkUserLogined;
+    set_SdkOpState(SdkUserLogined);
     
     return OPERATION_OK;
 }
@@ -276,7 +277,10 @@ SdkErrorCode RTChatSDKMain::leaveRoom()
 //加入麦序
 SdkErrorCode RTChatSDKMain::requestInsertMicQueue()
 {
-    if (_sdkOpState != SdkUserJoinedRoom) {
+    tryConnectServer();
+    
+    SdkOpState currentstate = getSdkState();
+    if (currentstate != SdkUserJoinedRoom) {
         return OPERATION_FAILED;
     }
     
@@ -287,7 +291,7 @@ SdkErrorCode RTChatSDKMain::requestInsertMicQueue()
         _netDataManager->sendClientMsg((const unsigned char*)&cmd, cmd.getSize());
     }
     
-    _sdkOpState = SdkUserWaitingToken;
+    set_SdkOpState(SdkUserWaitingToken);
     
     return OPERATION_OK;
 }
@@ -295,7 +299,10 @@ SdkErrorCode RTChatSDKMain::requestInsertMicQueue()
 //离开麦序
 SdkErrorCode RTChatSDKMain::leaveMicQueue()
 {
-    if (_sdkOpState != SdkUserJoinedRoom) {
+    tryConnectServer();
+    
+    SdkOpState currentstate = getSdkState();
+    if (currentstate < SdkUserWaitingToken) {
         return OPERATION_FAILED;
     }
     
@@ -306,7 +313,7 @@ SdkErrorCode RTChatSDKMain::leaveMicQueue()
         _netDataManager->sendClientMsg((const unsigned char*)&cmd, cmd.getSize());
     }
     
-    _sdkOpState = SdkUserJoinedRoom;
+    set_SdkOpState(SdkUserJoinedRoom);
     
     return OPERATION_OK;
     
@@ -318,7 +325,8 @@ SdkErrorCode RTChatSDKMain::leaveMicQueue()
 //是否接收随机聊天，临时增加的接口
 void RTChatSDKMain::returnRandChatRes(bool isAccept, uint64_t srctempid)
 {
-    if (_sdkOpState != SdkUserLogined) {
+    SdkOpState currentstate = getSdkState();
+    if (currentstate != SdkUserLogined) {
         return;
     }
     
@@ -329,12 +337,136 @@ void RTChatSDKMain::returnRandChatRes(bool isAccept, uint64_t srctempid)
     SendProtoMsg(msg, Cmd::enReturnRandChat);
 }
 
-//随机进入一个房间
-void RTChatSDKMain::randomJoinRoom()
+/// 设置本人Mac静音(主线程)
+void RTChatSDKMain::setMuteSelf(bool isMute)
 {
-    if (_roomInfoMap.size() != 0) {
-        joinRoom(_roomInfoMap.rbegin()->first);
+    if (_mediaSample) {
+        _mediaSample->setMuteMic(isMute);
+        _isMute = isMute;
     }
+}
+
+/// 开始录制麦克风数据
+bool RTChatSDKMain::startRecordVoice()
+{
+    if (_isrecording) {
+        return false;
+    }
+    
+    if (_mediaSample) {
+        pthread_mutex_lock(&_mutexLock);
+        _isrecording = true;
+        pthread_mutex_unlock(&_mutexLock);
+        
+        TimeCounter::instance().registerTimeOutCallBack("record", 30, std::bind(&RTChatSDKMain::recordTimeExceed, this, std::placeholders::_1));
+        _recordstarttime = time(NULL);
+        return _mediaSample->startRecordVoice(_buffStream);
+    }
+    else {
+        return false;
+    }
+}
+
+/// 停止录制麦克风数据
+bool RTChatSDKMain::stopRecordVoice()
+{
+    bool isrecording;
+    
+    pthread_mutex_lock(&_mutexLock);
+    isrecording = _isrecording;
+    pthread_mutex_unlock(&_mutexLock);
+    
+    if (!isrecording) {
+        return false;
+    }
+    
+    bool result = false;
+    if (_mediaSample) {
+        if ( (result = _mediaSample->stopRecordVoice()) ) {
+            uploadVoiceData();
+            
+            pthread_mutex_lock(&_mutexLock);
+            _recordduration = time(NULL) - _recordstarttime;
+            _isrecording = false;
+            pthread_mutex_unlock(&_mutexLock);
+        }
+    }
+    else {
+        return false;
+    }
+    
+    return result;
+}
+
+/// 开始播放录制数据
+bool RTChatSDKMain::startPlayLocalVoice(const char *voiceUrl)
+{
+    RTChatBuffStream* instream = NULL;
+    
+    if (_playBuffPool) {
+        RTChatBuffStreamPool::StBuffInfo* info = _playBuffPool->getAvailableBuff(voiceUrl);
+        if (info && !info->needDownload) {
+            instream = info->buffstream;
+            playVoiceStream(instream);
+        }
+        else {
+            HttpProcess::instance().requestContent(voiceUrl);
+            _downloadingfileurl = voiceUrl;
+        }
+    }
+    else {
+        return false;
+    }
+    
+    return true;
+}
+
+/// 停止播放数据(主线程)
+bool RTChatSDKMain::stopPlayLocalVoice()
+{
+    if (_mediaSample) {
+        return _mediaSample->stopPlayLocalStream();
+    }
+    else {
+        return false;
+    }
+}
+
+///请求更改排麦房权限(主线程)
+bool RTChatSDKMain::requestUpdatePower(uint64_t othertempid, enPowerType powertype)
+{
+    tryConnectServer();
+    
+    SdkOpState currentstate = getSdkState();
+    if (currentstate < SdkUserJoinedRoom) {
+        return OPERATION_FAILED;
+    }
+    
+    Cmd::cmdRequestUpdatePower msg;
+    msg.set_tempid(othertempid);
+    msg.set_power((Cmd::enPowerType)powertype);
+    
+    SendProtoMsg(msg, Cmd::enRequestCreateRoom);
+    
+    return OPERATION_OK;
+}
+
+/// 分配麦(主线程)
+bool RTChatSDKMain::requestAssignMic(uint64_t othertempid)
+{
+    tryConnectServer();
+    
+    SdkOpState currentstate = getSdkState();
+    if (currentstate < SdkUserJoinedRoom) {
+        return OPERATION_FAILED;
+    }
+    
+    Cmd::cmdRequestAssignMic msg;
+    msg.set_tempid(othertempid);
+    
+    SendProtoMsg(msg, Cmd::enRequestAssignMic);
+    
+    return OPERATION_OK;
 }
 
 ///打开控制连接
@@ -344,7 +476,7 @@ void RTChatSDKMain::openControlConnection()
         _netDataManager->init("ws://180.168.126.249:16008");
         _netDataManager->activity();
     }
-    _sdkOpState = SdkControlConnecting;
+    set_SdkOpState(SdkControlConnecting);
 }
 
 ///关闭控制连接
@@ -367,7 +499,7 @@ void RTChatSDKMain::openGateWayConnection()
         _netDataManager->init(Public::SdkAvar("ws://%s:%u", _gateWayIP.c_str(), _gateWayPort));
     }
     
-    _sdkOpState = SdkGateWaySocketConnecting;
+    set_SdkOpState(SdkGateWaySocketConnecting);
 }
 
 //上传录制的语音数据
@@ -375,60 +507,6 @@ void RTChatSDKMain::uploadVoiceData()
 {
     const RTChatBuffStream::BuffVec& buffvec = _buffStream->getBuffVec();
     HttpProcess::instance().postContent("http://122.11.47.94:10000/wangpan.php", &buffvec[0], _buffStream->get_datasize());
-    
-//    int s = socket(AF_INET, SOCK_STREAM, 0);
-//    struct sockaddr_in addr;
-//    addr.sin_family = AF_INET;
-//    addr.sin_port = htons(10000);
-//    addr.sin_addr.s_addr = inet_addr("122.11.47.94");
-//    
-//    connect(s, (struct sockaddr*)&addr, sizeof(addr));
-//    
-//    
-//    
-//    std::string header("");
-//    std::string content("");
-//    
-//    //----------------------post头开始--------------------------------
-//    header += "POST ";
-//    header += "/wangpan.php";
-//    header += " HTTP/1.1\r\n";
-//    header += "Host: 122.11.47.94:10000\r\n";
-//    header += "User-Agent: Mozilla/4.0\r\n";
-//    header += "Connection: Keep-Alive\r\n";
-//    header += "Accept: */*\r\n";
-//    header += "Pragma: no-cache\r\n";
-//    header += "Content-Type: multipart/form-data; charset=\"gb2312\"; boundary=----------------------------64b23e4066ed\r\n";
-//    
-//    content += "------------------------------64b23e4066ed\r\n";
-//    content += "Content-Disposition: form-data; name=\"file\"; filename=\"1.txt\"\r\n";
-//    content += "Content-Type: aapplication/octet-stream\r\n\r\n";
-//    
-//    //post尾时间戳
-//    std::string strContent("\r\n------------------------------64b23e4066ed\r\n");
-//    char temp[64] = {0};
-//    //注意下面这个参数Content-Length，这个参数值是：http请求头长度+请求尾长度+文件总长度
-//    sprintf(temp, "Content-Length: %u\r\n\r\n", content.length() + 1024 + strContent.length());
-//    header += temp;
-//    std::string str_http_request;
-//    str_http_request.append(header).append(content);
-//    //----------------------post头结束-----------------------------------
-//    
-//    send(s, str_http_request.c_str(), str_http_request.length(), 0);
-//    
-//    sleep(1);
-//    
-//    char* buff = new char[1024];
-//    int total = 0;
-//    while (total < 1024) {
-//        int size = send(s, &buff[total], 1024-total, 0);
-//        total += size;
-//    }
-//    sleep(1);
-//    
-//    send(s, strContent.c_str(), strContent.length(),0);
-//    
-//    shutdown(s, 2);
 }
 
 //调用底层引擎播放流
@@ -450,7 +528,8 @@ void RTChatSDKMain::recordTimeExceed(int time)
 /// 请求发送漂流瓶(测试用接口)
 bool RTChatSDKMain::requestRandPlay(const std::string& url)
 {
-    if (_sdkOpState >= SdkUserCreatingRoom) {
+    SdkOpState currentstate = getSdkState();
+    if (currentstate >= SdkUserCreatingRoom) {
         return OPERATION_FAILED;
     }
     
@@ -477,9 +556,9 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             _gateWayIP = protomsg.gateip();
             _gateWayPort = protomsg.gateport();
             
-            closeControlConnection();
+            set_SdkOpState(SdkGateWaySocketUnConnected);
             
-            _sdkOpState = SdkGateWaySocketUnConnected;
+            closeControlConnection();
             
             openGateWayConnection();
             
@@ -491,7 +570,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
             
             if (protomsg.result() == Cmd::cmdNotifyLoginResult::LOGIN_RESULT_OK) {
-                _sdkOpState = SdkUserLogined;
+                set_SdkOpState(SdkUserLogined);
                 _sdkTempID = protomsg.tempid();
                 
                 StNotifyLoginResult callbackdata(protomsg.result(), protomsg.tempid());
@@ -807,6 +886,14 @@ void RTChatSDKMain::connectVoiceRoom(const std::string& ip, unsigned int port)
     }
 }
 
+/// 随机进入一个房间（测试用接口）
+void RTChatSDKMain::randomJoinRoom()
+{
+    if (_roomInfoMap.size() != 0) {
+        joinRoom(_roomInfoMap.rbegin()->first);
+    }
+}
+
 //获取当前的输入mic静音状态
 bool RTChatSDKMain::getMuteSelf()
 {
@@ -851,128 +938,84 @@ void RTChatSDKMain::httpRequestCallBack(HttpDirection direction, const char *ptr
     }
 }
 
-//设置本人Mac静音
-void RTChatSDKMain::setMuteSelf(bool isMute)
+bool RTChatSDKMain::Run(ThreadObj obj)
 {
-    if (_mediaSample) {
-        _mediaSample->setMuteMic(isMute);
-        _isMute = isMute;
-    }
+    RTChatSDKMain* mgr = static_cast<RTChatSDKMain*>(obj);
+    
+    return mgr->Process();
 }
 
-//开始录制麦克风数据
-bool RTChatSDKMain::startRecordVoice()
+bool RTChatSDKMain::Process()
 {
-    if (_isrecording) {
-        return false;
-    }
+    SdkOpState currentstate = getSdkState();
     
-    if (_mediaSample) {
-        pthread_mutex_lock(&_mutexLock);
-        _isrecording = true;
-        pthread_mutex_unlock(&_mutexLock);
+    if (currentstate == SdkControlConnected) {
+        requestLogicInfo();
+        set_SdkOpState(SdkWaitingGateWayInfo);
+    }
+    if (currentstate == SdkGateWaySocketUnConnected) {
         
-        TimeCounter::instance().registerTimeOutCallBack(30, std::bind(&RTChatSDKMain::recordTimeExceed, this, std::placeholders::_1));
-        _recordstarttime = time(NULL);
-        return _mediaSample->startRecordVoice(_buffStream);
     }
-    else {
-        return false;
-    }
-}
-
-//停止录制麦克风数据
-bool RTChatSDKMain::stopRecordVoice()
-{
-    bool isrecording;
-    
-    pthread_mutex_lock(&_mutexLock);
-    isrecording = _isrecording;
-    pthread_mutex_unlock(&_mutexLock);
-    
-    if (!isrecording) {
-        return false;
+    if (currentstate == SdkGateWaySocketConnected) {
+        requestLogin();
     }
     
-    bool result = false;
-    if (_mediaSample) {
-        if ( (result = _mediaSample->stopRecordVoice()) ) {
-            uploadVoiceData();
-            
-            pthread_mutex_lock(&_mutexLock);
-            _recordduration = time(NULL) - _recordstarttime;
-            _isrecording = false;
-            pthread_mutex_unlock(&_mutexLock);
-        }
+    if (_netDataManager) {
+        _netDataManager->Process();
     }
-    else {
-        return false;
-    }
-    
-    return result;
-}
-
-//开始播放录制数据
-bool RTChatSDKMain::startPlayLocalVoice(const char *voiceUrl)
-{
-    RTChatBuffStream* instream = NULL;
-    
-    if (_playBuffPool) {
-        RTChatBuffStreamPool::StBuffInfo* info = _playBuffPool->getAvailableBuff(voiceUrl);
-        if (info && !info->needDownload) {
-            instream = info->buffstream;
-            playVoiceStream(instream);
-        }
-        else {
-            HttpProcess::instance().requestContent(voiceUrl);
-            _downloadingfileurl = voiceUrl;
-        }
-    }
-    else {
-        return false;
-    }
-    
     return true;
 }
 
-//停止播放数据
-bool RTChatSDKMain::stopPlayLocalVoice()
+/// 尝试重连服务器
+void RTChatSDKMain::tryConnectServer()
 {
-    if (_mediaSample) {
-        return _mediaSample->stopPlayLocalStream();
-    }
-    else {
-        return false;
+    SdkOpState currentstate = getSdkState();
+    if (currentstate == SdkControlUnConnected || currentstate == SdkGateWaySocketUnConnected) {
+        _netDataManager->resetRetryCount();
     }
 }
 
-//请求更改排麦房权限
-bool RTChatSDKMain::requestUpdatePower(uint64_t othertempid, enPowerType powertype)
+///请求逻辑服务器地址
+SdkErrorCode RTChatSDKMain::requestLogicInfo()
 {
-    if (_sdkOpState < SdkUserJoinedRoom) {
+    if (_appid == "" || _appkey == "") {
         return OPERATION_FAILED;
     }
     
-    Cmd::cmdRequestUpdatePower msg;
-    msg.set_tempid(othertempid);
-    msg.set_power((Cmd::enPowerType)powertype);
+    Cmd::cmdRequestLogicInfo msg;
+    msg.set_appid(_appid);
+    msg.set_key(_appkey);
     
-    SendProtoMsg(msg, Cmd::enRequestCreateRoom);
+    SendProtoMsg(msg, Cmd::enRequestLogicInfo);
     
     return OPERATION_OK;
 }
 
-/// 分配麦
-bool RTChatSDKMain::requestAssignMic(uint64_t othertempid)
+/// 请求登录(工作线程)
+SdkErrorCode RTChatSDKMain::requestLogin(const char* uniqueid)
 {
-    if (_sdkOpState < SdkUserJoinedRoom) {
+    if (uniqueid != NULL) {
+        _uniqueid = uniqueid;
+    }
+    if (_uniqueid == "") {
         return OPERATION_FAILED;
     }
     
-    Cmd::cmdRequestAssignMic msg;
-    msg.set_tempid(othertempid);
+    SdkOpState currentstate = getSdkState();
+    if (currentstate < SdkGateWaySocketConnected) {
+        return OPERATION_FAILED;
+    }
     
-    SendProtoMsg(msg, Cmd::enRequestAssignMic);
+    set_SdkOpState(SdkUserLogining);
+    
+    Cmd::cmdRequestLogin msg;
+    msg.set_uniqueid(_uniqueid);
+    msg.set_token("yuew89341huidy89iuh1");
+    msg.set_tempid(_sdkTempID);
+    
+    SendProtoMsg(msg, Cmd::enRequestLogin);
+    
+    Public::sdklog("发送登录消息完成");
     
     return OPERATION_OK;
 }

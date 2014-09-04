@@ -414,6 +414,7 @@ uint64_t MediaSample::getRecordStreamTimeLength(OutStream* outstream)
 
 void MediaSample::closeVoiceEngine()
 {
+    Public::sdklog("  关闭VoiceEngine");
     leaveCurrentRoom();
     _voiceServerIp = "";
     _voiceServerPort = 0;
