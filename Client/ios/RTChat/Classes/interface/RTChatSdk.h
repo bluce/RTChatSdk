@@ -68,6 +68,12 @@ public:
     
     //停止播放数据
     bool stopPlayLocalVoice();
+    
+    //请求更改排麦房权限
+    bool requestUpdatePower(uint64_t othertempid, enPowerType powertype);
+    
+    /// 分配麦
+    bool requestAssignMic(uint64_t othertempid);
 };
 
 #endif
