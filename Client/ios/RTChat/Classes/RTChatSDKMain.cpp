@@ -697,6 +697,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
                 for (int i = 0; i < protomsg.info_size(); i++) {
                     stRoomUserInfo info;
                     info.tempid = protomsg.info(i).tempid();
+                    info.power = (enPowerType)protomsg.info(i).power();
                     bcopy(protomsg.info(i).uniqueid().c_str(), info.uniqueid, sizeof(info.uniqueid));
                     userList->userinfo[i] = info;
                 }
@@ -871,7 +872,7 @@ bool RTChatSDKMain::startRecordVoice()
         _isrecording = true;
         pthread_mutex_unlock(&_mutexLock);
         
-        TimeCounter::instance().registerTimeOutCallBack(20, std::bind(&RTChatSDKMain::recordTimeExceed, this, std::placeholders::_1));
+        TimeCounter::instance().registerTimeOutCallBack(30, std::bind(&RTChatSDKMain::recordTimeExceed, this, std::placeholders::_1));
         _recordstarttime = time(NULL);
         return _mediaSample->startRecordVoice(_buffStream);
     }

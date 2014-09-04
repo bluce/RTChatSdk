@@ -180,4 +180,5 @@ message stRoomUserInfo
 {
 	required uint64 tempid = 1;
 	required string uniqueid = 2;
+	required enPowerType power = 3;
 }

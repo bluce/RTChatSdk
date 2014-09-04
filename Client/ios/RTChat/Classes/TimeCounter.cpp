@@ -67,7 +67,7 @@ void TimeCounter::destroyCallBackInfo(int id)
     for (auto it = _callBackInfoVec.begin(); it != _callBackInfoVec.end();) {
         StCallBackInfo& info = *it;
         if (info._id == id) {
-            _callBackInfoVec.erase(it++);
+            _callBackInfoVec.erase(it);
             break;
         }
     }

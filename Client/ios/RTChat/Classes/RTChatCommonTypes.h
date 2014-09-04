@@ -273,6 +273,7 @@ struct StNotifyDelVoiceUser {
 struct stRoomUserInfo {
     uint64_t tempid;     //SDK内部用户ID
     char uniqueid[64];  //应用侧用户ID
+    enPowerType power;  //用户权限
 };
 
 //通知有人进入房间
