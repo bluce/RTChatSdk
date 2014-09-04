@@ -106,6 +106,7 @@ void MediaSample::connectRoom(const std::string &ip, unsigned int port, uint64_t
 
 void MediaSample::leaveCurrentRoom()
 {
+    Public::sdklog("    离开当前房间");
     setReceiveMute(false);
     setWetherSendVoiceData(false);
     clearChannelData();

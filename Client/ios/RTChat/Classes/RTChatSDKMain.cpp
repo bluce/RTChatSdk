@@ -673,7 +673,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
         {
             Public::sdklog("接收到增加通道指令");
             
-            if (_sdkOpState == SdkUserJoinedRoom) {
+            if (_sdkOpState >= SdkUserJoinedRoom) {
                 Cmd::cmdNotifyAddVoiceUser protomsg;
                 protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
                 for (int i = 0; i < protomsg.info_size(); i++) {
@@ -699,7 +699,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
         {
             Public::sdklog("接收到通知麦序指令");
             
-            if (_sdkOpState == SdkUserJoinedRoom) {
+            if (_sdkOpState >= SdkUserJoinedRoom) {
                 Cmd::cmdNotifyMicQueue protomsg;
                 protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
                 
@@ -721,7 +721,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
         {
             Public::sdklog("接收到某人获得麦序指令");
             
-            if (_sdkOpState == SdkUserJoinedRoom) {
+            if (_sdkOpState >= SdkUserJoinedRoom) {
                 Cmd::cmdNotifyTakeMic protomsg;
                 protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
                 
@@ -729,14 +729,14 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
                     //轮到本人说话
                     if (_mediaSample) {
                         _mediaSample->setWetherSendVoiceData(true);
-                        _sdkOpState = SdkUserSpeaking;
+                        set_SdkOpState(SdkUserSpeaking);
                     }
                 }
                 else {
                     //轮到他人说话
                     if (_mediaSample) {
                         _mediaSample->setWetherSendVoiceData(false);
-                        _sdkOpState = SdkUserJoinedRoom;
+                        set_SdkOpState(SdkUserJoinedRoom);
                     }
                 }
                 
@@ -750,7 +750,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
         {
             Public::sdklog("接收到删除语音通道指令");
             
-            if (_sdkOpState == SdkUserJoinedRoom) {
+            if (_sdkOpState >= SdkUserJoinedRoom) {
                 Cmd::cmdNotifyDelVoiceUser protomsg;
                 protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
                 for (int i = 0; i < protomsg.info_size(); i++) {
@@ -766,7 +766,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
         {
             Public::sdklog("接收到通知有用户进入房间指令");
             
-            if (_sdkOpState == SdkUserJoinedRoom) {
+            if (_sdkOpState >= SdkUserJoinedRoom) {
                 Cmd::cmdNotifySomeEnterRoom protomsg;
                 protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
                 
@@ -790,7 +790,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
         {
             Public::sdklog("接收到用户离开指令");
             
-            if (_sdkOpState == SdkUserJoinedRoom) {
+            if (_sdkOpState >= SdkUserJoinedRoom) {
                 Cmd::cmdNotifySomeLeaveRoom protomsg;
                 protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
                 
