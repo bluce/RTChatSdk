@@ -1,50 +1,50 @@
 //
-//  RTChatSdkIosHelper.cpp
+//  RTChatSdkCocos2dxHelper.cpp
 //  flappyball
 //
 //  Created by raymon_wang on 14-8-18.
 //
 //
 
-#include "RTChatSdkIosHelper.h"
+#include "RTChatSdkCocos2dxHelper.h"
 
 using namespace std::placeholders;
 
-static RTChatSdkIosHelper* s_RTChatSdkIosHelper = NULL;
+static RTChatSdkCocos2dxHelper* s_RTChatSdkCocos2dxHelper = NULL;
 
-RTChatSdkIosHelper::RTChatSdkIosHelper() :
+RTChatSdkCocos2dxHelper::RTChatSdkCocos2dxHelper() :
 _voiceDelegate(NULL)
 {
     pthread_mutex_init(&_mutexlock, 0);
 }
 
-RTChatSdkIosHelper::~RTChatSdkIosHelper()
+RTChatSdkCocos2dxHelper::~RTChatSdkCocos2dxHelper()
 {
     
 }
 
-void RTChatSdkIosHelper::initCallBack()
+void RTChatSdkCocos2dxHelper::initCallBack()
 {
-    RTChatSDKMain::sharedInstance().registerMsgCallback(std::bind(&RTChatSdkIosHelper::RTChatCallBack, this, _1, _2, _3, _4));
+    RTChatSDKMain::sharedInstance().registerMsgCallback(std::bind(&RTChatSdkCocos2dxHelper::RTChatCallBack, this, _1, _2, _3, _4));
 }
 
-RTChatSdkIosHelper& RTChatSdkIosHelper::instance()
+RTChatSdkCocos2dxHelper& RTChatSdkCocos2dxHelper::instance()
 {
-    if (!s_RTChatSdkIosHelper) {
-        s_RTChatSdkIosHelper = new RTChatSdkIosHelper();
+    if (!s_RTChatSdkCocos2dxHelper) {
+        s_RTChatSdkCocos2dxHelper = new RTChatSdkCocos2dxHelper();
     }
     
-    return *s_RTChatSdkIosHelper;
+    return *s_RTChatSdkCocos2dxHelper;
 }
 
-void RTChatSdkIosHelper::init(const std::string& appid, const std::string& key, const char* uniqueid)
+void RTChatSdkCocos2dxHelper::init(const std::string& appid, const std::string& key, const char* uniqueid)
 {
     initCallBack();
     
     RTChatSDKMain::sharedInstance().initSDK(appid, key, uniqueid);
 }
 
-void RTChatSdkIosHelper::RTChatCallBack(SdkResponseCmd cmdType, SdkErrorCode error, const unsigned char* dataPtr, uint32_t dataSize)
+void RTChatSdkCocos2dxHelper::RTChatCallBack(SdkResponseCmd cmdType, SdkErrorCode error, const unsigned char* dataPtr, uint32_t dataSize)
 {
     pthread_mutex_lock(&_mutexlock);
     
@@ -59,17 +59,17 @@ void RTChatSdkIosHelper::RTChatCallBack(SdkResponseCmd cmdType, SdkErrorCode err
     pthread_mutex_unlock(&_mutexlock);
 }
 
-void RTChatSdkIosHelper::setDelegate(RTChatSdkIosHelperDelegate* delegate)
+void RTChatSdkCocos2dxHelper::setDelegate(RTChatSdkCocos2dxHelperDelegate* delegate)
 {
     _voiceDelegate = delegate;
 }
 
-RTChatSdkIosHelperDelegate* RTChatSdkIosHelper::getDelegate()
+RTChatSdkCocos2dxHelperDelegate* RTChatSdkCocos2dxHelper::getDelegate()
 {
     return _voiceDelegate;
 }
 
-void RTChatSdkIosHelper::visit()
+void RTChatSdkCocos2dxHelper::visit()
 {
     StCallBackData* stCallBackData = NULL;
     

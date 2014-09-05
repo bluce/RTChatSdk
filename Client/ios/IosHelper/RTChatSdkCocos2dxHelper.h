@@ -14,7 +14,7 @@
 #include <queue>
 #include "RTChat/RTChatSdk.h"
 
-class RTChatSdkIosHelperDelegate {
+class RTChatSdkCocos2dxHelperDelegate {
 public:
     //请求登录回调
     virtual void onNotifyLoginResult(SdkErrorCode error, uint64_t tempid) {};
@@ -62,13 +62,13 @@ public:
     virtual void onNotifyUpdatePower(SdkErrorCode error, uint64_t tempid, enPowerType type) {};
     
     /// 分配麦返回结果
-    virtual void onNotifyAssignResult(SdkErrorCode error, enAssignResult) {};
+    virtual void onNotifyAssignResult(SdkErrorCode error, enAssignResult result) {};
 };
 
-class RTChatSdkIosHelper {
+class RTChatSdkCocos2dxHelper {
 public:
-    RTChatSdkIosHelper();
-    virtual ~RTChatSdkIosHelper();
+    RTChatSdkCocos2dxHelper();
+    virtual ~RTChatSdkCocos2dxHelper();
     
 public:
     struct StCallBackData {
@@ -87,7 +87,7 @@ public:
     };
     typedef std::queue<StCallBackData*> MsgQueue;
     
-    static RTChatSdkIosHelper& instance();
+    static RTChatSdkCocos2dxHelper& instance();
     
     //帮助类初始化
     void init(const std::string& appid, const std::string& key, const char* uniqueid = NULL);
@@ -99,10 +99,10 @@ public:
     void RTChatCallBack(SdkResponseCmd cmdType, SdkErrorCode error = OPERATION_OK, const unsigned char* dataPtr = NULL, uint32_t dataSize = 0);
     
     //设置代理指针
-    void setDelegate(RTChatSdkIosHelperDelegate* delegate);
+    void setDelegate(RTChatSdkCocos2dxHelperDelegate* delegate);
     
     //获取代理指针
-    RTChatSdkIosHelperDelegate* getDelegate();
+    RTChatSdkCocos2dxHelperDelegate* getDelegate();
     
     //此函数需要在游戏帧循环调用
     void visit();
@@ -112,7 +112,7 @@ protected:
     MsgQueue                _msgQueue;      //消息队列
     
 private:
-    RTChatSdkIosHelperDelegate*          _voiceDelegate;
+    RTChatSdkCocos2dxHelperDelegate*          _voiceDelegate;
     
 };
 
