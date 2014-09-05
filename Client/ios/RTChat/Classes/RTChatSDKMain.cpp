@@ -547,6 +547,8 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
     
     Public::sdklog("cmdid=%u", cmd->cmdid);
     
+    SdkOpState currentstate = getSdkState();
+    
     switch (cmd->cmdid) {
         case Cmd::enNotifyLogicInfo:
         {
@@ -585,7 +587,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
         }
         case Cmd::enNotifyCreateResult:
         {
-            if (_sdkOpState == SdkUserJoinedRoom) {
+            if (currentstate == SdkUserJoinedRoom) {
                 leaveRoom();
             }
             
@@ -595,7 +597,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
             if (protomsg.isok()) {
                 connectVoiceRoom(protomsg.ip(), protomsg.port());
                 
-                _sdkOpState = SdkUserJoinedRoom;
+                set_SdkOpState(SdkUserJoinedRoom);
                 
                 //这里需要加锁吗，待处理
                 _currentRoomID = protomsg.roomid();
@@ -615,7 +617,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
         {
             Public::sdklog("接收到进入房间指令");
             
-            if (_sdkOpState == SdkUserJoinedRoom) {
+            if (currentstate == SdkUserJoinedRoom) {
                 leaveRoom();
             }
             
@@ -626,14 +628,14 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
                 if (_sdkOpState != SdkUserJoinedRoom) {
                     connectVoiceRoom(protomsg.ip(), protomsg.port());
                     
-                    _sdkOpState = SdkUserJoinedRoom;
+                    set_SdkOpState(SdkUserJoinedRoom);
                     
                     StNotifyEnterResult callbackdata(protomsg.roomid(), (enRoomType)protomsg.type());
                     _func(enNotifyEnterResult, OPERATION_OK, (const unsigned char*)&callbackdata, sizeof(StNotifyEnterResult));
                 }
             }
             else {
-                _sdkOpState = SdkUserLogined;
+                set_SdkOpState(SdkUserLogined);
                 
                 _func(enNotifyEnterResult, ENTER_RESULT_ERROR, NULL, 0);
             }
@@ -667,7 +669,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
         {
             Public::sdklog("接收到增加通道指令");
             
-            if (_sdkOpState >= SdkUserJoinedRoom) {
+            if (currentstate >= SdkUserJoinedRoom) {
                 Cmd::cmdNotifyAddVoiceUser protomsg;
                 protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
                 for (int i = 0; i < protomsg.info_size(); i++) {
@@ -693,7 +695,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
         {
             Public::sdklog("接收到通知麦序指令");
             
-            if (_sdkOpState >= SdkUserJoinedRoom) {
+            if (currentstate >= SdkUserJoinedRoom) {
                 Cmd::cmdNotifyMicQueue protomsg;
                 protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
                 
@@ -715,7 +717,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
         {
             Public::sdklog("接收到某人获得麦序指令");
             
-            if (_sdkOpState >= SdkUserJoinedRoom) {
+            if (currentstate >= SdkUserJoinedRoom) {
                 Cmd::cmdNotifyTakeMic protomsg;
                 protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
                 
@@ -744,7 +746,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
         {
             Public::sdklog("接收到删除语音通道指令");
             
-            if (_sdkOpState >= SdkUserJoinedRoom) {
+            if (currentstate >= SdkUserJoinedRoom) {
                 Cmd::cmdNotifyDelVoiceUser protomsg;
                 protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
                 for (int i = 0; i < protomsg.info_size(); i++) {
@@ -760,7 +762,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
         {
             Public::sdklog("接收到通知有用户进入房间指令");
             
-            if (_sdkOpState >= SdkUserJoinedRoom) {
+            if (currentstate >= SdkUserJoinedRoom) {
                 Cmd::cmdNotifySomeEnterRoom protomsg;
                 protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
                 
@@ -784,7 +786,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
         {
             Public::sdklog("接收到用户离开指令");
             
-            if (_sdkOpState >= SdkUserJoinedRoom) {
+            if (currentstate >= SdkUserJoinedRoom) {
                 Cmd::cmdNotifySomeLeaveRoom protomsg;
                 protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
                 
@@ -800,7 +802,7 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
         {
             Public::sdklog("接收到随机聊天请求指令");
             
-            if (_sdkOpState == SdkUserLogined) {
+            if (currentstate == SdkUserLogined) {
                 Cmd::cmdNotifyRandChat protomsg;
                 protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
                 
