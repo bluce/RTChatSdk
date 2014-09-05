@@ -628,14 +628,8 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
                     
                     _sdkOpState = SdkUserJoinedRoom;
                     
-                    if (protomsg.type() == Cmd::ROOM_TYPE_QUEUE) {
-                        StNotifyEnterResult callbackdata(protomsg.roomid(), ROOM_TYPE_QUEUE);
-                        _func(enNotifyEnterResult, OPERATION_OK, (const unsigned char*)&callbackdata, sizeof(StNotifyEnterResult));
-                    }
-                    else if (protomsg.type() == Cmd::ROOM_TYPE_FREE) {
-                        StNotifyEnterResult callbackdata(protomsg.roomid(), ROOM_TYPE_FREE);
-                        _func(enNotifyEnterResult, OPERATION_OK, (const unsigned char*)&callbackdata, sizeof(StNotifyEnterResult));
-                    }
+                    StNotifyEnterResult callbackdata(protomsg.roomid(), (enRoomType)protomsg.type());
+                    _func(enNotifyEnterResult, OPERATION_OK, (const unsigned char*)&callbackdata, sizeof(StNotifyEnterResult));
                 }
             }
             else {
