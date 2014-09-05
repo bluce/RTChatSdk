@@ -473,7 +473,7 @@ bool RTChatSDKMain::requestAssignMic(uint64_t othertempid)
 void RTChatSDKMain::openControlConnection()
 {
     if (_netDataManager) {
-        _netDataManager->init("ws://180.168.126.249:16008");
+        _netDataManager->init(Public::SdkAvar("ws://%s", ControlServerAddr));
         _netDataManager->activity();
     }
     set_SdkOpState(SdkControlConnecting);
@@ -506,7 +506,7 @@ void RTChatSDKMain::openGateWayConnection()
 void RTChatSDKMain::uploadVoiceData()
 {
     const RTChatBuffStream::BuffVec& buffvec = _buffStream->getBuffVec();
-    HttpProcess::instance().postContent("http://122.11.47.94:10000/wangpan.php", &buffvec[0], _buffStream->get_datasize());
+    HttpProcess::instance().postContent(VoiceUpLoadUrlHead, &buffvec[0], _buffStream->get_datasize());
 }
 
 //调用底层引擎播放流

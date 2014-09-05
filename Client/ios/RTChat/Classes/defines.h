@@ -28,8 +28,9 @@ inline void constructDynamic(T *ptr) {
     cmd* name = (cmd*)buffer##name; \
     constructDynamic(name); \
 
-#define VoiceUpLoadUrlHead  "http://122.11.47.94:10000/rtvoice/index.php?/wangpan/submit"
+#define VoiceUpLoadUrlHead  "http://uploadchat.ztgame.com:10000/wangpan.php"
 
-#define VoiceDownLoadUrlHead  "http://122.11.47.94:10000/rtvoice/upload/"
+#define ControlServerAddr   "rtchat.ztgame.com:18000"
+
 
 #endif

@@ -32,7 +32,7 @@
             [self.httpManager.responseSerializer setAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
             self.httpManager.requestSerializer = [AFHTTPRequestSerializer serializer];
             self.httpManager.responseSerializer = [AFHTTPResponseSerializer serializer];
-            [self.httpManager.requestSerializer setTimeoutInterval:3];
+            [self.httpManager.requestSerializer setTimeoutInterval:15];
         }
         
         return p;

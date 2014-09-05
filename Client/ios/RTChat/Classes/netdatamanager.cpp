@@ -145,7 +145,7 @@ void NetDataManager::destroyWebSocket()
 //发送心跳消息
 void NetDataManager::sendHelloMsg()
 {
-//    Public::sdklog("发送心跳消息");
+    Public::sdklog("  发送心跳消息%d", time(NULL));
     stHelloCmd cmd;
     _socket->send((const unsigned char*)&cmd, sizeof(stHelloCmd));
 }
@@ -169,13 +169,13 @@ void NetDataManager::onOpen(WebSocket* ws)
         RTChatSDKMain::sharedInstance().set_SdkOpState(SdkGateWaySocketConnected);
     }
     
-    TimeCounter::instance().registerTimeOutCallBack("nettimeout", 20, std::bind(&NetDataManager::connnectionTimeOut, this, std::placeholders::_1));
+    TimeCounter::instance().registerTimeOutCallBack("nettimeout", 60, std::bind(&NetDataManager::connnectionTimeOut, this, std::placeholders::_1));
 }
 
 //超时回调
 void NetDataManager::connnectionTimeOut(int period)
 {
-    Public::sdklog("  心跳超时回调");
+//    Public::sdklog("  心跳超时回调%d", time(NULL));
     
     pthread_mutex_lock(&_mutexlock);
     _needCloseConnection = true;

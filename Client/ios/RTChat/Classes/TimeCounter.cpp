@@ -8,6 +8,7 @@
 
 #include "TimeCounter.h"
 #include "public.h"
+#include <thread>
 
 static TimeCounter* s_TimeCounter = NULL;
 
@@ -106,10 +107,7 @@ bool TimeCounter::Process()
     }
     pthread_mutex_unlock(&_mutexlock);
     
-    timespec t;
-    t.tv_sec = 0;
-    t.tv_nsec = 1000;
-    nanosleep(&t, NULL);
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
     
     return true;
 }

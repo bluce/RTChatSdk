@@ -53,11 +53,11 @@ bool MediaSample::init()
         voe_audioProcessing->Release();
     }
     
-    VoEHardware* hardware = VoEHardware::GetInterface(_voe);
-    if (hardware) {
-        hardware->SetLoudspeakerStatus(true);
-        hardware->Release();
-    }
+//    VoEHardware* hardware = VoEHardware::GetInterface(_voe);
+//    if (hardware) {
+//        hardware->SetLoudspeakerStatus(true);
+//        hardware->Release();
+//    }
 
     return true;
 }
@@ -101,6 +101,12 @@ void MediaSample::connectRoom(const std::string &ip, unsigned int port, uint64_t
         volumnControl->SetMicVolume(255);
         volumnControl->SetChannelOutputVolumeScaling(channel, 3);
         volumnControl->Release();
+    }
+    
+    VoEHardware* hardware = VoEHardware::GetInterface(_voe);
+    if (hardware) {
+        hardware->SetLoudspeakerStatus(true);
+        hardware->Release();
     }
 }
 
