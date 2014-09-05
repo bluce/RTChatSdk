@@ -866,10 +866,10 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
         {
             Public::sdklog("收到漂流瓶");
             
-            Cmd::cmdNotifyRandPlay protomsg;
-            protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
+//            Cmd::cmdNotifyRandPlay protomsg;
+//            protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
             
-            startPlayLocalVoice(protomsg.url().c_str());
+//            startPlayLocalVoice(protomsg.url().c_str());
             
             break;
         }
@@ -916,7 +916,7 @@ void RTChatSDKMain::httpRequestCallBack(HttpDirection direction, const char *ptr
             _func(enRequestRec, OPERATION_OK, (const unsigned char*)&callbackdata, sizeof(StRequestRec));
             
             //测试代码
-            requestRandPlay(callbackdata.urlbuf);
+//            requestRandPlay(callbackdata.urlbuf);
         }
     }
     else {
