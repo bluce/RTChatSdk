@@ -12,6 +12,7 @@
 #include "RTChatSDKMain.h"
 #include "public.h"
 #include <unistd.h>
+#include "BridgeTools.h"
 
 static int maxretrycount = 10;
 
@@ -19,9 +20,14 @@ NetDataManager::NetDataManager() :
 _haveInited(false),
 _socket(NULL),
 _retrycount(0),
-_needCloseConnection(false)
+_needCloseConnection(false),
+_cryptobuffer(NULL),
+_decryptobuffer(NULL)
 {
     pthread_mutex_init(&_mutexlock, 0);
+    
+    _cryptobuffer = new unsigned char[1024*64];
+    _decryptobuffer = new unsigned char[1024*64];
 }
 
 NetDataManager::~NetDataManager()
@@ -77,15 +83,10 @@ bool NetDataManager::Process()
 
 void NetDataManager::sendClientMsg(const unsigned char *msg, unsigned int len)
 {
-//    if (!_socket) {
-//        connectControlServer();
-//    }
-//    else if (getWebSocketState() == WebSocket::State::CLOSED) {
-//        SAFE_DELETE(_socket);
-//        connectControlServer();
-//    }
-    if (_socket) {
-        _socket->send(msg, len);
+    int outsize = 0;
+    bool result = BridgeTools::des(msg, len, _cryptobuffer, outsize, true);
+    if (result && _socket) {
+        _socket->send(_cryptobuffer, outsize);
     }
 }
 
@@ -184,15 +185,24 @@ void NetDataManager::connnectionTimeOut(int period)
 
 void NetDataManager::onMessage(WebSocket* ws, const WebSocket::Data& data)
 {
-    if (data.len == 2) {    //心跳消息
-        sendHelloMsg();
+    int outsize = 0;
+    
+    //解密数据
+    bool result = BridgeTools::des((const unsigned char*)data.bytes, data.len, _decryptobuffer, outsize, false);
+    if (result) {
+        if (outsize == 2) {    //心跳消息
+            sendHelloMsg();
+            
+            TimeCounter::instance().resetCallBackInfoTime("nettimeout");
+            
+            return;
+        }
         
-        TimeCounter::instance().resetCallBackInfoTime("nettimeout");
-        
-        return;
+        //    RTChatSDKMain::sharedInstance().onRecvMsg(data.bytes, data.len);
+        RTChatSDKMain::sharedInstance().onRecvMsg((char*)_decryptobuffer, outsize);
     }
     
-    RTChatSDKMain::sharedInstance().onRecvMsg(data.bytes, data.len);
+    Public::sdklog("数据解密失败");
 }
 
 void NetDataManager::onClose(WebSocket* ws)

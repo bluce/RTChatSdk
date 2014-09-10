@@ -70,6 +70,8 @@ private:
     WebSocket*          _socket;
     std::string         _controlServerStr;
     int                 _retrycount;    //重连次数
+    unsigned char*      _cryptobuffer;  //加密缓冲区
+    unsigned char*      _decryptobuffer;    //解密缓冲区
 };
 
 #endif /* defined(__RTChat__netdatamanager__) */

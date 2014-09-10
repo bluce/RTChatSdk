@@ -26,6 +26,9 @@
 		4314C7CB19B4903F000F5323 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4314C7C119B4903F000F5323 /* AFURLResponseSerialization.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4314C7CC19B4903F000F5323 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4314C7C319B4903F000F5323 /* AFURLSessionManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4314C7CF19B49091000F5323 /* CmdHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4314C7CE19B49091000F5323 /* CmdHandler.m */; };
+		431D817E19BF038C002C279F /* 3Des.m in Sources */ = {isa = PBXBuildFile; fileRef = 431D817A19BF038C002C279F /* 3Des.m */; };
+		431D817F19BF038C002C279F /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 431D817C19BF038C002C279F /* GTMBase64.m */; };
+		431D819519BF04B5002C279F /* BridgeTools.mm in Sources */ = {isa = PBXBuildFile; fileRef = 431D819219BF0426002C279F /* BridgeTools.mm */; };
 		431FC14C199B824C00CFEB6B /* libaudio_coding_module.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC145199B821E00CFEB6B /* libaudio_coding_module.a */; };
 		431FC14D199B824C00CFEB6B /* libaudio_conference_mixer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC14B199B823D00CFEB6B /* libaudio_conference_mixer.a */; };
 		431FC1E5199B84C100CFEB6B /* libaudio_device.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC15A199B83A400CFEB6B /* libaudio_device.a */; };
@@ -506,6 +509,13 @@
 		4314C7C319B4903F000F5323 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		4314C7CD19B49091000F5323 /* CmdHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CmdHandler.h; sourceTree = "<group>"; };
 		4314C7CE19B49091000F5323 /* CmdHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CmdHandler.m; sourceTree = "<group>"; };
+		431D817919BF038C002C279F /* 3Des.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 3Des.h; sourceTree = "<group>"; };
+		431D817A19BF038C002C279F /* 3Des.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = 3Des.m; sourceTree = "<group>"; };
+		431D817B19BF038C002C279F /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
+		431D817C19BF038C002C279F /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
+		431D817D19BF038C002C279F /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		431D819219BF0426002C279F /* BridgeTools.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BridgeTools.mm; sourceTree = "<group>"; };
+		431D819319BF0426002C279F /* BridgeTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeTools.h; sourceTree = "<group>"; };
 		431FC140199B821E00CFEB6B /* audio_coding_module.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = audio_coding_module.xcodeproj; path = ../../../webRTC_xCode/audio_coding_module/audio_coding_module.xcodeproj; sourceTree = "<group>"; };
 		431FC146199B823D00CFEB6B /* audio_conference_mixer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = audio_conference_mixer.xcodeproj; path = ../../../webRTC_xCode/audio_conference_mixer/audio_conference_mixer.xcodeproj; sourceTree = "<group>"; };
 		431FC153199B83A400CFEB6B /* audio_device.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = audio_device.xcodeproj; path = ../../../webRTC_xCode/audio_device/audio_device.xcodeproj; sourceTree = "<group>"; };
@@ -821,6 +831,27 @@
 				4314C7C319B4903F000F5323 /* AFURLSessionManager.m */,
 			);
 			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		431D817819BF038C002C279F /* crypto */ = {
+			isa = PBXGroup;
+			children = (
+				431D817919BF038C002C279F /* 3Des.h */,
+				431D817A19BF038C002C279F /* 3Des.m */,
+				431D817B19BF038C002C279F /* GTMBase64.h */,
+				431D817C19BF038C002C279F /* GTMBase64.m */,
+				431D817D19BF038C002C279F /* GTMDefines.h */,
+			);
+			path = crypto;
+			sourceTree = "<group>";
+		};
+		431D819119BF03EA002C279F /* BridgeTools */ = {
+			isa = PBXGroup;
+			children = (
+				431D819219BF0426002C279F /* BridgeTools.mm */,
+				431D819319BF0426002C279F /* BridgeTools.h */,
+			);
+			name = BridgeTools;
 			sourceTree = "<group>";
 		};
 		431FC141199B821E00CFEB6B /* Products */ = {
@@ -1223,6 +1254,8 @@
 		435E03D9196E828E000C3012 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				431D819119BF03EA002C279F /* BridgeTools */,
+				431D817819BF038C002C279F /* crypto */,
 				43247A72198740EF00AF14C7 /* interface */,
 				43247A3D1987333E00AF14C7 /* webrtc */,
 				43998D7719865A99003C5793 /* NetProcess */,
@@ -1890,6 +1923,7 @@
 				43095C4C199C54E2003C23B3 /* public.cpp in Sources */,
 				430B19A819B84A7400BE772E /* RTChatSDKMain.cpp in Sources */,
 				43247A541987339300AF14C7 /* MediaSample.cpp in Sources */,
+				431D817E19BF038C002C279F /* 3Des.m in Sources */,
 				43998DC819865C28003C5793 /* extension_set.cc in Sources */,
 				43AE0052197913930062C9B4 /* json_reader.cpp in Sources */,
 				43998DD419865C28003C5793 /* message_lite.cc in Sources */,
@@ -1915,6 +1949,7 @@
 				43998DC419865C28003C5793 /* descriptor.cc in Sources */,
 				43998DD919865C28003C5793 /* once.cc in Sources */,
 				43998DCC19865C28003C5793 /* coded_stream.cc in Sources */,
+				431D817F19BF038C002C279F /* GTMBase64.m in Sources */,
 				43AE0053197913930062C9B4 /* json_value.cpp in Sources */,
 				4314C7CB19B4903F000F5323 /* AFURLResponseSerialization.m in Sources */,
 				43AE0054197913930062C9B4 /* json_writer.cpp in Sources */,
@@ -1937,6 +1972,7 @@
 				43998D751986570C003C5793 /* netdatamanager.cpp in Sources */,
 				43998DC519865C28003C5793 /* descriptor.pb.cc in Sources */,
 				4314C7CC19B4903F000F5323 /* AFURLSessionManager.m in Sources */,
+				431D819519BF04B5002C279F /* BridgeTools.mm in Sources */,
 				43998DDE19865C28003C5793 /* unknown_field_set.cc in Sources */,
 				435E03E6196E8333000C3012 /* CAStreamBasicDescription.cpp in Sources */,
 				433E66DF1987AAD10002AAC3 /* channel_transport.cc in Sources */,
