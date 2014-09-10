@@ -360,6 +360,7 @@ bool RTChatSDKMain::startRecordVoice()
         
         TimeCounter::instance().registerTimeOutCallBack("record", 30, std::bind(&RTChatSDKMain::recordTimeExceed, this, std::placeholders::_1));
         _recordstarttime = time(NULL);
+        _buffStream->resetBuffStream();
         return _mediaSample->startRecordVoice(_buffStream);
     }
     else {

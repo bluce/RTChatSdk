@@ -90,6 +90,7 @@ int RTChatBuffStreamPool::haveTheBuffByName(const char* name)
             res = i;
             break;
         }
+        i++;
     }
     
     return res;
