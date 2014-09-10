@@ -201,8 +201,9 @@ void NetDataManager::onMessage(WebSocket* ws, const WebSocket::Data& data)
         //    RTChatSDKMain::sharedInstance().onRecvMsg(data.bytes, data.len);
         RTChatSDKMain::sharedInstance().onRecvMsg((char*)_decryptobuffer, outsize);
     }
-    
-    Public::sdklog("数据解密失败");
+    else {
+        Public::sdklog("数据解密失败");
+    }
 }
 
 void NetDataManager::onClose(WebSocket* ws)

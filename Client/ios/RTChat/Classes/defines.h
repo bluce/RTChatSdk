@@ -33,5 +33,7 @@ inline void constructDynamic(T *ptr) {
 //#define ControlServerAddr   "rtchat.ztgame.com.cn:18000"
 #define ControlServerAddr   "180.168.126.249:18000"
 
+#define CryptoKey "12345678"
+
 
 #endif
