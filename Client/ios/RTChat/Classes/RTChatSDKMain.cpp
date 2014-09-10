@@ -401,6 +401,10 @@ bool RTChatSDKMain::stopRecordVoice()
 /// 开始播放录制数据
 bool RTChatSDKMain::startPlayLocalVoice(const char *voiceUrl)
 {
+    if (!voiceUrl) {
+        return false;
+    }
+    
     stopPlayLocalVoice();
     
     RTChatBuffStream* instream = NULL;

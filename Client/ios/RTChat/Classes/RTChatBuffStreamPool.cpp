@@ -29,6 +29,10 @@ void RTChatBuffStreamPool::init()
 
 RTChatBuffStreamPool::StBuffInfo* RTChatBuffStreamPool::getAvailableBuff(const char *name)
 {
+    if (!name) {
+        return NULL;
+    }
+    
     int index = haveTheBuffByName(name);
     if (index != -1) {
         StBuffInfo* info = _poolVec[index];
