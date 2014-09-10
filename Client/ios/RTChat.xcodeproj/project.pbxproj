@@ -71,6 +71,7 @@
 		435E03E5196E8333000C3012 /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435E03DE196E8333000C3012 /* CADebugMacros.cpp */; };
 		435E03E6196E8333000C3012 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435E03E1196E8333000C3012 /* CAStreamBasicDescription.cpp */; };
 		435E03E7196E8333000C3012 /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435E03E3196E8333000C3012 /* CAXException.cpp */; };
+		436C65FB19C059A800CB8B94 /* BridgeToolsImplIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 436C65E719C053BA00CB8B94 /* BridgeToolsImplIOS.mm */; };
 		43998BAC1986363F003C5793 /* libwebsockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43998BAB1986363F003C5793 /* libwebsockets.a */; };
 		43998BAF198636DA003C5793 /* WebSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43998BAD198636DA003C5793 /* WebSocket.cpp */; };
 		43998D71198656B5003C5793 /* game.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 43998D6F198656B5003C5793 /* game.pb.cc */; };
@@ -462,18 +463,18 @@
 
 /* Begin PBXFileReference section */
 		430079581973A705003DB064 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		4307F4A119AC3D0A00D059C3 /* RTChatBuffStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RTChatBuffStream.cpp; sourceTree = "<group>"; };
-		4307F4A219AC3D0A00D059C3 /* RTChatBuffStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTChatBuffStream.h; sourceTree = "<group>"; };
-		43095C4A199C54E2003C23B3 /* public.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = public.cpp; sourceTree = "<group>"; };
-		43095C4B199C54E2003C23B3 /* public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = public.h; sourceTree = "<group>"; };
+		4307F4A119AC3D0A00D059C3 /* RTChatBuffStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = RTChatBuffStream.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		4307F4A219AC3D0A00D059C3 /* RTChatBuffStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = RTChatBuffStream.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		43095C4A199C54E2003C23B3 /* public.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = public.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		43095C4B199C54E2003C23B3 /* public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = public.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		430F16F6196F8DC10083B252 /* tinystr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinystr.cpp; sourceTree = "<group>"; };
 		430F16F7196F8DC10083B252 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		430F16F8196F8DC10083B252 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
 		430F16F9196F8DC10083B252 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		430F16FA196F8DC10083B252 /* tinystr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinystr.h; sourceTree = "<group>"; };
 		430F16FB196F8DC10083B252 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
-		4314C78319B46362000F5323 /* RTChatBuffStreamPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RTChatBuffStreamPool.cpp; sourceTree = "<group>"; };
-		4314C78419B46362000F5323 /* RTChatBuffStreamPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTChatBuffStreamPool.h; sourceTree = "<group>"; };
+		4314C78319B46362000F5323 /* RTChatBuffStreamPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = RTChatBuffStreamPool.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		4314C78419B46362000F5323 /* RTChatBuffStreamPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = RTChatBuffStreamPool.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4314C79D19B477D3000F5323 /* curl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curl.h; sourceTree = "<group>"; };
 		4314C79E19B477D3000F5323 /* curlbuild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curlbuild.h; sourceTree = "<group>"; };
 		4314C79F19B477D3000F5323 /* curlrules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curlrules.h; sourceTree = "<group>"; };
@@ -507,15 +508,15 @@
 		4314C7C119B4903F000F5323 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		4314C7C219B4903F000F5323 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		4314C7C319B4903F000F5323 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
-		4314C7CD19B49091000F5323 /* CmdHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CmdHandler.h; sourceTree = "<group>"; };
-		4314C7CE19B49091000F5323 /* CmdHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CmdHandler.m; sourceTree = "<group>"; };
+		4314C7CD19B49091000F5323 /* CmdHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CmdHandler.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		4314C7CE19B49091000F5323 /* CmdHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CmdHandler.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		431D817919BF038C002C279F /* 3Des.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 3Des.h; sourceTree = "<group>"; };
 		431D817A19BF038C002C279F /* 3Des.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = 3Des.m; sourceTree = "<group>"; };
 		431D817B19BF038C002C279F /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		431D817C19BF038C002C279F /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		431D817D19BF038C002C279F /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
-		431D819219BF0426002C279F /* BridgeTools.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BridgeTools.mm; sourceTree = "<group>"; };
-		431D819319BF0426002C279F /* BridgeTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeTools.h; sourceTree = "<group>"; };
+		431D819219BF0426002C279F /* BridgeTools.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = BridgeTools.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		431D819319BF0426002C279F /* BridgeTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BridgeTools.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		431FC140199B821E00CFEB6B /* audio_coding_module.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = audio_coding_module.xcodeproj; path = ../../../webRTC_xCode/audio_coding_module/audio_coding_module.xcodeproj; sourceTree = "<group>"; };
 		431FC146199B823D00CFEB6B /* audio_conference_mixer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = audio_conference_mixer.xcodeproj; path = ../../../webRTC_xCode/audio_conference_mixer/audio_conference_mixer.xcodeproj; sourceTree = "<group>"; };
 		431FC153199B83A400CFEB6B /* audio_device.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = audio_device.xcodeproj; path = ../../../webRTC_xCode/audio_device/audio_device.xcodeproj; sourceTree = "<group>"; };
@@ -558,13 +559,13 @@
 		43247A4F1987333E00AF14C7 /* voe_rtp_rtcp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = voe_rtp_rtcp.h; sourceTree = "<group>"; };
 		43247A501987333E00AF14C7 /* voe_video_sync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = voe_video_sync.h; sourceTree = "<group>"; };
 		43247A511987333E00AF14C7 /* voe_volume_control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = voe_volume_control.h; sourceTree = "<group>"; };
-		43247A521987339300AF14C7 /* MediaSample.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MediaSample.cpp; sourceTree = "<group>"; };
-		43247A531987339300AF14C7 /* MediaSample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaSample.h; sourceTree = "<group>"; };
-		43247A731987412100AF14C7 /* RTChatSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTChatSdk.h; sourceTree = "<group>"; };
-		43247A74198741BC00AF14C7 /* RTChatSDKMain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RTChatSDKMain.cpp; sourceTree = "<group>"; };
-		43247A75198741BC00AF14C7 /* RTChatSDKMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTChatSDKMain.h; sourceTree = "<group>"; };
-		432D4E5019B5970800AD7B6A /* HttpProcess.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HttpProcess.mm; sourceTree = "<group>"; };
-		432D4E5119B5970800AD7B6A /* HttpProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpProcess.h; sourceTree = "<group>"; };
+		43247A521987339300AF14C7 /* MediaSample.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = MediaSample.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		43247A531987339300AF14C7 /* MediaSample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MediaSample.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		43247A731987412100AF14C7 /* RTChatSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = RTChatSdk.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		43247A74198741BC00AF14C7 /* RTChatSDKMain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = RTChatSDKMain.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		43247A75198741BC00AF14C7 /* RTChatSDKMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = RTChatSDKMain.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		432D4E5019B5970800AD7B6A /* HttpProcess.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = HttpProcess.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		432D4E5119B5970800AD7B6A /* HttpProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = HttpProcess.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		433E66CC1987AAD10002AAC3 /* common_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common_types.h; sourceTree = "<group>"; };
 		433E66CF1987AAD10002AAC3 /* channel_transport.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = channel_transport.cc; sourceTree = "<group>"; };
 		433E66D11987AAD10002AAC3 /* channel_transport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = channel_transport.h; sourceTree = "<group>"; };
@@ -594,16 +595,21 @@
 		435E03E3196E8333000C3012 /* CAXException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAXException.cpp; sourceTree = "<group>"; };
 		435E03E4196E8333000C3012 /* CAXException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAXException.h; sourceTree = "<group>"; };
 		435E03EE196E91AC000C3012 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		4374E72519932BD0000CE39F /* RTChatCommonTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTChatCommonTypes.h; sourceTree = "<group>"; };
+		436C65E319C053BA00CB8B94 /* BridgeToolsImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BridgeToolsImpl.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		436C65E419C053BA00CB8B94 /* BridgeToolsImplAndroid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = BridgeToolsImplAndroid.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		436C65E519C053BA00CB8B94 /* BridgeToolsImplAndroid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BridgeToolsImplAndroid.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		436C65E619C053BA00CB8B94 /* BridgeToolsImplIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BridgeToolsImplIOS.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		436C65E719C053BA00CB8B94 /* BridgeToolsImplIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = BridgeToolsImplIOS.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		4374E72519932BD0000CE39F /* RTChatCommonTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = RTChatCommonTypes.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		43998BA91986363F003C5793 /* libwebsockets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libwebsockets.h; sourceTree = "<group>"; };
 		43998BAB1986363F003C5793 /* libwebsockets.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwebsockets.a; sourceTree = "<group>"; };
 		43998BAD198636DA003C5793 /* WebSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WebSocket.cpp; sourceTree = "<group>"; };
 		43998BAE198636DA003C5793 /* WebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocket.h; sourceTree = "<group>"; };
 		43998D6F198656B5003C5793 /* game.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game.pb.cc; sourceTree = "<group>"; };
 		43998D70198656B5003C5793 /* game.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = game.pb.h; sourceTree = "<group>"; };
-		43998D72198656D3003C5793 /* netdatamanager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = netdatamanager.cpp; sourceTree = "<group>"; };
-		43998D73198656D3003C5793 /* netdatamanager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = netdatamanager.h; sourceTree = "<group>"; };
-		43998D7E19865ABA003C5793 /* command.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = command.h; sourceTree = "<group>"; };
+		43998D72198656D3003C5793 /* netdatamanager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = netdatamanager.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		43998D73198656D3003C5793 /* netdatamanager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = netdatamanager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		43998D7E19865ABA003C5793 /* command.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = command.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		43998D8119865C28003C5793 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		43998D8219865C28003C5793 /* descriptor.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = descriptor.cc; sourceTree = "<group>"; };
 		43998D8319865C28003C5793 /* descriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = descriptor.h; sourceTree = "<group>"; };
@@ -672,7 +678,7 @@
 		43998DE2198660B1003C5793 /* public.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = public.pb.cc; sourceTree = "<group>"; };
 		43998DE3198660B1003C5793 /* public.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = public.pb.h; sourceTree = "<group>"; };
 		43998DE619866803003C5793 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
-		43AD8521199101E4006EAB38 /* defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = defines.h; sourceTree = "<group>"; };
+		43AD8521199101E4006EAB38 /* defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = defines.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		43AE0040197913930062C9B4 /* assertions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = assertions.h; sourceTree = "<group>"; };
 		43AE0041197913930062C9B4 /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = autolink.h; sourceTree = "<group>"; };
 		43AE0042197913930062C9B4 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
@@ -692,7 +698,7 @@
 		43AE0051197913930062C9B4 /* json_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_writer.cpp; sourceTree = "<group>"; };
 		43BBA610199C61F200504C0C /* expat.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = expat.xcodeproj; path = ../../../webRTC_xCode/expat/expat.xcodeproj; sourceTree = "<group>"; };
 		43D6490A196E9797001944DC /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
-		43E6066A19ADBFF700181658 /* TimeCounter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeCounter.cpp; sourceTree = "<group>"; };
+		43E6066A19ADBFF700181658 /* TimeCounter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = TimeCounter.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		43E6066B19ADBFF700181658 /* TimeCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeCounter.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -848,6 +854,11 @@
 		431D819119BF03EA002C279F /* BridgeTools */ = {
 			isa = PBXGroup;
 			children = (
+				436C65E319C053BA00CB8B94 /* BridgeToolsImpl.h */,
+				436C65E419C053BA00CB8B94 /* BridgeToolsImplAndroid.cpp */,
+				436C65E519C053BA00CB8B94 /* BridgeToolsImplAndroid.h */,
+				436C65E619C053BA00CB8B94 /* BridgeToolsImplIOS.h */,
+				436C65E719C053BA00CB8B94 /* BridgeToolsImplIOS.mm */,
 				431D819219BF0426002C279F /* BridgeTools.mm */,
 				431D819319BF0426002C279F /* BridgeTools.h */,
 			);
@@ -1544,7 +1555,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0510;
-				ORGANIZATIONNAME = yunwei;
+				ORGANIZATIONNAME = RTChatTeam;
 			};
 			buildConfigurationList = 435E03A9196E7D9F000C3012 /* Build configuration list for PBXProject "RTChat" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1918,6 +1929,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				436C65FB19C059A800CB8B94 /* BridgeToolsImplIOS.mm in Sources */,
 				43998DDA19865C28003C5793 /* structurally_valid.cc in Sources */,
 				43998DCB19865C28003C5793 /* generated_message_util.cc in Sources */,
 				43095C4C199C54E2003C23B3 /* public.cpp in Sources */,

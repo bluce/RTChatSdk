@@ -2,8 +2,8 @@
 //  HttpProcess.h
 //  RTChat
 //
-//  Created by raymon_wang on 14-9-2.
-//  Copyright (c) 2014年 yunwei. All rights reserved.
+//  Created by wang3140@hotmail.com on 14-9-2.
+//  Copyright (c) 2014年 RTChatTeam. All rights reserved.
 //
 
 #ifndef __RTChat__HttpProcess__

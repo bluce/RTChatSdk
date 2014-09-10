@@ -2,8 +2,8 @@
 //  netdatamanager.cpp
 //  RTChat
 //
-//  Created by raymon_wang on 14-7-28.
-//  Copyright (c) 2014年 yunwei. All rights reserved.
+//  Created by wang3140@hotmail.com on 14-7-28.
+//  Copyright (c) 2014年 RTChatTeam. All rights reserved.
 //
 
 #include "netdatamanager.h"
@@ -33,6 +33,8 @@ _decryptobuffer(NULL)
 NetDataManager::~NetDataManager()
 {
     SAFE_DELETE(_socket);
+    SAFE_DELETEARRAY(_cryptobuffer);
+    SAFE_DELETEARRAY(_decryptobuffer);
 }
 
 void NetDataManager::init(const std::string &controlserver)
@@ -187,22 +189,21 @@ void NetDataManager::onMessage(WebSocket* ws, const WebSocket::Data& data)
 {
     int outsize = 0;
     
-    //解密数据
-    bool result = BridgeTools::des((const unsigned char*)data.bytes, data.len, _decryptobuffer, outsize, false);
-    if (result) {
-        if (outsize == 2) {    //心跳消息
-            sendHelloMsg();
-            
-            TimeCounter::instance().resetCallBackInfoTime("nettimeout");
-            
-            return;
-        }
-        
-        //    RTChatSDKMain::sharedInstance().onRecvMsg(data.bytes, data.len);
-        RTChatSDKMain::sharedInstance().onRecvMsg((char*)_decryptobuffer, outsize);
+    if (data.len == 2) {    //心跳消息
+        sendHelloMsg();
+        TimeCounter::instance().resetCallBackInfoTime("nettimeout");
+        return;
     }
     else {
-        Public::sdklog("数据解密失败");
+        //解密数据
+        bool result = BridgeTools::des((const unsigned char*)data.bytes, data.len, _decryptobuffer, outsize, false);
+        if (result) {
+            //    RTChatSDKMain::sharedInstance().onRecvMsg(data.bytes, data.len);
+            RTChatSDKMain::sharedInstance().onRecvMsg((char*)_decryptobuffer, outsize);
+        }
+        else {
+            Public::sdklog("数据解密失败");
+        }
     }
 }
 

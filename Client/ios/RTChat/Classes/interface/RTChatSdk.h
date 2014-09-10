@@ -2,8 +2,8 @@
 //  RTChatSdk.h
 //  RTChat
 //
-//  Created by raymon_wang on 14-7-29.
-//  Copyright (c) 2014年 yunwei. All rights reserved.
+//  Created by wang3140@hotmail.com on 14-7-29.
+//  Copyright (c) 2014年 RTChatTeam. All rights reserved.
 //
 
 #ifndef RTChat_RTChatSdk_h

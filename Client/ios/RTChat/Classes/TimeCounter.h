@@ -2,8 +2,8 @@
 //  TimeCounter.h
 //  RTChat
 //
-//  Created by raymon_wang on 14-8-27.
-//  Copyright (c) 2014年 yunwei. All rights reserved.
+//  Created by wang3140@hotmail.com on 14-8-27.
+//  Copyright (c) 2014年 RTChatTeam. All rights reserved.
 //
 
 #ifndef __RTChat__TimeCounter__

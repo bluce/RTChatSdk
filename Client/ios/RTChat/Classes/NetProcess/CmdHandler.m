@@ -2,8 +2,8 @@
 //  CmdHandler.m
 //  freepai_client
 //
-//  Created by raymon_wang on 14-5-22.
-//  Copyright (c) 2014年 yunwei. All rights reserved.
+//  Created by wang3140@hotmail.com on 14-5-22.
+//  Copyright (c) 2014年 RTChatTeam. All rights reserved.
 //
 
 #import "CmdHandler.h"
