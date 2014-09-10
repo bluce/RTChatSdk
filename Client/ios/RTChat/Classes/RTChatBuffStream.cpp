@@ -73,6 +73,12 @@ void RTChatBuffStream::resetBuffStream()
     _curWriteSize = 0;
 }
 
+//复位读
+void RTChatBuffStream::resetReadPosition()
+{
+    _curReadSize = 0;
+}
+
 
 
 

@@ -401,12 +401,15 @@ bool RTChatSDKMain::stopRecordVoice()
 /// 开始播放录制数据
 bool RTChatSDKMain::startPlayLocalVoice(const char *voiceUrl)
 {
+    stopPlayLocalVoice();
+    
     RTChatBuffStream* instream = NULL;
     
     if (_playBuffPool) {
         RTChatBuffStreamPool::StBuffInfo* info = _playBuffPool->getAvailableBuff(voiceUrl);
         if (info && !info->needDownload) {
             instream = info->buffstream;
+            instream->resetReadPosition();
             playVoiceStream(instream);
         }
         else {

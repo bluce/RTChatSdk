@@ -33,6 +33,9 @@ public:
     //重置BUFF等待写入
     void resetBuffStream();
     
+    //复位读
+    void resetReadPosition();
+    
 private:
     BuffVec                         _buffVec;
     int                             _curWriteSize;
