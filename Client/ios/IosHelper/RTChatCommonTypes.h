@@ -12,6 +12,8 @@
 #include <strings.h>
 #include <stdint.h>
 
+namespace rtchatsdk {
+
 enum enRoomType
 {
     ROOM_TYPE_MIN = 0,
@@ -364,5 +366,7 @@ struct StNotifyAssignResult {
 
 // enTakeMic, 谁拿到了当前的麦
 // Json: {"data":{"tempid":"1111", "mtime"="300"}}
+    
+}
 
 #endif

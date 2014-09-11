@@ -2,8 +2,8 @@
 //  RTChatSdkIosHelper.m
 //  RTChatIOSDemo
 //
-//  Created by raymon_wang on 14-9-5.
-//  Copyright (c) 2014年 yunwei. All rights reserved.
+//  Created by wang3140@hotmail.com on 14-9-5.
+//  Copyright (c) 2014年 RTChatTeam. All rights reserved.
 //
 
 #import "RTChatSdkIosHelper.h"
