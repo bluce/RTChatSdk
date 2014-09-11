@@ -32,10 +32,14 @@ inline void constructDynamic(T *ptr) {
 
 #define LogUpLoadUrlHead  "http://uploadchat.ztgame.com.cn:10000/uplog.php"
 
-//#define ControlServerAddr   "rtchat.ztgame.com.cn:18000"
-#define ControlServerAddr   "180.168.126.249:18000"
+#ifdef DEBUG
+    //#define ControlServerAddr   "rtchat.ztgame.com.cn:18000"
+    #define ControlServerAddr   "180.168.126.249:18000"
+#else
+    #define ControlServerAddr   "rtchatrelease.ztgame.com.cn:18000"
+#endif
 
-#define CryptoKey "12345678"
+#define CryptoKey "@1%^3&4$"
 
 
 #endif

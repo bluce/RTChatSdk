@@ -149,6 +149,7 @@ void MediaSample::setMuteMic(bool isMicMute)
 //设置是否发送语音数据
 void MediaSample::setWetherSendVoiceData(bool isSend)
 {
+    Public::sdklog("    设置%s发送语音数据", (isSend ? "是" : "否"));
     int channel = getAudioSendOutChannel();
     
     if (!_voe) {

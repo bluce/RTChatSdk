@@ -428,9 +428,11 @@ bool RTChatSDKMain::stopRecordVoice()
 bool RTChatSDKMain::startPlayLocalVoice(const char *voiceUrl)
 {
     if (!voiceUrl) {
+        Public::sdklog("开始播放录音数据，异常返回，输入录音地址为空");
         return false;
     }
     
+    Public::sdklog("开始播放录音数据");
     stopPlayLocalVoice();
     
     RTChatBuffStream* instream = NULL;
@@ -457,6 +459,7 @@ bool RTChatSDKMain::startPlayLocalVoice(const char *voiceUrl)
 /// 停止播放数据(主线程)
 bool RTChatSDKMain::stopPlayLocalVoice()
 {
+    Public::sdklog("停止播放录音数据");
     if (_mediaSample) {
         return _mediaSample->stopPlayLocalStream();
     }
@@ -468,10 +471,12 @@ bool RTChatSDKMain::stopPlayLocalVoice()
 ///请求更改排麦房权限(主线程)
 bool RTChatSDKMain::requestUpdatePower(uint64_t othertempid, enPowerType powertype)
 {
+    Public::sdklog("请求更改排麦房权限");
     tryConnectServer();
     
     SdkOpState currentstate = getSdkState();
     if (currentstate < SdkUserJoinedRoom) {
+        Public::sdklog("请求更改排麦房权限，当前状态错误返回，状态ID：%d", currentstate);
         return OPERATION_FAILED;
     }
     
@@ -487,10 +492,12 @@ bool RTChatSDKMain::requestUpdatePower(uint64_t othertempid, enPowerType powerty
 /// 分配麦(主线程)
 bool RTChatSDKMain::requestAssignMic(uint64_t othertempid)
 {
+    Public::sdklog("请求分配麦");
     tryConnectServer();
     
     SdkOpState currentstate = getSdkState();
     if (currentstate < SdkUserJoinedRoom) {
+        Public::sdklog("请求分配麦，当前状态错误返回，状态ID：%d", currentstate);
         return OPERATION_FAILED;
     }
     
@@ -505,6 +512,7 @@ bool RTChatSDKMain::requestAssignMic(uint64_t othertempid)
 ///打开控制连接
 void RTChatSDKMain::openControlConnection()
 {
+    Public::sdklog("打开控制连接");
     if (_netDataManager) {
         _netDataManager->init(Public::SdkAvar("ws://%s", ControlServerAddr));
         _netDataManager->activity();
@@ -515,6 +523,7 @@ void RTChatSDKMain::openControlConnection()
 ///关闭控制连接
 void RTChatSDKMain::closeControlConnection()
 {
+    Public::sdklog("关闭控制连接");
     if (_netDataManager) {
 //        _netDataManager->deactive();
         _netDataManager->destroyWebSocket();
@@ -524,7 +533,9 @@ void RTChatSDKMain::closeControlConnection()
 ///打开网关服务器连接
 void RTChatSDKMain::openGateWayConnection()
 {
+    Public::sdklog("打开网关服务器连接");
     if (_gateWayIP == "" || _gateWayPort == 0) {
+        Public::sdklog("打开网关服务器连接，异常返回，网关IP或端口非法!");
         return;
     }
     
@@ -548,6 +559,7 @@ void RTChatSDKMain::uploadVoiceData()
 //调用底层引擎播放流
 void RTChatSDKMain::playVoiceStream(RTChatBuffStream *instream)
 {
+    Public::sdklog("调用底层引擎播放流");
     if (_mediaSample && instream) {
         _mediaSample->startPlayLocalStream(instream);
     }
@@ -910,9 +922,10 @@ void RTChatSDKMain::onRecvMsg(char *data, int len)
     }
 }
 
-//语音引擎连接语音房间
+/// 语音引擎连接语音房间
 void RTChatSDKMain::connectVoiceRoom(const std::string& ip, unsigned int port)
 {
+    Public::sdklog("语音引擎连接语音房间");
     if (_mediaSample) {
         _mediaSample->connectRoom(ip, port, _sdkTempID);
     }
@@ -1011,7 +1024,9 @@ void RTChatSDKMain::tryConnectServer()
 ///请求逻辑服务器地址
 SdkErrorCode RTChatSDKMain::requestLogicInfo()
 {
+    Public::sdklog("请求逻辑服务器地址");
     if (_appid == "" || _appkey == "") {
+        Public::sdklog("请求逻辑服务器地址，异常返回，appid或appkey非法");
         return OPERATION_FAILED;
     }
     
@@ -1027,6 +1042,7 @@ SdkErrorCode RTChatSDKMain::requestLogicInfo()
 /// 请求登录(工作线程)
 SdkErrorCode RTChatSDKMain::requestLogin(const char* uniqueid)
 {
+    Public::sdklog("请求登录");
     if (uniqueid != NULL) {
         _uniqueid = uniqueid;
     }
@@ -1036,6 +1052,7 @@ SdkErrorCode RTChatSDKMain::requestLogin(const char* uniqueid)
     
     SdkOpState currentstate = getSdkState();
     if (currentstate < SdkGateWaySocketConnected) {
+        Public::sdklog("请求登录，当前状态错误返回，状态ID：%d", currentstate);
         return OPERATION_FAILED;
     }
     
