@@ -14,6 +14,8 @@
 #include <queue>
 #include "RTChat/RTChatSdk.h"
 
+using namespace rtchatsdk;
+
 class RTChatSdkCocos2dxHelperDelegate {
 public:
     //请求登录回调
