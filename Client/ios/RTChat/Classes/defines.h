@@ -9,6 +9,7 @@
 #ifndef RTChat_SdkPublic_h
 #define RTChat_SdkPublic_h
 
+namespace rtchatsdk {
 
 #define SAFE_DELETE(p) if(p) {delete p; p = NULL;}
 
@@ -41,5 +42,6 @@ inline void constructDynamic(T *ptr) {
 
 #define CryptoKey "@1%^3&4$"
 
+}
 
 #endif

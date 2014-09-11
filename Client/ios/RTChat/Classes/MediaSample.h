@@ -23,6 +23,8 @@
 using namespace webrtc;
 using namespace webrtc::test;
 
+namespace rtchatsdk {
+
 class MediaSample : public webrtc::VoiceEngineObserver, public webrtc::VoERTCPObserver {
 public:
     enum DataDirection {
@@ -127,5 +129,7 @@ private:
     unsigned int                    _recvport;
     int                             _playChannel;
 };
+    
+}
 
 #endif /* defined(__RtcSameple__MediaSample__) */

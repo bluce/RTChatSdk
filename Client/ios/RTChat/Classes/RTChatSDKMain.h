@@ -19,6 +19,8 @@
 
 using namespace webrtc;
 
+namespace rtchatsdk {
+    
 class NetDataManager;
 class MediaSample;
 class RTChatBuffStream;
@@ -203,5 +205,7 @@ private:
     time_t              _recordduration;    //录音持续时间
     Public*             _public;            //公共工具类
 };
+    
+}
 
 #endif /* defined(__RTChat__RTChatSDKMain__) */

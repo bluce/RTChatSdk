@@ -8,6 +8,8 @@
 
 #include "RTChatBuffStreamPool.h"
 
+namespace rtchatsdk {
+
 RTChatBuffStreamPool::RTChatBuffStreamPool(int poolsize) :
 _currentwriteindex(0)
 {
@@ -94,6 +96,8 @@ int RTChatBuffStreamPool::haveTheBuffByName(const char* name)
     }
     
     return res;
+}
+    
 }
 
 

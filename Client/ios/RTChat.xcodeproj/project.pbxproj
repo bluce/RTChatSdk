@@ -69,7 +69,6 @@
 		435E03E6196E8333000C3012 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435E03E1196E8333000C3012 /* CAStreamBasicDescription.cpp */; };
 		435E03E7196E8333000C3012 /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435E03E3196E8333000C3012 /* CAXException.cpp */; };
 		436C65FB19C059A800CB8B94 /* BridgeToolsImplIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 436C65E719C053BA00CB8B94 /* BridgeToolsImplIOS.mm */; };
-		43998BAC1986363F003C5793 /* libwebsockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43998BAB1986363F003C5793 /* libwebsockets.a */; };
 		43998BAF198636DA003C5793 /* WebSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43998BAD198636DA003C5793 /* WebSocket.cpp */; };
 		43998D71198656B5003C5793 /* game.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 43998D6F198656B5003C5793 /* game.pb.cc */; };
 		43998D751986570C003C5793 /* netdatamanager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43998D72198656D3003C5793 /* netdatamanager.cpp */; };
@@ -600,7 +599,6 @@
 		436C65E719C053BA00CB8B94 /* BridgeToolsImplIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = BridgeToolsImplIOS.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4374E72519932BD0000CE39F /* RTChatCommonTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = RTChatCommonTypes.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		43998BA91986363F003C5793 /* libwebsockets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libwebsockets.h; sourceTree = "<group>"; };
-		43998BAB1986363F003C5793 /* libwebsockets.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwebsockets.a; sourceTree = "<group>"; };
 		43998BAD198636DA003C5793 /* WebSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WebSocket.cpp; sourceTree = "<group>"; };
 		43998BAE198636DA003C5793 /* WebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocket.h; sourceTree = "<group>"; };
 		43998D6F198656B5003C5793 /* game.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game.pb.cc; sourceTree = "<group>"; };
@@ -735,7 +733,6 @@
 				431FC1FD199B84C200CFEB6B /* libwebrtc_utility.a in Frameworks */,
 				431FC14C199B824C00CFEB6B /* libaudio_coding_module.a in Frameworks */,
 				431FC14D199B824C00CFEB6B /* libaudio_conference_mixer.a in Frameworks */,
-				43998BAC1986363F003C5793 /* libwebsockets.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1320,14 +1317,6 @@
 				43998BA91986363F003C5793 /* libwebsockets.h */,
 			);
 			path = include;
-			sourceTree = "<group>";
-		};
-		43998BAA1986363F003C5793 /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				43998BAB1986363F003C5793 /* libwebsockets.a */,
-			);
-			path = lib;
 			sourceTree = "<group>";
 		};
 		43998BB0198645EC003C5793 /* proto */ = {

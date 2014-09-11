@@ -21,6 +21,8 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 
+namespace rtchatsdk {
+
 static  RTChatSDKMain* s_RTChatSDKMain = NULL;
 
 #define MaxBufferSize   1024
@@ -1086,6 +1088,8 @@ void RTChatSDKMain::initMutexLock()
     pthread_mutexattr_init(&attr);
     pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_RECURSIVE);
     pthread_mutex_init(&_mutexLock, &attr);
+}
+    
 }
 
 

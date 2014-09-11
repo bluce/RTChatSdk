@@ -14,6 +14,8 @@
 #include "MediaSample.h"
 #include "TimeCounter.h"
 
+namespace rtchatsdk {
+    
 class NetDataManager : public WebSocket::Delegate {
 public:
     NetDataManager();
@@ -73,5 +75,7 @@ private:
     unsigned char*      _cryptobuffer;  //加密缓冲区
     unsigned char*      _decryptobuffer;    //解密缓冲区
 };
+    
+}
 
 #endif /* defined(__RTChat__netdatamanager__) */

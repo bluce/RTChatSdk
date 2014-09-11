@@ -14,6 +14,8 @@
 
 using namespace webrtc;
 
+namespace rtchatsdk {
+
 MediaSample::MediaSample() :
 _voe(NULL),
 _recvport(30000),
@@ -493,6 +495,8 @@ void MediaSample::OnApplicationDataReceived(int channel, unsigned char subType,
         voe_base->StopSend(channel);
         voe_base->Release();
     }
+}
+    
 }
 
 
