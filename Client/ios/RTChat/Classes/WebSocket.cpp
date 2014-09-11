@@ -39,6 +39,8 @@
 #include "defines.h"
 #include "public.h"
 
+namespace rtchatsdk {
+
 #define WS_WRITE_BUFFER_SIZE 2048
 
 class WsMessage
@@ -801,6 +803,8 @@ void WebSocket::onUIThreadReceiveMessage(WsMessage* msg)
             break;
     }
 }
+    
+} //end namespace rtchat {
 
 
 

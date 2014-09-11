@@ -12,6 +12,8 @@
 #include "RTChatCommonTypes.h"
 #include <functional>
 
+namespace rtchatsdk {
+
 typedef std::function<void (SdkResponseCmd cmdType, SdkErrorCode error, const unsigned char* dataPtr, uint32_t dataSize)> pMsgCallFunc;
 
 class RTChatSDKMain {
@@ -75,5 +77,7 @@ public:
     /// 分配麦
     bool requestAssignMic(uint64_t othertempid);
 };
+    
+}
 
 #endif

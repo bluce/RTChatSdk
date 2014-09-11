@@ -9,6 +9,7 @@
 #ifndef RTChat_SdkPublic_h
 #define RTChat_SdkPublic_h
 
+namespace rtchatsdk {
 
 #define SAFE_DELETE(p) if(p) {delete p; p = NULL;}
 
@@ -32,5 +33,6 @@ inline void constructDynamic(T *ptr) {
 
 #define ControlServerAddr   "rtchat.ztgame.com.cn:18000"
 
+}
 
 #endif

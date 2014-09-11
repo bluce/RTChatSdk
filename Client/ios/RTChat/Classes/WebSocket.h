@@ -40,6 +40,9 @@ struct libwebsocket_context;
 struct libwebsocket_protocols;
 
 //class WsThreadHelper;
+
+namespace rtchatsdk {
+    
 class WsMessage;
 
 class WebSocket
@@ -169,5 +172,7 @@ private:
     std::list<WsMessage*>           _MessageQueue;
     pthread_mutex_t                 _MessageMutex;
 };
+    
+} //end namespace rtchat {
 
 #endif /* defined(__CC_JSB_WEBSOCKET_H__) */

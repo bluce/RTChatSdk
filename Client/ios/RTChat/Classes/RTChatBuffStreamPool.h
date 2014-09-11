@@ -13,6 +13,8 @@
 #include "RTChatBuffStream.h"
 #include "defines.h"
 
+namespace rtchatsdk {
+
 class RTChatBuffStreamPool {
 public:
     struct StBuffInfo{
@@ -51,5 +53,7 @@ private:
     int         _currentwriteindex;
     int         _poolsize;
 };
+    
+}
 
 #endif /* defined(__RTChat__RTChatBuffStreamPool__) */

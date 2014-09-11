@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		430079591973A705003DB064 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 430079581973A705003DB064 /* CoreFoundation.framework */; };
 		4307F4A319AC3D0A00D059C3 /* RTChatBuffStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4307F4A119AC3D0A00D059C3 /* RTChatBuffStream.cpp */; };
 		43095C4C199C54E2003C23B3 /* public.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43095C4A199C54E2003C23B3 /* public.cpp */; };
 		430B19A819B84A7400BE772E /* RTChatSDKMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43247A74198741BC00AF14C7 /* RTChatSDKMain.cpp */; };
@@ -63,12 +62,10 @@
 		433E66E51987AAD10002AAC3 /* udp_socket_posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = 433E66D61987AAD10002AAC3 /* udp_socket_posix.cc */; };
 		433E66E71987AAD10002AAC3 /* udp_socket_wrapper.cc in Sources */ = {isa = PBXBuildFile; fileRef = 433E66D81987AAD10002AAC3 /* udp_socket_wrapper.cc */; };
 		433E66EA1987AAD10002AAC3 /* udp_transport_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = 433E66DB1987AAD10002AAC3 /* udp_transport_impl.cc */; };
-		435E03B2196E7D9F000C3012 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03B1196E7D9F000C3012 /* Foundation.framework */; };
-		435E03D8196E813C000C3012 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E03D7196E813C000C3012 /* AudioToolbox.framework */; };
+		4354B24B19C1BDE4009C88D5 /* libwebsockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43998BAB1986363F003C5793 /* libwebsockets.a */; };
 		435E03E5196E8333000C3012 /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435E03DE196E8333000C3012 /* CADebugMacros.cpp */; };
 		435E03E6196E8333000C3012 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435E03E1196E8333000C3012 /* CAStreamBasicDescription.cpp */; };
 		435E03E7196E8333000C3012 /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435E03E3196E8333000C3012 /* CAXException.cpp */; };
-		43998BAC1986363F003C5793 /* libwebsockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43998BAB1986363F003C5793 /* libwebsockets.a */; };
 		43998BAF198636DA003C5793 /* WebSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43998BAD198636DA003C5793 /* WebSocket.cpp */; };
 		43998D71198656B5003C5793 /* game.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 43998D6F198656B5003C5793 /* game.pb.cc */; };
 		43998D751986570C003C5793 /* netdatamanager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43998D72198656D3003C5793 /* netdatamanager.cpp */; };
@@ -691,6 +688,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4354B24B19C1BDE4009C88D5 /* libwebsockets.a in Frameworks */,
 				43BBA617199C644E00504C0C /* libexpat.a in Frameworks */,
 				431FC2B1199B8C1600CFEB6B /* librtp_rtcp.a in Frameworks */,
 				431FC2B2199B8C1600CFEB6B /* libwebrtc_opus.a in Frameworks */,
@@ -721,10 +719,6 @@
 				431FC1FD199B84C200CFEB6B /* libwebrtc_utility.a in Frameworks */,
 				431FC14C199B824C00CFEB6B /* libaudio_coding_module.a in Frameworks */,
 				431FC14D199B824C00CFEB6B /* libaudio_conference_mixer.a in Frameworks */,
-				430079591973A705003DB064 /* CoreFoundation.framework in Frameworks */,
-				435E03D8196E813C000C3012 /* AudioToolbox.framework in Frameworks */,
-				435E03B2196E7D9F000C3012 /* Foundation.framework in Frameworks */,
-				43998BAC1986363F003C5793 /* libwebsockets.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

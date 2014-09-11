@@ -15,6 +15,8 @@
 
 static int maxretrycount = 10;
 
+namespace rtchatsdk {
+
 NetDataManager::NetDataManager() :
 _haveInited(false),
 _socket(NULL),
@@ -221,6 +223,8 @@ void NetDataManager::onError(WebSocket* ws, const WebSocket::ErrorCode& error)
     else if (RTChatSDKMain::sharedInstance().getSdkState() > SdkGateWaySocketUnConnected) {
         RTChatSDKMain::sharedInstance().set_SdkOpState(SdkGateWaySocketUnConnected);
     }
+}
+    
 }
 
 

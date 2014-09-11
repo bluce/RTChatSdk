@@ -12,6 +12,8 @@
 #include <iostream>
 #include <common_types.h>
 
+namespace rtchatsdk {
+
 class RTChatBuffStream : public webrtc::OutStream, public webrtc::InStream {
 public:
     typedef std::vector<unsigned char> BuffVec;
@@ -41,5 +43,7 @@ private:
     int                             _curWriteSize;
     int                             _curReadSize;
 };
+    
+}
 
 #endif /* defined(__RTChat__RTChatBuffStream__) */

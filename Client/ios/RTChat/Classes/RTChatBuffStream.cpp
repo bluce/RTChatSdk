@@ -9,6 +9,8 @@
 #include "RTChatBuffStream.h"
 #include "public.h"
 
+namespace rtchatsdk {
+
 RTChatBuffStream::RTChatBuffStream(int maxbuffsize) :
 _curWriteSize(0),
 _curReadSize(0)
@@ -77,6 +79,8 @@ void RTChatBuffStream::resetBuffStream()
 void RTChatBuffStream::resetReadPosition()
 {
     _curReadSize = 0;
+}
+    
 }
 
 

@@ -13,6 +13,8 @@
 
 #pragma pack(push, 1)
 
+namespace rtchatsdk {
+
 struct stBaseCmd
 {
     stBaseCmd() {
@@ -32,6 +34,8 @@ struct stHelloCmd
     }
     WORD cmdid;
 };
+    
+}
 
 #pragma pack(pop)
 

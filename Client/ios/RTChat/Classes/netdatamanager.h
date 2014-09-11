@@ -14,6 +14,8 @@
 #include "MediaSample.h"
 #include "TimeCounter.h"
 
+namespace rtchatsdk {
+    
 class NetDataManager : public WebSocket::Delegate {
 public:
     NetDataManager();
@@ -71,5 +73,7 @@ private:
     std::string         _controlServerStr;
     int                 _retrycount;    //重连次数
 };
+    
+}
 
 #endif /* defined(__RTChat__netdatamanager__) */
