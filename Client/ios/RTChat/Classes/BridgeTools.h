@@ -21,6 +21,8 @@ public:
     static std::string des(const char* ptr, int datasize);
     
     static bool des(const unsigned char* ptr, int datasize, unsigned char* outptr, int& outsize, bool encORdec/* 加密吗 */);
+    
+    static std::string getWritablePath();
 };
 
 #endif /* defined(__RTChat__BridgeTools__) */

@@ -72,7 +72,7 @@
 -(void)postFile:(NSString *)requrl reqParams:(NSDictionary *)reqParams data:(NSData*)data completBlock:(ReqRet)completBlock
 {
     if (_httpManager) {
-        [_httpManager POST:requrl parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [_httpManager POST:requrl parameters:reqParams constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
             [formData appendPartWithFileData:data name:@"file" fileName:@"1.txt" mimeType:@"application/octet-stream"];
         } success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString* string = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];

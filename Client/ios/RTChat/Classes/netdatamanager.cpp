@@ -28,6 +28,10 @@ _decryptobuffer(NULL)
     
     _cryptobuffer = new unsigned char[1024*64];
     _decryptobuffer = new unsigned char[1024*64];
+    
+    std::string path = BridgeTools::getWritablePath();
+    
+    Public::sdklog("%s", path.c_str());
 }
 
 NetDataManager::~NetDataManager()

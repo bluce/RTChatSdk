@@ -23,6 +23,7 @@ class NetDataManager;
 class MediaSample;
 class RTChatBuffStream;
 class RTChatBuffStreamPool;
+class Public;
 
 typedef std::function<void (SdkResponseCmd cmdType, SdkErrorCode error, const unsigned char* dataPtr, uint32_t dataSize)> pMsgCallFunc;
 
@@ -200,6 +201,7 @@ private:
     bool                _isrecording;       //录音标志
     time_t              _recordstarttime;   //录音开始时间
     time_t              _recordduration;    //录音持续时间
+    Public*             _public;            //公共工具类
 };
 
 #endif /* defined(__RTChat__RTChatSDKMain__) */

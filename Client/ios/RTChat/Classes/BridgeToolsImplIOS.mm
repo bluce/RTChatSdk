@@ -43,6 +43,15 @@ bool BridgeToolsImplIOS::des(const unsigned char* ptr, int datasize, unsigned ch
     return false;
 }
 
+std::string BridgeToolsImplIOS::getWritablePath()
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    std::string strRet = [documentsDirectory UTF8String];
+    strRet.append("/");
+    return strRet;
+}
+
 BridgeToolsImpl* getBridgeToolsImpl()
 {
     static BridgeToolsImplIOS s_BridgeToolsImplIOS;

@@ -58,6 +58,8 @@ _recordstarttime(0),
 _recordduration(0),
 _workThread(NULL)
 {
+    _public = new Public();
+    
     _netDataManager = new NetDataManager;
     
     //创建语音引擎
@@ -88,6 +90,7 @@ RTChatSDKMain::~RTChatSDKMain()
         _workThread->Stop();
     }
     SAFE_DELETE(_workThread);
+    SAFE_DELETE(_public);
 }
 
 RTChatSDKMain& RTChatSDKMain::sharedInstance()
@@ -106,6 +109,10 @@ void RTChatSDKMain::initSDK(const std::string &appid, const std::string &key, co
     
     if (uniqueid != NULL) {
         _uniqueid = uniqueid;
+    }
+    
+    if (_public) {
+        _public->init(_uniqueid.c_str());
     }
     
     activateSDK();
@@ -191,10 +198,12 @@ SdkOpState RTChatSDKMain::getSdkState()
 /// 申请房间列表(主线程)
 SdkErrorCode RTChatSDKMain::requestRoomList()
 {
+    Public::sdklog("请求房间列表");
     tryConnectServer();
     
     SdkOpState currentstate = getSdkState();
     if (currentstate < SdkUserLogined) {
+        Public::sdklog("请求房间列表，当前状态错误返回，状态ID：%d", currentstate);
         return OPERATION_FAILED;
     }
     
@@ -211,10 +220,12 @@ SdkErrorCode RTChatSDKMain::requestRoomList()
 //创建房间(主线程)
 SdkErrorCode RTChatSDKMain::createRoom(enRoomType roomType, enRoomReason reason)
 {
+    Public::sdklog("请求创建房间");
     tryConnectServer();
     
     SdkOpState currentstate = getSdkState();
     if (currentstate != SdkUserLogined) {
+        Public::sdklog("请求创建房间，当前状态错误返回，状态ID：%d", currentstate);
         return OPERATION_FAILED;
     }
     
@@ -231,10 +242,12 @@ SdkErrorCode RTChatSDKMain::createRoom(enRoomType roomType, enRoomReason reason)
 
 SdkErrorCode RTChatSDKMain::joinRoom(uint64_t roomid)
 {
+    Public::sdklog("请求进入房间");
     tryConnectServer();
     
     SdkOpState currentstate = getSdkState();
     if (currentstate != SdkUserLogined) {
+        Public::sdklog("请求进入房间，当前状态错误返回，状态ID：%d", currentstate);
         return OPERATION_FAILED;
     }
     
@@ -251,10 +264,12 @@ SdkErrorCode RTChatSDKMain::joinRoom(uint64_t roomid)
 //离开房间
 SdkErrorCode RTChatSDKMain::leaveRoom()
 {
+    Public::sdklog("请求离开房间");
     tryConnectServer();
     
     SdkOpState currentstate = getSdkState();
     if (currentstate < SdkUserjoiningRoom) {
+        Public::sdklog("请求离开房间，当前状态错误返回，状态ID：%d", currentstate);
         return OPERATION_FAILED;
     }
     
@@ -277,10 +292,12 @@ SdkErrorCode RTChatSDKMain::leaveRoom()
 //加入麦序
 SdkErrorCode RTChatSDKMain::requestInsertMicQueue()
 {
+    Public::sdklog("请求加入麦序");
     tryConnectServer();
     
     SdkOpState currentstate = getSdkState();
     if (currentstate != SdkUserJoinedRoom) {
+        Public::sdklog("请求加入麦序，当前状态错误返回，状态ID：%d", currentstate);
         return OPERATION_FAILED;
     }
     
@@ -299,10 +316,12 @@ SdkErrorCode RTChatSDKMain::requestInsertMicQueue()
 //离开麦序
 SdkErrorCode RTChatSDKMain::leaveMicQueue()
 {
+    Public::sdklog("请求离开麦序");
     tryConnectServer();
     
     SdkOpState currentstate = getSdkState();
     if (currentstate < SdkUserWaitingToken) {
+        Public::sdklog("请求离开麦序，当前状态错误返回，状态ID：%d", currentstate);
         return OPERATION_FAILED;
     }
     
@@ -325,8 +344,10 @@ SdkErrorCode RTChatSDKMain::leaveMicQueue()
 //是否接收随机聊天，临时增加的接口
 void RTChatSDKMain::returnRandChatRes(bool isAccept, uint64_t srctempid)
 {
+    Public::sdklog("是否接收随机聊天");
     SdkOpState currentstate = getSdkState();
     if (currentstate != SdkUserLogined) {
+        Public::sdklog("是否接收随机聊天，当前状态错误返回，状态ID：%d", currentstate);
         return;
     }
     
@@ -349,7 +370,9 @@ void RTChatSDKMain::setMuteSelf(bool isMute)
 /// 开始录制麦克风数据
 bool RTChatSDKMain::startRecordVoice()
 {
+    Public::sdklog("开始录音");
     if (_isrecording) {
+        Public::sdklog("开始录音，当前状态错误返回，原因：录音中");
         return false;
     }
     
@@ -371,6 +394,7 @@ bool RTChatSDKMain::startRecordVoice()
 /// 停止录制麦克风数据
 bool RTChatSDKMain::stopRecordVoice()
 {
+    Public::sdklog("停止录音");
     bool isrecording;
     
     pthread_mutex_lock(&_mutexLock);
@@ -378,6 +402,7 @@ bool RTChatSDKMain::stopRecordVoice()
     pthread_mutex_unlock(&_mutexLock);
     
     if (!isrecording) {
+        Public::sdklog("停止录音，当前状态错误返回，原因：不在录音状态");
         return false;
     }
     
@@ -513,8 +538,11 @@ void RTChatSDKMain::openGateWayConnection()
 //上传录制的语音数据
 void RTChatSDKMain::uploadVoiceData()
 {
+    Public::sdklog("上传录音文件");
     const RTChatBuffStream::BuffVec& buffvec = _buffStream->getBuffVec();
-    HttpProcess::instance().postContent(VoiceUpLoadUrlHead, &buffvec[0], _buffStream->get_datasize());
+    
+    std::map<const char*, const char*> param;
+    HttpProcess::instance().postContent(VoiceUpLoadUrlHead, &buffvec[0], _buffStream->get_datasize(), param);
 }
 
 //调用底层引擎播放流
@@ -975,6 +1003,7 @@ void RTChatSDKMain::tryConnectServer()
 {
     SdkOpState currentstate = getSdkState();
     if (currentstate == SdkControlUnConnected || currentstate == SdkGateWaySocketUnConnected) {
+        Public::sdklog("In tryConnectServer，当前连接异常，尝试重连");
         _netDataManager->resetRetryCount();
     }
 }

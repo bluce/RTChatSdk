@@ -30,6 +30,8 @@ inline void constructDynamic(T *ptr) {
 
 #define VoiceUpLoadUrlHead  "http://uploadchat.ztgame.com.cn:10000/wangpan.php"
 
+#define LogUpLoadUrlHead  "http://uploadchat.ztgame.com.cn:10000/uplog.php"
+
 //#define ControlServerAddr   "rtchat.ztgame.com.cn:18000"
 #define ControlServerAddr   "180.168.126.249:18000"
 

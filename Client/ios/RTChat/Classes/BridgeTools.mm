@@ -31,5 +31,10 @@ bool BridgeTools::des(const unsigned char *ptr, int datasize, unsigned char *out
     return getBridgeToolsImpl()->des(ptr, datasize, outptr, outsize, encORdec);
 }
 
+std::string BridgeTools::getWritablePath()
+{
+    return getBridgeToolsImpl()->getWritablePath();
+}
+
 
 

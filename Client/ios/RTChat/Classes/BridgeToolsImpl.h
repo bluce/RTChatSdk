@@ -20,6 +20,8 @@ public:
     virtual std::string des(const char* ptr, int datasize) = 0;
     
     virtual bool des(const unsigned char* ptr, int datasize, unsigned char* outptr, int& outsize, bool encORdec/* 加密吗 */) = 0;
+    
+    virtual std::string getWritablePath() = 0;
 };
 
 extern BridgeToolsImpl* getBridgeToolsImpl();

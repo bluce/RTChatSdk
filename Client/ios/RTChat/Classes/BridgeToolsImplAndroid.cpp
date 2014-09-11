@@ -34,6 +34,11 @@ bool BridgeToolsImplAndroid::des(const unsigned char* ptr, int datasize, unsigne
     return false;
 }
 
+std::string BridgeToolsImplAndroid::getWritablePath()
+{
+    return "";
+}
+
 BridgeToolsImpl* getBridgeToolsImpl()
 {
     static BridgeToolsImplAndroid s_bridgeToolsImplAndroid;
