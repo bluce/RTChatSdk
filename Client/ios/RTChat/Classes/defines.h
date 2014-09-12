@@ -41,7 +41,6 @@ inline void constructDynamic(T *ptr) {
 #endif
 
 #define CryptoKey "@1%^3&4$"
-
 }
 
 #endif
