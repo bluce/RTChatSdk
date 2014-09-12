@@ -13,6 +13,8 @@
 #include <sstream>
 #include <unistd.h>
 
+namespace rtchatsdk {
+
 static Public* s_Public = NULL;
 
 Public::Public()
@@ -96,6 +98,8 @@ void Public::uploadLogFile(const char* uid)
     params["uid"] = uid;
     params["os"] = "ios";
     HttpProcess::instance().postContent(LogUpLoadUrlHead, (const unsigned char*)contents.c_str(), contents.length(), params, false);
+}
+    
 }
 
 

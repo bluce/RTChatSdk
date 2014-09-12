@@ -14,6 +14,8 @@
 
 using namespace std;
 
+namespace rtchatsdk {
+
 class Public {
 public:
     Public();
@@ -37,5 +39,7 @@ private:
     ofstream        _logfilestream;
     pthread_mutex_t _mutexLock;
 };
+    
+}
 
 #endif /* defined(__RTChat__public__) */

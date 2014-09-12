@@ -10,6 +10,8 @@
 #include "CmdHandler.h"
 #include "../public.h"
 
+namespace rtchatsdk {
+
 static  HttpProcess* s_HttpProcess = NULL;
 
 HttpProcess::HttpProcess()
@@ -88,6 +90,8 @@ void HttpProcess::requestContent(const char *urlstr)
         }
         _isrunning = false;
     }];
+}
+    
 }
 
 

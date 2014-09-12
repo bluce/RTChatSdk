@@ -12,6 +12,8 @@
 #include <iostream>
 #include <map>
 
+namespace rtchatsdk {
+
 enum HttpDirection {
     HttpProcess_DownLoad,
     HttpProcess_Upload,
@@ -36,5 +38,7 @@ private:
     bool            _isrunning;
     CallBackFunc    _func;
 };
+    
+}
 
 #endif /* defined(__RTChat__HttpProcess__) */
