@@ -313,7 +313,7 @@ sha1_result(struct sha1_ctxt *ctxt, void *digest0)
  */
 
 unsigned char *
-SHA1(const unsigned char *d, size_t n, unsigned char *md)
+rtchatsdk_SHA1(const unsigned char *d, size_t n, unsigned char *md)
 {
 	struct sha1_ctxt ctx;
 

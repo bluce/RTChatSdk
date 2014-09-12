@@ -1,5 +1,5 @@
 /*
- * libwebsockets - small server side websockets and web server implementation
+ * rtchatsdk_libwebsockets - small server side websockets and web server implementation
  *
  * Copyright (C) 2010-2013 Andy Green <andy@warmcat.com>
  *
@@ -39,7 +39,7 @@
 #ifdef LWS_OPENSSL_SUPPORT
 
 static void
-libwebsockets_decode_ssl_error(void)
+rtchatsdk_libwebsockets_decode_ssl_error(void)
 {
 	char buf[256];
 	u_long err;
@@ -52,7 +52,7 @@ libwebsockets_decode_ssl_error(void)
 #endif
 
 int
-interface_to_sa(const char *ifname, struct sockaddr_in *addr, size_t addrlen)
+rtchatsdk_interface_to_sa(const char *ifname, struct sockaddr_in *addr, size_t addrlen)
 {
 	int rc = -1;
 #ifdef WIN32
@@ -80,18 +80,18 @@ interface_to_sa(const char *ifname, struct sockaddr_in *addr, size_t addrlen)
 	return rc;
 }
 
-struct libwebsocket *
-libwebsocket_create_new_server_wsi(struct libwebsocket_context *context)
+struct rtchatsdk_libwebsocket *
+rtchatsdk_libwebsocket_create_new_server_wsi(struct rtchatsdk_libwebsocket_context *context)
 {
-	struct libwebsocket *new_wsi;
+	struct rtchatsdk_libwebsocket *new_wsi;
 
-	new_wsi = (struct libwebsocket *)malloc(sizeof(struct libwebsocket));
+	new_wsi = (struct rtchatsdk_libwebsocket *)malloc(sizeof(struct rtchatsdk_libwebsocket));
 	if (new_wsi == NULL) {
 		lwsl_err("Out of memory for new connection\n");
 		return NULL;
 	}
 
-	memset(new_wsi, 0, sizeof(struct libwebsocket));
+	memset(new_wsi, 0, sizeof(struct rtchatsdk_libwebsocket));
 #ifndef LWS_NO_EXTENSIONS
 	new_wsi->count_active_extensions = 0;
 #endif
@@ -103,7 +103,7 @@ libwebsocket_create_new_server_wsi(struct libwebsocket_context *context)
 	new_wsi->mode = LWS_CONNMODE_HTTP_SERVING;
 	new_wsi->hdr_parsing_completed = 0;
 
-	if (lws_allocate_header_table(new_wsi)) {
+	if (rtchatsdk_lws_allocate_header_table(new_wsi)) {
 		free(new_wsi);
 		return NULL;
 	}
@@ -121,10 +121,10 @@ libwebsocket_create_new_server_wsi(struct libwebsocket_context *context)
 	return new_wsi;
 }
 
-int lws_server_socket_service(struct libwebsocket_context *context,
-			struct libwebsocket *wsi, struct pollfd *pollfd)
+int lws_server_socket_service(struct rtchatsdk_libwebsocket_context *context,
+			struct rtchatsdk_libwebsocket *wsi, struct pollfd *pollfd)
 {
-	struct libwebsocket *new_wsi;
+	struct rtchatsdk_libwebsocket *new_wsi;
 	int accept_fd;
 	socklen_t clilen;
 	struct sockaddr_in cli_addr;
@@ -162,7 +162,7 @@ int lws_server_socket_service(struct libwebsocket_context *context,
 			if (len < 0) {
 				lwsl_debug("Socket read returned %d\n", len);
 				if (errno != EINTR && errno != EAGAIN)
-					libwebsocket_close_and_free_session(
+					rtchatsdk_libwebsocket_close_and_free_session(
 						context, wsi,
 						LWS_CLOSE_STATUS_NOSTATUS);
 				return 0;
@@ -172,12 +172,12 @@ int lws_server_socket_service(struct libwebsocket_context *context,
 				/* lwsl_info("   state=%d\n", wsi->state); */
 				if (!wsi->hdr_parsing_completed)
 					free(wsi->u.hdr.ah);
-				libwebsocket_close_and_free_session(
+				rtchatsdk_libwebsocket_close_and_free_session(
 				       context, wsi, LWS_CLOSE_STATUS_NOSTATUS);
 				return 0;
 			}
 
-			n = libwebsocket_read(context, wsi,
+			n = rtchatsdk_libwebsocket_read(context, wsi,
 						context->service_buffer, len);
 			if (n < 0)
 				/* we closed wsi */
@@ -193,7 +193,7 @@ int lws_server_socket_service(struct libwebsocket_context *context,
 		pollfd->events &= ~POLLOUT;
 
 		if (wsi->state != WSI_STATE_HTTP_ISSUING_FILE) {
-			n = user_callback_handle_rxflow(
+			n = rtchatsdk_user_callback_handle_rxflow(
 					wsi->protocol->callback,
 					wsi->protocol->owning_server,
 					wsi, LWS_CALLBACK_HTTP_WRITEABLE,
@@ -201,14 +201,14 @@ int lws_server_socket_service(struct libwebsocket_context *context,
 					NULL,
 					0);
 			if (n < 0)
-				libwebsocket_close_and_free_session(
+				rtchatsdk_libwebsocket_close_and_free_session(
 				       context, wsi, LWS_CLOSE_STATUS_NOSTATUS);
 			break;
 		}
 
 		/* nonzero for completion or error */
-		if (libwebsockets_serve_http_file_fragment(context, wsi))
-			libwebsocket_close_and_free_session(context, wsi,
+		if (rtchatsdk_libwebsockets_serve_http_file_fragment(context, wsi))
+			rtchatsdk_libwebsocket_close_and_free_session(context, wsi,
 					       LWS_CLOSE_STATUS_NOSTATUS);
 		break;
 
@@ -222,10 +222,10 @@ int lws_server_socket_service(struct libwebsocket_context *context,
 		/* listen socket got an unencrypted connection... */
 
 		clilen = sizeof(cli_addr);
-		lws_latency_pre(context, wsi);
+		rtchatsdk_lws_latency_pre(context, wsi);
 		accept_fd  = accept(pollfd->fd, (struct sockaddr *)&cli_addr,
 								       &clilen);
-		lws_latency(context, wsi,
+		rtchatsdk_lws_latency(context, wsi,
 			"unencrypted accept LWS_CONNMODE_SERVER_LISTENER",
 						     accept_fd, accept_fd >= 0);
 		if (accept_fd < 0) {
@@ -237,7 +237,7 @@ int lws_server_socket_service(struct libwebsocket_context *context,
 			break;
 		}
 
-		lws_set_socket_options(context, accept_fd);
+		rtchatsdk_lws_set_socket_options(context, accept_fd);
 
 		/*
 		 * look at who we connected to and give user code a chance
@@ -253,7 +253,7 @@ int lws_server_socket_service(struct libwebsocket_context *context,
 			break;
 		}
 
-		new_wsi = libwebsocket_create_new_server_wsi(context);
+		new_wsi = rtchatsdk_libwebsocket_create_new_server_wsi(context);
 		if (new_wsi == NULL) {
 			compatible_close(accept_fd);
 			break;
@@ -269,7 +269,7 @@ int lws_server_socket_service(struct libwebsocket_context *context,
 			lwsl_debug("accepted new conn  port %u on fd=%d\n",
 					  ntohs(cli_addr.sin_port), accept_fd);
 
-			insert_wsi_socket_into_fds(context, new_wsi);
+			rtchatsdk_insert_wsi_socket_into_fds(context, new_wsi);
 			break;
 #ifdef LWS_OPENSSL_SUPPORT
 		}
@@ -279,7 +279,7 @@ int lws_server_socket_service(struct libwebsocket_context *context,
 			lwsl_err("SSL_new failed: %s\n",
 			    ERR_error_string(SSL_get_error(
 			    new_wsi->ssl, 0), NULL));
-			    libwebsockets_decode_ssl_error();
+			    rtchatsdk_libwebsockets_decode_ssl_error();
 			free(new_wsi);
 			compatible_close(accept_fd);
 			break;
@@ -313,9 +313,9 @@ int lws_server_socket_service(struct libwebsocket_context *context,
 
 		wsi = new_wsi;
 		wsi->mode = LWS_CONNMODE_SSL_ACK_PENDING;
-		insert_wsi_socket_into_fds(context, wsi);
+		rtchatsdk_insert_wsi_socket_into_fds(context, wsi);
 
-		libwebsocket_set_timeout(wsi, PENDING_TIMEOUT_SSL_ACCEPT,
+		rtchatsdk_libwebsocket_set_timeout(wsi, PENDING_TIMEOUT_SSL_ACCEPT,
 							AWAITING_TIMEOUT);
 
 		lwsl_info("inserted SSL accept into fds, trying SSL_accept\n");
@@ -367,14 +367,14 @@ int lws_server_socket_service(struct libwebsocket_context *context,
 			lwsl_debug("SSL_accept failed skt %u: %s\n",
 			      pollfd->fd,
 			      ERR_error_string(m, NULL));
-			libwebsocket_close_and_free_session(context, wsi,
+			rtchatsdk_libwebsocket_close_and_free_session(context, wsi,
 						     LWS_CLOSE_STATUS_NOSTATUS);
 			break;
 		}
 
 		/* OK, we are accepted */
 
-		libwebsocket_set_timeout(wsi, NO_PENDING_TIMEOUT, 0);
+		rtchatsdk_libwebsocket_set_timeout(wsi, NO_PENDING_TIMEOUT, 0);
 
 		wsi->mode = LWS_CONNMODE_HTTP_SERVING;
 

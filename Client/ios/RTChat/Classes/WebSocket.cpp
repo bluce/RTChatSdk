@@ -96,13 +96,13 @@ public:
 class WebSocketCallbackWrapper {
 public:
     
-    static int onSocketCallback(struct libwebsocket_context *ctx,
-                                struct libwebsocket *wsi,
-                                enum libwebsocket_callback_reasons reason,
+    static int onSocketCallback(struct rtchatsdk_libwebsocket_context *ctx,
+                                struct rtchatsdk_libwebsocket *wsi,
+                                enum rtchatsdk_libwebsocket_callback_reasons reason,
                                 void *user, void *in, size_t len)
     {
         // Gets the user data from context. We know that it's a 'WebSocket' instance.
-        WebSocket* wsInstance = (WebSocket*)libwebsocket_context_user(ctx);
+        WebSocket* wsInstance = (WebSocket*)rtchatsdk_libwebsocket_context_user(ctx);
         if (wsInstance)
         {
             return wsInstance->onSocketCallback(ctx, wsi, reason, user, in, len);
@@ -298,8 +298,8 @@ bool WebSocket::init(const Delegate& delegate,
         protocolCount = 1;
     }
     
-	_wsProtocols = new libwebsocket_protocols[protocolCount+1];
-	memset(_wsProtocols, 0, sizeof(libwebsocket_protocols)*(protocolCount+1));
+	_wsProtocols = new rtchatsdk_libwebsocket_protocols[protocolCount+1];
+	memset(_wsProtocols, 0, sizeof(rtchatsdk_libwebsocket_protocols)*(protocolCount+1));
 
     if (protocols && protocols->size() > 0)
     {
@@ -398,7 +398,7 @@ int WebSocket::onSubThreadLoop()
 {
     if (_readyState == State::CLOSED || _readyState == State::CLOSING)
     {
-        libwebsocket_context_destroy(_wsContext);
+        rtchatsdk_libwebsocket_context_destroy(_wsContext);
         _wsContext = NULL;
         // return 1 to exit the loop.
         return 1;
@@ -406,7 +406,7 @@ int WebSocket::onSubThreadLoop()
     
     if (_wsContext && _readyState != State::CLOSED && _readyState != State::CLOSING)
     {
-        libwebsocket_service(_wsContext, 0);
+        rtchatsdk_libwebsocket_service(_wsContext, 0);
     }
     
     // Sleep 50 ms
@@ -418,7 +418,7 @@ int WebSocket::onSubThreadLoop()
 
 void WebSocket::onSubThreadStarted()
 {
-	struct lws_context_creation_info info;
+	struct rtchatsdk_lws_context_creation_info info;
 	memset(&info, 0, sizeof info);
     
 	/*
@@ -432,13 +432,13 @@ void WebSocket::onSubThreadStarted()
 	info.port = CONTEXT_PORT_NO_LISTEN;
 	info.protocols = _wsProtocols;
 #ifndef LWS_NO_EXTENSIONS
-	info.extensions = libwebsocket_get_internal_extensions();
+	info.extensions = rtchatsdk_libwebsocket_get_internal_extensions();
 #endif
 	info.gid = -1;
 	info.uid = -1;
     info.user = (void*)this;
     
-	_wsContext = libwebsocket_create_context(&info);
+	_wsContext = rtchatsdk_libwebsocket_create_context(&info);
     
 	if(nullptr != _wsContext)
     {
@@ -450,7 +450,7 @@ void WebSocket::onSubThreadStarted()
             
             if (_wsProtocols[i+1].callback != nullptr) name += ", ";
         }
-        _wsInstance = libwebsocket_client_connect(_wsContext, _host.c_str(), _port, _SSLConnection,
+        _wsInstance = rtchatsdk_libwebsocket_client_connect(_wsContext, _host.c_str(), _port, _SSLConnection,
                                              _path.c_str(), _host.c_str(), _host.c_str(),
                                              name.c_str(), -1);
                                              
@@ -470,8 +470,8 @@ void WebSocket::onSubThreadEnded()
 
 }
 
-int WebSocket::onSocketCallback(struct libwebsocket_context *ctx,
-                     struct libwebsocket *wsi,
+int WebSocket::onSocketCallback(struct rtchatsdk_libwebsocket_context *ctx,
+                     struct rtchatsdk_libwebsocket *wsi,
                      int reason,
                      void *user, void *in, ssize_t len)
 {
@@ -518,7 +518,7 @@ int WebSocket::onSocketCallback(struct libwebsocket_context *ctx,
                  * start the ball rolling,
                  * LWS_CALLBACK_CLIENT_WRITEABLE will come next service
                  */
-                libwebsocket_callback_on_writable(ctx, wsi);
+                rtchatsdk_libwebsocket_callback_on_writable(ctx, wsi);
 //                _wsHelper->sendMessageToUIThread(msg);
                 onUIThreadReceiveMessage(msg);
             }
@@ -574,7 +574,7 @@ int WebSocket::onSocketCallback(struct libwebsocket_context *ctx,
                         		writeProtocol |= LWS_WRITE_NO_FIN;
                         }
                         
-                        bytesWrite = libwebsocket_write(wsi,  &buf[LWS_SEND_BUFFER_PRE_PADDING], n, (libwebsocket_write_protocol)writeProtocol);
+                        bytesWrite = rtchatsdk_libwebsocket_write(wsi,  &buf[LWS_SEND_BUFFER_PRE_PADDING], n, (rtchatsdk_libwebsocket_write_protocol)writeProtocol);
 //                        Public::sdklog("[websocket:send] bytesWrite => %d", bytesWrite);
                         
                         // Buffer overrun?
@@ -673,7 +673,7 @@ int WebSocket::onSocketCallback(struct libwebsocket_context *ctx,
                 
                 /* get notified as soon as we can write again */
                 
-                libwebsocket_callback_on_writable(ctx, wsi);
+                rtchatsdk_libwebsocket_callback_on_writable(ctx, wsi);
             }
             break;
             
@@ -716,7 +716,7 @@ int WebSocket::onSocketCallback(struct libwebsocket_context *ctx,
                         _currentDataLen = _currentDataLen + len;
                     }
 
-                    _pendingFrameDataLen = libwebsockets_remaining_packet_payload (wsi);
+                    _pendingFrameDataLen = rtchatsdk_libwebsockets_remaining_packet_payload (wsi);
 
                     if (_pendingFrameDataLen > 0)
                     {
@@ -732,7 +732,7 @@ int WebSocket::onSocketCallback(struct libwebsocket_context *ctx,
 						char* bytes = nullptr;
 						Data* data = new Data();
 
-						if (lws_frame_is_binary(wsi))
+						if (rtchatsdk_lws_frame_is_binary(wsi))
 						{
 
 							bytes = new char[_currentDataLen];

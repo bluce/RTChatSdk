@@ -1,5 +1,5 @@
 /*
- * libwebsockets - small server side websockets and web server implementation
+ * rtchatsdk_libwebsockets - small server side websockets and web server implementation
  *
  * Copyright (C) 2010-2013 Andy Green <andy@warmcat.com>
  *
@@ -54,8 +54,8 @@
  */
 
 LWS_VISIBLE int
-libwebsocket_read(struct libwebsocket_context *context,
-		     struct libwebsocket *wsi, unsigned char *buf, size_t len)
+rtchatsdk_libwebsocket_read(struct rtchatsdk_libwebsocket_context *context,
+		     struct rtchatsdk_libwebsocket *wsi, unsigned char *buf, size_t len)
 {
 	size_t n;
 	struct allocated_headers *ah;
@@ -81,7 +81,7 @@ libwebsocket_read(struct libwebsocket_context *context,
 		case LWS_CONNMODE_WS_CLIENT_WAITING_EXTENSION_CONNECT:
 		case LWS_CONNMODE_WS_CLIENT:
 			for (n = 0; n < len; n++)
-				if (libwebsocket_client_rx_sm(wsi, *buf++)) {
+				if (rtchatsdk_libwebsocket_client_rx_sm(wsi, *buf++)) {
 					lwsl_info("client_rx_sm failed\n");
 					goto bail;
 				}
@@ -94,34 +94,34 @@ libwebsocket_read(struct libwebsocket_context *context,
 		/* LWS_CONNMODE_WS_SERVING */
 
 		for (n = 0; n < len; n++)
-			if (libwebsocket_parse(wsi, *buf++)) {
-				lwsl_info("libwebsocket_parse failed\n");
+			if (rtchatsdk_libwebsocket_parse(wsi, *buf++)) {
+				lwsl_info("rtchatsdk_libwebsocket_parse failed\n");
 				goto bail_nuke_ah;
 			}
 
 		if (wsi->u.hdr.parser_state != WSI_PARSING_COMPLETE)
 			break;
 
-		lwsl_parser("libwebsocket_parse sees parsing complete\n");
+		lwsl_parser("rtchatsdk_libwebsocket_parse sees parsing complete\n");
 
 		wsi->mode = LWS_CONNMODE_PRE_WS_SERVING_ACCEPT;
 
 		/* is this websocket protocol or normal http 1.0? */
 
-		if (!lws_hdr_total_length(wsi, WSI_TOKEN_UPGRADE) ||
-			     !lws_hdr_total_length(wsi, WSI_TOKEN_CONNECTION)) {
+		if (!rtchatsdk_lws_hdr_total_length(wsi, WSI_TOKEN_UPGRADE) ||
+			     !rtchatsdk_lws_hdr_total_length(wsi, WSI_TOKEN_CONNECTION)) {
 
 			/* it's not websocket.... shall we accept it as http? */
 
-			if (!lws_hdr_total_length(wsi, WSI_TOKEN_GET_URI)) {
+			if (!rtchatsdk_lws_hdr_total_length(wsi, WSI_TOKEN_GET_URI)) {
 				lwsl_warn("Missing URI in HTTP request\n");
 				goto bail_nuke_ah;
 			}
 
 			lwsl_info("HTTP request for '%s'\n",
-				lws_hdr_simple_ptr(wsi, WSI_TOKEN_GET_URI));
+				rtchatsdk_lws_hdr_simple_ptr(wsi, WSI_TOKEN_GET_URI));
 
-			if (libwebsocket_ensure_user_space(wsi))
+			if (rtchatsdk_libwebsocket_ensure_user_space(wsi))
 				goto bail_nuke_ah;
 
 			/*
@@ -132,8 +132,8 @@ libwebsocket_read(struct libwebsocket_context *context,
 			 */
 
 			ah = wsi->u.hdr.ah;
-			uri_ptr = lws_hdr_simple_ptr(wsi, WSI_TOKEN_GET_URI);
-			uri_len = lws_hdr_total_length(wsi, WSI_TOKEN_GET_URI);
+			uri_ptr = rtchatsdk_lws_hdr_simple_ptr(wsi, WSI_TOKEN_GET_URI);
+			uri_len = rtchatsdk_lws_hdr_total_length(wsi, WSI_TOKEN_GET_URI);
 
 			/* union transition */
 			memset(&wsi->u, 0, sizeof(wsi->u));
@@ -159,7 +159,7 @@ libwebsocket_read(struct libwebsocket_context *context,
 		}
 
 		if (!wsi->protocol)
-			lwsl_err("NULL protocol at libwebsocket_read\n");
+			lwsl_err("NULL protocol at rtchatsdk_libwebsocket_read\n");
 
 		/*
 		 * It's websocket
@@ -169,12 +169,12 @@ libwebsocket_read(struct libwebsocket_context *context,
 
 		while (wsi->protocol->callback) {
 
-			if (!lws_hdr_total_length(wsi, WSI_TOKEN_PROTOCOL)) {
+			if (!rtchatsdk_lws_hdr_total_length(wsi, WSI_TOKEN_PROTOCOL)) {
 				if (wsi->protocol->name == NULL)
 					break;
 			} else
 				if (wsi->protocol->name && strcmp(
-					lws_hdr_simple_ptr(wsi,
+					rtchatsdk_lws_hdr_simple_ptr(wsi,
 						WSI_TOKEN_PROTOCOL),
 						      wsi->protocol->name) == 0)
 					break;
@@ -185,13 +185,13 @@ libwebsocket_read(struct libwebsocket_context *context,
 		/* we didn't find a protocol he wanted? */
 
 		if (wsi->protocol->callback == NULL) {
-			if (lws_hdr_simple_ptr(wsi, WSI_TOKEN_PROTOCOL) ==
+			if (rtchatsdk_lws_hdr_simple_ptr(wsi, WSI_TOKEN_PROTOCOL) ==
 									 NULL) {
 				lwsl_info("no protocol -> prot 0 handler\n");
 				wsi->protocol = &context->protocols[0];
 			} else {
 				lwsl_err("Req protocol %s not supported\n",
-				   lws_hdr_simple_ptr(wsi, WSI_TOKEN_PROTOCOL));
+				   rtchatsdk_lws_hdr_simple_ptr(wsi, WSI_TOKEN_PROTOCOL));
 				goto bail_nuke_ah;
 			}
 		}
@@ -203,7 +203,7 @@ libwebsocket_read(struct libwebsocket_context *context,
 
 		if ((wsi->protocol->callback)(wsi->protocol->owning_server, wsi,
 				LWS_CALLBACK_FILTER_PROTOCOL_CONNECTION,
-				lws_hdr_simple_ptr(wsi, WSI_TOKEN_PROTOCOL),
+				rtchatsdk_lws_hdr_simple_ptr(wsi, WSI_TOKEN_PROTOCOL),
 								     NULL, 0)) {
 			lwsl_warn("User code denied connection\n");
 			goto bail;
@@ -218,7 +218,7 @@ libwebsocket_read(struct libwebsocket_context *context,
 		switch (wsi->ietf_spec_revision) {
 		case 13:
 			lwsl_parser("lws_parse calling handshake_04\n");
-			if (handshake_0405(context, wsi)) {
+			if (rtchatsdk_handshake_0405(context, wsi)) {
 				lwsl_info("hs0405 has failed the connection\n");
 				goto bail;
 			}
@@ -274,7 +274,7 @@ libwebsocket_read(struct libwebsocket_context *context,
 		switch (wsi->mode) {
 		case LWS_CONNMODE_WS_CLIENT:
 			for (n = 0; n < len; n++)
-				if (libwebsocket_client_rx_sm(
+				if (rtchatsdk_libwebsocket_client_rx_sm(
 							     wsi, *buf++) < 0) {
 					lwsl_info("client rx has bailed\n");
 					goto bail;
@@ -288,14 +288,14 @@ libwebsocket_read(struct libwebsocket_context *context,
 #ifndef LWS_NO_SERVER
 		/* LWS_CONNMODE_WS_SERVING */
 
-		if (libwebsocket_interpret_incoming_packet(wsi, buf, len) < 0) {
+		if (rtchatsdk_libwebsocket_interpret_incoming_packet(wsi, buf, len) < 0) {
 			lwsl_info("interpret_incoming_packet has bailed\n");
 			goto bail;
 		}
 #endif
 		break;
 	default:
-		lwsl_err("libwebsocket_read: Unhandled state\n");
+		lwsl_err("rtchatsdk_libwebsocket_read: Unhandled state\n");
 		break;
 	}
 
@@ -307,9 +307,9 @@ bail_nuke_ah:
 		free(wsi->u.hdr.ah);
 
 bail:
-	lwsl_info("closing connection at libwebsocket_read bail:\n");
+	lwsl_info("closing connection at rtchatsdk_libwebsocket_read bail:\n");
 
-	libwebsocket_close_and_free_session(context, wsi,
+	rtchatsdk_libwebsocket_close_and_free_session(context, wsi,
 						     LWS_CLOSE_STATUS_NOSTATUS);
 
 	return -1;

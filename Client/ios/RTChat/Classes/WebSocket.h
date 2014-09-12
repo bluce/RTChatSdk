@@ -35,9 +35,9 @@
 #include <vector>
 #include <mutex>
 
-struct libwebsocket;
-struct libwebsocket_context;
-struct libwebsocket_protocols;
+struct rtchatsdk_libwebsocket;
+struct rtchatsdk_libwebsocket_context;
+struct rtchatsdk_libwebsocket_protocols;
 
 //class WsThreadHelper;
 
@@ -145,8 +145,8 @@ private:
     virtual void onUIThreadReceiveMessage(WsMessage* msg);
 
     friend class WebSocketCallbackWrapper;
-    int onSocketCallback(struct libwebsocket_context *ctx,
-                         struct libwebsocket *wsi,
+    int onSocketCallback(struct rtchatsdk_libwebsocket_context *ctx,
+                         struct rtchatsdk_libwebsocket *wsi,
                          int reason,
                          void *user, void *in, ssize_t len);
 
@@ -163,11 +163,11 @@ private:
     friend class WsThreadHelper;
 //    WsThreadHelper* _wsHelper;
 
-    struct libwebsocket*         _wsInstance;
-    struct libwebsocket_context* _wsContext;
+    struct rtchatsdk_libwebsocket*         _wsInstance;
+    struct rtchatsdk_libwebsocket_context* _wsContext;
     Delegate* _delegate;
     int _SSLConnection;
-    struct libwebsocket_protocols* _wsProtocols;
+    struct rtchatsdk_libwebsocket_protocols* _wsProtocols;
     
     std::list<WsMessage*>           _MessageQueue;
     pthread_mutex_t                 _MessageMutex;

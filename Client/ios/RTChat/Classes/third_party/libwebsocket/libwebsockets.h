@@ -1,5 +1,5 @@
 /*
- * libwebsockets - small server side websockets and web server implementation
+ * rtchatsdk_libwebsockets - small server side websockets and web server implementation
  *
  * Copyright (C) 2010-2013 Andy Green <andy@warmcat.com>
  *
@@ -77,7 +77,7 @@ typedef int ssize_t;
 #define CONTEXT_PORT_NO_LISTEN 0
 #define MAX_MUX_RECURSION 2
 
-enum lws_log_levels {
+enum rtchatsdk_lws_log_levels {
 	LLL_ERR = 1 << 0,
 	LLL_WARN = 1 << 1,
 	LLL_NOTICE = 1 << 2,
@@ -92,12 +92,12 @@ enum lws_log_levels {
 	LLL_COUNT = 10 /* set to count of valid flags */
 };
 
-LWS_VISIBLE LWS_EXTERN void _lws_log(int filter, const char *format, ...);
+LWS_VISIBLE LWS_EXTERN void _rtchatsdk_lws_log(int filter, const char *format, ...);
 
 /* notice, warn and log are always compiled in */
-#define lwsl_notice(...) _lws_log(LLL_NOTICE, __VA_ARGS__)
-#define lwsl_warn(...) _lws_log(LLL_WARN, __VA_ARGS__)
-#define lwsl_err(...) _lws_log(LLL_ERR, __VA_ARGS__)
+#define lwsl_notice(...) _rtchatsdk_lws_log(LLL_NOTICE, __VA_ARGS__)
+#define lwsl_warn(...) _rtchatsdk_lws_log(LLL_WARN, __VA_ARGS__)
+#define lwsl_err(...) _rtchatsdk_lws_log(LLL_ERR, __VA_ARGS__)
 /*
  *  weaker logging can be deselected at configure time using --disable-debug
  *  that gets rid of the overhead of checking while keeping _warn and _err
@@ -105,14 +105,14 @@ LWS_VISIBLE LWS_EXTERN void _lws_log(int filter, const char *format, ...);
  */
 #ifdef _DEBUG
 
-#define lwsl_info(...) _lws_log(LLL_INFO, __VA_ARGS__)
-#define lwsl_debug(...) _lws_log(LLL_DEBUG, __VA_ARGS__)
-#define lwsl_parser(...) _lws_log(LLL_PARSER, __VA_ARGS__)
-#define lwsl_header(...)  _lws_log(LLL_HEADER, __VA_ARGS__)
-#define lwsl_ext(...)  _lws_log(LLL_EXT, __VA_ARGS__)
-#define lwsl_client(...) _lws_log(LLL_CLIENT, __VA_ARGS__)
-#define lwsl_latency(...) _lws_log(LLL_LATENCY, __VA_ARGS__)
-LWS_VISIBLE LWS_EXTERN void lwsl_hexdump(void *buf, size_t len);
+#define lwsl_info(...) _rtchatsdk_lws_log(LLL_INFO, __VA_ARGS__)
+#define lwsl_debug(...) _rtchatsdk_lws_log(LLL_DEBUG, __VA_ARGS__)
+#define lwsl_parser(...) _rtchatsdk_lws_log(LLL_PARSER, __VA_ARGS__)
+#define lwsl_header(...)  _rtchatsdk_lws_log(LLL_HEADER, __VA_ARGS__)
+#define lwsl_ext(...)  _rtchatsdk_lws_log(LLL_EXT, __VA_ARGS__)
+#define lwsl_client(...) _rtchatsdk_lws_log(LLL_CLIENT, __VA_ARGS__)
+#define lwsl_latency(...) _rtchatsdk_lws_log(LLL_LATENCY, __VA_ARGS__)
+LWS_VISIBLE LWS_EXTERN void rtchatsdk_lwsl_hexdump(void *buf, size_t len);
 
 #else /* no debug */
 
@@ -127,12 +127,12 @@ LWS_VISIBLE LWS_EXTERN void lwsl_hexdump(void *buf, size_t len);
 
 #endif
 
-enum libwebsocket_context_options {
+enum rtchatsdk_libwebsocket_context_options {
 	LWS_SERVER_OPTION_REQUIRE_VALID_OPENSSL_CLIENT_CERT = 2,
 	LWS_SERVER_OPTION_SKIP_SERVER_CANONICAL_NAME = 4,
 };
 
-enum libwebsocket_callback_reasons {
+enum rtchatsdk_libwebsocket_callback_reasons {
 	LWS_CALLBACK_ESTABLISHED,
 	LWS_CALLBACK_CLIENT_CONNECTION_ERROR,
 	LWS_CALLBACK_CLIENT_FILTER_PRE_ESTABLISH,
@@ -164,7 +164,7 @@ enum libwebsocket_callback_reasons {
 };
 
 #ifndef LWS_NO_EXTENSIONS
-enum libwebsocket_extension_callback_reasons {
+enum rtchatsdk_libwebsocket_extension_callback_reasons {
 	LWS_EXT_CALLBACK_SERVER_CONTEXT_CONSTRUCT,
 	LWS_EXT_CALLBACK_CLIENT_CONTEXT_CONSTRUCT,
 	LWS_EXT_CALLBACK_SERVER_CONTEXT_DESTRUCT,
@@ -191,7 +191,7 @@ enum libwebsocket_extension_callback_reasons {
 };
 #endif
 
-enum libwebsocket_write_protocol {
+enum rtchatsdk_libwebsocket_write_protocol {
 	LWS_WRITE_TEXT,
 	LWS_WRITE_BINARY,
 	LWS_WRITE_CONTINUATION,
@@ -221,7 +221,7 @@ enum libwebsocket_write_protocol {
  * points to .token_len chars containing that header content.
  */
 
-struct lws_tokens {
+struct rtchatsdk_lws_tokens {
 	char *token;
 	int token_len;
 };
@@ -359,7 +359,7 @@ enum lws_token_indexes {
       (e.g., the server certificate can't be verified).
 */
 
-enum lws_close_status {
+enum rtchatsdk_lws_close_status {
 	LWS_CLOSE_STATUS_NOSTATUS = 0,
 	LWS_CLOSE_STATUS_NORMAL = 1000,
 	LWS_CLOSE_STATUS_GOINGAWAY = 1001,
@@ -376,10 +376,10 @@ enum lws_close_status {
 	LWS_CLOSE_STATUS_TLS_FAILURE = 1015,
 };
 
-struct libwebsocket;
-struct libwebsocket_context;
+struct rtchatsdk_libwebsocket;
+struct rtchatsdk_libwebsocket_context;
 /* needed even with extensions disabled for create context */
-struct libwebsocket_extension;
+struct rtchatsdk_libwebsocket_extension;
 
 /**
  * callback_function() - User server actions
@@ -395,7 +395,7 @@ struct libwebsocket_extension;
  *
  *	For each connection / session there is user data allocated that is
  *	pointed to by "user".  You set the size of this user data area when
- *	the library is initialized with libwebsocket_create_server.
+ *	the library is initialized with rtchatsdk_libwebsocket_create_server.
  *
  *	You get an opportunity to initialize user data when called back with
  *	LWS_CALLBACK_ESTABLISHED reason.
@@ -437,7 +437,7 @@ struct libwebsocket_extension;
  *				for example, to send a script to the client
  *				which will then open the websockets connection.
  *				@in points to the URI path requested and
- *				libwebsockets_serve_http_file() makes it very
+ *				rtchatsdk_libwebsockets_serve_http_file() makes it very
  *				simple to send back a file to the client.
  *				Normally after sending the file you are done
  *				with the http connection, since the rest of the
@@ -456,7 +456,7 @@ struct libwebsocket_extension;
  *
  *	LWS_CALLBACK_CLIENT_WRITEABLE:
  *      LWS_CALLBACK_SERVER_WRITEABLE:   If you call
- *		libwebsocket_callback_on_writable() on a connection, you will
+ *		rtchatsdk_libwebsocket_callback_on_writable() on a connection, you will
  *		get one of these callbacks coming when the connection socket
  *		is able to accept another write packet without blocking.
  *		If it already was able to take another packet without blocking,
@@ -478,7 +478,7 @@ struct libwebsocket_extension;
  *		been received and parsed from the client, but the response is
  *		not sent yet.  Return non-zero to disallow the connection.
  *		@user is a pointer to an array of struct lws_tokens, you can
- *		use the header enums lws_token_indexes from libwebsockets.h
+ *		use the header enums lws_token_indexes from rtchatsdk_libwebsockets.h
  *		to check for and read the supported header presence and
  *		content before deciding to allow the handshake to proceed or
  *		to kill the connection.
@@ -497,19 +497,19 @@ struct libwebsocket_extension;
  *		is the server's OpenSSL SSL_CTX*
  *
  *	LWS_CALLBACK_OPENSSL_PERFORM_CLIENT_CERT_VERIFICATION: if the
- *		libwebsockets context was created with the option
+ *		rtchatsdk_libwebsockets context was created with the option
  *		LWS_SERVER_OPTION_REQUIRE_VALID_OPENSSL_CLIENT_CERT, then this
  *		callback is generated during OpenSSL verification of the cert
  *		sent from the client.  It is sent to protocol[0] callback as
  *		no protocol has been negotiated on the connection yet.
- *		Notice that the libwebsockets context and wsi are both NULL
+ *		Notice that the rtchatsdk_libwebsockets context and wsi are both NULL
  *		during this callback.  See
  *		 http://www.openssl.org/docs/ssl/SSL_CTX_set_verify.html
  *		to understand more detail about the OpenSSL callback that
- *		generates this libwebsockets callback and the meanings of the
+ *		generates this rtchatsdk_libwebsockets callback and the meanings of the
  *		arguments passed.  In this callback, @user is the x509_ctx,
  *		@in is the ssl pointer and @len is preverify_ok
- *		Notice that this callback maintains libwebsocket return
+ *		Notice that this callback maintains rtchatsdk_libwebsocket return
  *		conventions, return 0 to mean the cert is OK or 1 to fail it.
  *		This also means that if you don't handle this callback then
  *		the default callback action of returning 0 allows the client
@@ -568,12 +568,12 @@ struct libwebsocket_extension;
  *		deallocate everything that was allocated by the protocol.
  *
  *	The next four reasons are optional and only need taking care of if you
- *	will be integrating libwebsockets sockets into an external polling
+ *	will be integrating rtchatsdk_libwebsockets sockets into an external polling
  *	array.
  *
- *	LWS_CALLBACK_ADD_POLL_FD: libwebsocket deals with its poll() loop
+ *	LWS_CALLBACK_ADD_POLL_FD: rtchatsdk_libwebsocket deals with its poll() loop
  *		internally, but in the case you are integrating with another
- *		server you will need to have libwebsocket sockets share a
+ *		server you will need to have rtchatsdk_libwebsocket sockets share a
  *		polling array with the other server.  This and the other
  *		POLL_FD related callbacks let you put your specialized
  *		poll array interface code in the callback for protocol 0, the
@@ -589,26 +589,26 @@ struct libwebsocket_extension;
  *		the socket desricptor.  If you are using the internal polling
  *		loop, you can just ignore it.
  *
- *	LWS_CALLBACK_SET_MODE_POLL_FD: This callback happens when libwebsockets
+ *	LWS_CALLBACK_SET_MODE_POLL_FD: This callback happens when rtchatsdk_libwebsockets
  *		wants to modify the events for the socket descriptor in @in.
  *		The handler should OR @len on to the events member of the pollfd
  *		struct for this socket descriptor.  If you are using the
  *		internal polling loop, you can just ignore it.
  *
- *	LWS_CALLBACK_CLEAR_MODE_POLL_FD: This callback occurs when libwebsockets
+ *	LWS_CALLBACK_CLEAR_MODE_POLL_FD: This callback occurs when rtchatsdk_libwebsockets
  *		wants to modify the events for the socket descriptor in @in.
  *		The handler should AND ~@len on to the events member of the
  *		pollfd struct for this socket descriptor.  If you are using the
  *		internal polling loop, you can just ignore it.
  */
-LWS_VISIBLE LWS_EXTERN int callback(struct libwebsocket_context *context,
-			struct libwebsocket *wsi,
-			 enum libwebsocket_callback_reasons reason, void *user,
+LWS_VISIBLE LWS_EXTERN int rtchatsdk_callback(struct rtchatsdk_libwebsocket_context *context,
+			struct rtchatsdk_libwebsocket *wsi,
+			 enum rtchatsdk_libwebsocket_callback_reasons reason, void *user,
 							  void *in, size_t len);
 
-typedef int (callback_function)(struct libwebsocket_context *context,
-			struct libwebsocket *wsi,
-			 enum libwebsocket_callback_reasons reason, void *user,
+typedef int (rtchatsdk_callback_function)(struct rtchatsdk_libwebsocket_context *context,
+			struct rtchatsdk_libwebsocket *wsi,
+			 enum rtchatsdk_libwebsocket_callback_reasons reason, void *user,
 							  void *in, size_t len);
 
 #ifndef LWS_NO_EXTENSIONS
@@ -626,7 +626,7 @@ typedef int (callback_function)(struct libwebsocket_context *context,
  *	callbacks during the connection lifetime to allow the extension to
  *	operate on websocket data and manage itself.
  *
- *	Libwebsockets takes care of allocating and freeing "user" memory for
+ *	rtchatsdk_libwebsockets takes care of allocating and freeing "user" memory for
  *	each active extension on each connection.  That is what is pointed to
  *	by the @user parameter.
  *
@@ -670,21 +670,21 @@ typedef int (callback_function)(struct libwebsocket_context *context,
  *		buffer safely, it should copy the data into its own buffer and
  *		set the lws_tokens token pointer to it.
  */
-LWS_VISIBLE LWS_EXTERN int extension_callback(struct libwebsocket_context *context,
-			struct libwebsocket_extension *ext,
-			struct libwebsocket *wsi,
-			enum libwebsocket_extension_callback_reasons reason,
+LWS_VISIBLE LWS_EXTERN int rtchatsdk_extension_callback(struct rtchatsdk_libwebsocket_context *context,
+			struct rtchatsdk_libwebsocket_extension *ext,
+			struct rtchatsdk_libwebsocket *wsi,
+			enum rtchatsdk_libwebsocket_extension_callback_reasons reason,
 			void *user, void *in, size_t len);
 
-typedef int (extension_callback_function)(struct libwebsocket_context *context,
-			struct libwebsocket_extension *ext,
-			struct libwebsocket *wsi,
-			enum libwebsocket_extension_callback_reasons reason,
+typedef int (rtchatsdk_extension_callback_function)(struct rtchatsdk_libwebsocket_context *context,
+			struct rtchatsdk_libwebsocket_extension *ext,
+			struct rtchatsdk_libwebsocket *wsi,
+			enum rtchatsdk_libwebsocket_extension_callback_reasons reason,
 			void *user, void *in, size_t len);
 #endif
 
 /**
- * struct libwebsocket_protocols -	List of protocols and handlers server
+ * struct rtchatsdk_libwebsocket_protocols -	List of protocols and handlers server
  *					supports.
  * @name:	Protocol name that must match the one given in the client
  *		Javascript new WebSocket(url, 'protocol') name
@@ -700,7 +700,7 @@ typedef int (extension_callback_function)(struct libwebsocket_context *context,
  *		you support.  If the frame size is exceeded, there is no
  *		error, but the buffer will spill to the user callback when
  *		full, which you can detect by using
- *		libwebsockets_remaining_packet_payload().  Notice that you
+ *		rtchatsdk_libwebsockets_remaining_packet_payload().  Notice that you
  *		just talk about frame size here, the LWS_SEND_BUFFER_PRE_PADDING
  *		and post-padding are automatically also allocated on top.
  * @owning_server:	the server init call fills in this opaque pointer when
@@ -708,13 +708,13 @@ typedef int (extension_callback_function)(struct libwebsocket_context *context,
  * @protocol_index: which protocol we are starting from zero
  *
  *	This structure represents one protocol supported by the server.  An
- *	array of these structures is passed to libwebsocket_create_server()
+ *	array of these structures is passed to rtchatsdk_libwebsocket_create_server()
  *	allows as many protocols as you like to be handled by one server.
  */
 
-struct libwebsocket_protocols {
+struct rtchatsdk_libwebsocket_protocols {
 	const char *name;
-	callback_function *callback;
+	rtchatsdk_callback_function *callback;
 	size_t per_session_data_size;
 	size_t rx_buffer_size;
 
@@ -723,17 +723,17 @@ struct libwebsocket_protocols {
 	 * no need for user to use them directly either
 	 */
 
-	struct libwebsocket_context *owning_server;
+	struct rtchatsdk_libwebsocket_context *owning_server;
 	int protocol_index;
 };
 
 #ifndef LWS_NO_EXTENSIONS
 /**
- * struct libwebsocket_extension -	An extension we know how to cope with
+ * struct rtchatsdk_libwebsocket_extension -	An extension we know how to cope with
  *
  * @name:			Formal extension name, eg, "deflate-stream"
  * @callback:			Service callback
- * @per_session_data_size:	Libwebsockets will auto-malloc this much
+ * @per_session_data_size:	rtchatsdk_libwebsockets will auto-malloc this much
  *				memory for the use of the extension, a pointer
  *				to it comes in the @user callback parameter
  * @per_context_private_data:   Optional storage for this extension that
@@ -741,16 +741,16 @@ struct libwebsocket_protocols {
  *				all sessions, etc, if it wants
  */
 
-struct libwebsocket_extension {
+struct rtchatsdk_libwebsocket_extension {
 	const char *name;
-	extension_callback_function *callback;
+	rtchatsdk_extension_callback_function *callback;
 	size_t per_session_data_size;
 	void *per_context_private_data;
 };
 #endif
 
 /**
- * struct lws_context_creation_info: parameters to create context with
+ * struct rtchatsdk_lws_context_creation_info: parameters to create context with
  *
  * @port:	Port to listen on... you can use 0 to suppress listening on
  *		any port, that's what you want if you are not running a
@@ -761,10 +761,10 @@ struct libwebsocket_extension {
  *		specific callback for each one.  The list is ended with an
  *		entry that has a NULL callback pointer.
  *		It's not const because we write the owning_server member
- * @extensions: NULL or array of libwebsocket_extension structs listing the
+ * @extensions: NULL or array of rtchatsdk_libwebsocket_extension structs listing the
  *		extensions this context supports.  If you configured with
  *		--without-extensions, you should give NULL here.
- * @ssl_cert_filepath:	If libwebsockets was compiled to use ssl, and you want
+ * @ssl_cert_filepath:	If rtchatsdk_libwebsockets was compiled to use ssl, and you want
  *			to listen using SSL, set to the filepath to fetch the
  *			server cert from, otherwise NULL for unencrypted
  * @ssl_private_key_filepath: filepath to private key if wanting SSL mode,
@@ -777,9 +777,9 @@ struct libwebsocket_extension {
  * @uid:	user id to change to after setting listen socket, or -1.
  * @options:	0, or LWS_SERVER_OPTION_DEFEAT_CLIENT_MASK
  * @user:	optional user pointer that can be recovered via the context
- *		pointer using libwebsocket_context_user
+ *		pointer using rtchatsdk_libwebsocket_context_user
  * @ka_time:	0 for no keepalive, otherwise apply this keepalive timeout to
- *		all libwebsocket sockets, client or server
+ *		all rtchatsdk_libwebsocket sockets, client or server
  * @ka_probes:	if ka_time was nonzero, after the timeout expires how many
  *		times to try to get a response from the peer before giving up
  *		and killing the connection
@@ -787,11 +787,11 @@ struct libwebsocket_extension {
  *		attempt
  */
 
-struct lws_context_creation_info {
+struct rtchatsdk_lws_context_creation_info {
 	int port;
 	const char *iface;
-	struct libwebsocket_protocols *protocols;
-	struct libwebsocket_extension *extensions;
+	struct rtchatsdk_libwebsocket_protocols *protocols;
+	struct rtchatsdk_libwebsocket_extension *extensions;
 	const char *ssl_cert_filepath;
 	const char *ssl_private_key_filepath;
 	const char *ssl_ca_filepath;
@@ -807,27 +807,27 @@ struct lws_context_creation_info {
 };
 
 LWS_VISIBLE LWS_EXTERN
-void lws_set_log_level(int level,
+void rtchatsdk_lws_set_log_level(int level,
 			void (*log_emit_function)(int level, const char *line));
 
 LWS_VISIBLE LWS_EXTERN void
-lwsl_emit_syslog(int level, const char *line);
+rtchatsdk_lwsl_emit_syslog(int level, const char *line);
 
-LWS_VISIBLE LWS_EXTERN struct libwebsocket_context *
-libwebsocket_create_context(struct lws_context_creation_info *info);
+LWS_VISIBLE LWS_EXTERN struct rtchatsdk_libwebsocket_context *
+rtchatsdk_libwebsocket_create_context(struct rtchatsdk_lws_context_creation_info *info);
 
 LWS_VISIBLE LWS_EXTERN void
-libwebsocket_context_destroy(struct libwebsocket_context *context);
+rtchatsdk_libwebsocket_context_destroy(struct rtchatsdk_libwebsocket_context *context);
 
 LWS_VISIBLE LWS_EXTERN int
-libwebsocket_service(struct libwebsocket_context *context, int timeout_ms);
+rtchatsdk_libwebsocket_service(struct rtchatsdk_libwebsocket_context *context, int timeout_ms);
 
 LWS_VISIBLE LWS_EXTERN int
-libwebsocket_service_fd(struct libwebsocket_context *context,
+rtchatsdk_libwebsocket_service_fd(struct rtchatsdk_libwebsocket_context *context,
 							 struct pollfd *pollfd);
 
 LWS_VISIBLE LWS_EXTERN void *
-libwebsocket_context_user(struct libwebsocket_context *context);
+rtchatsdk_libwebsocket_context_user(struct rtchatsdk_libwebsocket_context *context);
 
 /*
  * IMPORTANT NOTICE!
@@ -839,7 +839,7 @@ libwebsocket_context_user(struct libwebsocket_context *context);
  * This allows us to add protocol info before and after the data, and send as
  * one packet on the network without payload copying, for maximum efficiency.
  *
- * So for example you need this kind of code to use libwebsocket_write with a
+ * So for example you need this kind of code to use rtchatsdk_libwebsocket_write with a
  * 128-byte payload
  *
  *   char buf[LWS_SEND_BUFFER_PRE_PADDING + 128 + LWS_SEND_BUFFER_POST_PADDING];
@@ -847,7 +847,7 @@ libwebsocket_context_user(struct libwebsocket_context *context);
  *   // fill your part of the buffer... for example here it's all zeros
  *   memset(&buf[LWS_SEND_BUFFER_PRE_PADDING], 0, 128);
  *
- *   libwebsocket_write(wsi, &buf[LWS_SEND_BUFFER_PRE_PADDING], 128,
+ *   rtchatsdk_libwebsocket_write(wsi, &buf[LWS_SEND_BUFFER_PRE_PADDING], 128,
  *   								LWS_WRITE_TEXT);
  *
  * When sending LWS_WRITE_HTTP, there is no protocol addition and you can just
@@ -865,49 +865,49 @@ libwebsocket_context_user(struct libwebsocket_context *context);
 #define LWS_SEND_BUFFER_POST_PADDING 4
 
 LWS_VISIBLE LWS_EXTERN int
-libwebsocket_write(struct libwebsocket *wsi, unsigned char *buf, size_t len,
-				     enum libwebsocket_write_protocol protocol);
+rtchatsdk_libwebsocket_write(struct rtchatsdk_libwebsocket *wsi, unsigned char *buf, size_t len,
+				     enum rtchatsdk_libwebsocket_write_protocol protocol);
 
 LWS_VISIBLE LWS_EXTERN int
-libwebsockets_serve_http_file(struct libwebsocket_context *context,
-			struct libwebsocket *wsi, const char *file,
+rtchatsdk_libwebsockets_serve_http_file(struct rtchatsdk_libwebsocket_context *context,
+			struct rtchatsdk_libwebsocket *wsi, const char *file,
 						     const char *content_type);
 LWS_VISIBLE LWS_EXTERN int
-libwebsockets_serve_http_file_fragment(struct libwebsocket_context *context,
-			struct libwebsocket *wsi);
+rtchatsdk_libwebsockets_serve_http_file_fragment(struct rtchatsdk_libwebsocket_context *context,
+			struct rtchatsdk_libwebsocket *wsi);
 
-LWS_VISIBLE LWS_EXTERN const struct libwebsocket_protocols *
-libwebsockets_get_protocol(struct libwebsocket *wsi);
-
-LWS_VISIBLE LWS_EXTERN int
-libwebsocket_callback_on_writable(struct libwebsocket_context *context,
-						      struct libwebsocket *wsi);
+LWS_VISIBLE LWS_EXTERN const struct rtchatsdk_libwebsocket_protocols *
+rtchatsdk_libwebsockets_get_protocol(struct rtchatsdk_libwebsocket *wsi);
 
 LWS_VISIBLE LWS_EXTERN int
-libwebsocket_callback_on_writable_all_protocol(
-				 const struct libwebsocket_protocols *protocol);
+rtchatsdk_libwebsocket_callback_on_writable(struct rtchatsdk_libwebsocket_context *context,
+						      struct rtchatsdk_libwebsocket *wsi);
 
 LWS_VISIBLE LWS_EXTERN int
-libwebsocket_get_socket_fd(struct libwebsocket *wsi);
+rtchatsdk_libwebsocket_callback_on_writable_all_protocol(
+				 const struct rtchatsdk_libwebsocket_protocols *protocol);
 
 LWS_VISIBLE LWS_EXTERN int
-libwebsocket_is_final_fragment(struct libwebsocket *wsi);
+rtchatsdk_libwebsocket_get_socket_fd(struct rtchatsdk_libwebsocket *wsi);
+
+LWS_VISIBLE LWS_EXTERN int
+rtchatsdk_libwebsocket_is_final_fragment(struct rtchatsdk_libwebsocket *wsi);
 
 LWS_VISIBLE LWS_EXTERN unsigned char
-libwebsocket_get_reserved_bits(struct libwebsocket *wsi);
+rtchatsdk_libwebsocket_get_reserved_bits(struct rtchatsdk_libwebsocket *wsi);
 
 LWS_VISIBLE LWS_EXTERN int
-libwebsocket_rx_flow_control(struct libwebsocket *wsi, int enable);
+rtchatsdk_libwebsocket_rx_flow_control(struct rtchatsdk_libwebsocket *wsi, int enable);
 
 LWS_VISIBLE LWS_EXTERN void
-libwebsocket_rx_flow_allow_all_protocol(
-				const struct libwebsocket_protocols *protocol);
+rtchatsdk_libwebsocket_rx_flow_allow_all_protocol(
+				const struct rtchatsdk_libwebsocket_protocols *protocol);
 
 LWS_VISIBLE LWS_EXTERN size_t
-libwebsockets_remaining_packet_payload(struct libwebsocket *wsi);
+rtchatsdk_libwebsockets_remaining_packet_payload(struct rtchatsdk_libwebsocket *wsi);
 
-LWS_VISIBLE LWS_EXTERN struct libwebsocket *
-libwebsocket_client_connect(struct libwebsocket_context *clients,
+LWS_VISIBLE LWS_EXTERN struct rtchatsdk_libwebsocket *
+rtchatsdk_libwebsocket_client_connect(struct rtchatsdk_libwebsocket_context *clients,
 			      const char *address,
 			      int port,
 			      int ssl_connection,
@@ -917,8 +917,8 @@ libwebsocket_client_connect(struct libwebsocket_context *clients,
 			      const char *protocol,
 			      int ietf_version_or_minus_one);
 
-LWS_VISIBLE LWS_EXTERN struct libwebsocket *
-libwebsocket_client_connect_extended(struct libwebsocket_context *clients,
+LWS_VISIBLE LWS_EXTERN struct rtchatsdk_libwebsocket *
+rtchatsdk_libwebsocket_client_connect_extended(struct rtchatsdk_libwebsocket_context *clients,
 			      const char *address,
 			      int port,
 			      int ssl_connection,
@@ -930,46 +930,46 @@ libwebsocket_client_connect_extended(struct libwebsocket_context *clients,
 			      void *userdata);
 
 LWS_VISIBLE LWS_EXTERN const char *
-libwebsocket_canonical_hostname(struct libwebsocket_context *context);
+rtchatsdk_libwebsocket_canonical_hostname(struct rtchatsdk_libwebsocket_context *context);
 
 
 LWS_VISIBLE LWS_EXTERN void
-libwebsockets_get_peer_addresses(struct libwebsocket_context *context,
-		struct libwebsocket *wsi, int fd, char *name, int name_len,
+rtchatsdk_libwebsockets_get_peer_addresses(struct rtchatsdk_libwebsocket_context *context,
+		struct rtchatsdk_libwebsocket *wsi, int fd, char *name, int name_len,
 					char *rip, int rip_len);
 
 LWS_VISIBLE LWS_EXTERN int
-libwebsockets_get_random(struct libwebsocket_context *context,
+rtchatsdk_libwebsockets_get_random(struct rtchatsdk_libwebsocket_context *context,
 							    void *buf, int len);
 
 LWS_VISIBLE LWS_EXTERN int
-lws_daemonize(const char *_lock_path);
+rtchatsdk_lws_daemonize(const char *_lock_path);
 
 LWS_VISIBLE LWS_EXTERN int
-lws_send_pipe_choked(struct libwebsocket *wsi);
+rtchatsdk_lws_send_pipe_choked(struct rtchatsdk_libwebsocket *wsi);
 
 LWS_VISIBLE LWS_EXTERN int
-lws_frame_is_binary(struct libwebsocket *wsi);
+rtchatsdk_lws_frame_is_binary(struct rtchatsdk_libwebsocket *wsi);
 
 LWS_VISIBLE LWS_EXTERN unsigned char *
-libwebsockets_SHA1(const unsigned char *d, size_t n, unsigned char *md);
+rtchatsdk_libwebsockets_SHA1(const unsigned char *d, size_t n, unsigned char *md);
 
 LWS_VISIBLE LWS_EXTERN int
-lws_b64_encode_string(const char *in, int in_len, char *out, int out_size);
+rtchatsdk_lws_b64_encode_string(const char *in, int in_len, char *out, int out_size);
 
 LWS_VISIBLE LWS_EXTERN int
-lws_b64_decode_string(const char *in, char *out, int out_size);
+rtchatsdk_lws_b64_decode_string(const char *in, char *out, int out_size);
 
 LWS_VISIBLE LWS_EXTERN const char *
-lws_get_library_version(void);
+rtchatsdk_lws_get_library_version(void);
 
 /* access to headers... only valid while headers valid */
 
 LWS_VISIBLE LWS_EXTERN int
-lws_hdr_total_length(struct libwebsocket *wsi, enum lws_token_indexes h);
+rtchatsdk_lws_hdr_total_length(struct rtchatsdk_libwebsocket *wsi, enum lws_token_indexes h);
 
 LWS_VISIBLE LWS_EXTERN int
-lws_hdr_copy(struct libwebsocket *wsi, char *dest, int len,
+rtchatsdk_lws_hdr_copy(struct rtchatsdk_libwebsocket *wsi, char *dest, int len,
 						enum lws_token_indexes h);
 
 /*
@@ -978,12 +978,12 @@ lws_hdr_copy(struct libwebsocket *wsi, char *dest, int len,
  */
 
 LWS_VISIBLE LWS_EXTERN int
-libwebsocket_read(struct libwebsocket_context *context,
-				struct libwebsocket *wsi,
+rtchatsdk_libwebsocket_read(struct rtchatsdk_libwebsocket_context *context,
+				struct rtchatsdk_libwebsocket *wsi,
 					       unsigned char *buf, size_t len);
 
 #ifndef LWS_NO_EXTENSIONS
-LWS_VISIBLE LWS_EXTERN struct libwebsocket_extension *libwebsocket_get_internal_extensions();
+LWS_VISIBLE LWS_EXTERN struct rtchatsdk_libwebsocket_extension *rtchatsdk_libwebsocket_get_internal_extensions();
 #endif
 
 #ifdef __cplusplus

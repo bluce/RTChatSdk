@@ -8,7 +8,7 @@
  * LWS_OPENSSL_SUPPORT needs to be set also for this to work. */
 /* #undef USE_CYASSL */
 
-/* The Libwebsocket version */
+/* The rtchatsdk_libwebsocket version */
 #define LWS_LIBRARY_VERSION "1.3"
 
 /* The current git commit hash that we're building from */
@@ -38,7 +38,7 @@
 /* If we should compile with MinGW support */
 /* #undef LWS_MINGW_SUPPORT */
 
-/* Use the BSD getifaddrs that comes with libwebsocket, for uclibc support */
+/* Use the BSD getifaddrs that comes with rtchatsdk_libwebsocket, for uclibc support */
 /* #undef LWS_BUILTIN_GETIFADDRS */
 
 /* Define to 1 if you have the `bzero' function. */

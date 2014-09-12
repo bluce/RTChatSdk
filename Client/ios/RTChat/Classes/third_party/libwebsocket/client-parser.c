@@ -1,5 +1,5 @@
 /*
- * libwebsockets - small server side websockets and web server implementation
+ * rtchatsdk_libwebsockets - small server side websockets and web server implementation
  *
  * Copyright (C) 2010-2013 Andy Green <andy@warmcat.com>
  *
@@ -21,11 +21,11 @@
 
 #include "private-libwebsockets.h"
 
-int libwebsocket_client_rx_sm(struct libwebsocket *wsi, unsigned char c)
+int rtchatsdk_libwebsocket_client_rx_sm(struct rtchatsdk_libwebsocket *wsi, unsigned char c)
 {
 	int callback_action = LWS_CALLBACK_CLIENT_RECEIVE;
 	int handled;
-	struct lws_tokens eff_buf;
+	struct rtchatsdk_lws_tokens eff_buf;
 #ifndef LWS_NO_EXTENSIONS
 	int n;
 	int m;
@@ -278,7 +278,7 @@ spill:
 			 * we do not care about how it went, we are closing
 			 * immediately afterwards
 			 */
-			libwebsocket_write(wsi, (unsigned char *)
+			rtchatsdk_libwebsocket_write(wsi, (unsigned char *)
 			   &wsi->u.ws.rx_user_buffer[
 				LWS_SEND_BUFFER_PRE_PADDING],
 				wsi->u.ws.rx_user_buffer_head, LWS_WRITE_CLOSE);
@@ -293,7 +293,7 @@ spill:
 			 * !!! this may block or have partial write or fail
 			 * !!! very unlikely if the ping size is small
 			 */
-			libwebsocket_write(wsi, (unsigned char *)
+			rtchatsdk_libwebsocket_write(wsi, (unsigned char *)
 			    &wsi->u.ws.rx_user_buffer[
 				LWS_SEND_BUFFER_PRE_PADDING],
 					wsi->u.ws.rx_user_buffer_head,
@@ -303,7 +303,7 @@ spill:
 
 		case LWS_WS_OPCODE_07__PONG:
 			lwsl_info("client receied pong\n");
-			lwsl_hexdump(&wsi->u.ws.rx_user_buffer[
+			rtchatsdk_lwsl_hexdump(&wsi->u.ws.rx_user_buffer[
 				LWS_SEND_BUFFER_PRE_PADDING],
 				    wsi->u.ws.rx_user_buffer_head);
 
@@ -358,7 +358,7 @@ spill:
 		/*
 		 * No it's real payload, pass it up to the user callback.
 		 * It's nicely buffered with the pre-padding taken care of
-		 * so it can be sent straight out again using libwebsocket_write
+		 * so it can be sent straight out again using rtchatsdk_libwebsocket_write
 		 */
 		if (handled)
 			goto already_done;
@@ -396,7 +396,7 @@ spill:
 		wsi->protocol->callback(
 			wsi->protocol->owning_server,
 			wsi,
-			(enum libwebsocket_callback_reasons)callback_action,
+			(enum rtchatsdk_libwebsocket_callback_reasons)callback_action,
 			wsi->user_space,
 			eff_buf.token,
 			eff_buf.token_len);

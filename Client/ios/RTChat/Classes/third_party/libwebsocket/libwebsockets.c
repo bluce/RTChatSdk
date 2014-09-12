@@ -1,5 +1,5 @@
 /*
- * libwebsockets - small server side websockets and web server implementation
+ * rtchatsdk_libwebsockets - small server side websockets and web server implementation
  *
  * Copyright (C) 2010 Andy Green <andy@warmcat.com>
  *
@@ -73,14 +73,14 @@ static const char * const log_level_names[] = {
 };
 
 #ifndef LWS_NO_CLIENT
-	extern int lws_client_socket_service(
-		struct libwebsocket_context *context,
-		struct libwebsocket *wsi, struct pollfd *pollfd);
+	extern int rtchatsdk_lws_client_socket_service(
+		struct rtchatsdk_libwebsocket_context *context,
+		struct rtchatsdk_libwebsocket *wsi, struct pollfd *pollfd);
 #endif
 #ifndef LWS_NO_SERVER
 	extern int lws_server_socket_service(
-		struct libwebsocket_context *context,
-		struct libwebsocket *wsi, struct pollfd *pollfd);
+		struct rtchatsdk_libwebsocket_context *context,
+		struct rtchatsdk_libwebsocket *wsi, struct pollfd *pollfd);
 #endif
 
 /**
@@ -98,8 +98,8 @@ lws_get_library_version(void)
 }
 
 int
-insert_wsi_socket_into_fds(struct libwebsocket_context *context,
-						       struct libwebsocket *wsi)
+rtchatsdk_insert_wsi_socket_into_fds(struct rtchatsdk_libwebsocket_context *context,
+						       struct rtchatsdk_libwebsocket *wsi)
 {
 	if (context->fds_count >= context->max_fds) {
 		lwsl_err("Too many fds (%d)\n", context->max_fds);
@@ -133,8 +133,8 @@ insert_wsi_socket_into_fds(struct libwebsocket_context *context,
 }
 
 static int
-remove_wsi_socket_from_fds(struct libwebsocket_context *context,
-						      struct libwebsocket *wsi)
+remove_wsi_socket_from_fds(struct rtchatsdk_libwebsocket_context *context,
+						      struct rtchatsdk_libwebsocket *wsi)
 {
 	int m;
 
@@ -178,8 +178,8 @@ do_ext:
 
 
 void
-libwebsocket_close_and_free_session(struct libwebsocket_context *context,
-			 struct libwebsocket *wsi, enum lws_close_status reason)
+rtchatsdk_libwebsocket_close_and_free_session(struct rtchatsdk_libwebsocket_context *context,
+			 struct rtchatsdk_libwebsocket *wsi, enum rtchatsdk_lws_close_status reason)
 {
 	int n;
 	int old_state;
@@ -188,8 +188,8 @@ libwebsocket_close_and_free_session(struct libwebsocket_context *context,
 #ifndef LWS_NO_EXTENSIONS
 	int ret;
 	int m;
-	struct lws_tokens eff_buf;
-	struct libwebsocket_extension *ext;
+	struct rtchatsdk_lws_tokens eff_buf;
+	struct rtchatsdk_libwebsocket_extension *ext;
 #endif
 
 	if (!wsi)
@@ -276,7 +276,7 @@ libwebsocket_close_and_free_session(struct libwebsocket_context *context,
 		/* assuming they left us something to send, send it */
 
 		if (eff_buf.token_len)
-			if (lws_issue_raw(wsi, (unsigned char *)eff_buf.token,
+			if (rtchatsdk_lws_issue_raw(wsi, (unsigned char *)eff_buf.token,
 				      eff_buf.token_len) != eff_buf.token_len) {
 				lwsl_debug("close: ext spill failed\n");
 				goto just_kill_connection;
@@ -303,7 +303,7 @@ libwebsocket_close_and_free_session(struct libwebsocket_context *context,
 
 		/* make valgrind happy */
 		memset(buf, 0, sizeof(buf));
-		n = libwebsocket_write(wsi,
+		n = rtchatsdk_libwebsocket_write(wsi,
 				&buf[LWS_SEND_BUFFER_PRE_PADDING + 2],
 							    0, LWS_WRITE_CLOSE);
 		if (n >= 0) {
@@ -319,7 +319,7 @@ libwebsocket_close_and_free_session(struct libwebsocket_context *context,
 			 * out of politeness
 			 */
 
-			libwebsocket_set_timeout(wsi,
+			rtchatsdk_libwebsocket_set_timeout(wsi,
 						  PENDING_TIMEOUT_CLOSE_ACK, 1);
 
 			lwsl_debug("sent close indication, awaiting ack\n");
@@ -432,9 +432,9 @@ just_kill_connection:
 }
 
 /**
- * libwebsockets_get_peer_addresses() - Get client address information
- * @context:	Libwebsockets context
- * @wsi:	Local struct libwebsocket associated with
+ * rtchatsdk_libwebsockets_get_peer_addresses() - Get client address information
+ * @context:	rtchatsdk_libwebsockets context
+ * @wsi:	Local struct rtchatsdk_libwebsocket associated with
  * @fd:		Connection socket descriptor
  * @name:	Buffer to take client address name
  * @name_len:	Length of client address name buffer
@@ -448,8 +448,8 @@ just_kill_connection:
  */
 
 LWS_VISIBLE void
-libwebsockets_get_peer_addresses(struct libwebsocket_context *context,
-	struct libwebsocket *wsi, int fd, char *name, int name_len,
+rtchatsdk_libwebsockets_get_peer_addresses(struct rtchatsdk_libwebsocket_context *context,
+	struct rtchatsdk_libwebsocket *wsi, int fd, char *name, int name_len,
 					char *rip, int rip_len)
 {
 	socklen_t len;
@@ -467,7 +467,7 @@ libwebsockets_get_peer_addresses(struct libwebsocket_context *context,
 	rip[0] = '\0';
 	name[0] = '\0';
 
-	lws_latency_pre(context, wsi);
+	rtchatsdk_lws_latency_pre(context, wsi);
 
 	len = sizeof(sin);
 	if (getpeername(fd, (struct sockaddr *) &sin, &len) < 0) {
@@ -517,10 +517,10 @@ libwebsockets_get_peer_addresses(struct libwebsocket_context *context,
 
 	ret = 0;
 bail:
-	lws_latency(context, wsi, "libwebsockets_get_peer_addresses", ret, 1);
+	rtchatsdk_lws_latency(context, wsi, "rtchatsdk_libwebsockets_get_peer_addresses", ret, 1);
 }
 
-LWS_VISIBLE int libwebsockets_get_random(struct libwebsocket_context *context,
+LWS_VISIBLE int rtchatsdk_libwebsockets_get_random(struct rtchatsdk_libwebsocket_context *context,
 							     void *buf, int len)
 {
 	int n;
@@ -536,7 +536,7 @@ LWS_VISIBLE int libwebsockets_get_random(struct libwebsocket_context *context,
 	return n;
 }
 
-int lws_set_socket_options(struct libwebsocket_context *context, int fd)
+int rtchatsdk_lws_set_socket_options(struct rtchatsdk_libwebsocket_context *context, int fd)
 {
 	int optval = 1;
 	socklen_t optlen = sizeof(optval);
@@ -610,7 +610,7 @@ int lws_set_socket_options(struct libwebsocket_context *context, int fd)
 	return 0;
 }
 
-LWS_VISIBLE int lws_send_pipe_choked(struct libwebsocket *wsi)
+LWS_VISIBLE int rtchatsdk_lws_send_pipe_choked(struct rtchatsdk_libwebsocket *wsi)
 {
 	struct pollfd fds;
 
@@ -630,13 +630,13 @@ LWS_VISIBLE int lws_send_pipe_choked(struct libwebsocket *wsi)
 }
 
 int
-lws_handle_POLLOUT_event(struct libwebsocket_context *context,
-				struct libwebsocket *wsi, struct pollfd *pollfd)
+rtchatsdk_lws_handle_POLLOUT_event(struct rtchatsdk_libwebsocket_context *context,
+				struct rtchatsdk_libwebsocket *wsi, struct pollfd *pollfd)
 {
 	int n;
 
 #ifndef LWS_NO_EXTENSIONS
-	struct lws_tokens eff_buf;
+	struct rtchatsdk_lws_tokens eff_buf;
 	int ret;
 	int m;
 	int handled = 0;
@@ -699,7 +699,7 @@ lws_handle_POLLOUT_event(struct libwebsocket_context *context,
 		/* assuming they gave us something to send, send it */
 
 		if (eff_buf.token_len) {
-			n = lws_issue_raw(wsi, (unsigned char *)eff_buf.token,
+			n = rtchatsdk_lws_issue_raw(wsi, (unsigned char *)eff_buf.token,
 							     eff_buf.token_len);
 			if (n < 0)
 				return -1;
@@ -724,7 +724,7 @@ lws_handle_POLLOUT_event(struct libwebsocket_context *context,
 		 * something... did that leave the pipe choked?
 		 */
 
-		if (!lws_send_pipe_choked(wsi))
+		if (!rtchatsdk_lws_send_pipe_choked(wsi))
 			/* no we could add more */
 			continue;
 
@@ -763,16 +763,16 @@ notify_action:
 	else
 		n = LWS_CALLBACK_SERVER_WRITEABLE;
 
-	return user_callback_handle_rxflow(wsi->protocol->callback, context,
-			wsi, (enum libwebsocket_callback_reasons) n,
+	return rtchatsdk_user_callback_handle_rxflow(wsi->protocol->callback, context,
+			wsi, (enum rtchatsdk_libwebsocket_callback_reasons) n,
 						      wsi->user_space, NULL, 0);
 }
 
 
 
 int
-libwebsocket_service_timeout_check(struct libwebsocket_context *context,
-				     struct libwebsocket *wsi, unsigned int sec)
+rtchatsdk_libwebsocket_service_timeout_check(struct rtchatsdk_libwebsocket_context *context,
+				     struct rtchatsdk_libwebsocket *wsi, unsigned int sec)
 {
 #ifndef LWS_NO_EXTENSIONS
 	int n;
@@ -799,7 +799,7 @@ libwebsocket_service_timeout_check(struct libwebsocket_context *context,
 
 	if (sec > wsi->pending_timeout_limit) {
 		lwsl_info("TIMEDOUT WAITING\n");
-		libwebsocket_close_and_free_session(context,
+		rtchatsdk_libwebsocket_close_and_free_session(context,
 				wsi, LWS_CLOSE_STATUS_NOSTATUS);
 		return 1;
 	}
@@ -808,20 +808,20 @@ libwebsocket_service_timeout_check(struct libwebsocket_context *context,
 }
 
 /**
- * libwebsocket_service_fd() - Service polled socket with something waiting
+ * rtchatsdk_libwebsocket_service_fd() - Service polled socket with something waiting
  * @context:	Websocket context
  * @pollfd:	The pollfd entry describing the socket fd and which events
  *		happened.
  *
  *	This function takes a pollfd that has POLLIN or POLLOUT activity and
  *	services it according to the state of the associated
- *	struct libwebsocket.
+ *	struct rtchatsdk_libwebsocket.
  *
  *	The one call deals with all "service" that might happen on a socket
  *	including listen accepts, http files as well as websocket protocol.
  *
  *	If a pollfd says it has something, you can just pass it to
- *	libwebsocket_serice_fd() whether it is a socket handled by lws or not.
+ *	rtchatsdk_libwebsocket_serice_fd() whether it is a socket handled by lws or not.
  *	If it sees it is a lws socket, the traffic will be handled and
  *	pollfd->revents will be zeroed now.
  *
@@ -831,10 +831,10 @@ libwebsocket_service_timeout_check(struct libwebsocket_context *context,
  */
 
 LWS_VISIBLE int
-libwebsocket_service_fd(struct libwebsocket_context *context,
+rtchatsdk_libwebsocket_service_fd(struct rtchatsdk_libwebsocket_context *context,
 							  struct pollfd *pollfd)
 {
-	struct libwebsocket *wsi;
+	struct rtchatsdk_libwebsocket *wsi;
 	int n;
 	int m;
 	int listen_socket_fds_index = 0;
@@ -846,7 +846,7 @@ libwebsocket_service_fd(struct libwebsocket_context *context,
 #ifndef LWS_NO_EXTENSIONS
 	int more = 1;
 #endif
-	struct lws_tokens eff_buf;
+	struct rtchatsdk_lws_tokens eff_buf;
 
 	if (context->listen_service_fd)
 		listen_socket_fds_index = context->lws_lookup[
@@ -881,7 +881,7 @@ libwebsocket_service_fd(struct libwebsocket_context *context,
 			if (!wsi)
 				continue;
 
-			if (libwebsocket_service_timeout_check(context, wsi,
+			if (rtchatsdk_libwebsocket_service_timeout_check(context, wsi,
 								     tv.tv_sec))
 				/* he did time out... */
 				if (m == our_fd) {
@@ -941,7 +941,7 @@ libwebsocket_service_fd(struct libwebsocket_context *context,
 				n = poll(&context->fds[listen_socket_fds_index],
 									  1, 0);
 				if (n > 0) { /* there's a conn waiting for us */
-					libwebsocket_service_fd(context,
+					rtchatsdk_libwebsocket_service_fd(context,
 						&context->
 						  fds[listen_socket_fds_index]);
 					context->listen_service_extraseen++;
@@ -987,8 +987,8 @@ libwebsocket_service_fd(struct libwebsocket_context *context,
 
 		if ((pollfd->revents & POLLOUT) &&
 			wsi->state == WSI_STATE_ESTABLISHED &&
-			   lws_handle_POLLOUT_event(context, wsi, pollfd) < 0) {
-				lwsl_info("libwebsocket_service_fd: closing\n");
+			   rtchatsdk_lws_handle_POLLOUT_event(context, wsi, pollfd) < 0) {
+				lwsl_info("rtchatsdk_libwebsocket_service_fd: closing\n");
 				goto close_and_handled;
 			}
 
@@ -1079,7 +1079,7 @@ drain:
 			/* service incoming data */
 
 			if (eff_buf.token_len) {
-				n = libwebsocket_read(context, wsi,
+				n = rtchatsdk_libwebsocket_read(context, wsi,
 					(unsigned char *)eff_buf.token,
 							    eff_buf.token_len);
 				if (n < 0) {
@@ -1099,7 +1099,7 @@ drain:
 			free(wsi->u.ws.rxflow_buffer);
 			wsi->u.ws.rxflow_buffer = NULL;
 			/* having drained the rxflow buffer, can rearm POLLIN */
-			_libwebsocket_rx_flow_control(wsi);
+			_rtchatsdk_libwebsocket_rx_flow_control(wsi);
 		}
 
 #ifdef LWS_OPENSSL_SUPPORT
@@ -1112,7 +1112,7 @@ drain:
 #ifdef LWS_NO_CLIENT
 		break;
 #else
-		n = lws_client_socket_service(context, wsi, pollfd);
+		n = rtchatsdk_lws_client_socket_service(context, wsi, pollfd);
 		goto handled;
 #endif
 	}
@@ -1121,7 +1121,7 @@ drain:
 	goto handled;
 
 close_and_handled:
-	libwebsocket_close_and_free_session(context, wsi,
+	rtchatsdk_libwebsocket_close_and_free_session(context, wsi,
 						LWS_CLOSE_STATUS_NOSTATUS);
 	n = 1;
 
@@ -1132,7 +1132,7 @@ handled:
 
 
 /**
- * libwebsocket_context_destroy() - Destroy the websocket context
+ * rtchatsdk_libwebsocket_context_destroy() - Destroy the websocket context
  * @context:	Websocket context
  *
  *	This function closes any active connections and then frees the
@@ -1140,13 +1140,13 @@ handled:
  *	undefined.
  */
 LWS_VISIBLE void
-libwebsocket_context_destroy(struct libwebsocket_context *context)
+rtchatsdk_libwebsocket_context_destroy(struct rtchatsdk_libwebsocket_context *context)
 {
 #ifndef LWS_NO_EXTENSIONS
 	int n;
 	int m;
-	struct libwebsocket_extension *ext;
-	struct libwebsocket_protocols *protocol = context->protocols;
+	struct rtchatsdk_libwebsocket_extension *ext;
+	struct rtchatsdk_libwebsocket_protocols *protocol = context->protocols;
 
 #ifdef LWS_LATENCY
 	if (context->worst_latency_info[0])
@@ -1154,9 +1154,9 @@ libwebsocket_context_destroy(struct libwebsocket_context *context)
 #endif
 
 	for (n = 0; n < context->fds_count; n++) {
-		struct libwebsocket *wsi =
+		struct rtchatsdk_libwebsocket *wsi =
 					context->lws_lookup[context->fds[n].fd];
-		libwebsocket_close_and_free_session(context,
+		rtchatsdk_libwebsocket_close_and_free_session(context,
 			wsi, LWS_CLOSE_STATUS_NOSTATUS /* no protocol close */);
 		n--;
 	}
@@ -1172,7 +1172,7 @@ libwebsocket_context_destroy(struct libwebsocket_context *context)
 		m = LWS_EXT_CALLBACK_SERVER_CONTEXT_DESTRUCT;
 	while (ext && ext->callback) {
 		ext->callback(context, ext, NULL,
-			(enum libwebsocket_extension_callback_reasons)m,
+			(enum rtchatsdk_libwebsocket_extension_callback_reasons)m,
 								 NULL, NULL, 0);
 		ext++;
 	}
@@ -1220,7 +1220,7 @@ libwebsocket_context_destroy(struct libwebsocket_context *context)
 }
 
 /**
- * libwebsocket_context_user() - get the user data associated with the context
+ * rtchatsdk_libwebsocket_context_user() - get the user data associated with the context
  * @context: Websocket context
  *
  *	This returns the optional user allocation that can be attached to
@@ -1229,13 +1229,13 @@ libwebsocket_context_destroy(struct libwebsocket_context *context)
  *	using globals statics in the user code.
  */
 LWS_EXTERN void *
-libwebsocket_context_user(struct libwebsocket_context *context)
+rtchatsdk_libwebsocket_context_user(struct rtchatsdk_libwebsocket_context *context)
 {
 	return context->user_space;
 }
 
 /**
- * libwebsocket_service() - Service any pending websocket activity
+ * rtchatsdk_libwebsocket_service() - Service any pending websocket activity
  * @context:	Websocket context
  * @timeout_ms:	Timeout for poll; 0 means return immediately if nothing needed
  *		service otherwise block and service immediately, returning
@@ -1267,7 +1267,7 @@ libwebsocket_context_user(struct libwebsocket_context *context)
  */
 
 LWS_VISIBLE int
-libwebsocket_service(struct libwebsocket_context *context, int timeout_ms)
+rtchatsdk_libwebsocket_service(struct rtchatsdk_libwebsocket_context *context, int timeout_ms)
 {
 	int n;
 	int m;
@@ -1291,7 +1291,7 @@ libwebsocket_service(struct libwebsocket_context *context, int timeout_ms)
 	for (n = 0; n < context->fds_count; n++) {
 		if (!context->fds[n].revents)
 			continue;
-		m = libwebsocket_service_fd(context, &context->fds[n]);
+		m = rtchatsdk_libwebsocket_service_fd(context, &context->fds[n]);
 		if (m < 0)
 			return -1;
 		/* if something closed, retry this slot */
@@ -1304,9 +1304,9 @@ libwebsocket_service(struct libwebsocket_context *context, int timeout_ms)
 
 #ifndef LWS_NO_EXTENSIONS
 int
-lws_any_extension_handled(struct libwebsocket_context *context,
-			  struct libwebsocket *wsi,
-			  enum libwebsocket_extension_callback_reasons r,
+rtchatsdk_lws_any_extension_handled(struct rtchatsdk_libwebsocket_context *context,
+			  struct rtchatsdk_libwebsocket *wsi,
+			  enum rtchatsdk_libwebsocket_extension_callback_reasons r,
 						       void *v, size_t len)
 {
 	int n;
@@ -1328,8 +1328,8 @@ lws_any_extension_handled(struct libwebsocket_context *context,
 
 
 void *
-lws_get_extension_user_matching_ext(struct libwebsocket *wsi,
-					   struct libwebsocket_extension *ext)
+lws_get_extension_user_matching_ext(struct rtchatsdk_libwebsocket *wsi,
+					   struct rtchatsdk_libwebsocket_extension *ext)
 {
 	int n = 0;
 
@@ -1349,17 +1349,17 @@ lws_get_extension_user_matching_ext(struct libwebsocket *wsi,
 #endif
 
 /**
- * libwebsocket_callback_on_writable() - Request a callback when this socket
+ * rtchatsdk_libwebsocket_callback_on_writable() - Request a callback when this socket
  *					 becomes able to be written to without
  *					 blocking
  *
- * @context:	libwebsockets context
+ * @context:	rtchatsdk_libwebsockets context
  * @wsi:	Websocket connection instance to get callback for
  */
 
 LWS_VISIBLE int
-libwebsocket_callback_on_writable(struct libwebsocket_context *context,
-						      struct libwebsocket *wsi)
+rtchatsdk_libwebsocket_callback_on_writable(struct rtchatsdk_libwebsocket_context *context,
+						      struct rtchatsdk_libwebsocket *wsi)
 {
 #ifndef LWS_NO_EXTENSIONS
 	int n;
@@ -1381,7 +1381,7 @@ libwebsocket_callback_on_writable(struct libwebsocket_context *context,
 		return 1;
 #endif
 	if (wsi->position_in_fds_table < 0) {
-		lwsl_err("libwebsocket_callback_on_writable: failed to find socket %d\n",
+		lwsl_err("rtchatsdk_libwebsocket_callback_on_writable: failed to find socket %d\n",
 								     wsi->sock);
 		return -1;
 	}
@@ -1397,7 +1397,7 @@ libwebsocket_callback_on_writable(struct libwebsocket_context *context,
 }
 
 /**
- * libwebsocket_callback_on_writable_all_protocol() - Request a callback for
+ * rtchatsdk_libwebsocket_callback_on_writable_all_protocol() - Request a callback for
  *			all connections using the given protocol when it
  *			becomes possible to write to each socket without
  *			blocking in turn.
@@ -1406,26 +1406,26 @@ libwebsocket_callback_on_writable(struct libwebsocket_context *context,
  */
 
 LWS_VISIBLE int
-libwebsocket_callback_on_writable_all_protocol(
-				  const struct libwebsocket_protocols *protocol)
+rtchatsdk_libwebsocket_callback_on_writable_all_protocol(
+				  const struct rtchatsdk_libwebsocket_protocols *protocol)
 {
-	struct libwebsocket_context *context = protocol->owning_server;
+	struct rtchatsdk_libwebsocket_context *context = protocol->owning_server;
 	int n;
-	struct libwebsocket *wsi;
+	struct rtchatsdk_libwebsocket *wsi;
 
 	for (n = 0; n < context->fds_count; n++) {
 		wsi = context->lws_lookup[context->fds[n].fd];
 		if (!wsi)
 			continue;
 		if (wsi->protocol == protocol)
-			libwebsocket_callback_on_writable(context, wsi);
+			rtchatsdk_libwebsocket_callback_on_writable(context, wsi);
 	}
 
 	return 0;
 }
 
 /**
- * libwebsocket_set_timeout() - marks the wsi as subject to a timeout
+ * rtchatsdk_libwebsocket_set_timeout() - marks the wsi as subject to a timeout
  *
  * You will not need this unless you are doing something special
  *
@@ -1435,7 +1435,7 @@ libwebsocket_callback_on_writable_all_protocol(
  */
 
 void
-libwebsocket_set_timeout(struct libwebsocket *wsi,
+rtchatsdk_libwebsocket_set_timeout(struct rtchatsdk_libwebsocket *wsi,
 					  enum pending_timeout reason, int secs)
 {
 	struct timeval tv;
@@ -1448,7 +1448,7 @@ libwebsocket_set_timeout(struct libwebsocket *wsi,
 
 
 /**
- * libwebsocket_get_socket_fd() - returns the socket file descriptor
+ * rtchatsdk_libwebsocket_get_socket_fd() - returns the socket file descriptor
  *
  * You will not need this unless you are doing something special
  *
@@ -1456,14 +1456,14 @@ libwebsocket_set_timeout(struct libwebsocket *wsi,
  */
 
 LWS_VISIBLE int
-libwebsocket_get_socket_fd(struct libwebsocket *wsi)
+rtchatsdk_libwebsocket_get_socket_fd(struct rtchatsdk_libwebsocket *wsi)
 {
 	return wsi->sock;
 }
 
 #ifdef LWS_LATENCY
 void
-lws_latency(struct libwebsocket_context *context, struct libwebsocket *wsi,
+lws_latency(struct rtchatsdk_libwebsocket_context *context, struct rtchatsdk_libwebsocket *wsi,
 				     const char *action, int ret, int completed)
 {
 	struct timeval tv;
@@ -1507,15 +1507,15 @@ lws_latency(struct libwebsocket_context *context, struct libwebsocket *wsi,
 
 #ifdef LWS_NO_SERVER
 int
-_libwebsocket_rx_flow_control(struct libswebsocket *wsi)
+_rtchatsdk_libwebsocket_rx_flow_control(struct libswebsocket *wsi)
 {
 	return 0;
 }
 #else
 int
-_libwebsocket_rx_flow_control(struct libwebsocket *wsi)
+_rtchatsdk_libwebsocket_rx_flow_control(struct rtchatsdk_libwebsocket *wsi)
 {
-	struct libwebsocket_context *context = wsi->protocol->owning_server;
+	struct rtchatsdk_libwebsocket_context *context = wsi->protocol->owning_server;
 
 	/* there is no pending change */
 	if (!(wsi->u.ws.rxflow_change_to & LWS_RXFLOW_PENDING_CHANGE))
@@ -1524,7 +1524,7 @@ _libwebsocket_rx_flow_control(struct libwebsocket *wsi)
 	/* stuff is still buffered, not ready to really accept new input */
 	if (wsi->u.ws.rxflow_buffer) {
 		/* get ourselves called back to deal with stashed buffer */
-		libwebsocket_callback_on_writable(context, wsi);
+		rtchatsdk_libwebsocket_callback_on_writable(context, wsi);
 		return 0;
 	}
 
@@ -1558,7 +1558,7 @@ _libwebsocket_rx_flow_control(struct libwebsocket *wsi)
 #endif
 
 /**
- * libwebsocket_rx_flow_control() - Enable and disable socket servicing for
+ * rtchatsdk_libwebsocket_rx_flow_control() - Enable and disable socket servicing for
  *				receieved packets.
  *
  * If the output side of a server process becomes choked, this allows flow
@@ -1569,19 +1569,19 @@ _libwebsocket_rx_flow_control(struct libwebsocket *wsi)
  */
 
 LWS_VISIBLE int
-libwebsocket_rx_flow_control(struct libwebsocket *wsi, int enable)
+rtchatsdk_libwebsocket_rx_flow_control(struct rtchatsdk_libwebsocket *wsi, int enable)
 {
 	if (enable == (wsi->u.ws.rxflow_change_to & LWS_RXFLOW_ALLOW))
 		return 0;
 
-	lwsl_info("libwebsocket_rx_flow_control(0x%p, %d)\n", wsi, enable);
+	lwsl_info("rtchatsdk_libwebsocket_rx_flow_control(0x%p, %d)\n", wsi, enable);
 	wsi->u.ws.rxflow_change_to = LWS_RXFLOW_PENDING_CHANGE | !!enable;
 
 	return 0;
 }
 
 /**
- * libwebsocket_rx_flow_allow_all_protocol() - Allow all connections with this protocol to receive
+ * rtchatsdk_libwebsocket_rx_flow_allow_all_protocol() - Allow all connections with this protocol to receive
  *
  * When the user server code realizes it can accept more input, it can
  * call this to have the RX flow restriction removed from all connections using
@@ -1591,25 +1591,25 @@ libwebsocket_rx_flow_control(struct libwebsocket *wsi, int enable)
  */
 
 LWS_VISIBLE void
-libwebsocket_rx_flow_allow_all_protocol(
-				const struct libwebsocket_protocols *protocol)
+rtchatsdk_libwebsocket_rx_flow_allow_all_protocol(
+				const struct rtchatsdk_libwebsocket_protocols *protocol)
 {
-	struct libwebsocket_context *context = protocol->owning_server;
+	struct rtchatsdk_libwebsocket_context *context = protocol->owning_server;
 	int n;
-	struct libwebsocket *wsi;
+	struct rtchatsdk_libwebsocket *wsi;
 
 	for (n = 0; n < context->fds_count; n++) {
 		wsi = context->lws_lookup[context->fds[n].fd];
 		if (!wsi)
 			continue;
 		if (wsi->protocol == protocol)
-			libwebsocket_rx_flow_control(wsi, LWS_RXFLOW_ALLOW);
+			rtchatsdk_libwebsocket_rx_flow_control(wsi, LWS_RXFLOW_ALLOW);
 	}
 }
 
 
 /**
- * libwebsocket_canonical_hostname() - returns this host's hostname
+ * rtchatsdk_libwebsocket_canonical_hostname() - returns this host's hostname
  *
  * This is typically used by client code to fill in the host parameter
  * when making a client connection.  You can only call it after the context
@@ -1620,7 +1620,7 @@ libwebsocket_rx_flow_allow_all_protocol(
 
 
 LWS_VISIBLE extern const char *
-libwebsocket_canonical_hostname(struct libwebsocket_context *context)
+rtchatsdk_libwebsocket_canonical_hostname(struct rtchatsdk_libwebsocket_context *context)
 {
 	return (const char *)context->canonical_hostname;
 }
@@ -1637,7 +1637,7 @@ OpenSSL_verify_callback(int preverify_ok, X509_STORE_CTX *x509_ctx)
 
 	SSL *ssl;
 	int n;
-	struct libwebsocket_context *context;
+	struct rtchatsdk_libwebsocket_context *context;
 
 	ssl = X509_STORE_CTX_get_ex_data(x509_ctx,
 		SSL_get_ex_data_X509_STORE_CTX_idx());
@@ -1663,32 +1663,32 @@ OpenSSL_verify_callback(int preverify_ok, X509_STORE_CTX *x509_ctx)
 }
 #endif
 
-int user_callback_handle_rxflow(callback_function callback_function,
-		struct libwebsocket_context *context,
-			struct libwebsocket *wsi,
-			 enum libwebsocket_callback_reasons reason, void *user,
+int rtchatsdk_user_callback_handle_rxflow(rtchatsdk_callback_function callback_function,
+		struct rtchatsdk_libwebsocket_context *context,
+			struct rtchatsdk_libwebsocket *wsi,
+			 enum rtchatsdk_libwebsocket_callback_reasons reason, void *user,
 							  void *in, size_t len)
 {
 	int n;
 
 	n = callback_function(context, wsi, reason, user, in, len);
 	if (!n)
-		n = _libwebsocket_rx_flow_control(wsi);
+		n = _rtchatsdk_libwebsocket_rx_flow_control(wsi);
 
 	return n;
 }
 
 
 /**
- * libwebsocket_create_context() - Create the websocket handler
+ * rtchatsdk_libwebsocket_create_context() - Create the websocket handler
  * @info:	pointer to struct with parameters
  *
  *	This function creates the listening socket (if serving) and takes care
  *	of all initialization in one step.
  *
- *	After initialization, it returns a struct libwebsocket_context * that
+ *	After initialization, it returns a struct rtchatsdk_libwebsocket_context * that
  *	represents this server.  After calling, user code needs to take care
- *	of calling libwebsocket_service() with the context pointer to get the
+ *	of calling rtchatsdk_libwebsocket_service() with the context pointer to get the
  *	server's sockets serviced.  This can be done in the same process context
  *	or a forked process, or another thread,
  *
@@ -1709,20 +1709,20 @@ int user_callback_handle_rxflow(callback_function callback_function,
  *	one place; they're all handled in the user callback.
  */
 
-LWS_VISIBLE struct libwebsocket_context *
-libwebsocket_create_context(struct lws_context_creation_info *info)
+LWS_VISIBLE struct rtchatsdk_libwebsocket_context *
+rtchatsdk_libwebsocket_create_context(struct rtchatsdk_lws_context_creation_info *info)
 {
-	struct libwebsocket_context *context = NULL;
+	struct rtchatsdk_libwebsocket_context *context = NULL;
 	char *p;
 	int n;
 #ifndef LWS_NO_SERVER
 	int opt = 1;
-	struct libwebsocket *wsi;
+	struct rtchatsdk_libwebsocket *wsi;
 	struct sockaddr_in serv_addr;
 #endif
 #ifndef LWS_NO_EXTENSIONS
 	int m;
-	struct libwebsocket_extension *ext;
+	struct rtchatsdk_libwebsocket_extension *ext;
 #endif
 
 #ifdef LWS_OPENSSL_SUPPORT
@@ -1730,7 +1730,7 @@ libwebsocket_create_context(struct lws_context_creation_info *info)
 #endif
 
 #ifndef LWS_NO_DAEMONIZE
-	int pid_daemon = get_daemonize_pid();
+	int pid_daemon = rtchatsdk_get_daemonize_pid();
 #endif
 
 	lwsl_notice("Initial logging level %d\n", log_level);
@@ -1782,8 +1782,8 @@ libwebsocket_create_context(struct lws_context_creation_info *info)
 	}
 #endif
 
-	context = (struct libwebsocket_context *)
-				malloc(sizeof(struct libwebsocket_context));
+	context = (struct rtchatsdk_libwebsocket_context *)
+				malloc(sizeof(struct rtchatsdk_libwebsocket_context));
 	if (!context) {
 		lwsl_err("No memory for websocket context\n");
 		return NULL;
@@ -1803,11 +1803,11 @@ libwebsocket_create_context(struct lws_context_creation_info *info)
 	/* to reduce this allocation, */
 	context->max_fds = getdtablesize();
 	lwsl_notice(" static allocation: %u + (%u x %u fds) = %u bytes\n",
-		sizeof(struct libwebsocket_context),
-		sizeof(struct pollfd) + sizeof(struct libwebsocket *),
+		sizeof(struct rtchatsdk_libwebsocket_context),
+		sizeof(struct pollfd) + sizeof(struct rtchatsdk_libwebsocket *),
 		context->max_fds,
-		sizeof(struct libwebsocket_context) +
-		((sizeof(struct pollfd) + sizeof(struct libwebsocket *)) *
+		sizeof(struct rtchatsdk_libwebsocket_context) +
+		((sizeof(struct pollfd) + sizeof(struct rtchatsdk_libwebsocket *)) *
 							     context->max_fds));
 
 	context->fds = (struct pollfd *)malloc(sizeof(struct pollfd) *
@@ -1818,8 +1818,8 @@ libwebsocket_create_context(struct lws_context_creation_info *info)
 		free(context);
 		return NULL;
 	}
-	context->lws_lookup = (struct libwebsocket **)
-		      malloc(sizeof(struct libwebsocket *) * context->max_fds);
+	context->lws_lookup = (struct rtchatsdk_libwebsocket **)
+		      malloc(sizeof(struct rtchatsdk_libwebsocket *) * context->max_fds);
 	if (context->lws_lookup == NULL) {
 		lwsl_err(
 		  "Unable to allocate lws_lookup array for %d connections\n",
@@ -1828,7 +1828,7 @@ libwebsocket_create_context(struct lws_context_creation_info *info)
 		free(context);
 		return NULL;
 	}
-	memset(context->lws_lookup, 0, sizeof(struct libwebsocket *) *
+	memset(context->lws_lookup, 0, sizeof(struct rtchatsdk_libwebsocket *) *
 							context->max_fds);
 
 	context->fds_count = 0;
@@ -1918,7 +1918,7 @@ libwebsocket_create_context(struct lws_context_creation_info *info)
 
 		lwsl_notice(
 			" per-conn mem: %u + %u headers + protocol rx buf\n",
-				sizeof(struct libwebsocket),
+				sizeof(struct rtchatsdk_libwebsocket),
 					      sizeof(struct allocated_headers));
 	}
 #endif
@@ -1940,7 +1940,7 @@ libwebsocket_create_context(struct lws_context_creation_info *info)
 	SSL_load_error_strings();
 
 	openssl_websocket_private_data_index =
-		SSL_get_ex_new_index(0, "libwebsockets", NULL, NULL, NULL);
+		SSL_get_ex_new_index(0, "rtchatsdk_libwebsockets", NULL, NULL, NULL);
 
 	/*
 	 * Firefox insists on SSLv23 not SSLv3
@@ -2094,7 +2094,7 @@ libwebsocket_create_context(struct lws_context_creation_info *info)
 
 	/* selftest */
 
-	if (lws_b64_selftest())
+	if (rtchatsdk_lws_b64_selftest())
 		goto bail;
 
 #ifndef LWS_NO_SERVER
@@ -2138,7 +2138,7 @@ libwebsocket_create_context(struct lws_context_creation_info *info)
 		if (info->iface == NULL)
 			serv_addr.sin_addr.s_addr = INADDR_ANY;
 		else
-			interface_to_sa(info->iface, &serv_addr,
+			rtchatsdk_interface_to_sa(info->iface, &serv_addr,
 						sizeof(serv_addr));
 		serv_addr.sin_port = htons(info->port);
 
@@ -2151,21 +2151,21 @@ libwebsocket_create_context(struct lws_context_creation_info *info)
 			goto bail;
 		}
 
-		wsi = (struct libwebsocket *)malloc(
-					sizeof(struct libwebsocket));
+		wsi = (struct rtchatsdk_libwebsocket *)malloc(
+					sizeof(struct rtchatsdk_libwebsocket));
 		if (wsi == NULL) {
 			lwsl_err("Out of mem\n");
 			close(sockfd);
 			goto bail;
 		}
-		memset(wsi, 0, sizeof(struct libwebsocket));
+		memset(wsi, 0, sizeof(struct rtchatsdk_libwebsocket));
 		wsi->sock = sockfd;
 #ifndef LWS_NO_EXTENSIONS
 		wsi->count_active_extensions = 0;
 #endif
 		wsi->mode = LWS_CONNMODE_SERVER_LISTENER;
 
-		insert_wsi_socket_into_fds(context, wsi);
+		rtchatsdk_insert_wsi_socket_into_fds(context, wsi);
 
 		context->listen_service_modulo = LWS_LISTEN_SERVICE_MODULO;
 		context->listen_service_count = 0;
@@ -2228,7 +2228,7 @@ libwebsocket_create_context(struct lws_context_creation_info *info)
 		while (ext->callback) {
 			lwsl_ext("  Extension: %s\n", ext->name);
 			ext->callback(context, ext, NULL,
-			(enum libwebsocket_extension_callback_reasons)m,
+			(enum rtchatsdk_libwebsocket_extension_callback_reasons)m,
 								NULL, NULL, 0);
 			ext++;
 		}
@@ -2237,12 +2237,12 @@ libwebsocket_create_context(struct lws_context_creation_info *info)
 	return context;
 
 bail:
-	libwebsocket_context_destroy(context);
+	rtchatsdk_libwebsocket_context_destroy(context);
 	return NULL;
 }
 
 /**
- * libwebsockets_get_protocol() - Returns a protocol pointer from a websocket
+ * rtchatsdk_libwebsockets_get_protocol() - Returns a protocol pointer from a websocket
  *				  connection.
  * @wsi:	pointer to struct websocket you want to know the protocol of
  *
@@ -2251,26 +2251,26 @@ bail:
  *	this is how you can get a pointer to the active protocol if needed.
  */
 
-LWS_VISIBLE const struct libwebsocket_protocols *
-libwebsockets_get_protocol(struct libwebsocket *wsi)
+LWS_VISIBLE const struct rtchatsdk_libwebsocket_protocols *
+rtchatsdk_libwebsockets_get_protocol(struct rtchatsdk_libwebsocket *wsi)
 {
 	return wsi->protocol;
 }
 
 LWS_VISIBLE int
-libwebsocket_is_final_fragment(struct libwebsocket *wsi)
+rtchatsdk_libwebsocket_is_final_fragment(struct rtchatsdk_libwebsocket *wsi)
 {
 	return wsi->u.ws.final;
 }
 
 LWS_VISIBLE unsigned char
-libwebsocket_get_reserved_bits(struct libwebsocket *wsi)
+rtchatsdk_libwebsocket_get_reserved_bits(struct rtchatsdk_libwebsocket *wsi)
 {
 	return wsi->u.ws.rsv;
 }
 
 int
-libwebsocket_ensure_user_space(struct libwebsocket *wsi)
+rtchatsdk_libwebsocket_ensure_user_space(struct rtchatsdk_libwebsocket *wsi)
 {
 	if (!wsi->protocol)
 		return 1;
@@ -2337,7 +2337,7 @@ LWS_VISIBLE void lwsl_emit_syslog(int level, const char *line)
 }
 #endif
 
-LWS_VISIBLE void _lws_log(int filter, const char *format, ...)
+LWS_VISIBLE void _rtchatsdk_lws_log(int filter, const char *format, ...)
 {
 	char buf[256];
 	va_list ap;

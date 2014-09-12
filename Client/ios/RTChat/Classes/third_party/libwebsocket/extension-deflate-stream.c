@@ -8,16 +8,16 @@
 #define LWS_ZLIB_MEMLEVEL 8
 
 int lws_extension_callback_deflate_stream(
-		struct libwebsocket_context *context,
-		struct libwebsocket_extension *ext,
-		struct libwebsocket *wsi,
-			enum libwebsocket_extension_callback_reasons reason,
+		struct rtchatsdk_libwebsocket_context *context,
+		struct rtchatsdk_libwebsocket_extension *ext,
+		struct rtchatsdk_libwebsocket *wsi,
+			enum rtchatsdk_libwebsocket_extension_callback_reasons reason,
 					       void *user, void *in, size_t len)
 {
 	struct lws_ext_deflate_stream_conn *conn =
 				     (struct lws_ext_deflate_stream_conn *)user;
 	int n;
-	struct lws_tokens *eff_buf = (struct lws_tokens *)in;
+	struct rtchatsdk_lws_tokens *eff_buf = (struct rtchatsdk_lws_tokens *)in;
 
 	switch (reason) {
 

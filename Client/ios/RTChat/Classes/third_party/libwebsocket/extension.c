@@ -3,7 +3,7 @@
 #include "extension-deflate-frame.h"
 #include "extension-deflate-stream.h"
 
-struct libwebsocket_extension libwebsocket_internal_extensions[] = {
+struct rtchatsdk_libwebsocket_extension rtchatsdk_libwebsocket_internal_extensions[] = {
 #ifdef LWS_EXT_DEFLATE_STREAM
 	{
 		"deflate-stream",
@@ -27,7 +27,7 @@ struct libwebsocket_extension libwebsocket_internal_extensions[] = {
 	}
 };
 
-LWS_VISIBLE struct libwebsocket_extension *libwebsocket_get_internal_extensions()
+LWS_VISIBLE struct rtchatsdk_libwebsocket_extension *rtchatsdk_libwebsocket_get_internal_extensions()
 {
-	return libwebsocket_internal_extensions;
+	return rtchatsdk_libwebsocket_internal_extensions;
 }

@@ -1,5 +1,5 @@
 /*
- * libwebsockets - small server side websockets and web server implementation
+ * rtchatsdk_libwebsockets - small server side websockets and web server implementation
  *
  * Copyright (C) 2010-2013 Andy Green <andy@warmcat.com>
  *
@@ -28,7 +28,7 @@
  */
 
 int
-handshake_0405(struct libwebsocket_context *context, struct libwebsocket *wsi)
+rtchatsdk_handshake_0405(struct rtchatsdk_libwebsocket_context *context, struct rtchatsdk_libwebsocket *wsi)
 {
 	unsigned char hash[20];
 	int n;
@@ -38,19 +38,19 @@ handshake_0405(struct libwebsocket_context *context, struct libwebsocket *wsi)
 #ifndef LWS_NO_EXTENSIONS
 	char *c;
 	char ext_name[128];
-	struct libwebsocket_extension *ext;
+	struct rtchatsdk_libwebsocket_extension *ext;
 	int ext_count = 0;
 	int more = 1;
 #endif
 
-	if (!lws_hdr_total_length(wsi, WSI_TOKEN_HOST) ||
-				!lws_hdr_total_length(wsi, WSI_TOKEN_KEY)) {
+	if (!rtchatsdk_lws_hdr_total_length(wsi, WSI_TOKEN_HOST) ||
+				!rtchatsdk_lws_hdr_total_length(wsi, WSI_TOKEN_KEY)) {
 		lwsl_parser("handshake_04 missing pieces\n");
 		/* completed header processing, but missing some bits */
 		goto bail;
 	}
 
-	if (lws_hdr_total_length(wsi, WSI_TOKEN_KEY) >=
+	if (rtchatsdk_lws_hdr_total_length(wsi, WSI_TOKEN_KEY) >=
 						     MAX_WEBSOCKET_04_KEY_LEN) {
 		lwsl_warn("Client key too long %d\n", MAX_WEBSOCKET_04_KEY_LEN);
 		goto bail;
@@ -62,11 +62,11 @@ handshake_0405(struct libwebsocket_context *context, struct libwebsocket *wsi)
 	 */
 	n = sprintf((char *)context->service_buffer,
 				"%s258EAFA5-E914-47DA-95CA-C5AB0DC85B11",
-				lws_hdr_simple_ptr(wsi, WSI_TOKEN_KEY));
+				rtchatsdk_lws_hdr_simple_ptr(wsi, WSI_TOKEN_KEY));
 
-	SHA1(context->service_buffer, n, hash);
+	rtchatsdk_SHA1(context->service_buffer, n, hash);
 
-	accept_len = lws_b64_encode_string((char *)hash, 20,
+	accept_len = rtchatsdk_lws_b64_encode_string((char *)hash, 20,
 			(char *)context->service_buffer,
 			sizeof(context->service_buffer));
 	if (accept_len < 0) {
@@ -75,7 +75,7 @@ handshake_0405(struct libwebsocket_context *context, struct libwebsocket *wsi)
 	}
 
 	/* allocate the per-connection user memory (if any) */
-	if (libwebsocket_ensure_user_space(wsi))
+	if (rtchatsdk_libwebsocket_ensure_user_space(wsi))
 		goto bail;
 
 	/* create the response packet */
@@ -91,9 +91,9 @@ handshake_0405(struct libwebsocket_context *context, struct libwebsocket *wsi)
 	strcpy(p, (char *)context->service_buffer);
 	p += accept_len;
 
-	if (lws_hdr_total_length(wsi, WSI_TOKEN_PROTOCOL)) {
+	if (rtchatsdk_lws_hdr_total_length(wsi, WSI_TOKEN_PROTOCOL)) {
 		LWS_CPYAPP(p, "\x0d\x0aSec-WebSocket-Protocol: ");
-		n = lws_hdr_copy(wsi, p, 128, WSI_TOKEN_PROTOCOL);
+		n = rtchatsdk_lws_hdr_copy(wsi, p, 128, WSI_TOKEN_PROTOCOL);
 		if (n < 0)
 			goto bail;
 		p += n;
@@ -105,14 +105,14 @@ handshake_0405(struct libwebsocket_context *context, struct libwebsocket *wsi)
 	 * enable on this connection, and give him back the list
 	 */
 
-	if (lws_hdr_total_length(wsi, WSI_TOKEN_EXTENSIONS)) {
+	if (rtchatsdk_lws_hdr_total_length(wsi, WSI_TOKEN_EXTENSIONS)) {
 
 		/*
 		 * break down the list of client extensions
 		 * and go through them
 		 */
 
-		if (lws_hdr_copy(wsi, (char *)context->service_buffer,
+		if (rtchatsdk_lws_hdr_copy(wsi, (char *)context->service_buffer,
 				sizeof(context->service_buffer),
 						      WSI_TOKEN_EXTENSIONS) < 0)
 			goto bail;
@@ -227,7 +227,7 @@ handshake_0405(struct libwebsocket_context *context, struct libwebsocket *wsi)
 	LWS_CPYAPP(p, "\x0d\x0a\x0d\x0a");
 
 #ifndef LWS_NO_EXTENSIONS
-	if (!lws_any_extension_handled(context, wsi,
+	if (!rtchatsdk_lws_any_extension_handled(context, wsi,
 			LWS_EXT_CALLBACK_HANDSHAKE_REPLY_TX,
 						     response, p - response)) {
 #else
@@ -239,7 +239,7 @@ handshake_0405(struct libwebsocket_context *context, struct libwebsocket *wsi)
 	#ifdef DEBUG
 		fwrite(response, 1,  p - response, stderr);
 	#endif
-		n = libwebsocket_write(wsi, (unsigned char *)response,
+		n = rtchatsdk_libwebsocket_write(wsi, (unsigned char *)response,
 						  p - response, LWS_WRITE_HTTP);
 		if (n != (p - response)) {
 			lwsl_debug("handshake_0405: ERROR writing to socket\n");

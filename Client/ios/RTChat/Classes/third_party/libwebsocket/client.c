@@ -1,5 +1,5 @@
 /*
- * libwebsockets - small server side websockets and web server implementation
+ * rtchatsdk_libwebsockets - small server side websockets and web server implementation
  *
  * Copyright (C) 2010-2013 Andy Green <andy@warmcat.com>
  *
@@ -35,8 +35,8 @@
 #include <netdb.h>
 #endif
 
-int lws_client_socket_service(struct libwebsocket_context *context,
-				struct libwebsocket *wsi, struct pollfd *pollfd)
+int rtchatsdk_lws_client_socket_service(struct rtchatsdk_libwebsocket_context *context,
+				struct rtchatsdk_libwebsocket *wsi, struct pollfd *pollfd)
 {
 	int n;
 	char *p = (char *)&context->service_buffer[0];
@@ -54,7 +54,7 @@ int lws_client_socket_service(struct libwebsocket_context *context,
 			lwsl_warn("Proxy connection %p (fd=%d) dead\n",
 				(void *)wsi, pollfd->fd);
 
-			libwebsocket_close_and_free_session(context, wsi,
+			rtchatsdk_libwebsocket_close_and_free_session(context, wsi,
 						     LWS_CLOSE_STATUS_NOSTATUS);
 			return 0;
 		}
@@ -62,7 +62,7 @@ int lws_client_socket_service(struct libwebsocket_context *context,
 		n = recv(wsi->sock, context->service_buffer,
 					sizeof(context->service_buffer), 0);
 		if (n < 0) {
-			libwebsocket_close_and_free_session(context, wsi,
+			rtchatsdk_libwebsocket_close_and_free_session(context, wsi,
 						     LWS_CLOSE_STATUS_NOSTATUS);
 			lwsl_err("ERROR reading from proxy socket\n");
 			return 0;
@@ -70,7 +70,7 @@ int lws_client_socket_service(struct libwebsocket_context *context,
 
 		context->service_buffer[13] = '\0';
 		if (strcmp((char *)context->service_buffer, "HTTP/1.0 200 ")) {
-			libwebsocket_close_and_free_session(context, wsi,
+			rtchatsdk_libwebsocket_close_and_free_session(context, wsi,
 						     LWS_CLOSE_STATUS_NOSTATUS);
 			lwsl_err("ERROR proxy: %s\n", context->service_buffer);
 			return 0;
@@ -78,7 +78,7 @@ int lws_client_socket_service(struct libwebsocket_context *context,
 
 		/* clear his proxy connection timeout */
 
-		libwebsocket_set_timeout(wsi, NO_PENDING_TIMEOUT, 0);
+		rtchatsdk_libwebsocket_set_timeout(wsi, NO_PENDING_TIMEOUT, 0);
 
 		/* fallthru */
 
@@ -92,7 +92,7 @@ int lws_client_socket_service(struct libwebsocket_context *context,
 	#ifdef LWS_OPENSSL_SUPPORT
 
 		/*
-		 * take care of our libwebsocket_callback_on_writable
+		 * take care of our rtchatsdk_libwebsocket_callback_on_writable
 		 * happening at a time when there's no real connection yet
 		 */
 
@@ -165,7 +165,7 @@ int lws_client_socket_service(struct libwebsocket_context *context,
 
 					lwsl_info(
 					     "SSL_connect WANT_... retrying\n");
-					libwebsocket_callback_on_writable(
+					rtchatsdk_libwebsocket_callback_on_writable(
 								  context, wsi);
 
 					return 0; /* no error */
@@ -202,7 +202,7 @@ int lws_client_socket_service(struct libwebsocket_context *context,
 
 				lwsl_err(
 				      "server's cert didn't look good %d\n", n);
-				libwebsocket_close_and_free_session(context,
+				rtchatsdk_libwebsocket_close_and_free_session(context,
 						wsi, LWS_CLOSE_STATUS_NOSTATUS);
 				return 0;
 			}
@@ -211,17 +211,17 @@ int lws_client_socket_service(struct libwebsocket_context *context,
 			wsi->ssl = NULL;
 #endif
 
-		p = libwebsockets_generate_client_handshake(context, wsi, p);
+		p = rtchatsdk_libwebsockets_generate_client_handshake(context, wsi, p);
 		if (p == NULL) {
 			lwsl_err("Failed to generate handshake for client\n");
-			libwebsocket_close_and_free_session(context, wsi,
+			rtchatsdk_libwebsocket_close_and_free_session(context, wsi,
 						     LWS_CLOSE_STATUS_NOSTATUS);
 			return 0;
 		}
 
 		/* send our request to the server */
 
-		lws_latency_pre(context, wsi);
+		rtchatsdk_lws_latency_pre(context, wsi);
 #ifdef LWS_OPENSSL_SUPPORT
 		if (wsi->use_ssl)
 			n = SSL_write(wsi->ssl, context->service_buffer,
@@ -230,13 +230,13 @@ int lws_client_socket_service(struct libwebsocket_context *context,
 #endif
 			n = send(wsi->sock, context->service_buffer,
 					p - (char *)context->service_buffer, 0);
-		lws_latency(context, wsi,
+		rtchatsdk_lws_latency(context, wsi,
 			"send or SSL_write LWS_CONNMODE...HANDSHAKE",
 								     n, n >= 0);
 
 		if (n < 0) {
 			lwsl_debug("ERROR writing to client socket\n");
-			libwebsocket_close_and_free_session(context, wsi,
+			rtchatsdk_libwebsocket_close_and_free_session(context, wsi,
 						     LWS_CLOSE_STATUS_NOSTATUS);
 			return 0;
 		}
@@ -244,7 +244,7 @@ int lws_client_socket_service(struct libwebsocket_context *context,
 		wsi->u.hdr.parser_state = WSI_TOKEN_NAME_PART;
 		wsi->u.hdr.lextable_pos = 0;
 		wsi->mode = LWS_CONNMODE_WS_CLIENT_WAITING_SERVER_REPLY;
-		libwebsocket_set_timeout(wsi,
+		rtchatsdk_libwebsocket_set_timeout(wsi,
 				PENDING_TIMEOUT_AWAITING_SERVER_RESPONSE,
 							      AWAITING_TIMEOUT);
 		break;
@@ -305,7 +305,7 @@ int lws_client_socket_service(struct libwebsocket_context *context,
 				goto bail3;
 			}
 
-			if (libwebsocket_parse(wsi, c)) {
+			if (rtchatsdk_libwebsocket_parse(wsi, c)) {
 				lwsl_warn("problems parsing header\n");
 				goto bail3;
 			}
@@ -313,7 +313,7 @@ int lws_client_socket_service(struct libwebsocket_context *context,
 
 		/*
 		 * hs may also be coming in multiple packets, there is a 5-sec
-		 * libwebsocket timeout still active here too, so if parsing did
+		 * rtchatsdk_libwebsocket timeout still active here too, so if parsing did
 		 * not complete just wait for next packet coming in this state
 		 */
 
@@ -326,12 +326,12 @@ int lws_client_socket_service(struct libwebsocket_context *context,
 		 * right away and deal with it that way
 		 */
 
-		return lws_client_interpret_server_handshake(context, wsi);
+		return rtchatsdk_lws_client_interpret_server_handshake(context, wsi);
 
 bail3:
 		lwsl_info(
 			"closing connection at LWS_CONNMODE...SERVER_REPLY\n");
-		libwebsocket_close_and_free_session(context, wsi,
+		rtchatsdk_libwebsocket_close_and_free_session(context, wsi,
 						    LWS_CLOSE_STATUS_NOSTATUS);
 		return 0;
 
@@ -364,8 +364,8 @@ strtolower(char *s)
 }
 
 int
-lws_client_interpret_server_handshake(struct libwebsocket_context *context,
-		struct libwebsocket *wsi)
+rtchatsdk_lws_client_interpret_server_handshake(struct rtchatsdk_libwebsocket_context *context,
+		struct rtchatsdk_libwebsocket *wsi)
 {
 	const char *pc;
 	int okay = 0;
@@ -373,7 +373,7 @@ lws_client_interpret_server_handshake(struct libwebsocket_context *context,
 	int len;
 #ifndef LWS_NO_EXTENSIONS
 	char ext_name[128];
-	struct libwebsocket_extension *ext;
+	struct rtchatsdk_libwebsocket_extension *ext;
 	void *v;
 	int more = 1;
 	const char *c;
@@ -386,12 +386,12 @@ lws_client_interpret_server_handshake(struct libwebsocket_context *context,
 	 * Now let's confirm it sent all the necessary headers
 	 */
 
-	if (lws_hdr_total_length(wsi, WSI_TOKEN_ACCEPT) == 0) {
+	if (rtchatsdk_lws_hdr_total_length(wsi, WSI_TOKEN_ACCEPT) == 0) {
 		lwsl_info("no ACCEPT\n");
 		goto bail3;
 	}
 
-	p = lws_hdr_simple_ptr(wsi, WSI_TOKEN_HTTP);
+	p = rtchatsdk_lws_hdr_simple_ptr(wsi, WSI_TOKEN_HTTP);
 	if (!p) {
 		lwsl_info("no URI\n");
 		goto bail3;
@@ -402,7 +402,7 @@ lws_client_interpret_server_handshake(struct libwebsocket_context *context,
 		goto bail3;
 	}
 
-	p = lws_hdr_simple_ptr(wsi, WSI_TOKEN_UPGRADE);
+	p = rtchatsdk_lws_hdr_simple_ptr(wsi, WSI_TOKEN_UPGRADE);
 	if (!p) {
 		lwsl_info("no UPGRADE\n");
 		goto bail3;
@@ -414,7 +414,7 @@ lws_client_interpret_server_handshake(struct libwebsocket_context *context,
 		goto bail3;
 	}
 
-	p = lws_hdr_simple_ptr(wsi, WSI_TOKEN_CONNECTION);
+	p = rtchatsdk_lws_hdr_simple_ptr(wsi, WSI_TOKEN_CONNECTION);
 	if (!p) {
 		lwsl_info("no Connection hdr\n");
 		goto bail3;
@@ -425,7 +425,7 @@ lws_client_interpret_server_handshake(struct libwebsocket_context *context,
 		goto bail3;
 	}
 
-	pc = lws_hdr_simple_ptr(wsi, _WSI_TOKEN_CLIENT_SENT_PROTOCOLS);
+	pc = rtchatsdk_lws_hdr_simple_ptr(wsi, _WSI_TOKEN_CLIENT_SENT_PROTOCOLS);
 	if (pc == NULL)
 		lwsl_parser("lws_client_int_s_hs: no protocol list\n");
 	else
@@ -436,7 +436,7 @@ lws_client_interpret_server_handshake(struct libwebsocket_context *context,
 	 * of protocols we offered
 	 */
 
-	len = lws_hdr_total_length(wsi, WSI_TOKEN_PROTOCOL);
+	len = rtchatsdk_lws_hdr_total_length(wsi, WSI_TOKEN_PROTOCOL);
 	if (!len) {
 
 		lwsl_info("lws_client_int_s_hs: WSI_TOKEN_PROTOCOL is null\n");
@@ -448,7 +448,7 @@ lws_client_interpret_server_handshake(struct libwebsocket_context *context,
 		goto check_extensions;
 	}
 
-	p = lws_hdr_simple_ptr(wsi, WSI_TOKEN_PROTOCOL);
+	p = rtchatsdk_lws_hdr_simple_ptr(wsi, WSI_TOKEN_PROTOCOL);
 	len = strlen(p);
 
 	while (*pc && !okay) {
@@ -491,7 +491,7 @@ check_extensions:
 #ifndef LWS_NO_EXTENSIONS
 	/* instantiate the accepted extensions */
 
-	if (!lws_hdr_total_length(wsi, WSI_TOKEN_EXTENSIONS)) {
+	if (!rtchatsdk_lws_hdr_total_length(wsi, WSI_TOKEN_EXTENSIONS)) {
 		lwsl_ext("no client extenstions allowed by server\n");
 		goto check_accept;
 	}
@@ -501,7 +501,7 @@ check_extensions:
 	 * and go through matching them or identifying bogons
 	 */
 
-	if (lws_hdr_copy(wsi, (char *)context->service_buffer,
+	if (rtchatsdk_lws_hdr_copy(wsi, (char *)context->service_buffer,
 		   sizeof(context->service_buffer), WSI_TOKEN_EXTENSIONS) < 0) {
 		lwsl_warn("ext list from server failed to copy\n");
 		goto bail2;
@@ -588,7 +588,7 @@ check_accept:
 	 * Confirm his accept token is the one we precomputed
 	 */
 
-	p = lws_hdr_simple_ptr(wsi, WSI_TOKEN_ACCEPT);
+	p = rtchatsdk_lws_hdr_simple_ptr(wsi, WSI_TOKEN_ACCEPT);
 	if (strcmp(p, wsi->u.hdr.ah->initial_handshake_hash_base64)) {
 		lwsl_warn("lws_client_int_s_hs: accept %s wrong vs %s\n", p,
 				  wsi->u.hdr.ah->initial_handshake_hash_base64);
@@ -596,7 +596,7 @@ check_accept:
 	}
 
 	/* allocate the per-connection user memory (if any) */
-	if (libwebsocket_ensure_user_space(wsi)) {
+	if (rtchatsdk_libwebsocket_ensure_user_space(wsi)) {
 		lwsl_err("Problem allocating wsi user mem\n");
 		goto bail2;
 	}
@@ -612,7 +612,7 @@ check_accept:
 
 	/* clear his proxy connection timeout */
 
-	libwebsocket_set_timeout(wsi, NO_PENDING_TIMEOUT, 0);
+	rtchatsdk_libwebsocket_set_timeout(wsi, NO_PENDING_TIMEOUT, 0);
 
 	/* free up his parsing allocations */
 	if (wsi->u.hdr.ah)
@@ -698,15 +698,15 @@ bail2:
 	if (wsi->u.hdr.ah)
 		free(wsi->u.hdr.ah);
 
-	libwebsocket_close_and_free_session(context, wsi, close_reason);
+	rtchatsdk_libwebsocket_close_and_free_session(context, wsi, close_reason);
 
 	return 1;
 }
 
 
 char *
-libwebsockets_generate_client_handshake(struct libwebsocket_context *context,
-		struct libwebsocket *wsi, char *pkt)
+rtchatsdk_libwebsockets_generate_client_handshake(struct rtchatsdk_libwebsocket_context *context,
+		struct rtchatsdk_libwebsocket *wsi, char *pkt)
 {
 	char buf[128];
 	char hash[20];
@@ -714,8 +714,8 @@ libwebsockets_generate_client_handshake(struct libwebsocket_context *context,
 	char *p = pkt;
 	int n;
 #ifndef LWS_NO_EXTENSIONS
-	struct libwebsocket_extension *ext;
-	struct libwebsocket_extension *ext1;
+	struct rtchatsdk_libwebsocket_extension *ext;
+	struct rtchatsdk_libwebsocket_extension *ext1;
 	int ext_count = 0;
 #endif
 
@@ -723,16 +723,16 @@ libwebsockets_generate_client_handshake(struct libwebsocket_context *context,
 	 * create the random key
 	 */
 
-	n = libwebsockets_get_random(context, hash, 16);
+	n = rtchatsdk_libwebsockets_get_random(context, hash, 16);
 	if (n != 16) {
 		lwsl_err("Unable to read from random dev %s\n",
 						SYSTEM_RANDOM_FILEPATH);
-		libwebsocket_close_and_free_session(context, wsi,
+		rtchatsdk_libwebsocket_close_and_free_session(context, wsi,
 					     LWS_CLOSE_STATUS_NOSTATUS);
 		return NULL;
 	}
 
-	lws_b64_encode_string(hash, 16, key_b64, sizeof(key_b64));
+	rtchatsdk_lws_b64_encode_string(hash, 16, key_b64, sizeof(key_b64));
 
 	/*
 	 * 00 example client handshake
@@ -761,25 +761,25 @@ libwebsockets_generate_client_handshake(struct libwebsocket_context *context,
 	 */
 
 	p += sprintf(p, "GET %s HTTP/1.1\x0d\x0a",
-				lws_hdr_simple_ptr(wsi, _WSI_TOKEN_CLIENT_URI));
+				rtchatsdk_lws_hdr_simple_ptr(wsi, _WSI_TOKEN_CLIENT_URI));
 
 	p += sprintf(p,
 		"Pragma: no-cache\x0d\x0a""Cache-Control: no-cache\x0d\x0a");
 
 	p += sprintf(p, "Host: %s\x0d\x0a",
-			       lws_hdr_simple_ptr(wsi, _WSI_TOKEN_CLIENT_HOST));
+			       rtchatsdk_lws_hdr_simple_ptr(wsi, _WSI_TOKEN_CLIENT_HOST));
 	p += sprintf(p,
 "Upgrade: websocket\x0d\x0a""Connection: Upgrade\x0d\x0a""Sec-WebSocket-Key: ");
 	strcpy(p, key_b64);
 	p += strlen(key_b64);
 	p += sprintf(p, "\x0d\x0a");
-	if (lws_hdr_simple_ptr(wsi, _WSI_TOKEN_CLIENT_ORIGIN))
+	if (rtchatsdk_lws_hdr_simple_ptr(wsi, _WSI_TOKEN_CLIENT_ORIGIN))
 		p += sprintf(p, "Origin: %s\x0d\x0a",
-			     lws_hdr_simple_ptr(wsi, _WSI_TOKEN_CLIENT_ORIGIN));
+			     rtchatsdk_lws_hdr_simple_ptr(wsi, _WSI_TOKEN_CLIENT_ORIGIN));
 
-	if (lws_hdr_simple_ptr(wsi, _WSI_TOKEN_CLIENT_SENT_PROTOCOLS))
+	if (rtchatsdk_lws_hdr_simple_ptr(wsi, _WSI_TOKEN_CLIENT_SENT_PROTOCOLS))
 		p += sprintf(p, "Sec-WebSocket-Protocol: %s\x0d\x0a",
-		     lws_hdr_simple_ptr(wsi, _WSI_TOKEN_CLIENT_SENT_PROTOCOLS));
+		     rtchatsdk_lws_hdr_simple_ptr(wsi, _WSI_TOKEN_CLIENT_SENT_PROTOCOLS));
 
 	/* tell the server what extensions we could support */
 
@@ -850,9 +850,9 @@ libwebsockets_generate_client_handshake(struct libwebsocket_context *context,
 	key_b64[39] = '\0'; /* enforce composed length below buf sizeof */
 	n = sprintf(buf, "%s258EAFA5-E914-47DA-95CA-C5AB0DC85B11", key_b64);
 
-	SHA1((unsigned char *)buf, n, (unsigned char *)hash);
+	rtchatsdk_SHA1((unsigned char *)buf, n, (unsigned char *)hash);
 
-	lws_b64_encode_string(hash, 20,
+	rtchatsdk_lws_b64_encode_string(hash, 20,
 			wsi->u.hdr.ah->initial_handshake_hash_base64,
 			  sizeof(wsi->u.hdr.ah->initial_handshake_hash_base64));
 

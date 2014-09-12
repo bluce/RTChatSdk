@@ -26,7 +26,7 @@
 int pid_daemon;
 static char *lock_path;
 
-int get_daemonize_pid()
+int rtchatsdk_get_daemonize_pid()
 {
 	return pid_daemon;
 }

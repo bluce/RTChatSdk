@@ -1,5 +1,5 @@
 /*
- * libwebsockets - small server side websockets and web server implementation
+ * rtchatsdk_libwebsockets - small server side websockets and web server implementation
  *
  * Copyright (C) 2010-2013 Andy Green <andy@warmcat.com>
  *
@@ -26,13 +26,13 @@
 #endif
 
 static int
-libwebsocket_0405_frame_mask_generate(struct libwebsocket *wsi)
+rtchatsdk_libwebsocket_0405_frame_mask_generate(struct rtchatsdk_libwebsocket *wsi)
 {
 	int n;
 
 	/* fetch the per-frame nonce */
 
-	n = libwebsockets_get_random(wsi->protocol->owning_server,
+	n = rtchatsdk_libwebsockets_get_random(wsi->protocol->owning_server,
 					   wsi->u.ws.frame_masking_nonce_04, 4);
 	if (n != 4) {
 		lwsl_parser("Unable to read from random device %s %d\n",
@@ -48,7 +48,7 @@ libwebsocket_0405_frame_mask_generate(struct libwebsocket *wsi)
 
 #ifdef _DEBUG
 
-LWS_VISIBLE void lwsl_hexdump(void *vbuf, size_t len)
+LWS_VISIBLE void rtchatsdk_lwsl_hexdump(void *vbuf, size_t len)
 {
 	int n;
 	int m;
@@ -94,9 +94,9 @@ LWS_VISIBLE void lwsl_hexdump(void *vbuf, size_t len)
  * notice this returns number of bytes sent, or -1
  */
 
-int lws_issue_raw(struct libwebsocket *wsi, unsigned char *buf, size_t len)
+int rtchatsdk_lws_issue_raw(struct rtchatsdk_libwebsocket *wsi, unsigned char *buf, size_t len)
 {
-	struct libwebsocket_context *context = wsi->protocol->owning_server;
+	struct rtchatsdk_libwebsocket_context *context = wsi->protocol->owning_server;
 	int n;
 #ifndef LWS_NO_EXTENSIONS
 	int m;
@@ -137,7 +137,7 @@ int lws_issue_raw(struct libwebsocket *wsi, unsigned char *buf, size_t len)
 	lws_hexdump(buf, len);
 #endif
 
-	lws_latency_pre(context, wsi);
+	rtchatsdk_lws_latency_pre(context, wsi);
 #ifdef LWS_OPENSSL_SUPPORT
 	if (wsi->ssl) {
 		n = SSL_write(wsi->ssl, buf, len);
@@ -149,7 +149,7 @@ int lws_issue_raw(struct libwebsocket *wsi, unsigned char *buf, size_t len)
 	} else {
 #endif
 		n = send(wsi->sock, buf, len, MSG_NOSIGNAL);
-		lws_latency(context, wsi, "send lws_issue_raw", n, n == len);
+		rtchatsdk_lws_latency(context, wsi, "send lws_issue_raw", n, n == len);
 		if (n < 0) {
 			lwsl_debug("ERROR writing len %d to skt %d\n", len, n);
 			return -1;
@@ -162,18 +162,18 @@ int lws_issue_raw(struct libwebsocket *wsi, unsigned char *buf, size_t len)
 
 #ifdef LWS_NO_EXTENSIONS
 int
-lws_issue_raw_ext_access(struct libwebsocket *wsi,
+rtchatsdk_lws_issue_raw_ext_access(struct rtchatsdk_libwebsocket *wsi,
 						 unsigned char *buf, size_t len)
 {
-	return lws_issue_raw(wsi, buf, len);
+	return rtchatsdk_lws_issue_raw(wsi, buf, len);
 }
 #else
 int
-lws_issue_raw_ext_access(struct libwebsocket *wsi,
+rtchatsdk_lws_issue_raw_ext_access(struct rtchatsdk_libwebsocket *wsi,
 						 unsigned char *buf, size_t len)
 {
 	int ret;
-	struct lws_tokens eff_buf;
+	struct rtchatsdk_lws_tokens eff_buf;
 	int m;
 	int n;
 
@@ -215,7 +215,7 @@ lws_issue_raw_ext_access(struct libwebsocket *wsi,
 		/* assuming they left us something to send, send it */
 
 		if (eff_buf.token_len) {
-			n = lws_issue_raw(wsi, (unsigned char *)eff_buf.token,
+			n = rtchatsdk_lws_issue_raw(wsi, (unsigned char *)eff_buf.token,
 							    eff_buf.token_len);
 			if (n < 0)
 				return -1;
@@ -246,7 +246,7 @@ lws_issue_raw_ext_access(struct libwebsocket *wsi,
 		 * Did that leave the pipe choked?
 		 */
 
-		if (!lws_send_pipe_choked(wsi))
+		if (!rtchatsdk_lws_send_pipe_choked(wsi))
 			/* no we could add more */
 			continue;
 
@@ -256,7 +256,7 @@ lws_issue_raw_ext_access(struct libwebsocket *wsi,
 		 * Yes, he's choked.  Don't spill the rest now get a callback
 		 * when he is ready to send and take care of it there
 		 */
-		libwebsocket_callback_on_writable(
+		rtchatsdk_libwebsocket_callback_on_writable(
 					     wsi->protocol->owning_server, wsi);
 		wsi->extension_data_pending = 1;
 		ret = 0;
@@ -267,7 +267,7 @@ lws_issue_raw_ext_access(struct libwebsocket *wsi,
 #endif
 
 /**
- * libwebsocket_write() - Apply protocol then write data to client
+ * rtchatsdk_libwebsocket_write() - Apply protocol then write data to client
  * @wsi:	Websocket instance (available from user callback)
  * @buf:	The data to send.  For data being sent on a websocket
  *		connection (ie, not default http), this buffer MUST have
@@ -296,8 +296,8 @@ lws_issue_raw_ext_access(struct libwebsocket *wsi,
  *	pressure at any given time.
  */
 
-LWS_VISIBLE int libwebsocket_write(struct libwebsocket *wsi, unsigned char *buf,
-			  size_t len, enum libwebsocket_write_protocol protocol)
+LWS_VISIBLE int rtchatsdk_libwebsocket_write(struct rtchatsdk_libwebsocket *wsi, unsigned char *buf,
+			  size_t len, enum rtchatsdk_libwebsocket_write_protocol protocol)
 {
 	int n;
 	int pre = 0;
@@ -307,12 +307,12 @@ LWS_VISIBLE int libwebsocket_write(struct libwebsocket *wsi, unsigned char *buf,
 	unsigned char is_masked_bit = 0;
 	size_t orig_len = len;
 #ifndef LWS_NO_EXTENSIONS
-	struct lws_tokens eff_buf;
+	struct rtchatsdk_lws_tokens eff_buf;
 	int m;
 #endif
 
 	if (len == 0 && protocol != LWS_WRITE_CLOSE) {
-		lwsl_warn("zero length libwebsocket_write attempt\n");
+		lwsl_warn("zero length rtchatsdk_libwebsocket_write attempt\n");
 		return 0;
 	}
 
@@ -442,7 +442,7 @@ LWS_VISIBLE int libwebsocket_write(struct libwebsocket *wsi, unsigned char *buf,
 
 	if (wsi->mode == LWS_CONNMODE_WS_CLIENT) {
 
-		if (libwebsocket_0405_frame_mask_generate(wsi)) {
+		if (rtchatsdk_libwebsocket_0405_frame_mask_generate(wsi)) {
 			lwsl_err("lws_write: frame mask generation failed\n");
 			return -1;
 		}
@@ -465,7 +465,7 @@ send_raw:
 
 #if 0
 	lwsl_debug("send %ld: ", len + post);
-	lwsl_hexdump(&buf[-pre], len + post);
+	rtchatsdk_lwsl_hexdump(&buf[-pre], len + post);
 #endif
 
 	switch (protocol) {
@@ -474,7 +474,7 @@ send_raw:
 	case LWS_WRITE_HTTP:
 	case LWS_WRITE_PONG:
 	case LWS_WRITE_PING:
-		return lws_issue_raw(wsi, (unsigned char *)buf - pre,
+		return rtchatsdk_lws_issue_raw(wsi, (unsigned char *)buf - pre,
 							      len + pre + post);
 	default:
 		break;
@@ -494,24 +494,24 @@ send_raw:
 	 * callback returns 1 in case it wants to spill more buffers
 	 */
 
-	n = lws_issue_raw_ext_access(wsi, buf - pre, len + pre + post);
+	n = rtchatsdk_lws_issue_raw_ext_access(wsi, buf - pre, len + pre + post);
 	if (n < 0)
 		return n;
 
 	return orig_len - ((len - pre + post) -n );
 }
 
-LWS_VISIBLE int libwebsockets_serve_http_file_fragment(
-		struct libwebsocket_context *context, struct libwebsocket *wsi)
+LWS_VISIBLE int rtchatsdk_libwebsockets_serve_http_file_fragment(
+		struct rtchatsdk_libwebsocket_context *context, struct rtchatsdk_libwebsocket *wsi)
 {
 	int ret = 0;
 	int n, m;
 
-	while (!lws_send_pipe_choked(wsi)) {
+	while (!rtchatsdk_lws_send_pipe_choked(wsi)) {
 		n = read(wsi->u.http.fd, context->service_buffer,
 					       sizeof(context->service_buffer));
 		if (n > 0) {
-			m = libwebsocket_write(wsi, context->service_buffer, n,
+			m = rtchatsdk_libwebsocket_write(wsi, context->service_buffer, n,
 								LWS_WRITE_HTTP);
 			if (m < 0)
 				return -1;
@@ -530,7 +530,7 @@ LWS_VISIBLE int libwebsockets_serve_http_file_fragment(
 			wsi->state = WSI_STATE_HTTP;
 
 			if (wsi->protocol->callback)
-				ret = user_callback_handle_rxflow(
+				ret = rtchatsdk_user_callback_handle_rxflow(
 					wsi->protocol->callback, context, wsi,
 					LWS_CALLBACK_HTTP_FILE_COMPLETION,
 					wsi->user_space, NULL, 0);
@@ -539,14 +539,14 @@ LWS_VISIBLE int libwebsockets_serve_http_file_fragment(
 	}
 
 	lwsl_notice("choked before able to send whole file (post)\n");
-	libwebsocket_callback_on_writable(context, wsi);
+	rtchatsdk_libwebsocket_callback_on_writable(context, wsi);
 
 	return ret;
 }
 
 /**
- * libwebsockets_serve_http_file() - Send a file back to the client using http
- * @context:		libwebsockets context
+ * rtchatsdk_libwebsockets_serve_http_file() - Send a file back to the client using http
+ * @context:		rtchatsdk_libwebsockets context
  * @wsi:		Websocket instance (available from user callback)
  * @file:		The file to issue over http
  * @content_type:	The http content type, eg, text/html
@@ -561,8 +561,8 @@ LWS_VISIBLE int libwebsockets_serve_http_file_fragment(
  *	the wsi should be left alone.
  */
 
-LWS_VISIBLE int libwebsockets_serve_http_file(struct libwebsocket_context *context,
-			struct libwebsocket *wsi, const char *file,
+LWS_VISIBLE int rtchatsdk_libwebsockets_serve_http_file(struct rtchatsdk_libwebsocket_context *context,
+			struct rtchatsdk_libwebsocket *wsi, const char *file,
 						       const char *content_type)
 {
 	struct stat stat_buf;
@@ -578,11 +578,11 @@ LWS_VISIBLE int libwebsockets_serve_http_file(struct libwebsocket_context *conte
 	if (wsi->u.http.fd < 1) {
 		lwsl_err("Unable to open '%s'\n", file);
 		p += sprintf((char *)p,
-		 "HTTP/1.0 400 Bad\x0d\x0aServer: libwebsockets\x0d\x0a\x0d\x0a"
+		 "HTTP/1.0 400 Bad\x0d\x0aServer: rtchatsdk_libwebsockets\x0d\x0a\x0d\x0a"
 		);
 		wsi->u.http.fd = 0;
 		/* too small to care about partial, closing anyway */
-		libwebsocket_write(wsi, context->service_buffer,
+		rtchatsdk_libwebsocket_write(wsi, context->service_buffer,
 				p - context->service_buffer, LWS_WRITE_HTTP);
 
 		return -1;
@@ -591,13 +591,13 @@ LWS_VISIBLE int libwebsockets_serve_http_file(struct libwebsocket_context *conte
 	fstat(wsi->u.http.fd, &stat_buf);
 	wsi->u.http.filelen = stat_buf.st_size;
 	p += sprintf((char *)p,
-"HTTP/1.0 200 OK\x0d\x0aServer: libwebsockets\x0d\x0a""Content-Type: %s\x0d\x0a",
+"HTTP/1.0 200 OK\x0d\x0aServer: rtchatsdk_libwebsockets\x0d\x0a""Content-Type: %s\x0d\x0a",
 								  content_type);
 	p += sprintf((char *)p,
 		"Content-Length: %u\x0d\x0a\x0d\x0a",
 					(unsigned int)stat_buf.st_size);
 
-	ret = libwebsocket_write(wsi, context->service_buffer,
+	ret = rtchatsdk_libwebsocket_write(wsi, context->service_buffer,
 				   p - context->service_buffer, LWS_WRITE_HTTP);
 	if (ret != (p - context->service_buffer)) {
 		lwsl_err("_write returned %d from %d\n", ret, (p - context->service_buffer));
@@ -607,6 +607,6 @@ LWS_VISIBLE int libwebsockets_serve_http_file(struct libwebsocket_context *conte
 	wsi->u.http.filepos = 0;
 	wsi->state = WSI_STATE_HTTP_ISSUING_FILE;
 
-	return libwebsockets_serve_http_file_fragment(context, wsi);
+	return rtchatsdk_libwebsockets_serve_http_file_fragment(context, wsi);
 }
 

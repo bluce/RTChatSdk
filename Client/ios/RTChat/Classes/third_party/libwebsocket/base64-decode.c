@@ -49,7 +49,7 @@ static const char decode[] = "|$$$}rstuvwxyz{$$$$$$$>?@ABCDEFGHIJKLMNOPQRSTUVW"
 			     "$$$$$$XYZ[\\]^_`abcdefghijklmnopq";
 
 LWS_VISIBLE int
-lws_b64_encode_string(const char *in, int in_len, char *out, int out_size)
+rtchatsdk_lws_b64_encode_string(const char *in, int in_len, char *out, int out_size)
 {
 	unsigned char triple[3];
 	int i;
@@ -98,7 +98,7 @@ lws_b64_encode_string(const char *in, int in_len, char *out, int out_size)
  */
 
 LWS_VISIBLE int
-lws_b64_decode_string(const char *in, char *out, int out_size)
+rtchatsdk_lws_b64_decode_string(const char *in, char *out, int out_size)
 {
 	int len;
 	int i;
@@ -152,7 +152,7 @@ lws_b64_decode_string(const char *in, char *out, int out_size)
 }
 
 int
-lws_b64_selftest(void)
+rtchatsdk_lws_b64_selftest(void)
 {
 	char buf[64];
 	int n;
@@ -167,7 +167,7 @@ lws_b64_selftest(void)
 	for (test = 0; test < sizeof plaintext / sizeof(plaintext[0]); test++) {
 
 		buf[sizeof(buf) - 1] = '\0';
-		n = lws_b64_encode_string(plaintext[test],
+		n = rtchatsdk_lws_b64_encode_string(plaintext[test],
 				      strlen(plaintext[test]), buf, sizeof buf);
 		if (n != strlen(coded[test]) || strcmp(buf, coded[test])) {
 			lwsl_err("Failed lws_b64 encode selftest "
@@ -176,7 +176,7 @@ lws_b64_selftest(void)
 		}
 
 		buf[sizeof(buf) - 1] = '\0';
-		n = lws_b64_decode_string(coded[test], buf, sizeof buf);
+		n = rtchatsdk_lws_b64_decode_string(coded[test], buf, sizeof buf);
 		if (n != strlen(plaintext[test]) ||
 						 strcmp(buf, plaintext[test])) {
 			lwsl_err("Failed lws_b64 decode selftest "

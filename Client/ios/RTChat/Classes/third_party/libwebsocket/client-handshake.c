@@ -1,8 +1,8 @@
 #include "private-libwebsockets.h"
 
-struct libwebsocket *__libwebsocket_client_connect_2(
-	struct libwebsocket_context *context,
-	struct libwebsocket *wsi
+struct rtchatsdk_libwebsocket *__rtchatsdk_libwebsocket_client_connect_2(
+	struct rtchatsdk_libwebsocket_context *context,
+	struct rtchatsdk_libwebsocket *wsi
 ) {
 	struct pollfd pfd;
 	struct hostent *server_hostent;
@@ -20,10 +20,10 @@ struct libwebsocket *__libwebsocket_client_connect_2(
 	if (context->http_proxy_port) {
 		plen = sprintf((char *)context->service_buffer,
 			"CONNECT %s:%u HTTP/1.0\x0d\x0a"
-			"User-agent: libwebsockets\x0d\x0a"
+			"User-agent: rtchatsdk_libwebsockets\x0d\x0a"
 /*Proxy-authorization: basic aGVsbG86d29ybGQ= */
 			"\x0d\x0a",
-			lws_hdr_simple_ptr(wsi, _WSI_TOKEN_CLIENT_PEER_ADDRESS),
+			rtchatsdk_lws_hdr_simple_ptr(wsi, _WSI_TOKEN_CLIENT_PEER_ADDRESS),
 			wsi->u.hdr.ah->c_port);
 
 		/* OK from now on we talk via the proxy, so connect to that */
@@ -32,7 +32,7 @@ struct libwebsocket *__libwebsocket_client_connect_2(
 		 * (will overwrite existing pointer,
 		 * leaving old string/frag there but unreferenced)
 		 */
-		if (lws_hdr_simple_create(wsi, _WSI_TOKEN_CLIENT_PEER_ADDRESS,
+		if (rtchatsdk_lws_hdr_simple_create(wsi, _WSI_TOKEN_CLIENT_PEER_ADDRESS,
 						   context->http_proxy_address))
 			goto oom4;
 		wsi->u.hdr.ah->c_port = context->http_proxy_port;
@@ -42,7 +42,7 @@ struct libwebsocket *__libwebsocket_client_connect_2(
 	 * prepare the actual connection (to the proxy, if any)
 	 */
 
-	ads = lws_hdr_simple_ptr(wsi, _WSI_TOKEN_CLIENT_PEER_ADDRESS);
+	ads = rtchatsdk_lws_hdr_simple_ptr(wsi, _WSI_TOKEN_CLIENT_PEER_ADDRESS);
 
 	lwsl_client("__libwebsocket_client_connect_2: address %s\n", ads);
 
@@ -73,13 +73,13 @@ struct libwebsocket *__libwebsocket_client_connect_2(
 
 	lwsl_client("connected\n");
 
-	if (lws_set_socket_options(context, wsi->sock)) {
+	if (rtchatsdk_lws_set_socket_options(context, wsi->sock)) {
 		lwsl_err("Failed to set wsi socket options\n");
 		compatible_close(wsi->sock);
 		goto oom4;
 	}
 
-	insert_wsi_socket_into_fds(context, wsi);
+	rtchatsdk_insert_wsi_socket_into_fds(context, wsi);
 
 	/* we are connected to server, or proxy */
 
@@ -92,7 +92,7 @@ struct libwebsocket *__libwebsocket_client_connect_2(
 			goto oom4;
 		}
 
-		libwebsocket_set_timeout(wsi,
+		rtchatsdk_libwebsocket_set_timeout(wsi,
 			PENDING_TIMEOUT_AWAITING_PROXY_RESPONSE,
 							      AWAITING_TIMEOUT);
 
@@ -111,14 +111,14 @@ struct libwebsocket *__libwebsocket_client_connect_2(
 	 * cover with a timeout.
 	 */
 
-	libwebsocket_set_timeout(wsi,
+	rtchatsdk_libwebsocket_set_timeout(wsi,
 		PENDING_TIMEOUT_SENT_CLIENT_HANDSHAKE, AWAITING_TIMEOUT);
 
 	wsi->mode = LWS_CONNMODE_WS_CLIENT_ISSUE_HANDSHAKE;
 	pfd.fd = wsi->sock;
 	pfd.revents = POLLIN;
 
-	n = libwebsocket_service_fd(context, &pfd);
+	n = rtchatsdk_libwebsocket_service_fd(context, &pfd);
 
 	if (n < 0)
 		goto oom4;
@@ -136,7 +136,7 @@ oom4:
 }
 
 /**
- * libwebsocket_client_connect() - Connect to another websocket server
+ * rtchatsdk_libwebsocket_client_connect() - Connect to another websocket server
  * @context:	Websocket context
  * @address:	Remote server address, eg, "myserver.com"
  * @port:	Port to connect to on the remote server, eg, 80
@@ -154,8 +154,8 @@ oom4:
  *	This function creates a connection to a remote server
  */
 
-LWS_VISIBLE struct libwebsocket *
-libwebsocket_client_connect(struct libwebsocket_context *context,
+LWS_VISIBLE struct rtchatsdk_libwebsocket *
+rtchatsdk_libwebsocket_client_connect(struct rtchatsdk_libwebsocket_context *context,
 			      const char *address,
 			      int port,
 			      int ssl_connection,
@@ -165,22 +165,22 @@ libwebsocket_client_connect(struct libwebsocket_context *context,
 			      const char *protocol,
 			      int ietf_version_or_minus_one)
 {
-	struct libwebsocket *wsi;
+	struct rtchatsdk_libwebsocket *wsi;
 #ifndef LWS_NO_EXTENSIONS
 	int n;
 	int m;
-	struct libwebsocket_extension *ext;
+	struct rtchatsdk_libwebsocket_extension *ext;
 	int handled;
 #endif
 
 #ifndef LWS_OPENSSL_SUPPORT
 	if (ssl_connection) {
-		lwsl_err("libwebsockets not configured for ssl\n");
+		lwsl_err("rtchatsdk_libwebsockets not configured for ssl\n");
 		return NULL;
 	}
 #endif
 
-	wsi = (struct libwebsocket *) malloc(sizeof(struct libwebsocket));
+	wsi = (struct rtchatsdk_libwebsocket *) malloc(sizeof(struct rtchatsdk_libwebsocket));
 	if (wsi == NULL)
 		goto bail;
 
@@ -203,7 +203,7 @@ libwebsocket_client_connect(struct libwebsocket_context *context,
 	wsi->use_ssl = ssl_connection;
 #endif
 
-	if (lws_allocate_header_table(wsi))
+	if (rtchatsdk_lws_allocate_header_table(wsi))
 		goto bail;
 
 	/*
@@ -211,19 +211,19 @@ libwebsocket_client_connect(struct libwebsocket_context *context,
 	 * stash them... we only need during connect phase so u.hdr is fine
 	 */
 	wsi->u.hdr.ah->c_port = port;
-	if (lws_hdr_simple_create(wsi, _WSI_TOKEN_CLIENT_PEER_ADDRESS, address))
+	if (rtchatsdk_lws_hdr_simple_create(wsi, _WSI_TOKEN_CLIENT_PEER_ADDRESS, address))
 		goto bail1;
 
 	/* these only need u.hdr lifetime as well */
 
-	if (lws_hdr_simple_create(wsi, _WSI_TOKEN_CLIENT_URI, path))
+	if (rtchatsdk_lws_hdr_simple_create(wsi, _WSI_TOKEN_CLIENT_URI, path))
 		goto bail1;
 
-	if (lws_hdr_simple_create(wsi, _WSI_TOKEN_CLIENT_HOST, host))
+	if (rtchatsdk_lws_hdr_simple_create(wsi, _WSI_TOKEN_CLIENT_HOST, host))
 		goto bail1;
 
 	if (origin)
-		if (lws_hdr_simple_create(wsi,
+		if (rtchatsdk_lws_hdr_simple_create(wsi,
 				_WSI_TOKEN_CLIENT_ORIGIN, origin))
 			goto bail1;
 	/*
@@ -231,7 +231,7 @@ libwebsocket_client_connect(struct libwebsocket_context *context,
 	 * stash it for later when we compare server response with it
 	 */
 	if (protocol)
-		if (lws_hdr_simple_create(wsi,
+		if (rtchatsdk_lws_hdr_simple_create(wsi,
 				_WSI_TOKEN_CLIENT_SENT_PROTOCOLS, protocol))
 			goto bail1;
 
@@ -261,9 +261,9 @@ libwebsocket_client_connect(struct libwebsocket_context *context,
 	}
 
 	if (handled) {
-		lwsl_client("libwebsocket_client_connect: ext handling conn\n");
+		lwsl_client("rtchatsdk_libwebsocket_client_connect: ext handling conn\n");
 
-		libwebsocket_set_timeout(wsi,
+		rtchatsdk_libwebsocket_set_timeout(wsi,
 			PENDING_TIMEOUT_AWAITING_EXTENSION_CONNECT_RESPONSE,
 							      AWAITING_TIMEOUT);
 
@@ -271,9 +271,9 @@ libwebsocket_client_connect(struct libwebsocket_context *context,
 		return wsi;
 	}
 #endif
-	lwsl_client("libwebsocket_client_connect: direct conn\n");
+	lwsl_client("rtchatsdk_libwebsocket_client_connect: direct conn\n");
 
-	return __libwebsocket_client_connect_2(context, wsi);
+	return __rtchatsdk_libwebsocket_client_connect_2(context, wsi);
 
 bail1:
 	free(wsi->u.hdr.ah);
@@ -285,7 +285,7 @@ bail:
 
 
 /**
- * libwebsocket_client_connect_extended() - Connect to another websocket server
+ * rtchatsdk_libwebsocket_client_connect_extended() - Connect to another websocket server
  * @context:	Websocket context
  * @address:	Remote server address, eg, "myserver.com"
  * @port:	Port to connect to on the remote server, eg, 80
@@ -304,8 +304,8 @@ bail:
  *	This function creates a connection to a remote server
  */
 
-LWS_VISIBLE struct libwebsocket *
-libwebsocket_client_connect_extended(struct libwebsocket_context *context,
+LWS_VISIBLE struct rtchatsdk_libwebsocket *
+rtchatsdk_libwebsocket_client_connect_extended(struct rtchatsdk_libwebsocket_context *context,
 			      const char *address,
 			      int port,
 			      int ssl_connection,
@@ -316,8 +316,8 @@ libwebsocket_client_connect_extended(struct libwebsocket_context *context,
 			      int ietf_version_or_minus_one,
 			      void *userdata)
 {
-	struct libwebsocket *ws =
-		libwebsocket_client_connect(context, address, port,
+	struct rtchatsdk_libwebsocket *ws =
+		rtchatsdk_libwebsocket_client_connect(context, address, port,
 			ssl_connection, path, host, origin, protocol,
 						     ietf_version_or_minus_one);
 

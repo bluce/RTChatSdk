@@ -1,5 +1,5 @@
 /*
- * libwebsockets - small server side websockets and web server implementation
+ * rtchatsdk_libwebsockets - small server side websockets and web server implementation
  *
  * Copyright (C) 2010-2013 Andy Green <andy@warmcat.com>
  *
@@ -307,7 +307,7 @@ int lextable_decode(int pos, char c)
 	return pos;
 }
 
-int lws_allocate_header_table(struct libwebsocket *wsi)
+int rtchatsdk_lws_allocate_header_table(struct rtchatsdk_libwebsocket *wsi)
 {
 	wsi->u.hdr.ah = malloc(sizeof(*wsi->u.hdr.ah));
 	if (wsi->u.hdr.ah == NULL) {
@@ -321,7 +321,7 @@ int lws_allocate_header_table(struct libwebsocket *wsi)
 	return 0;
 }
 
-LWS_VISIBLE int lws_hdr_total_length(struct libwebsocket *wsi, enum lws_token_indexes h)
+LWS_VISIBLE int rtchatsdk_lws_hdr_total_length(struct rtchatsdk_libwebsocket *wsi, enum lws_token_indexes h)
 {
 	int n;
 	int len = 0;
@@ -338,10 +338,10 @@ LWS_VISIBLE int lws_hdr_total_length(struct libwebsocket *wsi, enum lws_token_in
 	return len;
 }
 
-LWS_VISIBLE int lws_hdr_copy(struct libwebsocket *wsi, char *dest, int len,
+LWS_VISIBLE int rtchatsdk_lws_hdr_copy(struct rtchatsdk_libwebsocket *wsi, char *dest, int len,
 						enum lws_token_indexes h)
 {
-	int toklen = lws_hdr_total_length(wsi, h);
+	int toklen = rtchatsdk_lws_hdr_total_length(wsi, h);
 	int n;
 
 	if (toklen >= len)
@@ -361,7 +361,7 @@ LWS_VISIBLE int lws_hdr_copy(struct libwebsocket *wsi, char *dest, int len,
 	return toklen;
 }
 
-char *lws_hdr_simple_ptr(struct libwebsocket *wsi, enum lws_token_indexes h)
+char *rtchatsdk_lws_hdr_simple_ptr(struct rtchatsdk_libwebsocket *wsi, enum lws_token_indexes h)
 {
 	int n;
 
@@ -372,7 +372,7 @@ char *lws_hdr_simple_ptr(struct libwebsocket *wsi, enum lws_token_indexes h)
 	return &wsi->u.hdr.ah->data[wsi->u.hdr.ah->frags[n].offset];
 }
 
-int lws_hdr_simple_create(struct libwebsocket *wsi,
+int rtchatsdk_lws_hdr_simple_create(struct rtchatsdk_libwebsocket *wsi,
 				enum lws_token_indexes h, const char *s)
 {
 	wsi->u.hdr.ah->next_frag_index++;
@@ -404,7 +404,7 @@ int lws_hdr_simple_create(struct libwebsocket *wsi,
 	return 0;
 }
 
-int libwebsocket_parse(struct libwebsocket *wsi, unsigned char c)
+int rtchatsdk_libwebsocket_parse(struct rtchatsdk_libwebsocket *wsi, unsigned char c)
 {
 	int n;
 
@@ -586,10 +586,10 @@ start_fragment:
 
 set_parsing_complete:
 
-	if (lws_hdr_total_length(wsi, WSI_TOKEN_UPGRADE)) {
-		if (lws_hdr_total_length(wsi, WSI_TOKEN_VERSION))
+	if (rtchatsdk_lws_hdr_total_length(wsi, WSI_TOKEN_UPGRADE)) {
+		if (rtchatsdk_lws_hdr_total_length(wsi, WSI_TOKEN_VERSION))
 			wsi->ietf_spec_revision =
-			       atoi(lws_hdr_simple_ptr(wsi, WSI_TOKEN_VERSION));
+			       atoi(rtchatsdk_lws_hdr_simple_ptr(wsi, WSI_TOKEN_VERSION));
 
 		lwsl_parser("v%02d hdrs completed\n", wsi->ietf_spec_revision);
 	}
@@ -610,16 +610,16 @@ set_parsing_complete:
  * mode.
  */
 
-LWS_VISIBLE int lws_frame_is_binary(struct libwebsocket *wsi)
+LWS_VISIBLE int rtchatsdk_lws_frame_is_binary(struct rtchatsdk_libwebsocket *wsi)
 {
 	return wsi->u.ws.frame_is_binary;
 }
 
 int
-libwebsocket_rx_sm(struct libwebsocket *wsi, unsigned char c)
+rtchatsdk_libwebsocket_rx_sm(struct rtchatsdk_libwebsocket *wsi, unsigned char c)
 {
 	int n;
-	struct lws_tokens eff_buf;
+	struct rtchatsdk_lws_tokens eff_buf;
 	int ret = 0;
 #ifndef LWS_NO_EXTENSIONS
 	int handled;
@@ -917,7 +917,7 @@ spill:
 			}
 			lwsl_parser("server sees client close packet\n");
 			/* parrot the close packet payload back */
-			n = libwebsocket_write(wsi, (unsigned char *)
+			n = rtchatsdk_libwebsocket_write(wsi, (unsigned char *)
 				&wsi->u.ws.rx_user_buffer[
 					LWS_SEND_BUFFER_PRE_PADDING],
 					wsi->u.ws.rx_user_buffer_head,
@@ -931,11 +931,11 @@ spill:
 		case LWS_WS_OPCODE_07__PING:
 			lwsl_info("received %d byte ping, sending pong\n",
 						 wsi->u.ws.rx_user_buffer_head);
-			lwsl_hexdump(&wsi->u.ws.rx_user_buffer[
+			rtchatsdk_lwsl_hexdump(&wsi->u.ws.rx_user_buffer[
 					LWS_SEND_BUFFER_PRE_PADDING],
 						 wsi->u.ws.rx_user_buffer_head);
 			/* parrot the ping packet payload back as a pong */
-			n = libwebsocket_write(wsi, (unsigned char *)
+			n = rtchatsdk_libwebsocket_write(wsi, (unsigned char *)
 			&wsi->u.ws.rx_user_buffer[LWS_SEND_BUFFER_PRE_PADDING],
 				 wsi->u.ws.rx_user_buffer_head, LWS_WRITE_PONG);
 			if (n < 0)
@@ -993,7 +993,7 @@ spill:
 		/*
 		 * No it's real payload, pass it up to the user callback.
 		 * It's nicely buffered with the pre-padding taken care of
-		 * so it can be sent straight out again using libwebsocket_write
+		 * so it can be sent straight out again using rtchatsdk_libwebsocket_write
 		 */
 
 		eff_buf.token = &wsi->u.ws.rx_user_buffer[
@@ -1019,7 +1019,7 @@ spill:
 			eff_buf.token[eff_buf.token_len] = '\0';
 
 			if (wsi->protocol->callback)
-				ret = user_callback_handle_rxflow(
+				ret = rtchatsdk_user_callback_handle_rxflow(
 						wsi->protocol->callback,
 						wsi->protocol->owning_server,
 						wsi, LWS_CALLBACK_RECEIVE,
@@ -1044,7 +1044,7 @@ illegal_ctl_length:
 }
 
 
-int libwebsocket_interpret_incoming_packet(struct libwebsocket *wsi,
+int rtchatsdk_libwebsocket_interpret_incoming_packet(struct rtchatsdk_libwebsocket *wsi,
 						 unsigned char *buf, size_t len)
 {
 	size_t n = 0;
@@ -1052,7 +1052,7 @@ int libwebsocket_interpret_incoming_packet(struct libwebsocket *wsi,
 
 #if 0
 	lwsl_parser("received %d byte packet\n", (int)len);
-	lwsl_hexdump(buf, len);
+	rtchatsdk_lwsl_hexdump(buf, len);
 #endif
 
 	/* let the rx protocol state machine have as much as it needs */
@@ -1085,7 +1085,7 @@ int libwebsocket_interpret_incoming_packet(struct libwebsocket *wsi,
 			wsi->u.ws.rxflow_pos++;
 
 		/* process the byte */
-		m = libwebsocket_rx_sm(wsi, buf[n++]);
+		m = rtchatsdk_libwebsocket_rx_sm(wsi, buf[n++]);
 		if (m < 0)
 			return -1;
 	}
@@ -1095,24 +1095,24 @@ int libwebsocket_interpret_incoming_packet(struct libwebsocket *wsi,
 
 
 /**
- * libwebsockets_remaining_packet_payload() - Bytes to come before "overall"
+ * rtchatsdk_libwebsockets_remaining_packet_payload() - Bytes to come before "overall"
  *					      rx packet is complete
  * @wsi:		Websocket instance (available from user callback)
  *
  *	This function is intended to be called from the callback if the
  *  user code is interested in "complete packets" from the client.
- *  libwebsockets just passes through payload as it comes and issues a buffer
+ *  rtchatsdk_libwebsockets just passes through payload as it comes and issues a buffer
  *  additionally when it hits a built-in limit.  The LWS_CALLBACK_RECEIVE
  *  callback handler can use this API to find out if the buffer it has just
  *  been given is the last piece of a "complete packet" from the client --
- *  when that is the case libwebsockets_remaining_packet_payload() will return
+ *  when that is the case rtchatsdk_libwebsockets_remaining_packet_payload() will return
  *  0.
  *
  *  Many protocols won't care becuse their packets are always small.
  */
 
 LWS_VISIBLE size_t
-libwebsockets_remaining_packet_payload(struct libwebsocket *wsi)
+rtchatsdk_libwebsockets_remaining_packet_payload(struct rtchatsdk_libwebsocket *wsi)
 {
 	return wsi->u.ws.rx_packet_length;
 }
