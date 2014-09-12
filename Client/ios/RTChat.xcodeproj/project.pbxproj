@@ -57,6 +57,23 @@
 		431FC2B0199B8C0A00CFEB6B /* libneteq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC2A1199B8BA200CFEB6B /* libneteq.a */; };
 		431FC2B1199B8C1600CFEB6B /* librtp_rtcp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC29B199B8B8B00CFEB6B /* librtp_rtcp.a */; };
 		431FC2B2199B8C1600CFEB6B /* libwebrtc_opus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431FC294199B8B8400CFEB6B /* libwebrtc_opus.a */; };
+		4323738D19C2CDF800D0579A /* base64-decode.c in Sources */ = {isa = PBXBuildFile; fileRef = 4323737619C2CDF800D0579A /* base64-decode.c */; };
+		4323738E19C2CDF800D0579A /* client-handshake.c in Sources */ = {isa = PBXBuildFile; fileRef = 4323737719C2CDF800D0579A /* client-handshake.c */; };
+		4323738F19C2CDF800D0579A /* client-parser.c in Sources */ = {isa = PBXBuildFile; fileRef = 4323737819C2CDF800D0579A /* client-parser.c */; };
+		4323739019C2CDF800D0579A /* client.c in Sources */ = {isa = PBXBuildFile; fileRef = 4323737919C2CDF800D0579A /* client.c */; };
+		4323739119C2CDF800D0579A /* daemonize.c in Sources */ = {isa = PBXBuildFile; fileRef = 4323737A19C2CDF800D0579A /* daemonize.c */; };
+		4323739219C2CDF800D0579A /* extension-deflate-frame.c in Sources */ = {isa = PBXBuildFile; fileRef = 4323737B19C2CDF800D0579A /* extension-deflate-frame.c */; };
+		4323739319C2CDF800D0579A /* extension-deflate-stream.c in Sources */ = {isa = PBXBuildFile; fileRef = 4323737D19C2CDF800D0579A /* extension-deflate-stream.c */; };
+		4323739419C2CDF800D0579A /* extension.c in Sources */ = {isa = PBXBuildFile; fileRef = 4323737F19C2CDF800D0579A /* extension.c */; };
+		4323739519C2CDF800D0579A /* getifaddrs.c in Sources */ = {isa = PBXBuildFile; fileRef = 4323738019C2CDF800D0579A /* getifaddrs.c */; };
+		4323739619C2CDF800D0579A /* handshake.c in Sources */ = {isa = PBXBuildFile; fileRef = 4323738219C2CDF800D0579A /* handshake.c */; };
+		4323739719C2CDF800D0579A /* libwebsockets.c in Sources */ = {isa = PBXBuildFile; fileRef = 4323738319C2CDF800D0579A /* libwebsockets.c */; };
+		4323739819C2CDF800D0579A /* minilex.c in Sources */ = {isa = PBXBuildFile; fileRef = 4323738619C2CDF800D0579A /* minilex.c */; };
+		4323739919C2CDF800D0579A /* output.c in Sources */ = {isa = PBXBuildFile; fileRef = 4323738719C2CDF800D0579A /* output.c */; };
+		4323739A19C2CDF800D0579A /* parsers.c in Sources */ = {isa = PBXBuildFile; fileRef = 4323738819C2CDF800D0579A /* parsers.c */; };
+		4323739B19C2CDF800D0579A /* server-handshake.c in Sources */ = {isa = PBXBuildFile; fileRef = 4323738A19C2CDF800D0579A /* server-handshake.c */; };
+		4323739C19C2CDF800D0579A /* server.c in Sources */ = {isa = PBXBuildFile; fileRef = 4323738B19C2CDF800D0579A /* server.c */; };
+		4323739D19C2CDF800D0579A /* sha-1.c in Sources */ = {isa = PBXBuildFile; fileRef = 4323738C19C2CDF800D0579A /* sha-1.c */; };
 		43247A541987339300AF14C7 /* MediaSample.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43247A521987339300AF14C7 /* MediaSample.cpp */; };
 		432D4E5319B597B600AD7B6A /* HttpProcess.mm in Sources */ = {isa = PBXBuildFile; fileRef = 432D4E5019B5970800AD7B6A /* HttpProcess.mm */; };
 		433E66DF1987AAD10002AAC3 /* channel_transport.cc in Sources */ = {isa = PBXBuildFile; fileRef = 433E66CF1987AAD10002AAC3 /* channel_transport.cc */; };
@@ -543,6 +560,29 @@
 		431FC29C199B8BA200CFEB6B /* neteq.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = neteq.xcodeproj; path = ../../../webRTC_xCode/neteq/neteq.xcodeproj; sourceTree = "<group>"; };
 		431FC2A2199B8BAE00CFEB6B /* iSAC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iSAC.xcodeproj; path = ../../../webRTC_xCode/iSAC/iSAC.xcodeproj; sourceTree = "<group>"; };
 		431FC2A8199B8BEC00CFEB6B /* media_file.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = media_file.xcodeproj; path = ../../../webRTC_xCode/media_file/media_file.xcodeproj; sourceTree = "<group>"; };
+		4323737619C2CDF800D0579A /* base64-decode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "base64-decode.c"; sourceTree = "<group>"; };
+		4323737719C2CDF800D0579A /* client-handshake.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "client-handshake.c"; sourceTree = "<group>"; };
+		4323737819C2CDF800D0579A /* client-parser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "client-parser.c"; sourceTree = "<group>"; };
+		4323737919C2CDF800D0579A /* client.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = client.c; sourceTree = "<group>"; };
+		4323737A19C2CDF800D0579A /* daemonize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = daemonize.c; sourceTree = "<group>"; };
+		4323737B19C2CDF800D0579A /* extension-deflate-frame.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "extension-deflate-frame.c"; sourceTree = "<group>"; };
+		4323737C19C2CDF800D0579A /* extension-deflate-frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "extension-deflate-frame.h"; sourceTree = "<group>"; };
+		4323737D19C2CDF800D0579A /* extension-deflate-stream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "extension-deflate-stream.c"; sourceTree = "<group>"; };
+		4323737E19C2CDF800D0579A /* extension-deflate-stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "extension-deflate-stream.h"; sourceTree = "<group>"; };
+		4323737F19C2CDF800D0579A /* extension.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = extension.c; sourceTree = "<group>"; };
+		4323738019C2CDF800D0579A /* getifaddrs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = getifaddrs.c; sourceTree = "<group>"; };
+		4323738119C2CDF800D0579A /* getifaddrs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = getifaddrs.h; sourceTree = "<group>"; };
+		4323738219C2CDF800D0579A /* handshake.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = handshake.c; sourceTree = "<group>"; };
+		4323738319C2CDF800D0579A /* libwebsockets.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = libwebsockets.c; sourceTree = "<group>"; };
+		4323738419C2CDF800D0579A /* libwebsockets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libwebsockets.h; sourceTree = "<group>"; };
+		4323738519C2CDF800D0579A /* lws_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lws_config.h; sourceTree = "<group>"; };
+		4323738619C2CDF800D0579A /* minilex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = minilex.c; sourceTree = "<group>"; };
+		4323738719C2CDF800D0579A /* output.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = output.c; sourceTree = "<group>"; };
+		4323738819C2CDF800D0579A /* parsers.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = parsers.c; sourceTree = "<group>"; };
+		4323738919C2CDF800D0579A /* private-libwebsockets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "private-libwebsockets.h"; sourceTree = "<group>"; };
+		4323738A19C2CDF800D0579A /* server-handshake.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "server-handshake.c"; sourceTree = "<group>"; };
+		4323738B19C2CDF800D0579A /* server.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = server.c; sourceTree = "<group>"; };
+		4323738C19C2CDF800D0579A /* sha-1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "sha-1.c"; sourceTree = "<group>"; };
 		43247A451987333E00AF14C7 /* voe_audio_processing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = voe_audio_processing.h; sourceTree = "<group>"; };
 		43247A461987333E00AF14C7 /* voe_base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = voe_base.h; sourceTree = "<group>"; };
 		43247A471987333E00AF14C7 /* voe_codec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = voe_codec.h; sourceTree = "<group>"; };
@@ -1305,8 +1345,29 @@
 		43998BA71986363F003C5793 /* libwebsocket */ = {
 			isa = PBXGroup;
 			children = (
-				43998BA81986363F003C5793 /* include */,
-				43998BAA1986363F003C5793 /* lib */,
+				4323737619C2CDF800D0579A /* base64-decode.c */,
+				4323737719C2CDF800D0579A /* client-handshake.c */,
+				4323737819C2CDF800D0579A /* client-parser.c */,
+				4323737919C2CDF800D0579A /* client.c */,
+				4323737A19C2CDF800D0579A /* daemonize.c */,
+				4323737B19C2CDF800D0579A /* extension-deflate-frame.c */,
+				4323737C19C2CDF800D0579A /* extension-deflate-frame.h */,
+				4323737D19C2CDF800D0579A /* extension-deflate-stream.c */,
+				4323737E19C2CDF800D0579A /* extension-deflate-stream.h */,
+				4323737F19C2CDF800D0579A /* extension.c */,
+				4323738019C2CDF800D0579A /* getifaddrs.c */,
+				4323738119C2CDF800D0579A /* getifaddrs.h */,
+				4323738219C2CDF800D0579A /* handshake.c */,
+				4323738319C2CDF800D0579A /* libwebsockets.c */,
+				4323738419C2CDF800D0579A /* libwebsockets.h */,
+				4323738519C2CDF800D0579A /* lws_config.h */,
+				4323738619C2CDF800D0579A /* minilex.c */,
+				4323738719C2CDF800D0579A /* output.c */,
+				4323738819C2CDF800D0579A /* parsers.c */,
+				4323738919C2CDF800D0579A /* private-libwebsockets.h */,
+				4323738A19C2CDF800D0579A /* server-handshake.c */,
+				4323738B19C2CDF800D0579A /* server.c */,
+				4323738C19C2CDF800D0579A /* sha-1.c */,
 			);
 			path = libwebsocket;
 			sourceTree = "<group>";
@@ -1917,14 +1978,20 @@
 				436C65FB19C059A800CB8B94 /* BridgeToolsImplIOS.mm in Sources */,
 				43998DDA19865C28003C5793 /* structurally_valid.cc in Sources */,
 				43998DCB19865C28003C5793 /* generated_message_util.cc in Sources */,
+				4323738F19C2CDF800D0579A /* client-parser.c in Sources */,
 				43095C4C199C54E2003C23B3 /* public.cpp in Sources */,
 				430B19A819B84A7400BE772E /* RTChatSDKMain.cpp in Sources */,
 				43247A541987339300AF14C7 /* MediaSample.cpp in Sources */,
 				431D817E19BF038C002C279F /* 3Des.m in Sources */,
 				43998DC819865C28003C5793 /* extension_set.cc in Sources */,
 				43AE0052197913930062C9B4 /* json_reader.cpp in Sources */,
+				4323739019C2CDF800D0579A /* client.c in Sources */,
+				4323739219C2CDF800D0579A /* extension-deflate-frame.c in Sources */,
+				4323739119C2CDF800D0579A /* daemonize.c in Sources */,
 				43998DD419865C28003C5793 /* message_lite.cc in Sources */,
 				43998DC919865C28003C5793 /* extension_set_heavy.cc in Sources */,
+				4323739519C2CDF800D0579A /* getifaddrs.c in Sources */,
+				4323739D19C2CDF800D0579A /* sha-1.c in Sources */,
 				4314C7C919B4903F000F5323 /* AFURLConnectionOperation.m in Sources */,
 				43998DD219865C28003C5793 /* zero_copy_stream_impl_lite.cc in Sources */,
 				430F16FF196F8DC10083B252 /* tinyxmlparser.cpp in Sources */,
@@ -1932,6 +1999,7 @@
 				435E03E7196E8333000C3012 /* CAXException.cpp in Sources */,
 				43998DDC19865C28003C5793 /* substitute.cc in Sources */,
 				43998DD119865C28003C5793 /* zero_copy_stream_impl.cc in Sources */,
+				4323739919C2CDF800D0579A /* output.c in Sources */,
 				43998DE019865C28003C5793 /* wire_format_lite.cc in Sources */,
 				430F16FE196F8DC10083B252 /* tinyxmlerror.cpp in Sources */,
 				433E66E71987AAD10002AAC3 /* udp_socket_wrapper.cc in Sources */,
@@ -1954,8 +2022,11 @@
 				4314C7C819B4903F000F5323 /* AFSecurityPolicy.m in Sources */,
 				4307F4A319AC3D0A00D059C3 /* RTChatBuffStream.cpp in Sources */,
 				43998DD819865C28003C5793 /* common.cc in Sources */,
+				4323739319C2CDF800D0579A /* extension-deflate-stream.c in Sources */,
 				4314C79719B46404000F5323 /* RTChatBuffStreamPool.cpp in Sources */,
+				4323739819C2CDF800D0579A /* minilex.c in Sources */,
 				43998DCD19865C28003C5793 /* gzip_stream.cc in Sources */,
+				4323739719C2CDF800D0579A /* libwebsockets.c in Sources */,
 				435E03E5196E8333000C3012 /* CADebugMacros.cpp in Sources */,
 				43998DC719865C28003C5793 /* dynamic_message.cc in Sources */,
 				43998DCE19865C28003C5793 /* printer.cc in Sources */,
@@ -1973,16 +2044,23 @@
 				43998DDE19865C28003C5793 /* unknown_field_set.cc in Sources */,
 				435E03E6196E8333000C3012 /* CAStreamBasicDescription.cpp in Sources */,
 				433E66DF1987AAD10002AAC3 /* channel_transport.cc in Sources */,
+				4323739C19C2CDF800D0579A /* server.c in Sources */,
 				43998DD519865C28003C5793 /* reflection_ops.cc in Sources */,
 				432D4E5319B597B600AD7B6A /* HttpProcess.mm in Sources */,
 				43998DD319865C28003C5793 /* message.cc in Sources */,
+				4323739419C2CDF800D0579A /* extension.c in Sources */,
 				4314C7CA19B4903F000F5323 /* AFURLRequestSerialization.m in Sources */,
 				4314C7C519B4903F000F5323 /* AFHTTPRequestOperationManager.m in Sources */,
 				43998BAF198636DA003C5793 /* WebSocket.cpp in Sources */,
 				43998DD019865C28003C5793 /* zero_copy_stream.cc in Sources */,
 				433E66EA1987AAD10002AAC3 /* udp_transport_impl.cc in Sources */,
 				43E6066C19ADBFF700181658 /* TimeCounter.cpp in Sources */,
+				4323739A19C2CDF800D0579A /* parsers.c in Sources */,
+				4323739B19C2CDF800D0579A /* server-handshake.c in Sources */,
+				4323739619C2CDF800D0579A /* handshake.c in Sources */,
+				4323738D19C2CDF800D0579A /* base64-decode.c in Sources */,
 				43998DD719865C28003C5793 /* service.cc in Sources */,
+				4323738E19C2CDF800D0579A /* client-handshake.c in Sources */,
 				43998DDB19865C28003C5793 /* strutil.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2161,6 +2239,7 @@
 					WEBRTC_ARCH_ARM,
 					WEBRTC_ARCH_ARM_V7,
 					WEBRTC_ARCH_ARM_NEON,
+					CMAKE_BUILD,
 				);
 				GCC_USE_STANDARD_INCLUDE_SEARCHING = YES;
 				GCC_VERSION = "";
@@ -2235,6 +2314,7 @@
 					WEBRTC_ARCH_ARM,
 					WEBRTC_ARCH_ARM_V7,
 					WEBRTC_ARCH_ARM_NEON,
+					CMAKE_BUILD,
 				);
 				GCC_USE_STANDARD_INCLUDE_SEARCHING = YES;
 				GCC_VERSION = "";
