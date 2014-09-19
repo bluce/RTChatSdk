@@ -86,7 +86,7 @@ static const char * const log_level_names[] = {
 #endif
 
 /**
- * lws_get_library_version: get version and git hash library built from
+ * rtchatsdk_lws_get_library_version: get version and git hash library built from
  *
  *	returns a const char * to a string like "1.1 178d78c"
  *	representing the library version followed by the git head hash it
@@ -94,7 +94,7 @@ static const char * const log_level_names[] = {
  */
 
 LWS_VISIBLE const char *
-lws_get_library_version(void)
+rtchatsdk_lws_get_library_version(void)
 {
 	return library_version;
 }
@@ -1330,7 +1330,7 @@ rtchatsdk_lws_any_extension_handled(struct rtchatsdk_libwebsocket_context *conte
 
 
 void *
-lws_get_extension_user_matching_ext(struct rtchatsdk_libwebsocket *wsi,
+rtchatsdk_lws_get_extension_user_matching_ext(struct rtchatsdk_libwebsocket *wsi,
 					   struct rtchatsdk_libwebsocket_extension *ext)
 {
 	int n = 0;
@@ -2312,12 +2312,12 @@ static void lwsl_emit_stderr(int level, const char *line)
 }
 
 #ifdef WIN32
-LWS_VISIBLE void lwsl_emit_syslog(int level, const char *line)
+LWS_VISIBLE void rtchatsdk_lwsl_emit_syslog(int level, const char *line)
 {
 	lwsl_emit_stderr(level, line);
 }
 #else
-LWS_VISIBLE void lwsl_emit_syslog(int level, const char *line)
+LWS_VISIBLE void rtchatsdk_lwsl_emit_syslog(int level, const char *line)
 {
 	int syslog_level = LOG_DEBUG;
 
@@ -2366,7 +2366,7 @@ LWS_VISIBLE void _rtchatsdk_lws_log(int filter, const char *format, ...)
  *	emission on stderr.
  */
 
-LWS_VISIBLE void lws_set_log_level(int level, void (*log_emit_function)(int level,
+LWS_VISIBLE void rtchatsdk_lws_set_log_level(int level, void (*log_emit_function)(int level,
 							      const char *line))
 {
 	log_level = level;

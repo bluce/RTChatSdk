@@ -92,7 +92,7 @@ static void lws_daemon_closing(int sigact)
  */
 
 LWS_VISIBLE int
-lws_daemonize(const char *_lock_path)
+rtchatsdk_lws_daemonize(const char *_lock_path)
 {
 	pid_t sid, parent;
 	int fd;
@@ -126,7 +126,7 @@ lws_daemonize(const char *_lock_path)
 	n = strlen(_lock_path) + 1;
 	lock_path = malloc(n);
 	if (!lock_path) {
-		fprintf(stderr, "Out of mem in lws_daemonize\n");
+		fprintf(stderr, "Out of mem in rtchatsdk_lws_daemonize\n");
 		return 1;
 	}
 	strcpy(lock_path, _lock_path);

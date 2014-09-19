@@ -25,7 +25,7 @@ const char *set[] = {
 	"HTTP/1.1 ",
 };
 
-unsigned char lextable[] = {
+unsigned char rtchatsdk_lextable[] = {
 /* pos 0: state 0 */
    0x47 /* 'G' */, 0x07 /* to pos 14 state 1 */,
    0x48 /* 'H' */, 0x0A /* to pos 22 state 5 */,
@@ -303,16 +303,16 @@ struct state {
 struct state state[1000];
 int next = 1;
 
-int lextable_decode(int pos, char c)
+int rtchatsdk_lextable_decode(int pos, char c)
 {
 	while (1) {
-		if (lextable[pos + 1] == 0) // terminal marker
+		if (rtchatsdk_lextable[pos + 1] == 0) // terminal marker
 			return pos;
 
-		if ((lextable[pos] & 0x7f) == c)
-			return pos + (lextable[pos + 1] << 1);
+		if ((rtchatsdk_lextable[pos] & 0x7f) == c)
+			return pos + (rtchatsdk_lextable[pos + 1] << 1);
 
-		if (lextable[pos] & 0x80)
+		if (rtchatsdk_lextable[pos] & 0x80)
 			return -1;
 
 		pos += 2;
@@ -420,13 +420,13 @@ again:
 		fprintf(stderr, "Trying %s\n", set[n]);
 
 		while (set[n][m]) {
-			walk = lextable_decode(walk, set[n][m]);
+			walk = rtchatsdk_lextable_decode(walk, set[n][m]);
 			if (walk < 0) {
 				fprintf(stderr, "failed\n");
 				break;
 			}
-			if (lextable[walk + 1] == 0) {
-				fprintf(stderr, "decode: %d\n", lextable[walk] & 0x7f);
+			if (rtchatsdk_lextable[walk + 1] == 0) {
+				fprintf(stderr, "decode: %d\n", rtchatsdk_lextable[walk] & 0x7f);
 				break;
 			}
 			m++;

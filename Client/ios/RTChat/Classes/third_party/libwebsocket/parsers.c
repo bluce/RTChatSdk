@@ -26,7 +26,7 @@
 #endif
 
 
-unsigned char lextable[] = {
+unsigned char rtchatsdk_lextable[] = {
 	/* pos 0: state 0 */
 	0x47 /* 'G' */, 0x07 /* to pos 14 state 1 */,
 	0x48 /* 'H' */, 0x0A /* to pos 22 state 5 */,
@@ -290,16 +290,16 @@ unsigned char lextable[] = {
 	/* total size 276 bytes */
 };
 
-int lextable_decode(int pos, char c)
+int rtchatsdk_lextable_decode(int pos, char c)
 {
 	while (pos >= 0) {
-		if (lextable[pos + 1] == 0) /* terminal marker */
+		if (rtchatsdk_lextable[pos + 1] == 0) /* terminal marker */
 			return pos;
 
-		if ((lextable[pos] & 0x7f) == c)
-			return pos + (lextable[pos + 1] << 1);
+		if ((rtchatsdk_lextable[pos] & 0x7f) == c)
+			return pos + (rtchatsdk_lextable[pos + 1] << 1);
 
-		if (lextable[pos] & 0x80)
+		if (rtchatsdk_lextable[pos] & 0x80)
 			return -1;
 
 		pos += 2;
@@ -469,7 +469,7 @@ int rtchatsdk_libwebsocket_parse(struct rtchatsdk_libwebsocket *wsi, unsigned ch
 		lwsl_parser("WSI_TOKEN_NAME_PART '%c'\n", c);
 
 		wsi->u.hdr.lextable_pos =
-				lextable_decode(wsi->u.hdr.lextable_pos, c);
+				rtchatsdk_lextable_decode(wsi->u.hdr.lextable_pos, c);
 
 		if (wsi->u.hdr.lextable_pos < 0) {
 			/* this is not a header we know about */
@@ -490,11 +490,11 @@ int rtchatsdk_libwebsocket_parse(struct rtchatsdk_libwebsocket *wsi, unsigned ch
 			lwsl_info("Unknown method - dropping\n");
 			return -1;
 		}
-		if (lextable[wsi->u.hdr.lextable_pos + 1] == 0) {
+		if (rtchatsdk_lextable[wsi->u.hdr.lextable_pos + 1] == 0) {
 
 			/* terminal state */
 
-			n = lextable[wsi->u.hdr.lextable_pos] & 0x7f;
+			n = rtchatsdk_lextable[wsi->u.hdr.lextable_pos] & 0x7f;
 
 			lwsl_parser("known hdr %d\n", n);
 

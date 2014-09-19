@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "43C42A3919CA82FF00E9DCFA"
-               BuildableName = "libRTChat copy.a"
+               BuildableName = "libRTChat_sim.a"
                BlueprintName = "RTChat_sim"
                ReferencedContainer = "container:RTChat.xcodeproj">
             </BuildableReference>
