@@ -53,6 +53,8 @@ int openssl_websocket_private_data_index;
 #define LWS_BUILD_HASH "unknown-build-hash"
 #endif
 
+#include "lws_config.h"
+
 static int log_level = LLL_ERR | LLL_WARN | LLL_NOTICE;
 static void lwsl_emit_stderr(int level, const char *line);
 static void (*lwsl_emit)(int level, const char *line) = lwsl_emit_stderr;

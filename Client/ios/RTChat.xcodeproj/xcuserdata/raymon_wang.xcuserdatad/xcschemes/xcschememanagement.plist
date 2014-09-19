@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>RTChat_sim.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>34</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -38,6 +43,11 @@
 			<true/>
 		</dict>
 		<key>435E043C196E91D4000C3012</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>43C42A3919CA82FF00E9DCFA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
