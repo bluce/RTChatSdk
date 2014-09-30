@@ -1,0 +1,19 @@
+# ! /bin/bash
+#stop service 
+
+IFS='
+'
+for var in $(ps -x | grep "Service")
+do
+echo $var
+	pidnum=$(echo $var | cut -c1-5)
+	servicename=$(echo $var | cut -c28-)
+
+	
+	if kill -9 $pidnum
+	then 
+		echo "$servicename stoped"
+	else
+		echo "$servicename cannot be stoped"
+	fi
+done

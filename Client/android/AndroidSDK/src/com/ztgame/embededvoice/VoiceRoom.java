@@ -9,7 +9,6 @@ import org.webrtc.webrtcdemo.VoiceRxChannel;
 
 import android.content.Context;
 import android.util.Log;
-
 import Cmd.Public.enRoomType;
 import Cmd.Public.stMicInfo;
 import Cmd.Public.stVoiceUserInfo;
@@ -18,6 +17,7 @@ import Cmd.Game.*;
 public class VoiceRoom {
 
 	private long roomId;
+	private final String TAG = "VoiceRoom";
 	private MediaEngine  voiceMediaEngine;
 	private long myUserId;
 	private ArrayList<stMicInfo> userMicInfo = new ArrayList<stMicInfo>();
@@ -32,32 +32,32 @@ public class VoiceRoom {
 	
 	private Context ctx;
 	
+	public enum RoomState
+	{	
+		uninited,
+		creating,
+		created,
+		speaking,
+	}
 	
-	public static VoiceRoom CreateRoom(String serverip,int receiveport,int sendport,enRoomType roomtype,long userid,Context context)
+	public RoomState State = RoomState.uninited;
+		
+
+	public static VoiceRoom CreateRoom(enRoomType roomtype,long userid,Context context)
 	{
-		VoiceRoom room = new VoiceRoom(serverip,receiveport,sendport,roomtype,userid,context);
+		VoiceRoom room = new VoiceRoom(roomtype,userid,context);
 		return room;
 	}
-		
-	public VoiceRoom(String serverip,int receiveport,int sendport,enRoomType roomtype,long userid,Context context)
-	{ 
+	
+	public VoiceRoom(enRoomType roomtype,long userid,Context context)
+	{
 		ctx = context;
 		myUserId = userid;
-		roomip = serverip;
-		roomInputport = receiveport;
-		roomOutport = sendport;
 		roomType = roomtype;
-		
-		SetupMainVoiceChannel(roomip,roomInputport,roomOutport);
-		if(roomtype == enRoomType.ROOM_TYPE_FREE)
-		{
-			StartChat();
-		}else
-		{
-			voiceMediaEngine.startListen();
-		}
-
+		State = RoomState.creating;
 	}
+		
+
 	
 	public void SetRoomId(long roomID)
 	{
@@ -66,6 +66,14 @@ public class VoiceRoom {
 	
 	public boolean SetupMainVoiceChannel(String serverip,int receiveport,int sendport)
     {
+		SecondServer.Dlog(SecondServer.TraceLevel.TRACE_DEBUG,TAG,"SetupMainVoiceChannel ip="+ serverip + "  receiveport ="+receiveport);
+		roomip = serverip;
+		roomInputport = receiveport;
+		roomOutport = sendport;
+		
+		if(voiceMediaEngine != null)
+			 return false;
+		
 		voiceMediaEngine = new MediaEngine(ctx);
     	//mediaEngine.setAudioCodec(7);
 		voiceMediaEngine.setAudioRxPort(roomInputport);
@@ -76,27 +84,40 @@ public class VoiceRoom {
 		voiceMediaEngine.setTrace(true);
 		voiceMediaEngine.setDebuging(true);
 		voiceMediaEngine.setAudio(true);
-		voiceMediaEngine.setAudioCodec(voiceMediaEngine.getiLBCIndex());
+		int ilbcidex = voiceMediaEngine.getiLBCIndex();
+		//SecondServer.Dlog(SecondServer.TraceLevel.TRACE_DEBUG,TAG,"ilbcidex =" + ilbcidex);
+		voiceMediaEngine.setAudioCodec(ilbcidex);
     	
     	//mediaEngine.setAudioCodec(7);
 		
-		voiceMediaEngine.setSpeaker(false);
+		voiceMediaEngine.setSpeaker(true);
 		voiceMediaEngine.setEc(true);
 		voiceMediaEngine.setAgc(true);
 		voiceMediaEngine.setNs(true);
 		voiceMediaEngine.userid = myUserId;
 		voiceMediaEngine.activeChannel();
 		
+		State = RoomState.created;
+		if(roomType == enRoomType.ROOM_TYPE_FREE)
+		{
+			StartChat();
+			
+		}else
+		{
+			voiceMediaEngine.startListen();
+		}
     	return true;
     }
 	
 	public boolean AddFreeRoomUser(long peerid)
 	{
-		Log.e("yibintest", "add user -------------------------peerid = " + peerid);
+		
+		SecondServer.Dlog(SecondServer.TraceLevel.TRACE_DEBUG,TAG,"AddFreeRoomUser peerid =" + peerid);
 		VoiceRxChannel freeMicUser = voiceMediaEngine.addReceiveChl(peerid);
 		freeRoomUsers.add(freeMicUser);
-		if(freeRoomUsers.size() >= 2)
+		if(freeRoomUsers.size() >= 1)
 		{
+			SecondServer.Dlog(SecondServer.TraceLevel.TRACE_DEBUG,TAG,"swich cocec to  pcm");
 			voiceMediaEngine.setAudioCodec(7);
 		}
 		return true;
@@ -104,7 +125,7 @@ public class VoiceRoom {
 	
 	public boolean DelFreeRoomUser(long peerid)
 	{
-		Log.e("yibintest", "delete user -------------------------peerid = " + peerid);
+		SecondServer.Dlog(SecondServer.TraceLevel.TRACE_DEBUG,TAG,"DelFreeRoomUser peerid =" + peerid);
 		for (Iterator<VoiceRxChannel> i = freeRoomUsers.iterator(); i.hasNext();)
 		{  
 			VoiceRxChannel freeChl = i.next();
@@ -114,6 +135,7 @@ public class VoiceRoom {
 				freeChl.dispose();
 			}
 		}  
+		
 		return true;
 	}
 	
@@ -140,6 +162,7 @@ public class VoiceRoom {
 	
 	public void UpateCurrentMic(cmdNotifyTakeMic micinfo)
 	{
+		SecondServer.Dlog(SecondServer.TraceLevel.TRACE_DEBUG,TAG,"UpateCurrentMic id=" + micinfo.getUniqueid());
 		if(roomType == enRoomType.ROOM_TYPE_QUEUE)
 		{
 			
@@ -149,30 +172,32 @@ public class VoiceRoom {
 		}
 		
 		if(micinfo.getTempid() == myUserId)
-			{   Log.e("yibintest", "Get Mic -------------------------" + micinfo.getTempid() + "myUserId = " + myUserId);
+			{   
+				SecondServer.Dlog(SecondServer.TraceLevel.TRACE_DEBUG,TAG,"UpateCurrentMic startSay");
 				voiceMediaEngine.startSay();
-				isSpeaking = true;
+				
 			}else
 			{
-				Log.e("yibintest", "Leave Mic -------------------------" + micinfo.getTempid() + "myUserId = " + myUserId);
-				if(isSpeaking)
-				{
-					voiceMediaEngine.stopSay();
-					isSpeaking = false;
-				}
+				
+				SecondServer.Dlog(SecondServer.TraceLevel.TRACE_DEBUG,TAG,"UpateCurrentMic stopSay");
+				voiceMediaEngine.stopSay();
+				isSpeaking = false;
+				
 			}
 	}
 	
 	
 	public void Dispose()
 	{
+		SecondServer.Dlog(SecondServer.TraceLevel.TRACE_DEBUG,TAG,"Dispose---");
 		for (Iterator<VoiceRxChannel> i = freeRoomUsers.iterator(); i.hasNext();)
 		{  
 			VoiceRxChannel freeChl = i.next();
 			freeChl.stop();
 			freeChl.dispose();
 		}  
-		voiceMediaEngine.dispose();
+		if(voiceMediaEngine != null)
+			voiceMediaEngine.dispose();
 	}
 	
 	

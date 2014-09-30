@@ -1,0 +1,58 @@
+package Cmd;
+
+import "public.proto";
+
+enum enInternalId
+{
+	enInteranlNone = 1000;
+
+	/// 删除用户
+	enUnRegisterUser = 1001;
+
+	/// 删除一个房间
+	enDelRoom = 1002;
+
+	/// 注册gateway
+	enRegisterSvr = 1003;
+
+	/// 删除一个房间用户
+	enRemoveRoomUser = 1004;
+
+	/// 注册新用户
+	enRegisterUser = 1005;
+}
+
+/// 删除一个用户 
+message cmdUnRegisterUser
+{
+	required uint64 tempid = 1;
+}
+
+/// 删除房间
+message cmdDelRoom
+{
+	required uint64 roomid = 1;
+}
+
+/// 注册gateway
+message cmdRegisterSvr
+{
+	required uint32 svrid = 1;
+}
+
+/// 删除一个房间用户
+message cmdRemoveRoomUser
+{
+	required uint64 roomid = 1;
+	required uint64 tempid = 2;
+}
+
+/// 注册新用户
+message cmdRegisterUser
+{
+	required uint64 tempid = 1;
+	required string uniqueid = 2;
+	required bool isrec = 3;
+}
+
+

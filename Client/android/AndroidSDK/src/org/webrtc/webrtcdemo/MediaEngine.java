@@ -103,9 +103,34 @@ public class MediaEngine {
         }
       };
       
-   
     context.registerReceiver(headsetListener, receiverFilter);
   }
+  
+  public MediaEngine(Context context ,boolean byRecording) {
+	    this.context = context;
+	    voe = new VoiceEngine();
+	    check(voe.init() == 0, "Failed voe Init");
+	  
+	    check(voe.setSpeakerVolume(volumeLevel) == 0,
+	        "Failed setSpeakerVolume");
+	  
+	    // Set audio mode to communication
+	    AudioManager audioManager =
+	        ((AudioManager) context.getSystemService(Context.AUDIO_SERVICE));
+	    // Listen to headset being plugged in/out.
+	    IntentFilter receiverFilter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
+	    headsetListener = new BroadcastReceiver() {
+	        @Override
+	        public void onReceive(Context context, Intent intent) {
+	          if (intent.getAction().compareTo(Intent.ACTION_HEADSET_PLUG) == 0) {
+	            headsetPluggedIn = intent.getIntExtra("state", 0) == 1;
+	            updateAudioOutput();
+	          }
+	        }
+	      };
+	      
+	    context.registerReceiver(headsetListener, receiverFilter);
+	  }
 
   public void dispose() {
     stop();
@@ -114,6 +139,8 @@ public class MediaEngine {
     check(voe.deleteChannel(audioChannel) == 0, "VoE delete channel failed");
     voe.dispose();
   }
+  
+  
 
   public void start() {
     if (audioEnabled) {
@@ -161,11 +188,17 @@ public class MediaEngine {
 
   public void setTrace(boolean enable) {
     if (enable) {
-      voe.setTraceFile("/sdcard/trace.txt", false);
+      voe.setTraceFile(getDebugDirectory()+"/trace.txt", false);
       voe.setTraceFilter(VoiceEngine.TraceLevel.TRACE_ALL);
       return;
     }
    voe.setTraceFilter(VoiceEngine.TraceLevel.TRACE_NONE);
+  }
+  
+  private String getTraceFilePath()
+  {
+	  return Environment.getExternalStorageDirectory().toString() + "/" +
+			  "voetrace.txt";
   }
 
   private String getDebugDirectory() {
@@ -265,6 +298,42 @@ public class MediaEngine {
   public void muteMic(boolean isMuteMic)
   {
 	  voe.muteMic(audioChannel, isMuteMic);
+  }
+  
+  
+  public void startRecordingAsFile(String filename)
+  {
+	  int index = getiLBCIndex();
+	  voe.startRecordingMicrophone(filename, index);
+  }
+  
+  public void stopRcordingAsFile()
+  {
+	  voe.stopRecordingMicrophone();
+  }
+  
+  public void startRecordingPlayingout(String filename)
+  {   
+	  voe.startPlayout(audioChannel);
+	  voe.StartRecordingPlayout(audioChannel, filename, false);
+  }
+  
+  public void stopRecordingPlayingout()
+  {
+	  voe.stopPlayout(audioChannel);
+	  voe.StopRecordingPlayout(audioChannel);
+  }
+  
+  public void startPlayFile(String filename)
+  {
+	  voe.startPlayout(audioChannel);
+	  voe.startPlayingFileLocally(audioChannel, filename, false,2);
+  }
+  
+  public void stopPlayFile(String filename)
+  {
+	  voe.stopPlayingFileLocally(audioChannel);
+	  voe.stopPlayout(audioChannel);
   }
 
   public String[] audioCodecsAsString() {

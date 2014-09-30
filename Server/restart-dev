@@ -1,0 +1,26 @@
+#! /bin/sh
+
+./stopserver
+
+./LoginService/LoginService -d
+
+./InfoService/InfoService -d
+sleep 1
+
+./GateService/GateService -i 1 -d
+
+./GateService/GateService -i 2 -d
+
+./GateService/GateService -i 3 -d
+
+./TransService/TransService -i 1 -d
+
+./TransService/TransService -i 2 -d
+
+./TransService/TransService -i 3 -d
+
+sleep 1
+echo service restart successful
+
+
+

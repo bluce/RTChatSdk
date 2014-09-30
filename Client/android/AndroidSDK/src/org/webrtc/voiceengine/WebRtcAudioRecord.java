@@ -62,7 +62,7 @@ class WebRtcAudioRecord {
         // On average half of the samples have been recorded/buffered and the
         // recording interval is 1/100s.
         _bufferedRecSamples = sampleRate / 200;
-        // DoLog("rough rec delay set to " + _bufferedRecSamples);
+        //DoLog("rough rec delay set to " + _bufferedRecSamples);
 
         // release the object
         if (_audioRecord != null) {
@@ -70,7 +70,7 @@ class WebRtcAudioRecord {
             _audioRecord = null;
         }
 
-        Log.e("yibintest","InitRecording java");
+        //Log.e("yibintest","InitRecording java");
         
         try {
             _audioRecord = new AudioRecord(
@@ -166,7 +166,7 @@ class WebRtcAudioRecord {
             int readBytes = 0;
             _recBuffer.rewind(); // Reset the position to start of buffer
             readBytes = _audioRecord.read(_tempBufRec, 0, lengthInBytes);
-            // DoLog("read " + readBytes + "from SC");
+            //DoLog("read " + readBytes + "from SC");
             _recBuffer.put(_tempBufRec);
 
             if (readBytes != lengthInBytes) {

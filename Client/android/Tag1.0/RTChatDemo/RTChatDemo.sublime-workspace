@@ -1,0 +1,1151 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"roomid",
+				"roomid"
+			],
+			[
+				"anr",
+				"__android_log_print"
+			],
+			[
+				"jroom",
+				"jroomtype"
+			],
+			[
+				"room",
+				"roomtype"
+			],
+			[
+				"RT",
+				"RTChatSDKMain"
+			],
+			[
+				"re",
+				"result"
+			],
+			[
+				"test",
+				"test1222222"
+			],
+			[
+				"cr",
+				"createFreeRoom"
+			],
+			[
+				"req",
+				"reqRoomListBtn"
+			],
+			[
+				"add",
+				"addChild"
+			],
+			[
+				"e",
+				"env"
+			],
+			[
+				"jni",
+				"jniEnv"
+			],
+			[
+				"s",
+				"string"
+			],
+			[
+				"init",
+				"initNativeSDK"
+			],
+			[
+				"in",
+				"include"
+			],
+			[
+				"so",
+				"soldier"
+			],
+			[
+				"Fi",
+				"FightingSoldierTanks"
+			],
+			[
+				"pa",
+				"parentNode"
+			],
+			[
+				"ev",
+				"eventvalue"
+			],
+			[
+				"fa",
+				"false"
+			],
+			[
+				"or",
+				"orderinfo"
+			],
+			[
+				"bu",
+				"buyIteminfo"
+			],
+			[
+				"no",
+				"notifyQue"
+			],
+			[
+				"sun",
+				"soundAction"
+			],
+			[
+				"co",
+				"coroutine"
+			],
+			[
+				"talbe",
+				"table.sort	table.sort"
+			],
+			[
+				"t",
+				"true"
+			],
+			[
+				"get",
+				"getPositionY"
+			],
+			[
+				"set",
+				"setString"
+			],
+			[
+				"to",
+				"toarray"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"Se",
+				"selectedfriendId"
+			],
+			[
+				"sele",
+				"SelectScene"
+			],
+			[
+				"m",
+				"medalusing"
+			],
+			[
+				"show",
+				"showFriendMedal"
+			],
+			[
+				"select",
+				"selectedfriendId"
+			],
+			[
+				"ca",
+				"cacheFriendData"
+			],
+			[
+				"fre",
+				"friendsData"
+			],
+			[
+				"fbid",
+				"fbids"
+			],
+			[
+				"f",
+				"fridnds"
+			],
+			[
+				"fri",
+				"friendslist"
+			],
+			[
+				"fun",
+				"function	function"
+			],
+			[
+				"summonc",
+				"summoncraft"
+			],
+			[
+				"getPo",
+				"getPositionX"
+			],
+			[
+				"par",
+				"parent"
+			],
+			[
+				"air",
+				"aircraft"
+			],
+			[
+				"att",
+				"attackedPoint"
+			],
+			[
+				"stop",
+				"stopAction"
+			],
+			[
+				"stopf",
+				"stopfire"
+			],
+			[
+				"em",
+				"enemytype"
+			],
+			[
+				"ai",
+				"aircraft"
+			],
+			[
+				"run",
+				"runAction"
+			],
+			[
+				"stopA",
+				"stopActionByTag"
+			],
+			[
+				"aircra",
+				"aircraft"
+			],
+			[
+				"pl",
+				"planeFarray"
+			],
+			[
+				"sp",
+				"spriteArray"
+			],
+			[
+				"CC",
+				"CCArray"
+			],
+			[
+				"CCSpriteFr",
+				"CCSpriteFrameCache"
+			],
+			[
+				"CCS",
+				"CCSprite"
+			],
+			[
+				"a",
+				"action"
+			],
+			[
+				"miss",
+				"missile"
+			],
+			[
+				"ta",
+				"taskid"
+			],
+			[
+				"sing",
+				"singleAreaTbl"
+			],
+			[
+				"refresh",
+				"refreshSingleCntTbl"
+			],
+			[
+				"st",
+				"startPosition"
+			],
+			[
+				"ini",
+				"initparameter"
+			],
+			[
+				"ran",
+				"random"
+			],
+			[
+				"im",
+				"imagefilename"
+			],
+			[
+				"task",
+				"tasktype"
+			],
+			[
+				"Tab",
+				"TableTask"
+			],
+			[
+				"tem",
+				"teamnum"
+			],
+			[
+				"tme",
+				"teamnum"
+			],
+			[
+				"wa",
+				"wavedata"
+			],
+			[
+				"wave",
+				"wavedata"
+			],
+			[
+				"lev",
+				"levelValue"
+			],
+			[
+				"tas",
+				"taskflag"
+			],
+			[
+				"leve",
+				"levelid"
+			],
+			[
+				"Table",
+				"TableStage1"
+			],
+			[
+				"sum",
+				"summonAirCraftId"
+			],
+			[
+				"ba",
+				"baseai"
+			],
+			[
+				"self",
+				"selfExploding"
+			],
+			[
+				"c",
+				"create"
+			],
+			[
+				"spe",
+				"speedTrans"
+			],
+			[
+				"sky",
+				"skyCanvas"
+			],
+			[
+				"sk",
+				"skyCanvas"
+			],
+			[
+				"fl",
+				"flyaction"
+			],
+			[
+				"airc",
+				"aircraft"
+			],
+			[
+				"mo",
+				"movetype"
+			],
+			[
+				"fly",
+				"flyFrameAction"
+			],
+			[
+				"pn",
+				"pngname"
+			],
+			[
+				"CCRe",
+				"CCRepeatForever"
+			],
+			[
+				"rem",
+				"removeFromParentAndCleanup"
+			],
+			[
+				"ge",
+				"getPositionY"
+			],
+			[
+				"getP",
+				"getPositionX"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "Classes/RTChat/RTChatSdkAndroidIpml.cpp",
+			"settings":
+			{
+				"buffer_size": 9488,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Classes/RTChat/RTChatSdkAndroidIpml.h",
+			"settings":
+			{
+				"buffer_size": 1226,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "proj.android/README.md",
+			"settings":
+			{
+				"buffer_size": 1321,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Classes/RTChat/RTChatCommonTypes.h",
+			"settings":
+			{
+				"buffer_size": 4083,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Classes/RTChat/RTChatSdk.h",
+			"settings":
+			{
+				"buffer_size": 1141,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Classes/AppDelegate.cpp",
+			"settings":
+			{
+				"buffer_size": 1366,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Classes/HelloWorldScene.cpp",
+			"settings":
+			{
+				"buffer_size": 5905,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Classes/AppDelegate.h",
+			"settings":
+			{
+				"buffer_size": 947,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Classes/HelloWorldScene.h",
+			"settings":
+			{
+				"buffer_size": 937,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Classes/RTChat/jni_helpers.cc",
+			"settings":
+			{
+				"buffer_size": 2854,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "proj.android/jni/Android.mk",
+			"settings":
+			{
+				"buffer_size": 1375,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "/*\n *  Copyright (c) 2013 The WebRTC project authors. All Rights Reserved.\n *\n *  Use of this source code is governed by a BSD-style license\n *  that can be found in the LICENSE file in the root of the source\n *  tree. An additional intellectual property rights grant can be found\n *  in the file PATENTS.  All contributing project authors may\n *  be found in the AUTHORS file in the root of the source tree.\n */\n\n#ifndef RT_JNI_HELPERS_H_\n#define RT_JNI_HELPERS_H_\n\n// TODO(henrike): this file contains duplication with regards to\n// talk/app/webrtc/java/jni/peerconnection_jni.cc. When/if code can be shared\n// between trunk/talk and trunk/webrtc remove the duplication.\n\n#include <android/log.h>\n#include <jni.h>\n#include <stdlib.h>\n#include <map>\n#include <string>\n\n#define TAG \"RT-NATIVE\"\n\n// Abort the process if |x| is false, emitting |msg| to logcat.\n#define CHECK(x, msg)                                                  \\\n  if (x) {                                                             \\\n  } else {                                                             \\\n    __android_log_print(ANDROID_LOG_ERROR, TAG, \"%s:%d: %s\", __FILE__, \\\n                        __LINE__, msg);                                \\\n    abort();                                                           \\\n  }\n\n// Abort the process if |jni| has a Java exception pending, emitting |msg| to\n// logcat.\n#define CHECK_EXCEPTION(jni, msg) \\\n  if (0) {                        \\\n  } else {                        \\\n    if (jni->ExceptionCheck()) {  \\\n      jni->ExceptionDescribe();   \\\n      jni->ExceptionClear();      \\\n      CHECK(0, msg);              \\\n    }                             \\\n  }\n\n#define ARRAYSIZE(instance)                                     \\\n  static_cast<int>(sizeof(instance) / sizeof(instance[0]))\n\n// JNIEnv-helper methods that CHECK success: no Java exception thrown and found\n// object/class/method/field is non-null.\njmethodID GetMethodID(JNIEnv* jni, jclass c, const std::string& name,\n                      const char* signature);\n\n// Return a |jlong| that will automatically convert back to |ptr| when assigned\n// to a |uint64|\njlong jlongFromPointer(void* ptr);\n\n// Given a (UTF-16) jstring return a new UTF-8 native string.\nstd::string JavaToStdString(JNIEnv* jni, const jstring& j_string);\n\n// Android's FindClass() is trickier than usual because the app-specific\n// ClassLoader is not consulted when there is no app-specific frame on the\n// stack.  Consequently, we only look up classes once in JNI_OnLoad.\n// http://developer.android.com/training/articles/perf-jni.html#faq_FindClass\nclass ClassReferenceHolder {\n public:\n  ClassReferenceHolder(JNIEnv* jni, const char** classes, int size);\n  ~ClassReferenceHolder();\n\n  void FreeReferences(JNIEnv* jni);\n\n  jclass GetClass(const std::string& name);\n\n private:\n  void LoadClass(JNIEnv* jni, const std::string& name);\n\n  std::map<std::string, jclass> classes_;\n};\n\n#endif  // WEBRTC_EXAMPLES_ANDROID_MEDIA_DEMO_JNI_JNI_HELPERS_H_\n",
+			"file": "Classes/RTChat/jni_helpers.h",
+			"file_size": 3078,
+			"file_write_time": 130514637040000000,
+			"settings":
+			{
+				"buffer_size": 3002,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/yibin_billy/Desktop/mobileGame/RTChatDemo/Classes/AppDelegate.cpp",
+		"/Users/yibin_billy/Desktop/mobileGame/RTChatDemo/Classes/AppDelegate.h",
+		"/Users/yibin_billy/Desktop/mobileGame/RTChatDemo/Classes/HelloWorldScene.cpp",
+		"/Users/yibin_billy/Desktop/mobileGame/RTChatDemo/Classes/HelloWorldScene.h",
+		"/Users/yibin_billy/Desktop/mobileGame/RTChatDemo/proj.android/jni/Application.mk",
+		"/Users/yibin_billy/Desktop/mobileGame/RTChatDemo/proj.android/jni/hellocpp/main.cpp",
+		"/Users/yibin_billy/Desktop/mobileGame/RTChatDemo/proj.android/jni/Android.mk",
+		"/Users/yibin_billy/Desktop/mobileGame/DanceBird/frameworks/cocos2d-x/tools/tolua/cocos2dx_spine.ini副本",
+		"/Users/yibin_billy/Desktop/mobileGame/DanceBird/frameworks/cocos2d-x/tools/tolua/dancebird.py",
+		"/Users/yibin_billy/Desktop/voiceSDK/webRTC/trunk/webrtc/examples/android/media_demo/build_native.sh",
+		"/Users/yibin_billy/Desktop/voiceSDK/webRTC/trunk/Android.mk",
+		"/Users/yibin_billy/Desktop/voiceSDK/webRTC/trunk/webrtc/webrtc_examples.gyp",
+		"/Users/yibin_billy/Desktop/voiceSDK/webRTC/trunk/webrtc/examples/android/media_demo/jni/Android.mk",
+		"/Users/yibin_billy/Desktop/voiceSDK/webRTC/trunk/webrtc/examples/android/media_demo/jni/jni_helpers.cc",
+		"/Users/yibin_billy/Desktop/voiceSDK/webRTC/trunk/webrtc/examples/android/media_demo/jni/jni_helpers.h",
+		"/Users/yibin_billy/Desktop/mobileGame/trunk103/180.168.197.103/fxsj/cocos2d-x-2.1.4/projects/gxcocos/gxcocos/ArchiveManager.h",
+		"/Users/yibin_billy/Desktop/mobileGame/(gamm)fxsj/cocos2d-x-2.1.4/projects/(Gamm)Fxsj/proj.android/build_native.sh",
+		"/Users/yibin_billy/Desktop/voiceSDK/webRTC/trunk/third_party/icu/icu.gyp",
+		"/Users/yibin_billy/Desktop/mobileGame/trunk103/180.168.197.103/queueZombile/workspace/BirdQueue/android/jni/cqggl/main.cpp",
+		"/Users/yibin_billy/Desktop/mobileGame/(gamm)fxsj/cocos2d-x-2.1.4/tools/tolua++/CCNode.pkg",
+		"/Users/yibin_billy/Desktop/mobileGame/(gamm)fxsj/cocos2d-x-2.1.4/projects/Gamm-Fxsj/Resources/script/battle/BattleScene.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/(gamm)fxsj/cocos2d-x-2.1.4/projects/Gamm-Fxsj/Resources/script/Avatar.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/(gamm)fxsj/cocos2d-x-2.1.4/projects/Gamm-Fxsj/Resources/script/battle/MotherShip.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/trunk103/180.168.197.103/fxsj/cocos2d-x-2.1.4/projects/Gamm-Fxsj/Resources/script/FriendItem.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/trunk103/180.168.197.103/fxsj/cocos2d-x-2.1.4/projects/gxcocos/gxcocos/luagxcocos.cpp",
+		"/Users/yibin_billy/Desktop/mobileGame/trunk103/180.168.197.103/fxsj/cocos2d-x-2.1.4/projects/gxcocos/gxcocos/tolua++/luagxcocos.pkg",
+		"/Users/yibin_billy/Desktop/mobileGame/trunk103/180.168.197.103/fxsj/cocos2d-x-2.1.4/projects/gxcocos/gxcocos/InAppBilling.h",
+		"/Users/yibin_billy/Desktop/mobileGame/trunk103/180.168.197.103/fxsj/cocos2d-x-2.1.4/projects/gxcocos/gxcocos/InAppBilling.cpp",
+		"/Users/yibin_billy/Desktop/mobileGame/trunk103/180.168.197.103/queueZombile/workspace/BirdQueue/BirdStyle/jni/Android.mk",
+		"/Users/yibin_billy/Desktop/mobileGame/trunk103/180.168.197.103/queueZombile/workspace/CQggl/android/build_native.sh",
+		"/Users/yibin_billy/Desktop/mobileGame/trunk103/180.168.197.103/queueZombile/workspace/BirdQueue/android/build_native.sh",
+		"/Users/yibin_billy/Desktop/mobileGame/trunk103/180.168.197.103/queueZombile/workspace/BirdQueue/android/src/com/sdg/cqggl/Main.java",
+		"/Users/yibin_billy/Desktop/mobileGame/spacebrother/cocos2d-x-2.1.4/projects/fxsj/Resources/script/Welcome.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/spacebrother/cocos2d-x-2.1.4/projects/fxsj/Resources/script/MainScene.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/spacebrother/cocos2d-x-2.1.4/projects/fxsj-zh/update_resource.bat",
+		"/Users/yibin_billy/Downloads/资源包开发示例/sample/BIZ-LOCAL-XX-XX/order.op",
+		"/Users/yibin_billy/Desktop/shooter/testGesture/Assets/FingerGestures Samples/1) Finger Events/Scripts/FingerEventsSamplePart2.cs",
+		"/Users/yibin_billy/Desktop/ZombieShooter.cs",
+		"/Users/yibin_billy/Desktop/shooter/Gun/Assets/Scripts/Common/ConfMan.cs",
+		"/Users/yibin_billy/Desktop/shooter/Gun/Assets/Temp/Spawn.cs",
+		"/Users/yibin_billy/Desktop/shooter/192.184.94.122/project/subway/Assets/Resources/Conf/TableWeapon.json",
+		"/Users/yibin_billy/Desktop/shooter/192.184.94.122/doc/ZombieFrontier/TableWeapon.json",
+		"/Users/yibin_billy/Desktop/shooter/revert/Zombie_Frontier_v1_08/assets/gun_ak.json",
+		"/Users/yibin_billy/Desktop/shooter/revert/7yw.cn_僵尸前线2_v2.0_内购破解版/assets/level/level1/0.json",
+		"/Users/yibin_billy/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/yibin_billy/Library/Application Support/Sublime Text 3/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/yibin_billy/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/yibin_billy/Desktop/shooter/Zombie_Frontier_v1_08/assets/level/level1/enmey1test.json",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/battle/EnemyAirCraftFactory.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/battle/Talk.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/Loading.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/SelectScene.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/gxlua/HTTP.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/battle/ShooterGun.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/battle/ShooterLaser.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/battle/EnemyAirCraft.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/battle/AirCraftEffect.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/ExitGameDlg.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/BankScene.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/battle/BattleScene.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/MainScene.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/MainBar.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/loading.lua",
+		"/Users/yibin_billy/Desktop/doc/fxsj_doc/doc/table/关卡表.table",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/UserData.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/battle/Win.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/init.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/FriendScene.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/MedalScene.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/battle/Shooter.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/FriendItem.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/gxlua/LuaFaceBook.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/FriendInviteItem.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/battle/AirCraftAI.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/gxcocos/gxcocos/tolua++/HttpRequest.pkg",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/battle/EnemyAirCraftPath.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/gxcocos/gxlua/cocos.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/facebook-android-sdk-master/README.mdown",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/BackButton.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/tools/tolua++/CCNode.pkg",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/Dialog.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/battle/MotherShip.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/Lose.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/table/TableTask.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/table/TableEnemy.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/table/TableStage1.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos2d-x-2.1.4/projects/fxsj/Resources/script/gxlua/cocos.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos214/projects/fxsj/Resources/script/battle/EnemyAirCraftFactory.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos214/projects/fxsj/Resources/script/EnemyAirCraftPath.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos214/projects/fxsj/Resources/table/TableWeapon.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos214/projects/fxsj/Resources/script/MainScene.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos214/projects/fxsj/Resources/script/EnemyAirCraftFactory.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos214/projects/fxsj/Resources/script/EnemyAirCraftPath",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos214/projects/fxsj/Resources/script/AirCraftAi",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos214/projects/fxsj/Resources/script/init.lua",
+		"/Users/yibin_billy/Desktop/mobileGame/cocos214/projects/xxz/Resources/script/init.lua"
+	],
+	"find":
+	{
+		"height": 22.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"\"\n",
+			"{\n",
+			"Http",
+			"sid",
+			"UserData",
+			"CCSequence",
+			"registerScriptTouchHandler",
+			"rect",
+			"Rect",
+			"CCSeq",
+			"create",
+			"createShootFlame",
+			"BattleScene.mothership",
+			"monther",
+			"fire",
+			"tryshoot",
+			"EventCount",
+			"Exit",
+			"Device",
+			"serialize",
+			"launchBuyItem",
+			"creatediamondbuy",
+			"C_com_bwgame_fxsj_JNIManager_nativeIapWithTxPayStatus",
+			"scheduleUpdate",
+			"creatBrids",
+			"gameLogic",
+			"queryInventory",
+			"IAP",
+			"FT",
+			"regiserFlyNotify",
+			"registerScriptHandler",
+			"regiserFlyNotify",
+			"leavecnt",
+			"regiserFlyNotify",
+			"unregis",
+			"unregist",
+			"UserData.energy",
+			"default",
+			"setVisible",
+			"createImage",
+			"levelup",
+			")\n",
+			"bomb",
+			"convert",
+			"series",
+			"()\n",
+			"scheduler",
+			"btn",
+			"else",
+			"CCAaary",
+			"BackButton",
+			"scheduler",
+			"CCARRAY_FOREACH",
+			"CCFunc",
+			"playover",
+			"startfly",
+			"play",
+			"endPosition",
+			"bei",
+			"endPosition",
+			"excute",
+			"===",
+			"for",
+			" \n",
+			"cclog",
+			"Hide",
+			"for",
+			"ip",
+			"ipair",
+			"i pa r",
+			"5"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "Classes/RTChat/RTChatSdkAndroidIpml.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9488,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7313,
+								7313
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3612.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Classes/RTChat/RTChatSdkAndroidIpml.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1226,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1185,
+								1197
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 153.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "proj.android/README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1321,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "Classes/RTChat/RTChatCommonTypes.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4083,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2396,
+								2396
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1680.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "Classes/RTChat/RTChatSdk.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1141,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								808,
+								820
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 125.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "Classes/AppDelegate.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1366,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								135,
+								135
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 41.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "Classes/HelloWorldScene.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5905,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1383,
+								1383
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1119.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "Classes/AppDelegate.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 947,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								317,
+								317
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "Classes/HelloWorldScene.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 937,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								136,
+								138
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "Classes/RTChat/jni_helpers.cc",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2854,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1465,
+								1465
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 167.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "proj.android/jni/Android.mk",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1375,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								568,
+								568
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "Classes/RTChat/jni_helpers.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3002,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1462,
+								1462
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 22.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "RTChatDemo.sublime-project",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 337.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

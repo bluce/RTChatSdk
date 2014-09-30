@@ -14,7 +14,7 @@ import android.content.Context;
 
 public class NativeWebRtcContextRegistry {
   static {
-    System.loadLibrary("webrtcdemo-jni");
+    System.loadLibrary("rtchat");
   }
 
   public native void register(Context context);

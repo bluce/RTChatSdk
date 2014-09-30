@@ -79,7 +79,7 @@ public class VoiceEngine {
     private final int digitalCompressionGaindB;
     private final boolean limiterEnable;
   }
-
+  
   public VoiceEngine() {
     nativeVoiceEngine = create();
   }
@@ -101,7 +101,7 @@ public class VoiceEngine {
   public native int startPlayingFileLocally(
       int channel,
       String fileName,
-      boolean loop);
+      boolean loop,int format);
   public native int stopPlayingFileLocally(int channel);
   public native int startPlayingFileAsMicrophone(
       int channel,
@@ -111,6 +111,12 @@ public class VoiceEngine {
   public native int setRTCPCNAME(int channel,String cname);
   public native int insertExtraRTPPacket(int channel,String activate);
   public native int muteMic(int channel,boolean isMute);
+  public native int startRecordingMicrophone(String filename,int codecindex);
+  public native int stopRecordingMicrophone();
+  public native int StartRecordingPlayout(int channel,String filename,boolean isloop);
+  public native int StopRecordingPlayout(int channel);
+  
+  
   public native int numOfCodecs();
   public native CodecInst getCodec(int index);
   public native int setSendCodec(int channel, CodecInst codec);

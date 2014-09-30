@@ -1,0 +1,184 @@
+package Cmd;
+
+// websocket传输的基础命令
+// 服务器和客户端之间所有的命令都是此格式传输
+//
+//struct stBaseCmd
+//{
+//	uint16 cmdid;
+//  uint32 cmdlen;
+//	char data[0];
+//};
+
+
+/// 房间类型
+enum enRoomType
+{
+	ROOM_TYPE_MIN = 0; 
+	ROOM_TYPE_QUEUE = 1; /// 单人队列排麦模式(只能一个人拿麦)
+	ROOM_TYPE_FREE = 2;  /// 自由模式(最多4个人)
+	ROOM_TYPE_TWO = 3;   /// 二人模式
+	ROOM_TYPE_ONLY = 4;   /// 唯一模式(即主席模式)
+	ROOM_TYPE_MAX = 5;
+}
+
+
+/// 创建房间的理由
+enum enRoomReason
+{
+	ROOM_REASON_MIN = 0;
+	ROOM_REASON_NORMAL = 1; ///   正常的系统创建房间
+	ROOM_REASON_RANDCHAT = 2; /// 为测试加的随机聊天房间(类型是二人房间)
+	ROOM_REASON_MAX = 3;
+}
+
+
+/// 权限类型
+enum enPowerType
+{
+	POWER_TYPE_NORMAL = 1; /// 普通的人
+	POWER_TYPE_MASTER = 2; /// 房主
+	POWER_TYPE_ADMIN = 3; /// 管理员(房主分配的)
+}
+
+/// 录音返回
+enum enRecordType
+{
+	RECORD_TYPE_MIN = 0;
+	RECORD_TYPE_MAX = 1;
+}
+
+
+/// 播放返回
+enum enPlayType
+{
+	PLAY_TYPE_MIN = 0;
+	PLAY_TYPE_MAX = 1;
+}
+
+enum enCmdId
+{
+	enNone = 0;
+
+	/// 请求逻辑服务器信息
+	enRequestLogicInfo = 1;
+
+	/// 返回需要连接的逻辑服务器信息
+	enNotifyLogicInfo = 2;
+
+	/// 请求登录
+	enRequestLogin = 3;
+
+	/// 返回登录结果 
+	enNotifyLoginResult = 4;
+
+	/// 创建房间
+	enRequestCreateRoom = 5;
+
+	/// 创建房间返回
+	enNotifyCreateResult = 6;
+
+	/// 加入房间
+	enRequestEnterRoom = 7;
+
+	/// 加入房间返回
+	enNotifyEnterResult = 8;
+
+	/// 申请房间列表
+	enRequestRoomList = 9;
+
+	/// 返回房间列表
+	enNotifyRoomList = 10;
+
+	/// 增加收听通道
+	enNotifyAddVoiceUser = 11;
+
+	/// 加入麦序
+	enRequestJoinMicQueue = 12;
+
+	/// 离开麦序
+	enRequestLeaveMicQueue = 13;
+
+	/// 返回麦序
+	enNotifyMicQueue = 14;
+
+	/// 到某人聊天了
+	enNotifyTakeMic = 15;
+
+	/// 离开房间
+	enRequestLeaveRoom = 16;
+
+	/// 删除一个通道
+	enNotifyDelVoiceUser = 17;
+
+	/// 通知有人进入房间
+	enNotifySomeEnterRoom = 18;
+
+	/// 有人离开房间
+	enNotifySomeLeaveRoom = 19;
+
+	/// 有人想和你随机聊天
+	enNotifyRandChat = 21;
+
+	/// 返回是否要随机聊天
+	enReturnRandChat = 22;
+
+	/// 更新权限
+	enRequestUpdatePower = 23;
+
+	/// 通知更新权限
+	enNotifyUpdatePower = 24;
+
+	/// 请求录音
+	enRequestRec = 25;
+
+	/// 请求播放
+	enRequestPlay = 26;
+
+	/// 请求漂流瓶
+	enRequestRandPlay = 27;
+
+	/// 通知漂流瓶
+	enNotifyRandPlay = 28;
+
+	/// 分配麦
+	enRequestAssignMic = 29;
+
+	/// 分配返回结果 
+	enNotifyAssignResult = 30;
+
+	/// 更新权限结果
+	enNotifyUpdatePowerResult = 31;
+}
+
+
+/// 房间信息
+message stRoomInfo
+{
+	required uint64 roomid = 1;
+	required enRoomType roomtype = 2;
+	required uint32 num = 3; /// 房间当前人数(也是为测试增加的),不主动刷新，需要主动请求
+}
+
+/// 数据用户信息
+message stVoiceUserInfo
+{
+	required uint64 id = 1; /// 增加一个voice user 此id不确定目标
+}
+
+
+/// 麦序信息
+message stMicInfo
+{
+	required uint64 tempid = 1; /// 语音服务器的用户识别id
+	required string uniqueid = 2; /// 游戏的唯一 id
+}
+
+
+/// 房间用户信息
+message stRoomUserInfo
+{
+	required uint64 tempid = 1;
+	required string uniqueid = 2;
+	required enPowerType power = 3;
+}

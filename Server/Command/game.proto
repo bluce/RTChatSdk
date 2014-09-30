@@ -1,0 +1,238 @@
+/// 客户端和服务器之间的协议定义
+
+package Cmd;
+
+import "public.proto";
+
+
+/// 请求逻辑服务器地址
+message cmdRequestLogicInfo
+{
+	required string appid = 1;
+	required string key = 2;
+}
+
+
+/// 返回需要连接的逻辑服务器信息
+message cmdNotifyLogicInfo
+{
+	enum enLogicResult
+	{
+		LOGIC_RESULT_APPID_NOEXITS = 1;
+		LOGIC_RESULT_KEY_ERROR = 2;
+		LOGIC_RESULT_SYS_ERROR = 3;
+		LOGIC_RESULT_OK = 4;
+	}
+
+	required enLogicResult result = 1;
+	
+	optional string token = 2;   /// 登录token
+	optional string gateip = 3; /// 返回登录服务器的ip
+	optional uint32 gateport = 4; /// 登录服务器的端口
+}
+
+
+/// 请求登录
+message cmdRequestLogin
+{
+	required string token = 1;
+	required string uniqueid = 2;
+	optional uint64 tempid = 3;
+}
+
+
+/// 返回登录结果 
+message cmdNotifyLoginResult
+{
+	enum enLoginResult
+	{
+		LOGIN_RESULT_TOKEN_ERROR = 1;
+		LOGIN_RESULT_OK = 2;
+	}
+	
+	required enLoginResult result = 1;
+	optional uint64 tempid = 2;   /// 唯一识别id
+}
+
+
+
+/// 请求创建房间
+message cmdRequestCreateRoom
+{
+	required enRoomType type = 1;
+	required enRoomReason reason = 2;
+}
+
+
+/// 创建房间返回
+message cmdNotifyCreateResult
+{
+	required bool isok = 1;
+	optional uint64 roomid = 2;
+	optional enRoomType type = 3;
+	optional enRoomReason reason = 4;
+	optional string ip = 5;
+	optional uint32 port = 6;
+}
+
+
+/// 加入房间
+message cmdRequestEnterRoom
+{
+	required uint64 roomid = 1;
+}
+
+
+/// 加入房间返回
+message cmdNotifyEnterResult
+{
+	enum enEnterResult
+	{
+		ENTER_RESULT_NOEXITS = 1;
+		ENTER_RESULT_FULL = 2;
+		ENTER_RESULT_OK = 3;
+		ENTER_RESULT_ERROR = 4;
+	}
+	required enEnterResult result = 1;
+	optional uint64 roomid = 2;
+	optional enRoomType type = 3;
+	optional string ip = 5;
+	optional uint32 port = 6;
+}
+
+
+/// 下发房间信息
+message cmdNotifyRoomList
+{
+	repeated stRoomInfo info = 1;
+}
+
+
+/// 增加收听通道
+message cmdNotifyAddVoiceUser
+{
+	repeated stVoiceUserInfo info = 1;
+}
+
+/// 返回麦序
+message cmdNotifyMicQueue
+{
+	repeated stMicInfo info = 1;
+}
+
+/// 谁拿到了当前的麦
+message cmdNotifyTakeMic
+{
+	required uint64 tempid = 1;
+	required string uniqueid = 2;
+	required uint32 mtime = 3;
+}
+
+
+/// 删除收听通道
+message cmdNotifyDelVoiceUser
+{
+	repeated stVoiceUserInfo info = 1;
+}
+
+
+/// 通知有人进入房间
+message cmdNotifySomeEnterRoom
+{
+	enum enEnterReason
+	{
+		ENTER_REASON_NEW = 1;   /// 新加的 
+		ENTER_REASON_RECON = 2; /// 重连，先清除
+	}
+
+	required enEnterReason reason = 1;
+	repeated stRoomUserInfo info = 2;
+}
+
+
+/// 通知有人离开房间
+message cmdNotifySomeLeaveRoom
+{
+	required uint64 tempid = 1;
+}
+
+
+/// 有人想和你随机聊天
+message cmdNotifyRandChat
+{
+	required uint64 tempid = 1; /// 这个人想和你随机聊天
+	required string uniqueid = 2; /// 游戏的唯一id
+	required uint64 roomid = 3; /// 这个人在这个房间等你
+}
+
+
+/// 告知随机聊天结果
+message cmdReturnRandChat
+{
+	required bool isok = 1; /// 想去还是不想去
+	optional uint64 tempid = 2; /// 想去和这个人聊天
+}
+
+/// 请求更新权限
+message cmdRequestUpdatePower
+{
+	required uint64 tempid = 1;
+	required enPowerType power = 2;
+}
+
+/// 更新返回结果
+message cmdNotifyUpdatePowerResult
+{
+	enum enUpdateResult
+	{
+		UPDATE_RESULT_NOPOWER = 1;
+		UPDATE_RESULT_TYPEERR = 2;
+		UPDATE_RESULT_NOUSER = 3;
+		UPDATE_RESULT_SYSERR = 4;
+	}
+	
+	required enUpdateResult result = 1;
+}
+
+
+/// 通知更新权限(更新显示)
+message cmdNotifyUpdatePower
+{
+	required uint64 tempid = 1;
+	required enPowerType power = 2;
+}
+
+
+/// 分配麦
+message cmdRequestAssignMic
+{
+	required uint64 tempid = 1;
+}
+
+/// 返回结果
+message cmdNotifyAssignResult
+{
+	enum enAssignResult
+	{
+		ASSIGN_RESULT_NOPOWER = 1;
+		ASSIGN_RESULT_TYPEERR = 2;
+		ASSIGN_RESULT_NOUSER = 3;
+		ASSIGN_RESULT_SYSERR = 4;
+	}
+
+	required enAssignResult result = 1;
+}
+
+
+/// 请求漂流瓶
+message cmdRequestRandPlay
+{
+	required string url = 2;
+}
+
+/// 通知漂流瓶
+message cmdNotifyRandPlay
+{
+	required uint64 tempid = 1;
+	required string url = 2;
+}

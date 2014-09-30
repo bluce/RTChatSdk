@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+  	<!--网关服务器配置信息-->
+ 	<gateway>
+	  	<server id="1">
+			<info ip="180.168.126.249" port="16001" />
+			<log path="/tmp/log/voice/gateway_1.log" />
+		</server>
+
+		<server id="2">
+			<info ip="180.168.126.249"  port="16002" />
+			<log path="/tmp/log/voice/gateway_2.log" />
+		</server>
+
+		<server id="3">
+			<info ip="180.168.126.249"  port="16003" />
+			<log path="/tmp/log/voice/gateway_3.log" />
+		</server>
+
+		<server id="4">
+			<info ip="180.168.126.249" port="16004" />
+			<log path="/tmp/log/voice/gateway_4.log" />
+		</server>
+
+		<server id="5">
+			<info ip="180.168.126.249" port="16005" />
+			<log path="/tmp/log/voice/gateway_5.log" />
+		</server>
+
+		<server id="6">
+			<info ip="180.168.126.249" port="16006" />
+			<log path="/tmp/log/voice/gateway_6.log" />
+		</server>
+	</gateway>
+
+
+	<!--转发服务器配置信息-->
+	<trans>
+	  <server id="1">
+			<info ip="180.168.126.249" />
+			<log path="/tmp/log/voice/translog_1.log" />
+			<port min="20000" max="25000" />
+		</server>
+
+		<server id="2">
+			<info ip="180.168.126.249" />
+			<log path="/tmp/log/voice/translog_2.log" />
+			<port min="25000" max="30000" />
+		</server>
+
+		<server id="3">
+			<info ip="180.168.126.249" />
+			<log path="/tmp/log/voice/translog_3.log" />
+			<port min="30000" max="35000" />
+		</server>
+
+		<server id="4">
+			<info ip="180.168.126.249" />
+			<log path="/tmp/log/voice/translog_4.log" />
+			<port min="35000" max="40000" />
+		</server>
+
+		<server id="5">
+			<info ip="180.168.126.249" />
+			<log path="/tmp/log/voice/translog_5.log" />
+			<port min="40000" max="45000" />
+		</server>
+
+		<server id="6">
+			<info ip="180.168.126.249" />
+			<log path="/tmp/log/voice/translog_6.log" />
+			<port min="45000" max="50000" />
+		</server>
+  	</trans>
+
+	
+	<loginservice>
+		<addr ip="180.168.126.249" port="16008" />
+		<log path="/tmp/log/voice/loginservice.log" />
+	</loginservice>
+
+	
+	<infoservice>
+		<addr gateip="180.168.126.249" gateport="16009" transip="180.168.126.249" transport="16010" />
+		<log path="/tmp/log/voice/infoservice.log" />
+	</infoservice>
+</config>
