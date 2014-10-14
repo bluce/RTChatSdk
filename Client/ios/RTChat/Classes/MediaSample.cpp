@@ -97,13 +97,13 @@ void MediaSample::connectRoom(const std::string &ip, unsigned int port, uint64_t
     
     setEncodeTypeToChannel(channel, 102);
     
-    VoEVolumeControl* volumnControl = VoEVolumeControl::GetInterface(_voe);
-    if (volumnControl) {
-        volumnControl->SetSpeakerVolume(255);
-        volumnControl->SetMicVolume(255);
-        volumnControl->SetChannelOutputVolumeScaling(channel, 3);
-        volumnControl->Release();
-    }
+//    VoEVolumeControl* volumnControl = VoEVolumeControl::GetInterface(_voe);
+//    if (volumnControl) {
+//        volumnControl->SetSpeakerVolume(255);
+//        volumnControl->SetMicVolume(255);
+//        volumnControl->SetChannelOutputVolumeScaling(channel, 3);
+//        volumnControl->Release();
+//    }
     
     VoEHardware* hardware = VoEHardware::GetInterface(_voe);
     if (hardware) {

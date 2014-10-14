@@ -10,33 +10,33 @@
 	<string>RTChat</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>1ABF6850-7708-4A1D-8377-A9944A48FEBA</key>
+		<key>90C523589990CBC065023DE3C106E7B92D8CB1C8</key>
 		<string>ssh://180.166.92.227:5678/~/git_repo/webRTC_xCode.git</string>
-		<key>8C4CD7D7-0595-4EFB-AB1F-514E21D2176E</key>
+		<key>D87EC08D4E8A83CEC13507146D0581400B4B775A</key>
 		<string>ssh://180.166.92.227:5678/~/git_repo/rtchatsdk.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Client/ios/RTChat.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>1ABF6850-7708-4A1D-8377-A9944A48FEBA</key>
+		<key>90C523589990CBC065023DE3C106E7B92D8CB1C8</key>
 		<string>../../../../../webRTC_xCode</string>
-		<key>8C4CD7D7-0595-4EFB-AB1F-514E21D2176E</key>
+		<key>D87EC08D4E8A83CEC13507146D0581400B4B775A</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>ssh://180.166.92.227:5678/~/git_repo/rtchatsdk.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>8C4CD7D7-0595-4EFB-AB1F-514E21D2176E</string>
+	<string>D87EC08D4E8A83CEC13507146D0581400B4B775A</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>8C4CD7D7-0595-4EFB-AB1F-514E21D2176E</string>
+			<string>D87EC08D4E8A83CEC13507146D0581400B4B775A</string>
 			<key>IDESourceControlWCCName</key>
 			<string>RTChatSdk</string>
 		</dict>
@@ -44,7 +44,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>1ABF6850-7708-4A1D-8377-A9944A48FEBA</string>
+			<string>90C523589990CBC065023DE3C106E7B92D8CB1C8</string>
 			<key>IDESourceControlWCCName</key>
 			<string>webRTC_xCode</string>
 		</dict>

@@ -74,7 +74,7 @@
 		4323739B19C2CDF800D0579A /* server-handshake.c in Sources */ = {isa = PBXBuildFile; fileRef = 4323738A19C2CDF800D0579A /* server-handshake.c */; };
 		4323739C19C2CDF800D0579A /* server.c in Sources */ = {isa = PBXBuildFile; fileRef = 4323738B19C2CDF800D0579A /* server.c */; };
 		4323739D19C2CDF800D0579A /* sha-1.c in Sources */ = {isa = PBXBuildFile; fileRef = 4323738C19C2CDF800D0579A /* sha-1.c */; };
-		43247A541987339300AF14C7 /* MediaSample.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43247A521987339300AF14C7 /* MediaSample.cpp */; };
+		432B279F19EBF58C00C6312D /* MediaSample.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43247A521987339300AF14C7 /* MediaSample.cpp */; };
 		432B2DC719CA858A001267A7 /* libiSACFix_sim.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 432B2DC619CA857E001267A7 /* libiSACFix_sim.a */; };
 		432B2DF019CA8629001267A7 /* libiSAC_sim.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 432B2DEF19CA8629001267A7 /* libiSAC_sim.a */; };
 		432B2E4719CA963F001267A7 /* libiLBC_sim.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 432B2E4619CA9632001267A7 /* libiLBC_sim.a */; };
@@ -2335,7 +2335,6 @@
 				4323738F19C2CDF800D0579A /* client-parser.c in Sources */,
 				43095C4C199C54E2003C23B3 /* public.cpp in Sources */,
 				430B19A819B84A7400BE772E /* RTChatSDKMain.cpp in Sources */,
-				43247A541987339300AF14C7 /* MediaSample.cpp in Sources */,
 				431D817E19BF038C002C279F /* 3Des.m in Sources */,
 				43998DC819865C28003C5793 /* extension_set.cc in Sources */,
 				43AE0052197913930062C9B4 /* json_reader.cpp in Sources */,
@@ -2386,6 +2385,7 @@
 				43998DCE19865C28003C5793 /* printer.cc in Sources */,
 				430F16FD196F8DC10083B252 /* tinyxml.cpp in Sources */,
 				430F16FC196F8DC10083B252 /* tinystr.cpp in Sources */,
+				432B279F19EBF58C00C6312D /* MediaSample.cpp in Sources */,
 				4314C7C619B4903F000F5323 /* AFHTTPSessionManager.m in Sources */,
 				433E66E31987AAD10002AAC3 /* udp_socket_manager_wrapper.cc in Sources */,
 				43998D71198656B5003C5793 /* game.pb.cc in Sources */,
