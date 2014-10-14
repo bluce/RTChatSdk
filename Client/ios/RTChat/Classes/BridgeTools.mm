@@ -31,6 +31,11 @@ bool BridgeTools::des(const unsigned char *ptr, int datasize, unsigned char *out
     return getBridgeToolsImpl()->des(ptr, datasize, outptr, outsize, encORdec);
 }
 
+float BridgeTools::getOperationSystemVersion()
+{
+    return getBridgeToolsImpl()->getOperationSystemVersion();
+}
+
 std::string BridgeTools::getWritablePath()
 {
     return getBridgeToolsImpl()->getWritablePath();

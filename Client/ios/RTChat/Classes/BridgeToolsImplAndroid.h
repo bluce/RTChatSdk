@@ -25,6 +25,8 @@ public:
     virtual bool des(const unsigned char* ptr, int datasize, unsigned char* outptr, int& outsize, bool encORdec/* 加密吗 */);
     
     virtual std::string getWritablePath();
+    
+    virtual float getOperationSystemVersion();
 };
 
 #endif /* #ifdef WEBRTC_ANDROID */

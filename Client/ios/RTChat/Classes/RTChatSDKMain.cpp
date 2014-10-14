@@ -14,6 +14,7 @@
 #include "RTChatBuffStreamPool.h"
 #include "defines.h"
 #include "public.h"
+#include "BridgeTools.h"
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -104,8 +105,13 @@ RTChatSDKMain& RTChatSDKMain::sharedInstance()
     return *s_RTChatSDKMain;
 }
 
-void RTChatSDKMain::initSDK(const std::string &appid, const std::string &key, const char* uniqueid)
+SdkErrorCode RTChatSDKMain::initSDK(const std::string &appid, const std::string &key, const char* uniqueid)
 {
+    float opversion = BridgeTools::getOperationSystemVersion();
+    if (opversion < 6.0) {
+        return OPERATION_VERSION_LOW;
+    }
+    
     _appid = appid;
     _appkey = key;
     
@@ -120,6 +126,8 @@ void RTChatSDKMain::initSDK(const std::string &appid, const std::string &key, co
     activateSDK();
     
     HttpProcess::instance().registerCallBack(std::bind(&RTChatSDKMain::httpRequestCallBack, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+    
+    return OPERATION_OK;
 }
 
 //注册消息回调

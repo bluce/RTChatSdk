@@ -39,6 +39,11 @@ std::string BridgeToolsImplAndroid::getWritablePath()
     return "";
 }
 
+float BridgeToolsImplAndroid::getOperationSystemVersion()
+{
+    return 0;
+}
+
 BridgeToolsImpl* getBridgeToolsImpl()
 {
     static BridgeToolsImplAndroid s_bridgeToolsImplAndroid;

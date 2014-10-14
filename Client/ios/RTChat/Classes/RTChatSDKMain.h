@@ -42,7 +42,7 @@ public:
     /*******************需要暴露给用户的接口开始**********************/
     
     //sdk初始化，只能调用一次(主线程)
-    void initSDK(const std::string& appid, const std::string& key, const char* uniqueid = NULL);
+    SdkErrorCode initSDK(const std::string& appid, const std::string& key, const char* uniqueid = NULL);
     
     //注册消息回调(主线程)
     void registerMsgCallback(const pMsgCallFunc& func);

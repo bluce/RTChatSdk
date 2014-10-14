@@ -7,6 +7,7 @@
 //
 
 #include "BridgeToolsImplIOS.h"
+#import <UIKit/UIKit.h>
 
 #ifdef WEBRTC_IOS
 #include "crypto/3Des.h"
@@ -50,6 +51,11 @@ std::string BridgeToolsImplIOS::getWritablePath()
     std::string strRet = [documentsDirectory UTF8String];
     strRet.append("/");
     return strRet;
+}
+
+float BridgeToolsImplIOS::getOperationSystemVersion()
+{
+    return [[[UIDevice currentDevice] systemVersion] floatValue];
 }
 
 BridgeToolsImpl* getBridgeToolsImpl()

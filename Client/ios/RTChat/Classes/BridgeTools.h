@@ -23,6 +23,8 @@ public:
     static bool des(const unsigned char* ptr, int datasize, unsigned char* outptr, int& outsize, bool encORdec/* 加密吗 */);
     
     static std::string getWritablePath();
+    
+    static float getOperationSystemVersion();
 };
 
 #endif /* defined(__RTChat__BridgeTools__) */

@@ -165,6 +165,7 @@ enum SdkResponseCmd {
 enum SdkErrorCode {
     OPERATION_OK = 0,   //通用成功消息
     OPERATION_FAILED,   //通用失败消息
+    OPERATION_VERSION_LOW,  //操作系统版本号低
 
     /* 异步回调消息错误码开始 */
     LOGIC_RESULT_APPID_NOEXITS,
