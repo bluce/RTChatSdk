@@ -2660,7 +2660,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 			};
@@ -2691,7 +2691,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2734,7 +2734,7 @@
 					"$(PROJECT_DIR)/RTChat/Classes/third_party/nss/nspr/pr/include",
 					"$(PROJECT_DIR)/RTChat/Classes/third_party",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LD_NO_PIE = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2809,7 +2809,7 @@
 					"$(PROJECT_DIR)/RTChat/Classes/third_party/nss/nspr/pr/include",
 					"$(PROJECT_DIR)/RTChat/Classes/third_party",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LD_NO_PIE = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

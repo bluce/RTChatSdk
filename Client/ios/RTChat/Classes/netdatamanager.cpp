@@ -70,9 +70,7 @@ bool NetDataManager::Process()
     
     if (needcloseconnection && _socket) {
         _socket->close();
-        pthread_mutex_lock(&_mutexlock);
         _needCloseConnection = false;
-        pthread_mutex_unlock(&_mutexlock);
         return true;
     }
     
@@ -80,13 +78,16 @@ bool NetDataManager::Process()
         connectControlServer();
     }
     
-    if (_socket && _socket->onSubThreadLoop() == 0) {
-        return true;
+    //调用websocket主循环
+    if (_socket) {
+        _socket->onSubThreadLoop();
     }
     else {
         sleep(1);
         return true;
     }
+    
+    return true;
 }
 
 void NetDataManager::sendClientMsg(const unsigned char *msg, unsigned int len)
@@ -94,7 +95,9 @@ void NetDataManager::sendClientMsg(const unsigned char *msg, unsigned int len)
     int outsize = 0;
     bool result = BridgeTools::des(msg, len, _cryptobuffer, outsize, true);
     if (result && _socket) {
+        pthread_mutex_lock(&_mutexlock);
         _socket->send(_cryptobuffer, outsize);
+        pthread_mutex_unlock(&_mutexlock);
     }
 }
 
@@ -131,13 +134,14 @@ void NetDataManager::connectControlServer()
     Public::sdklog("  In connectControlServer");
     
     if (!_socket) {
+        pthread_mutex_lock(&_mutexlock);
         _socket = new WebSocket();
+        pthread_mutex_unlock(&_mutexlock);
     }
-    _socket->init(*this, _controlServerStr);
-    
-    _socket->onSubThreadStarted();
     
     pthread_mutex_unlock(&_mutexlock);
+    _socket->init(*this, _controlServerStr);
+    _socket->onSubThreadStarted();
     _retrycount++;
     pthread_mutex_unlock(&_mutexlock);
     
@@ -148,7 +152,9 @@ void NetDataManager::connectControlServer()
 void NetDataManager::destroyWebSocket()
 {
     Public::sdklog("  In destroyWebSocket");
+    pthread_mutex_lock(&_mutexlock);
     SAFE_DELETE(_socket);
+    pthread_mutex_unlock(&_mutexlock);
 }
 
 //发送心跳消息
@@ -156,7 +162,10 @@ void NetDataManager::sendHelloMsg()
 {
     Public::sdklog("  发送心跳消息%d", time(NULL));
     stHelloCmd cmd;
+    
+    pthread_mutex_lock(&_mutexlock);
     _socket->send((const unsigned char*)&cmd, sizeof(stHelloCmd));
+    pthread_mutex_unlock(&_mutexlock);
 }
 
 //是否达到最大重连次数
