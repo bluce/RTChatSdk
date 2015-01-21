@@ -236,3 +236,76 @@ message cmdNotifyRandPlay
 	required uint64 tempid = 1;
 	required string url = 2;
 }
+
+
+///请求验证GM身份
+message	CmdRequestGmAuth
+{
+	required  string  account = 1;
+	required  string  password = 2;
+
+}
+
+
+///返回GM验证结果
+message	CmdNotifyGmAuthResult
+{
+	enum  enAuthResult
+	{
+		EN_AUTH_RET_FAIL = 0;
+		EN_AUTH_RET_OK  = 1;
+	}
+	required int32	result = 1;
+}
+
+
+///  请求进入GM房间
+/// 目前roomid随便发， 防止将来有roomlist来选择
+message 	CmdRequestEnterGmRoom
+{
+	required uint64 roomid = 1; 
+}
+
+
+///开始服务
+message		CmdRequestServe
+{
+	enum  enServeOp
+	{
+		EN_SERVE_OP_END  = 0;	//暂停服务
+		EN_SERVE_OP_START = 1; //开始服务
+
+	}
+
+	required enServeOp	serve = 1;	/// 1开始服务  0 停止服务器
+}
+///进入房间后，会通知当前排麦信息
+///message		CmdNotifyGmRange
+///{
+///	required  int32	 range  = 1;   /// 前面还有多少人
+///	optional string  gmname  = 2;  /// gm 名字 
+///	optional string  servname = 3; ///  被服务的人名
+///}
+
+
+
+///停止UDP user 数据打通了。。
+message		CmdNotifyStopUDPChannel
+{
+
+	required  string  name = 1;
+}
+
+
+/// 想和某人聊天
+message cmdTalkWithSome
+{
+	required string uniqueid = 1;
+}
+
+
+
+
+
+
+

@@ -169,12 +169,6 @@ public:
     return RTChatSDKMain::sharedInstance().requestAssignMic(othertempid);
 }
 
-/// 请求和某人聊天(主线程)
--(bool) requestTalkToOther(NSString* uniquegameaccid)
-{
-    return RTChatSDKMain::sharedInstance().requestTalkToOther([othertempid UTF8String]);
-}
-
 /// 验证GM身份(主线程)
 -(bool) requestVerifyGM:(NSString*)account password:(NSString*)password
 {

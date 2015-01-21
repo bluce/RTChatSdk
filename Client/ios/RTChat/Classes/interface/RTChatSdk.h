@@ -74,8 +74,11 @@ public:
     /// 请求更改排麦房权限(主线程)
     bool requestUpdatePower(uint64_t othertempid, enPowerType powertype);
     
-    /// 分配麦
+    /// 分配麦(主线程)
     bool requestAssignMic(uint64_t othertempid);
+    
+    /// 请求和某人聊天(主线程)
+    bool requestTalkToOther(const char* uniquegameaccid);
 };
     
 }

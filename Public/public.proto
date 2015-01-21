@@ -18,8 +18,9 @@ enum enRoomType
 	ROOM_TYPE_QUEUE = 1; /// 单人队列排麦模式(只能一个人拿麦)
 	ROOM_TYPE_FREE = 2;  /// 自由模式(最多4个人)
 	ROOM_TYPE_TWO = 3;   /// 二人模式
-	ROOM_TYPE_ONLY = 4;   /// 抢麦模式
-	ROOM_TYPE_MAX = 5;
+	ROOM_TYPE_ONLY = 4;   /// 唯一模式(即主席模式)
+	ROOM_TYPE_GM 	= 5;	///GM房间
+	ROOM_TYPE_MAX = 6;
 }
 
 
@@ -29,7 +30,9 @@ enum enRoomReason
 	ROOM_REASON_MIN = 0;
 	ROOM_REASON_NORMAL = 1; ///   正常的系统创建房间
 	ROOM_REASON_RANDCHAT = 2; /// 为测试加的随机聊天房间(类型是二人房间)
-	ROOM_REASON_MAX = 3;
+	ROOM_REASON_GM	 = 3;	/// GM的房间
+	ROOM_REASON_MAX = 4;
+
 }
 
 
@@ -149,7 +152,36 @@ enum enCmdId
 
 	/// 更新权限结果
 	enNotifyUpdatePowerResult = 31;
+
+	/// 请求验证GM身份。。
+	enRequestGmAuth	=  32;
+
+	///  返回GM验证身份。。
+	enNotifyGmAuthResult = 33;
+
+	///	请求进入GM房间
+	enRequestEnterGmRoom = 34;
+
+	/// 	更新排麦信息
+	enNotifyGmRange	=  35;
+
+	///   通知你是GM了
+	enNotifyUAreGM = 36;
+
+	////  开始/停止服务
+	enRequestServe = 37;
+	///  告知玩家停止激活
+	enNotifyStopUDPChannel = 38;	
+
+	enActiveTunnal = 1016;
+	
+	/// 反馈玩家可以进入的消息
+	enUserOkJoin = 1018;
+
+	/// 和此人聊天
+	enTalkWithSome = 1019;
 }
+
 
 
 /// 房间信息
@@ -182,3 +214,7 @@ message stRoomUserInfo
 	required string uniqueid = 2;
 	required enPowerType power = 3;
 }
+
+///停止UDP user 数据打通了。。
+
+

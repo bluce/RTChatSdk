@@ -853,6 +853,12 @@
 		433E66DB1987AAD10002AAC3 /* udp_transport_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = udp_transport_impl.cc; sourceTree = "<group>"; };
 		433E66DC1987AAD10002AAC3 /* udp_transport_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = udp_transport_impl.h; sourceTree = "<group>"; };
 		433E66DD1987AAD10002AAC3 /* typedefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = typedefs.h; sourceTree = "<group>"; };
+		434338521A6F510C002546A5 /* RTChatCommonTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RTChatCommonTypes.h; sourceTree = "<group>"; };
+		434338531A6F510C002546A5 /* RTChatSdk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RTChatSdk.h; sourceTree = "<group>"; };
+		434338541A6F510C002546A5 /* RTChatSdkCocos2dxHelper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RTChatSdkCocos2dxHelper.cpp; sourceTree = "<group>"; };
+		434338551A6F510C002546A5 /* RTChatSdkCocos2dxHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RTChatSdkCocos2dxHelper.h; sourceTree = "<group>"; };
+		434338561A6F510C002546A5 /* RTChatSdkIosHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RTChatSdkIosHelper.h; sourceTree = "<group>"; };
+		434338571A6F510C002546A5 /* RTChatSdkIosHelper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RTChatSdkIosHelper.mm; sourceTree = "<group>"; };
 		435E03AE196E7D9F000C3012 /* libRTChat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRTChat.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		435E03B1196E7D9F000C3012 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		435E03B5196E7D9F000C3012 /* RTChat-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RTChat-Prefix.pch"; sourceTree = "<group>"; };
@@ -1494,9 +1500,23 @@
 			path = include;
 			sourceTree = "<group>";
 		};
+		434338511A6F510C002546A5 /* IosHelper */ = {
+			isa = PBXGroup;
+			children = (
+				434338521A6F510C002546A5 /* RTChatCommonTypes.h */,
+				434338531A6F510C002546A5 /* RTChatSdk.h */,
+				434338541A6F510C002546A5 /* RTChatSdkCocos2dxHelper.cpp */,
+				434338551A6F510C002546A5 /* RTChatSdkCocos2dxHelper.h */,
+				434338561A6F510C002546A5 /* RTChatSdkIosHelper.h */,
+				434338571A6F510C002546A5 /* RTChatSdkIosHelper.mm */,
+			);
+			path = IosHelper;
+			sourceTree = "<group>";
+		};
 		435E03A5196E7D9F000C3012 = {
 			isa = PBXGroup;
 			children = (
+				434338511A6F510C002546A5 /* IosHelper */,
 				435E03B3196E7D9F000C3012 /* RTChat */,
 				435E03B0196E7D9F000C3012 /* Frameworks */,
 				435E03AF196E7D9F000C3012 /* Products */,

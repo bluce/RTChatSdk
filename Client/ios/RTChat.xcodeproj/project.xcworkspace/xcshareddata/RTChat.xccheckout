@@ -16,7 +16,7 @@
 		<string>ssh://180.166.92.227:5678/~/git_repo/rtchatsdk.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Client/ios/RTChat.xcodeproj/project.xcworkspace</string>
+	<string>Client/ios/RTChat.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>90C523589990CBC065023DE3C106E7B92D8CB1C8</key>
