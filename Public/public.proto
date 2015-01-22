@@ -179,7 +179,10 @@ enum enCmdId
 	enUserOkJoin = 1018;
 
 	/// 和此人聊天
-	enTalkWithSome = 1019;
+	enTalkWithSome = 39;
+
+	/// 通知进入房间 
+	enEnterTalkRoom = 40;
 }
 
 

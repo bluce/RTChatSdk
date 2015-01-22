@@ -73,6 +73,7 @@ message cmdNotifyCreateResult
 	optional enRoomReason reason = 4;
 	optional string ip = 5;
 	optional uint32 port = 6;
+	optional string talkid = 7;
 }
 
 
@@ -303,6 +304,11 @@ message cmdTalkWithSome
 	required string uniqueid = 1;
 }
 
+/// 通知进入房间
+message cmdEnterTalkRoom
+{
+	required uint64 roomid = 1;
+}
 
 
 

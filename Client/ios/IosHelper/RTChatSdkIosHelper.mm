@@ -169,12 +169,6 @@ public:
     return RTChatSDKMain::sharedInstance().requestAssignMic(othertempid);
 }
 
-/// 请求和某人聊天(主线程)
--(bool) requestTalkToOther(NSString* uniquegameaccid)
-{
-    return RTChatSDKMain::sharedInstance().requestTalkToOther([othertempid UTF8String]);
-}
-
 /// 验证GM身份(主线程)
 -(bool) requestVerifyGM:(NSString*)account password:(NSString*)password
 {
@@ -192,6 +186,12 @@ public:
 -(bool) startGMService:(enGmServeOp)serviceop
 {
     return RTChatSDKMain::sharedInstance().startGMService(serviceop);
+}
+
+/// 请求和某人聊天(主线程)
+-(bool)requestTalkToOther:(NSString *)uniquegameaccid
+{
+    return RTChatSDKMain::sharedInstance().requestTalkToOther([uniquegameaccid UTF8String]);
 }
 
 -(void)CallBack:(SdkResponseCmd)cmdType error:(SdkErrorCode)error dataptr:(const unsigned char*)dataPtr dataSize:(uint32_t)dataSize

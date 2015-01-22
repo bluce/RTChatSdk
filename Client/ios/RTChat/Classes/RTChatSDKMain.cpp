@@ -617,7 +617,7 @@ namespace rtchatsdk {
         
         return OPERATION_OK;
     }
-
+    
     void RTChatSDKMain::onRecvMsg(char *data, int len)
     {
         stBaseCmd* cmd = (stBaseCmd*)data;
@@ -945,6 +945,13 @@ namespace rtchatsdk {
     //            startPlayLocalVoice(protomsg.url().c_str());
                 
                 break;
+            }
+            case Cmd::enEnterTalkRoom:
+            {
+                Public::sdklog("直接把用户拉入房间");
+                Cmd::cmdEnterTalkRoom protomsg;
+                protomsg.ParseFromArray(cmd->data, cmd->cmdlen);
+                joinRoom(protomsg.roomid());
             }
             default:
                 break;

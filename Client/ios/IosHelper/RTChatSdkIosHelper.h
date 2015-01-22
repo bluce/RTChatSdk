@@ -79,9 +79,6 @@ class RTChatSdkHelp;
 /// 分配麦
 -(bool) requestAssignMic:(uint64_t) othertempid;
 
-/// 请求和某人聊天(主线程)
--(bool) requestTalkToOther(NSString* uniquegameaccid);
-
 /// 验证GM身份(主线程)
 -(bool) requestVerifyGM:(NSString*)account password:(NSString*)password;
 
@@ -91,6 +88,9 @@ class RTChatSdkHelp;
 
 ///GM开始服务
 -(bool) startGMService:(enGmServeOp)serviceop;
+
+/// 请求和某人聊天(主线程)
+-(bool) requestTalkToOther:(NSString*) uniquegameaccid;
 
 -(void)CallBack:(SdkResponseCmd)cmdType error:(SdkErrorCode)error dataptr:(const unsigned char*)dataPtr dataSize:(uint32_t)dataSize;
 

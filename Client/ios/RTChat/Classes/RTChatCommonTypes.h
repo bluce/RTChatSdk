@@ -160,6 +160,12 @@ enum SdkResponseCmd {
     
 	/// 更新权限结果
 	enNotifyUpdatePowerResult = 31,
+    
+    /// 和此人聊天
+    enTalkWithSome = 39,
+    
+    /// 通知进入房间
+    enEnterTalkRoom = 40,
 };
 
 enum SdkErrorCode {
