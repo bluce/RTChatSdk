@@ -36,6 +36,7 @@ inline void constructDynamic(T *ptr) {
 #ifdef DEBUG
 //    #define ControlServerAddr   "rtchat.ztgame.com.cn:18000"
     #define ControlServerAddr   "180.168.126.249:18000"
+//    #define ControlServerAddr   "122.11.47.93:18000"
 #else
     #define ControlServerAddr   "rtchatrelease.ztgame.com.cn:18000"
 #endif

@@ -107,6 +107,7 @@ namespace rtchatsdk {
 
     SdkErrorCode RTChatSDKMain::initSDK(const std::string &appid, const std::string &key, const char* uniqueid)
     {
+        Public::sdklog("初始化SDK");
         float opversion = BridgeTools::getOperationSystemVersion();
         if (opversion < 6.0) {
             return OPERATION_VERSION_LOW;
