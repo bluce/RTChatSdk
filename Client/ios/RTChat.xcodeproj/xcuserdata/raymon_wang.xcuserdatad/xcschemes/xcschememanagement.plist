@@ -6,17 +6,33 @@
 	<dict>
 		<key>RTChat.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
+		</dict>
+		<key>RTChatAll.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<true/>
+			<key>orderHint</key>
+			<integer>43</integer>
 		</dict>
 		<key>RTChat_sim.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
-			<integer>34</integer>
+			<integer>35</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>430DC6E61A711C50005E88C4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>435E03AD196E7D9F000C3012</key>
 		<dict>
 			<key>primary</key>
