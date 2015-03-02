@@ -14,7 +14,7 @@
 
 namespace rtchatsdk {
 
-typedef std::function<void (SdkResponseCmd cmdType, SdkErrorCode error, const unsigned char* dataPtr, uint32_t dataSize)> pMsgCallFunc;
+typedef std::function<void (SdkResponseCmd cmdType, SdkErrorCode error, const char* dataPtr, uint64_t dataSize)> pMsgCallFunc;
 
 class RTChatSDKMain {
 public:
@@ -65,6 +65,9 @@ public:
     /// 停止录制麦克风数据(主线程)
     bool stopRecordVoice();
     
+    /// 取消当前录音
+    bool cancelRecordedVoice();
+    
     /// 开始播放录制数据(主线程)
     bool startPlayLocalVoice(const char* voiceUrl);
     
@@ -79,6 +82,15 @@ public:
     
     /// 请求和某人聊天(主线程)
     bool requestTalkToOther(const char* uniquegameaccid);
+    
+    ///开始语音识别
+    bool startVoiceToText();
+    
+    ///停止语音识别
+    bool stopVoiceToText();
+    
+    /// 获取当前地理位置信息
+    bool startGetCurrentCoordinate();
 };
     
 }

@@ -9,7 +9,7 @@
 #include "MediaSample.h"
 #include "defines.h"
 #include "public.h"
-#include "RTChatSDKMain.h"
+#include "RTChatSDKMain_Ios.h"
 #include <webrtc/voice_engine/include/voe_file.h>
 
 using namespace webrtc;

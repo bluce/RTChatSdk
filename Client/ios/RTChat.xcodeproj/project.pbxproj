@@ -24,7 +24,7 @@
 /* Begin PBXBuildFile section */
 		4307F4A319AC3D0A00D059C3 /* RTChatBuffStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4307F4A119AC3D0A00D059C3 /* RTChatBuffStream.cpp */; };
 		43095C4C199C54E2003C23B3 /* public.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43095C4A199C54E2003C23B3 /* public.cpp */; };
-		430B19A819B84A7400BE772E /* RTChatSDKMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43247A74198741BC00AF14C7 /* RTChatSDKMain.cpp */; };
+		430B19A819B84A7400BE772E /* RTChatSDKMain_Ios.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43247A74198741BC00AF14C7 /* RTChatSDKMain_Ios.mm */; };
 		430F16FC196F8DC10083B252 /* tinystr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F6196F8DC10083B252 /* tinystr.cpp */; };
 		430F16FD196F8DC10083B252 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F7196F8DC10083B252 /* tinyxml.cpp */; };
 		430F16FE196F8DC10083B252 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F16F8196F8DC10083B252 /* tinyxmlerror.cpp */; };
@@ -105,6 +105,50 @@
 		435E03E6196E8333000C3012 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435E03E1196E8333000C3012 /* CAStreamBasicDescription.cpp */; };
 		435E03E7196E8333000C3012 /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435E03E3196E8333000C3012 /* CAXException.cpp */; };
 		436C65FB19C059A800CB8B94 /* BridgeToolsImplIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 436C65E719C053BA00CB8B94 /* BridgeToolsImplIOS.mm */; };
+		438C0F101AA40E8F00F31CAA /* SoundObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F0F1AA40E8F00F31CAA /* SoundObject.mm */; };
+		438C0F111AA40E8F00F31CAA /* SoundObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F0F1AA40E8F00F31CAA /* SoundObject.mm */; };
+		438C0F141AA40EB600F31CAA /* SoundRecognize.mm in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F131AA40EB600F31CAA /* SoundRecognize.mm */; };
+		438C0F151AA40EB600F31CAA /* SoundRecognize.mm in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F131AA40EB600F31CAA /* SoundRecognize.mm */; };
+		438C0F191AA40FA400F31CAA /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 438C0F181AA40FA400F31CAA /* libmp3lame.a */; };
+		438C0F1A1AA40FA400F31CAA /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 438C0F181AA40FA400F31CAA /* libmp3lame.a */; };
+		438C0F201AA4105800F31CAA /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 438C0F1C1AA4105800F31CAA /* iflyMSC.framework */; };
+		438C0F211AA4105800F31CAA /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 438C0F1C1AA4105800F31CAA /* iflyMSC.framework */; };
+		438C0F221AA4105800F31CAA /* libSunFlower.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 438C0F1F1AA4105800F31CAA /* libSunFlower.a */; };
+		438C0F231AA4105800F31CAA /* libSunFlower.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 438C0F1F1AA4105800F31CAA /* libSunFlower.a */; };
+		438C0F261AA4117200F31CAA /* ISRDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F251AA4117200F31CAA /* ISRDataHelper.m */; };
+		438C0F271AA4117200F31CAA /* ISRDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F251AA4117200F31CAA /* ISRDataHelper.m */; };
+		438C0F391AA41AFF00F31CAA /* SBJson4Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F2C1AA41AFF00F31CAA /* SBJson4Parser.m */; };
+		438C0F3A1AA41AFF00F31CAA /* SBJson4Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F2C1AA41AFF00F31CAA /* SBJson4Parser.m */; };
+		438C0F3B1AA41AFF00F31CAA /* SBJson4StreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F2E1AA41AFF00F31CAA /* SBJson4StreamParser.m */; };
+		438C0F3C1AA41AFF00F31CAA /* SBJson4StreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F2E1AA41AFF00F31CAA /* SBJson4StreamParser.m */; };
+		438C0F3D1AA41AFF00F31CAA /* SBJson4StreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F301AA41AFF00F31CAA /* SBJson4StreamParserState.m */; };
+		438C0F3E1AA41AFF00F31CAA /* SBJson4StreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F301AA41AFF00F31CAA /* SBJson4StreamParserState.m */; };
+		438C0F3F1AA41AFF00F31CAA /* SBJson4StreamTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F321AA41AFF00F31CAA /* SBJson4StreamTokeniser.m */; };
+		438C0F401AA41AFF00F31CAA /* SBJson4StreamTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F321AA41AFF00F31CAA /* SBJson4StreamTokeniser.m */; };
+		438C0F411AA41AFF00F31CAA /* SBJson4StreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F341AA41AFF00F31CAA /* SBJson4StreamWriter.m */; };
+		438C0F421AA41AFF00F31CAA /* SBJson4StreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F341AA41AFF00F31CAA /* SBJson4StreamWriter.m */; };
+		438C0F431AA41AFF00F31CAA /* SBJson4StreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F361AA41AFF00F31CAA /* SBJson4StreamWriterState.m */; };
+		438C0F441AA41AFF00F31CAA /* SBJson4StreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F361AA41AFF00F31CAA /* SBJson4StreamWriterState.m */; };
+		438C0F451AA41AFF00F31CAA /* SBJson4Writer.m in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F381AA41AFF00F31CAA /* SBJson4Writer.m */; };
+		438C0F461AA41AFF00F31CAA /* SBJson4Writer.m in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F381AA41AFF00F31CAA /* SBJson4Writer.m */; };
+		438C0F8C1AA4581800F31CAA /* LocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F751AA4581800F31CAA /* LocationHelper.m */; };
+		438C0F8D1AA4581800F31CAA /* LocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F751AA4581800F31CAA /* LocationHelper.m */; };
+		438C0F8E1AA4581800F31CAA /* amrFileCodec_Ios.mm in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F791AA4581800F31CAA /* amrFileCodec_Ios.mm */; };
+		438C0F8F1AA4581800F31CAA /* amrFileCodec_Ios.mm in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F791AA4581800F31CAA /* amrFileCodec_Ios.mm */; };
+		438C0F911AA4581800F31CAA /* amrFileCodec_win.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F7A1AA4581800F31CAA /* amrFileCodec_win.cpp */; };
+		438C0F921AA4581800F31CAA /* wav.mm in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F7D1AA4581800F31CAA /* wav.mm */; };
+		438C0F931AA4581800F31CAA /* wav.mm in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F7D1AA4581800F31CAA /* wav.mm */; };
+		438C0F941AA4581800F31CAA /* libopencore-amrnb-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 438C0F7F1AA4581800F31CAA /* libopencore-amrnb-mac.a */; };
+		438C0F951AA4581900F31CAA /* libopencore-amrnb-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 438C0F7F1AA4581800F31CAA /* libopencore-amrnb-mac.a */; };
+		438C0F971AA4581900F31CAA /* libopencore-amrnb-win.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 438C0F801AA4581800F31CAA /* libopencore-amrnb-win.a */; };
+		438C0F981AA4581900F31CAA /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 438C0F811AA4581800F31CAA /* libopencore-amrnb.a */; };
+		438C0F991AA4581900F31CAA /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 438C0F811AA4581800F31CAA /* libopencore-amrnb.a */; };
+		438C0F9A1AA4581900F31CAA /* libopencore-amrwb-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 438C0F821AA4581800F31CAA /* libopencore-amrwb-mac.a */; };
+		438C0F9B1AA4581900F31CAA /* libopencore-amrwb-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 438C0F821AA4581800F31CAA /* libopencore-amrwb-mac.a */; };
+		438C0F9C1AA4581900F31CAA /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 438C0F831AA4581800F31CAA /* libopencore-amrwb.a */; };
+		438C0F9D1AA4581900F31CAA /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 438C0F831AA4581800F31CAA /* libopencore-amrwb.a */; };
+		438C0F9E1AA4581900F31CAA /* VoiceConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F8B1AA4581800F31CAA /* VoiceConverter.mm */; };
+		438C0F9F1AA4581900F31CAA /* VoiceConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 438C0F8B1AA4581800F31CAA /* VoiceConverter.mm */; };
 		43998BAF198636DA003C5793 /* WebSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43998BAD198636DA003C5793 /* WebSocket.cpp */; };
 		43998D71198656B5003C5793 /* game.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 43998D6F198656B5003C5793 /* game.pb.cc */; };
 		43998D751986570C003C5793 /* netdatamanager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43998D72198656D3003C5793 /* netdatamanager.cpp */; };
@@ -148,7 +192,7 @@
 		43C42A5B19CA82FF00E9DCFA /* generated_message_util.cc in Sources */ = {isa = PBXBuildFile; fileRef = 43998D9019865C28003C5793 /* generated_message_util.cc */; };
 		43C42A5C19CA82FF00E9DCFA /* client-parser.c in Sources */ = {isa = PBXBuildFile; fileRef = 4323737819C2CDF800D0579A /* client-parser.c */; };
 		43C42A5D19CA82FF00E9DCFA /* public.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43095C4A199C54E2003C23B3 /* public.cpp */; };
-		43C42A5E19CA82FF00E9DCFA /* RTChatSDKMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43247A74198741BC00AF14C7 /* RTChatSDKMain.cpp */; };
+		43C42A5E19CA82FF00E9DCFA /* RTChatSDKMain_Ios.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43247A74198741BC00AF14C7 /* RTChatSDKMain_Ios.mm */; };
 		43C42A5F19CA82FF00E9DCFA /* MediaSample.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43247A521987339300AF14C7 /* MediaSample.cpp */; };
 		43C42A6019CA82FF00E9DCFA /* 3Des.m in Sources */ = {isa = PBXBuildFile; fileRef = 431D817A19BF038C002C279F /* 3Des.m */; };
 		43C42A6119CA82FF00E9DCFA /* extension_set.cc in Sources */ = {isa = PBXBuildFile; fileRef = 43998D8B19865C28003C5793 /* extension_set.cc */; };
@@ -772,8 +816,8 @@
 		43247A521987339300AF14C7 /* MediaSample.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = MediaSample.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		43247A531987339300AF14C7 /* MediaSample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MediaSample.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		43247A731987412100AF14C7 /* RTChatSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = RTChatSdk.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		43247A74198741BC00AF14C7 /* RTChatSDKMain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = RTChatSDKMain.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
-		43247A75198741BC00AF14C7 /* RTChatSDKMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = RTChatSDKMain.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		43247A74198741BC00AF14C7 /* RTChatSDKMain_Ios.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = RTChatSDKMain_Ios.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		43247A75198741BC00AF14C7 /* RTChatSDKMain_Ios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = RTChatSDKMain_Ios.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4325F6891A907A7C002F0CD4 /* opus.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = opus.xcodeproj; path = ../../../webRTC_xCode/opus/opus.xcodeproj; sourceTree = "<group>"; };
 		4325F7871A9089C4002F0CD4 /* crssl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = crssl.xcodeproj; path = ../../../webRTC_xCode/crssl/crssl.xcodeproj; sourceTree = "<group>"; };
 		432D4E5019B5970800AD7B6A /* HttpProcess.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = HttpProcess.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -819,6 +863,51 @@
 		436C65E619C053BA00CB8B94 /* BridgeToolsImplIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BridgeToolsImplIOS.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		436C65E719C053BA00CB8B94 /* BridgeToolsImplIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = BridgeToolsImplIOS.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4374E72519932BD0000CE39F /* RTChatCommonTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = RTChatCommonTypes.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		438C0F0E1AA40E8F00F31CAA /* SoundObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundObject.h; sourceTree = "<group>"; };
+		438C0F0F1AA40E8F00F31CAA /* SoundObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoundObject.mm; sourceTree = "<group>"; };
+		438C0F121AA40EB600F31CAA /* SoundRecognize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundRecognize.h; sourceTree = "<group>"; };
+		438C0F131AA40EB600F31CAA /* SoundRecognize.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoundRecognize.mm; sourceTree = "<group>"; };
+		438C0F171AA40FA400F31CAA /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
+		438C0F181AA40FA400F31CAA /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
+		438C0F1C1AA4105800F31CAA /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
+		438C0F1E1AA4105800F31CAA /* IFlyFlowerCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFlyFlowerCollector.h; sourceTree = "<group>"; };
+		438C0F1F1AA4105800F31CAA /* libSunFlower.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSunFlower.a; sourceTree = "<group>"; };
+		438C0F241AA4117200F31CAA /* ISRDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISRDataHelper.h; sourceTree = "<group>"; };
+		438C0F251AA4117200F31CAA /* ISRDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISRDataHelper.m; sourceTree = "<group>"; };
+		438C0F2A1AA41AFF00F31CAA /* SBJson4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4.h; sourceTree = "<group>"; };
+		438C0F2B1AA41AFF00F31CAA /* SBJson4Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4Parser.h; sourceTree = "<group>"; };
+		438C0F2C1AA41AFF00F31CAA /* SBJson4Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4Parser.m; sourceTree = "<group>"; };
+		438C0F2D1AA41AFF00F31CAA /* SBJson4StreamParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamParser.h; sourceTree = "<group>"; };
+		438C0F2E1AA41AFF00F31CAA /* SBJson4StreamParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamParser.m; sourceTree = "<group>"; };
+		438C0F2F1AA41AFF00F31CAA /* SBJson4StreamParserState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamParserState.h; sourceTree = "<group>"; };
+		438C0F301AA41AFF00F31CAA /* SBJson4StreamParserState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamParserState.m; sourceTree = "<group>"; };
+		438C0F311AA41AFF00F31CAA /* SBJson4StreamTokeniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamTokeniser.h; sourceTree = "<group>"; };
+		438C0F321AA41AFF00F31CAA /* SBJson4StreamTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamTokeniser.m; sourceTree = "<group>"; };
+		438C0F331AA41AFF00F31CAA /* SBJson4StreamWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamWriter.h; sourceTree = "<group>"; };
+		438C0F341AA41AFF00F31CAA /* SBJson4StreamWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamWriter.m; sourceTree = "<group>"; };
+		438C0F351AA41AFF00F31CAA /* SBJson4StreamWriterState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamWriterState.h; sourceTree = "<group>"; };
+		438C0F361AA41AFF00F31CAA /* SBJson4StreamWriterState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamWriterState.m; sourceTree = "<group>"; };
+		438C0F371AA41AFF00F31CAA /* SBJson4Writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4Writer.h; sourceTree = "<group>"; };
+		438C0F381AA41AFF00F31CAA /* SBJson4Writer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4Writer.m; sourceTree = "<group>"; };
+		438C0F741AA4581800F31CAA /* LocationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationHelper.h; sourceTree = "<group>"; };
+		438C0F751AA4581800F31CAA /* LocationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationHelper.m; sourceTree = "<group>"; };
+		438C0F781AA4581800F31CAA /* amrFileCodec_Ios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec_Ios.h; sourceTree = "<group>"; };
+		438C0F791AA4581800F31CAA /* amrFileCodec_Ios.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec_Ios.mm; sourceTree = "<group>"; };
+		438C0F7A1AA4581800F31CAA /* amrFileCodec_win.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = amrFileCodec_win.cpp; sourceTree = "<group>"; };
+		438C0F7B1AA4581800F31CAA /* amrFileCodec_win.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec_win.h; sourceTree = "<group>"; };
+		438C0F7C1AA4581800F31CAA /* wav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wav.h; sourceTree = "<group>"; };
+		438C0F7D1AA4581800F31CAA /* wav.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = wav.mm; sourceTree = "<group>"; };
+		438C0F7F1AA4581800F31CAA /* libopencore-amrnb-mac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb-mac.a"; sourceTree = "<group>"; };
+		438C0F801AA4581800F31CAA /* libopencore-amrnb-win.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb-win.a"; sourceTree = "<group>"; };
+		438C0F811AA4581800F31CAA /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
+		438C0F821AA4581800F31CAA /* libopencore-amrwb-mac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrwb-mac.a"; sourceTree = "<group>"; };
+		438C0F831AA4581800F31CAA /* libopencore-amrwb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrwb.a"; sourceTree = "<group>"; };
+		438C0F851AA4581800F31CAA /* interf_dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_dec.h; sourceTree = "<group>"; };
+		438C0F861AA4581800F31CAA /* interf_enc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_enc.h; sourceTree = "<group>"; };
+		438C0F881AA4581800F31CAA /* dec_if.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dec_if.h; sourceTree = "<group>"; };
+		438C0F891AA4581800F31CAA /* if_rom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_rom.h; sourceTree = "<group>"; };
+		438C0F8A1AA4581800F31CAA /* VoiceConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceConverter.h; sourceTree = "<group>"; };
+		438C0F8B1AA4581800F31CAA /* VoiceConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VoiceConverter.mm; sourceTree = "<group>"; };
 		43998BAD198636DA003C5793 /* WebSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WebSocket.cpp; sourceTree = "<group>"; };
 		43998BAE198636DA003C5793 /* WebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocket.h; sourceTree = "<group>"; };
 		43998D6F198656B5003C5793 /* game.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game.pb.cc; sourceTree = "<group>"; };
@@ -925,6 +1014,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4325F78D1A9089D3002F0CD4 /* libcrssl.a in Frameworks */,
+				438C0F941AA4581800F31CAA /* libopencore-amrnb-mac.a in Frameworks */,
 				4325F6DF1A907EFF002F0CD4 /* libiSACFix.a in Frameworks */,
 				4325F6DD1A907E94002F0CD4 /* libexpat.a in Frameworks */,
 				4325F6DC1A907E7B002F0CD4 /* libiSAC.a in Frameworks */,
@@ -933,16 +1023,22 @@
 				4325F6D91A907DF6002F0CD4 /* libsrtp.a in Frameworks */,
 				4325F6D81A907DE1002F0CD4 /* libneteq.a in Frameworks */,
 				4325F6D71A907DCE002F0CD4 /* libiLBC.a in Frameworks */,
+				438C0F221AA4105800F31CAA /* libSunFlower.a in Frameworks */,
 				4325F6D61A907DB4002F0CD4 /* libbitrate_controller.a in Frameworks */,
 				4325F6D51A907DA0002F0CD4 /* libCNG.a in Frameworks */,
 				4325F6D41A907D89002F0CD4 /* libaudio_device.a in Frameworks */,
 				4325F6D31A907CEE002F0CD4 /* libPCM16B.a in Frameworks */,
+				438C0F191AA40FA400F31CAA /* libmp3lame.a in Frameworks */,
 				4325F6B21A907CA1002F0CD4 /* libwebrtc_opus.a in Frameworks */,
 				4325F6921A907A90002F0CD4 /* libopus.a in Frameworks */,
 				4325F6861A9077F4002F0CD4 /* libG722.a in Frameworks */,
 				4325F6851A9077E0002F0CD4 /* libG711.a in Frameworks */,
 				4325F6841A907790002F0CD4 /* libaudio_coding_module.a in Frameworks */,
+				438C0F9A1AA4581900F31CAA /* libopencore-amrwb-mac.a in Frameworks */,
+				438C0F981AA4581900F31CAA /* libopencore-amrnb.a in Frameworks */,
+				438C0F201AA4105800F31CAA /* iflyMSC.framework in Frameworks */,
 				4325F6831A90774D002F0CD4 /* libaudio_conference_mixer.a in Frameworks */,
+				438C0F9C1AA4581900F31CAA /* libopencore-amrwb.a in Frameworks */,
 				4325F6821A907706002F0CD4 /* librtp_rtcp.a in Frameworks */,
 				4325F6811A9076BD002F0CD4 /* libmedia_file.a in Frameworks */,
 				4325F6801A9074E3002F0CD4 /* libaudio_processing.a in Frameworks */,
@@ -961,8 +1057,11 @@
 				432B2FEE19CAB1FF001267A7 /* libvoice_engine_sim.a in Frameworks */,
 				432B2FC819CAB0DC001267A7 /* libaudio_processing_sim.a in Frameworks */,
 				432B2E8B19CA9731001267A7 /* libcommon_audio_sim.a in Frameworks */,
+				438C0F971AA4581900F31CAA /* libopencore-amrnb-win.a in Frameworks */,
 				432B2E4719CA963F001267A7 /* libiLBC_sim.a in Frameworks */,
+				438C0F231AA4105800F31CAA /* libSunFlower.a in Frameworks */,
 				432B2DF019CA8629001267A7 /* libiSAC_sim.a in Frameworks */,
+				438C0F991AA4581900F31CAA /* libopencore-amrnb.a in Frameworks */,
 				432B2DC719CA858A001267A7 /* libiSACFix_sim.a in Frameworks */,
 				43C42AEA19CA835100E9DCFA /* libneteq_sim.a in Frameworks */,
 				43C42AB119CA82FF00E9DCFA /* libexpat.a in Frameworks */,
@@ -972,13 +1071,18 @@
 				43C42AB919CA82FF00E9DCFA /* libaudio_device.a in Frameworks */,
 				43C42ABB19CA82FF00E9DCFA /* libbitrate_controller.a in Frameworks */,
 				43C42ABC19CA82FF00E9DCFA /* libCNG.a in Frameworks */,
+				438C0F1A1AA40FA400F31CAA /* libmp3lame.a in Frameworks */,
 				43C42ABE19CA82FF00E9DCFA /* libcrnssckbi.a in Frameworks */,
 				43C42ABF19CA82FF00E9DCFA /* libG711.a in Frameworks */,
 				43C42AC019CA82FF00E9DCFA /* libG722.a in Frameworks */,
+				438C0F951AA4581900F31CAA /* libopencore-amrnb-mac.a in Frameworks */,
+				438C0F9D1AA4581900F31CAA /* libopencore-amrwb.a in Frameworks */,
+				438C0F211AA4105800F31CAA /* iflyMSC.framework in Frameworks */,
 				43C42AC319CA82FF00E9DCFA /* libnss_static.a in Frameworks */,
 				43C42AC419CA82FF00E9DCFA /* libpaced_sender.a in Frameworks */,
 				43C42AC519CA82FF00E9DCFA /* libPCM16B.a in Frameworks */,
 				43C42AC619CA82FF00E9DCFA /* librbe_components.a in Frameworks */,
+				438C0F9B1AA4581900F31CAA /* libopencore-amrwb-mac.a in Frameworks */,
 				43C42AC719CA82FF00E9DCFA /* libsrtp.a in Frameworks */,
 				43C42AC819CA82FF00E9DCFA /* libsystem_wrappers.a in Frameworks */,
 				43C42AC919CA82FF00E9DCFA /* libusrsctp.a in Frameworks */,
@@ -1470,9 +1574,9 @@
 		435E03B0196E7D9F000C3012 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				431956FB19C1A38A00D7B069 /* SystemConfiguration.framework */,
 				4325F7871A9089C4002F0CD4 /* crssl.xcodeproj */,
 				4325F6891A907A7C002F0CD4 /* opus.xcodeproj */,
-				431956FB19C1A38A00D7B069 /* SystemConfiguration.framework */,
 				43BBA610199C61F200504C0C /* expat.xcodeproj */,
 				431FC2A8199B8BEC00CFEB6B /* media_file.xcodeproj */,
 				431FC2A2199B8BAE00CFEB6B /* iSAC.xcodeproj */,
@@ -1534,6 +1638,8 @@
 		435E03D9196E828E000C3012 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				438C0F761AA4581800F31CAA /* VoiceConvert */,
+				438C0F161AA40FA400F31CAA /* lame */,
 				431D819119BF03EA002C279F /* BridgeTools */,
 				431D817819BF038C002C279F /* crypto */,
 				43247A72198740EF00AF14C7 /* interface */,
@@ -1542,14 +1648,22 @@
 				43998BB0198645EC003C5793 /* proto */,
 				43AEFB761979013F0062C9B4 /* third_party */,
 				430F16F4196F8DC10083B252 /* tinyXml */,
+				438C0F741AA4581800F31CAA /* LocationHelper.h */,
+				438C0F751AA4581800F31CAA /* LocationHelper.m */,
 				43998D72198656D3003C5793 /* netdatamanager.cpp */,
 				43998D73198656D3003C5793 /* netdatamanager.h */,
-				43247A74198741BC00AF14C7 /* RTChatSDKMain.cpp */,
-				43247A75198741BC00AF14C7 /* RTChatSDKMain.h */,
+				43247A74198741BC00AF14C7 /* RTChatSDKMain_Ios.mm */,
+				43247A75198741BC00AF14C7 /* RTChatSDKMain_Ios.h */,
 				43998BAD198636DA003C5793 /* WebSocket.cpp */,
 				43998BAE198636DA003C5793 /* WebSocket.h */,
 				43247A521987339300AF14C7 /* MediaSample.cpp */,
 				43247A531987339300AF14C7 /* MediaSample.h */,
+				438C0F0E1AA40E8F00F31CAA /* SoundObject.h */,
+				438C0F0F1AA40E8F00F31CAA /* SoundObject.mm */,
+				438C0F121AA40EB600F31CAA /* SoundRecognize.h */,
+				438C0F131AA40EB600F31CAA /* SoundRecognize.mm */,
+				438C0F241AA4117200F31CAA /* ISRDataHelper.h */,
+				438C0F251AA4117200F31CAA /* ISRDataHelper.m */,
 				43AD8521199101E4006EAB38 /* defines.h */,
 				43095C4A199C54E2003C23B3 /* public.cpp */,
 				43095C4B199C54E2003C23B3 /* public.h */,
@@ -1576,6 +1690,111 @@
 				435E03E4196E8333000C3012 /* CAXException.h */,
 			);
 			path = PublicUtility;
+			sourceTree = "<group>";
+		};
+		438C0F161AA40FA400F31CAA /* lame */ = {
+			isa = PBXGroup;
+			children = (
+				438C0F171AA40FA400F31CAA /* lame.h */,
+				438C0F181AA40FA400F31CAA /* libmp3lame.a */,
+			);
+			path = lame;
+			sourceTree = "<group>";
+		};
+		438C0F1B1AA4105800F31CAA /* xunfei */ = {
+			isa = PBXGroup;
+			children = (
+				438C0F1C1AA4105800F31CAA /* iflyMSC.framework */,
+				438C0F1D1AA4105800F31CAA /* sunflower */,
+			);
+			path = xunfei;
+			sourceTree = "<group>";
+		};
+		438C0F1D1AA4105800F31CAA /* sunflower */ = {
+			isa = PBXGroup;
+			children = (
+				438C0F1E1AA4105800F31CAA /* IFlyFlowerCollector.h */,
+				438C0F1F1AA4105800F31CAA /* libSunFlower.a */,
+			);
+			path = sunflower;
+			sourceTree = "<group>";
+		};
+		438C0F291AA41AFF00F31CAA /* SBJson */ = {
+			isa = PBXGroup;
+			children = (
+				438C0F2A1AA41AFF00F31CAA /* SBJson4.h */,
+				438C0F2B1AA41AFF00F31CAA /* SBJson4Parser.h */,
+				438C0F2C1AA41AFF00F31CAA /* SBJson4Parser.m */,
+				438C0F2D1AA41AFF00F31CAA /* SBJson4StreamParser.h */,
+				438C0F2E1AA41AFF00F31CAA /* SBJson4StreamParser.m */,
+				438C0F2F1AA41AFF00F31CAA /* SBJson4StreamParserState.h */,
+				438C0F301AA41AFF00F31CAA /* SBJson4StreamParserState.m */,
+				438C0F311AA41AFF00F31CAA /* SBJson4StreamTokeniser.h */,
+				438C0F321AA41AFF00F31CAA /* SBJson4StreamTokeniser.m */,
+				438C0F331AA41AFF00F31CAA /* SBJson4StreamWriter.h */,
+				438C0F341AA41AFF00F31CAA /* SBJson4StreamWriter.m */,
+				438C0F351AA41AFF00F31CAA /* SBJson4StreamWriterState.h */,
+				438C0F361AA41AFF00F31CAA /* SBJson4StreamWriterState.m */,
+				438C0F371AA41AFF00F31CAA /* SBJson4Writer.h */,
+				438C0F381AA41AFF00F31CAA /* SBJson4Writer.m */,
+			);
+			path = SBJson;
+			sourceTree = "<group>";
+		};
+		438C0F761AA4581800F31CAA /* VoiceConvert */ = {
+			isa = PBXGroup;
+			children = (
+				438C0F771AA4581800F31CAA /* amrwapper */,
+				438C0F7E1AA4581800F31CAA /* lib */,
+				438C0F841AA4581800F31CAA /* opencore-amrnb */,
+				438C0F871AA4581800F31CAA /* opencore-amrwb */,
+				438C0F8A1AA4581800F31CAA /* VoiceConverter.h */,
+				438C0F8B1AA4581800F31CAA /* VoiceConverter.mm */,
+			);
+			path = VoiceConvert;
+			sourceTree = "<group>";
+		};
+		438C0F771AA4581800F31CAA /* amrwapper */ = {
+			isa = PBXGroup;
+			children = (
+				438C0F781AA4581800F31CAA /* amrFileCodec_Ios.h */,
+				438C0F791AA4581800F31CAA /* amrFileCodec_Ios.mm */,
+				438C0F7A1AA4581800F31CAA /* amrFileCodec_win.cpp */,
+				438C0F7B1AA4581800F31CAA /* amrFileCodec_win.h */,
+				438C0F7C1AA4581800F31CAA /* wav.h */,
+				438C0F7D1AA4581800F31CAA /* wav.mm */,
+			);
+			path = amrwapper;
+			sourceTree = "<group>";
+		};
+		438C0F7E1AA4581800F31CAA /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				438C0F7F1AA4581800F31CAA /* libopencore-amrnb-mac.a */,
+				438C0F801AA4581800F31CAA /* libopencore-amrnb-win.a */,
+				438C0F811AA4581800F31CAA /* libopencore-amrnb.a */,
+				438C0F821AA4581800F31CAA /* libopencore-amrwb-mac.a */,
+				438C0F831AA4581800F31CAA /* libopencore-amrwb.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		438C0F841AA4581800F31CAA /* opencore-amrnb */ = {
+			isa = PBXGroup;
+			children = (
+				438C0F851AA4581800F31CAA /* interf_dec.h */,
+				438C0F861AA4581800F31CAA /* interf_enc.h */,
+			);
+			path = "opencore-amrnb";
+			sourceTree = "<group>";
+		};
+		438C0F871AA4581800F31CAA /* opencore-amrwb */ = {
+			isa = PBXGroup;
+			children = (
+				438C0F881AA4581800F31CAA /* dec_if.h */,
+				438C0F891AA4581800F31CAA /* if_rom.h */,
+			);
+			path = "opencore-amrwb";
 			sourceTree = "<group>";
 		};
 		43998BA71986363F003C5793 /* libwebsocket */ = {
@@ -1770,6 +1989,8 @@
 		43AEFB761979013F0062C9B4 /* third_party */ = {
 			isa = PBXGroup;
 			children = (
+				438C0F291AA41AFF00F31CAA /* SBJson */,
+				438C0F1B1AA4105800F31CAA /* xunfei */,
 				4314C7B019B4903F000F5323 /* AFNetworking */,
 				4314C79B19B477D3000F5323 /* libcurl */,
 				43998D7F19865C28003C5793 /* google */,
@@ -2279,11 +2500,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				436C65FB19C059A800CB8B94 /* BridgeToolsImplIOS.mm in Sources */,
+				438C0F8E1AA4581800F31CAA /* amrFileCodec_Ios.mm in Sources */,
 				43998DDA19865C28003C5793 /* structurally_valid.cc in Sources */,
 				43998DCB19865C28003C5793 /* generated_message_util.cc in Sources */,
 				4323738F19C2CDF800D0579A /* client-parser.c in Sources */,
 				43095C4C199C54E2003C23B3 /* public.cpp in Sources */,
-				430B19A819B84A7400BE772E /* RTChatSDKMain.cpp in Sources */,
+				430B19A819B84A7400BE772E /* RTChatSDKMain_Ios.mm in Sources */,
+				438C0F3F1AA41AFF00F31CAA /* SBJson4StreamTokeniser.m in Sources */,
 				431D817E19BF038C002C279F /* 3Des.m in Sources */,
 				43998DC819865C28003C5793 /* extension_set.cc in Sources */,
 				43AE0052197913930062C9B4 /* json_reader.cpp in Sources */,
@@ -2294,6 +2517,7 @@
 				43998DC919865C28003C5793 /* extension_set_heavy.cc in Sources */,
 				4323739519C2CDF800D0579A /* getifaddrs.c in Sources */,
 				4323739D19C2CDF800D0579A /* sha-1.c in Sources */,
+				438C0F411AA41AFF00F31CAA /* SBJson4StreamWriter.m in Sources */,
 				4314C7C919B4903F000F5323 /* AFURLConnectionOperation.m in Sources */,
 				43998DD219865C28003C5793 /* zero_copy_stream_impl_lite.cc in Sources */,
 				430F16FF196F8DC10083B252 /* tinyxmlparser.cpp in Sources */,
@@ -2308,11 +2532,15 @@
 				433E66E11987AAD10002AAC3 /* udp_socket_manager_posix.cc in Sources */,
 				43998DDD19865C28003C5793 /* text_format.cc in Sources */,
 				43998DDF19865C28003C5793 /* wire_format.cc in Sources */,
+				438C0F101AA40E8F00F31CAA /* SoundObject.mm in Sources */,
 				4314C7C419B4903F000F5323 /* AFHTTPRequestOperation.m in Sources */,
+				438C0F431AA41AFF00F31CAA /* SBJson4StreamWriterState.m in Sources */,
+				438C0F141AA40EB600F31CAA /* SoundRecognize.mm in Sources */,
 				4314C7C719B4903F000F5323 /* AFNetworkReachabilityManager.m in Sources */,
 				43998DCF19865C28003C5793 /* tokenizer.cc in Sources */,
 				4314C7CF19B49091000F5323 /* CmdHandler.m in Sources */,
 				43998DCA19865C28003C5793 /* generated_message_reflection.cc in Sources */,
+				438C0F8C1AA4581800F31CAA /* LocationHelper.m in Sources */,
 				43998DC419865C28003C5793 /* descriptor.cc in Sources */,
 				43998DD919865C28003C5793 /* once.cc in Sources */,
 				43998DCC19865C28003C5793 /* coded_stream.cc in Sources */,
@@ -2323,6 +2551,7 @@
 				43998DE4198660B1003C5793 /* public.pb.cc in Sources */,
 				4314C7C819B4903F000F5323 /* AFSecurityPolicy.m in Sources */,
 				4307F4A319AC3D0A00D059C3 /* RTChatBuffStream.cpp in Sources */,
+				438C0F451AA41AFF00F31CAA /* SBJson4Writer.m in Sources */,
 				43998DD819865C28003C5793 /* common.cc in Sources */,
 				4323739319C2CDF800D0579A /* extension-deflate-stream.c in Sources */,
 				4314C79719B46404000F5323 /* RTChatBuffStreamPool.cpp in Sources */,
@@ -2336,8 +2565,10 @@
 				430F16FC196F8DC10083B252 /* tinystr.cpp in Sources */,
 				432B279F19EBF58C00C6312D /* MediaSample.cpp in Sources */,
 				4314C7C619B4903F000F5323 /* AFHTTPSessionManager.m in Sources */,
+				438C0F3B1AA41AFF00F31CAA /* SBJson4StreamParser.m in Sources */,
 				433E66E31987AAD10002AAC3 /* udp_socket_manager_wrapper.cc in Sources */,
 				43998D71198656B5003C5793 /* game.pb.cc in Sources */,
+				438C0F921AA4581800F31CAA /* wav.mm in Sources */,
 				433E66E51987AAD10002AAC3 /* udp_socket_posix.cc in Sources */,
 				43998DC619865C28003C5793 /* descriptor_database.cc in Sources */,
 				43998D751986570C003C5793 /* netdatamanager.cpp in Sources */,
@@ -2354,15 +2585,19 @@
 				4323739419C2CDF800D0579A /* extension.c in Sources */,
 				4314C7CA19B4903F000F5323 /* AFURLRequestSerialization.m in Sources */,
 				4314C7C519B4903F000F5323 /* AFHTTPRequestOperationManager.m in Sources */,
+				438C0F261AA4117200F31CAA /* ISRDataHelper.m in Sources */,
+				438C0F3D1AA41AFF00F31CAA /* SBJson4StreamParserState.m in Sources */,
 				43998BAF198636DA003C5793 /* WebSocket.cpp in Sources */,
 				43998DD019865C28003C5793 /* zero_copy_stream.cc in Sources */,
 				433E66EA1987AAD10002AAC3 /* udp_transport_impl.cc in Sources */,
 				43E6066C19ADBFF700181658 /* TimeCounter.cpp in Sources */,
+				438C0F391AA41AFF00F31CAA /* SBJson4Parser.m in Sources */,
 				4323739A19C2CDF800D0579A /* parsers.c in Sources */,
 				4323739B19C2CDF800D0579A /* server-handshake.c in Sources */,
 				4323739619C2CDF800D0579A /* handshake.c in Sources */,
 				4323738D19C2CDF800D0579A /* base64-decode.c in Sources */,
 				43998DD719865C28003C5793 /* service.cc in Sources */,
+				438C0F9E1AA4581900F31CAA /* VoiceConverter.mm in Sources */,
 				4323738E19C2CDF800D0579A /* client-handshake.c in Sources */,
 				43998DDB19865C28003C5793 /* strutil.cc in Sources */,
 			);
@@ -2373,11 +2608,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				43C42A5919CA82FF00E9DCFA /* BridgeToolsImplIOS.mm in Sources */,
+				438C0F8F1AA4581800F31CAA /* amrFileCodec_Ios.mm in Sources */,
 				43C42A5A19CA82FF00E9DCFA /* structurally_valid.cc in Sources */,
 				43C42A5B19CA82FF00E9DCFA /* generated_message_util.cc in Sources */,
 				43C42A5C19CA82FF00E9DCFA /* client-parser.c in Sources */,
 				43C42A5D19CA82FF00E9DCFA /* public.cpp in Sources */,
-				43C42A5E19CA82FF00E9DCFA /* RTChatSDKMain.cpp in Sources */,
+				43C42A5E19CA82FF00E9DCFA /* RTChatSDKMain_Ios.mm in Sources */,
+				438C0F401AA41AFF00F31CAA /* SBJson4StreamTokeniser.m in Sources */,
 				43C42A5F19CA82FF00E9DCFA /* MediaSample.cpp in Sources */,
 				43C42A6019CA82FF00E9DCFA /* 3Des.m in Sources */,
 				43C42A6119CA82FF00E9DCFA /* extension_set.cc in Sources */,
@@ -2388,6 +2625,7 @@
 				43C42A6619CA82FF00E9DCFA /* message_lite.cc in Sources */,
 				43C42A6719CA82FF00E9DCFA /* extension_set_heavy.cc in Sources */,
 				43C42A6819CA82FF00E9DCFA /* getifaddrs.c in Sources */,
+				438C0F421AA41AFF00F31CAA /* SBJson4StreamWriter.m in Sources */,
 				43C42A6919CA82FF00E9DCFA /* sha-1.c in Sources */,
 				43C42A6A19CA82FF00E9DCFA /* AFURLConnectionOperation.m in Sources */,
 				43C42A6B19CA82FF00E9DCFA /* zero_copy_stream_impl_lite.cc in Sources */,
@@ -2402,13 +2640,18 @@
 				43C42A7419CA82FF00E9DCFA /* udp_socket_wrapper.cc in Sources */,
 				43C42A7519CA82FF00E9DCFA /* udp_socket_manager_posix.cc in Sources */,
 				43C42A7619CA82FF00E9DCFA /* text_format.cc in Sources */,
+				438C0F111AA40E8F00F31CAA /* SoundObject.mm in Sources */,
 				43C42A7719CA82FF00E9DCFA /* wire_format.cc in Sources */,
+				438C0F441AA41AFF00F31CAA /* SBJson4StreamWriterState.m in Sources */,
+				438C0F151AA40EB600F31CAA /* SoundRecognize.mm in Sources */,
 				43C42A7819CA82FF00E9DCFA /* AFHTTPRequestOperation.m in Sources */,
 				43C42A7919CA82FF00E9DCFA /* AFNetworkReachabilityManager.m in Sources */,
 				43C42A7A19CA82FF00E9DCFA /* tokenizer.cc in Sources */,
 				43C42A7B19CA82FF00E9DCFA /* CmdHandler.m in Sources */,
+				438C0F8D1AA4581800F31CAA /* LocationHelper.m in Sources */,
 				43C42A7C19CA82FF00E9DCFA /* generated_message_reflection.cc in Sources */,
 				43C42A7D19CA82FF00E9DCFA /* descriptor.cc in Sources */,
+				438C0F911AA4581800F31CAA /* amrFileCodec_win.cpp in Sources */,
 				43C42A7E19CA82FF00E9DCFA /* once.cc in Sources */,
 				43C42A7F19CA82FF00E9DCFA /* coded_stream.cc in Sources */,
 				43C42A8019CA82FF00E9DCFA /* GTMBase64.m in Sources */,
@@ -2417,6 +2660,7 @@
 				43C42A8319CA82FF00E9DCFA /* json_writer.cpp in Sources */,
 				43C42A8419CA82FF00E9DCFA /* public.pb.cc in Sources */,
 				43C42A8519CA82FF00E9DCFA /* AFSecurityPolicy.m in Sources */,
+				438C0F461AA41AFF00F31CAA /* SBJson4Writer.m in Sources */,
 				43C42A8619CA82FF00E9DCFA /* RTChatBuffStream.cpp in Sources */,
 				43C42A8719CA82FF00E9DCFA /* common.cc in Sources */,
 				43C42A8819CA82FF00E9DCFA /* extension-deflate-stream.c in Sources */,
@@ -2430,8 +2674,10 @@
 				43C42A9019CA82FF00E9DCFA /* tinyxml.cpp in Sources */,
 				43C42A9119CA82FF00E9DCFA /* tinystr.cpp in Sources */,
 				43C42A9219CA82FF00E9DCFA /* AFHTTPSessionManager.m in Sources */,
+				438C0F3C1AA41AFF00F31CAA /* SBJson4StreamParser.m in Sources */,
 				43C42A9319CA82FF00E9DCFA /* udp_socket_manager_wrapper.cc in Sources */,
 				43C42A9419CA82FF00E9DCFA /* game.pb.cc in Sources */,
+				438C0F931AA4581800F31CAA /* wav.mm in Sources */,
 				43C42A9519CA82FF00E9DCFA /* udp_socket_posix.cc in Sources */,
 				43C42A9619CA82FF00E9DCFA /* descriptor_database.cc in Sources */,
 				43C42A9719CA82FF00E9DCFA /* netdatamanager.cpp in Sources */,
@@ -2448,15 +2694,19 @@
 				43C42AA219CA82FF00E9DCFA /* extension.c in Sources */,
 				43C42AA319CA82FF00E9DCFA /* AFURLRequestSerialization.m in Sources */,
 				43C42AA419CA82FF00E9DCFA /* AFHTTPRequestOperationManager.m in Sources */,
+				438C0F271AA4117200F31CAA /* ISRDataHelper.m in Sources */,
+				438C0F3E1AA41AFF00F31CAA /* SBJson4StreamParserState.m in Sources */,
 				43C42AA519CA82FF00E9DCFA /* WebSocket.cpp in Sources */,
 				43C42AA619CA82FF00E9DCFA /* zero_copy_stream.cc in Sources */,
 				43C42AA719CA82FF00E9DCFA /* udp_transport_impl.cc in Sources */,
 				43C42AA819CA82FF00E9DCFA /* TimeCounter.cpp in Sources */,
+				438C0F3A1AA41AFF00F31CAA /* SBJson4Parser.m in Sources */,
 				43C42AA919CA82FF00E9DCFA /* parsers.c in Sources */,
 				43C42AAA19CA82FF00E9DCFA /* server-handshake.c in Sources */,
 				43C42AAB19CA82FF00E9DCFA /* handshake.c in Sources */,
 				43C42AAC19CA82FF00E9DCFA /* base64-decode.c in Sources */,
 				43C42AAD19CA82FF00E9DCFA /* service.cc in Sources */,
+				438C0F9F1AA4581900F31CAA /* VoiceConverter.mm in Sources */,
 				43C42AAE19CA82FF00E9DCFA /* client-handshake.c in Sources */,
 				43C42AAF19CA82FF00E9DCFA /* strutil.cc in Sources */,
 			);
@@ -2619,6 +2869,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/RTChat.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/RTChat/Classes/third_party/xunfei",
+				);
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_ENABLE_TRIGRAPHS = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
@@ -2670,6 +2924,9 @@
 					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/nss_static/build/Debug-iphoneos",
 					"/Users/raymon_wang/Documents/Develop/RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Debug-iphoneos",
 					"$(PROJECT_DIR)/RTChat/Classes/third_party/libcurl/libraries",
+					"$(PROJECT_DIR)/RTChat/Classes/lame",
+					"$(PROJECT_DIR)/RTChat/Classes/third_party/xunfei/sunflower",
+					"$(PROJECT_DIR)/RTChat/Classes/VoiceConvert/lib",
 				);
 				LLVM_LTO = NO;
 				ONLY_ACTIVE_ARCH = NO;
@@ -2693,6 +2950,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/RTChat.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/RTChat/Classes/third_party/xunfei",
+				);
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_ENABLE_TRIGRAPHS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -2744,6 +3005,9 @@
 					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/nss_static/build/Debug-iphoneos",
 					"/Users/raymon_wang/Documents/Develop/RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Debug-iphoneos",
 					"$(PROJECT_DIR)/RTChat/Classes/third_party/libcurl/libraries",
+					"$(PROJECT_DIR)/RTChat/Classes/lame",
+					"$(PROJECT_DIR)/RTChat/Classes/third_party/xunfei/sunflower",
+					"$(PROJECT_DIR)/RTChat/Classes/VoiceConvert/lib",
 				);
 				LLVM_LTO = YES;
 				OTHER_CFLAGS = "";
@@ -2765,6 +3029,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/RTChat.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/RTChat/Classes/third_party/xunfei",
+				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_ENABLE_TRIGRAPHS = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
@@ -2815,6 +3083,9 @@
 					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/nss_static/build/Debug-iphoneos",
 					"/Users/raymon_wang/Documents/Develop/RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Debug-iphoneos",
 					"$(PROJECT_DIR)/RTChat/Classes/third_party/libcurl/libraries",
+					"$(PROJECT_DIR)/RTChat/Classes/lame",
+					"$(PROJECT_DIR)/RTChat/Classes/third_party/xunfei/sunflower",
+					"$(PROJECT_DIR)/RTChat/Classes/VoiceConvert/lib",
 				);
 				LLVM_LTO = NO;
 				ONLY_ACTIVE_ARCH = NO;
@@ -2838,6 +3109,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/RTChat.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/RTChat/Classes/third_party/xunfei",
+				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_ENABLE_TRIGRAPHS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -2890,6 +3165,9 @@
 					"/Users/raymon_wang/Documents/Develop/webRTC_xCode/nss_static/build/Debug-iphoneos",
 					"/Users/raymon_wang/Documents/Develop/RTChatSdkTestApp/DerivedData/RTChatTestAPP/Build/Products/Debug-iphoneos",
 					"$(PROJECT_DIR)/RTChat/Classes/third_party/libcurl/libraries",
+					"$(PROJECT_DIR)/RTChat/Classes/lame",
+					"$(PROJECT_DIR)/RTChat/Classes/third_party/xunfei/sunflower",
+					"$(PROJECT_DIR)/RTChat/Classes/VoiceConvert/lib",
 				);
 				LLVM_LTO = YES;
 				OTHER_CFLAGS = "";

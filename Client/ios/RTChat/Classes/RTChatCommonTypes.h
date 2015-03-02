@@ -161,6 +161,27 @@ enum SdkResponseCmd {
 	/// 更新权限结果
 	enNotifyUpdatePowerResult = 31,
     
+    /// 设置头像回调
+    enReqSetAvaterResult = 32,
+    
+    /// 设置头像回调
+    enReqGetAvaterResult = 33,
+    
+    /// 通知即时录音音量
+    enNotifyRecordPower = 34,
+    
+    /// 通知播放停止
+    enNotifyPlayOver = 35,
+    
+    /// 通知视频回调
+    enNotifyRecordVideoOver = 36,
+    
+    ///通知语音识别文本结果回调
+    enNotifyVoiceTextResult = 37,
+    
+    ///通知经纬度定位回调
+    enNotifyCoodinateInfo = 38,
+    
     /// 和此人聊天
     enTalkWithSome = 39,
     

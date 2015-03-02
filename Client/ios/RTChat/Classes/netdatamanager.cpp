@@ -9,7 +9,7 @@
 #include "netdatamanager.h"
 #include "NetProcess/command.h"
 #include "proto/game.pb.h"
-#include "RTChatSDKMain.h"
+#include "RTChatSDKMain_Ios.h"
 #include "public.h"
 #include <unistd.h>
 #include "BridgeTools.h"
